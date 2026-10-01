@@ -1,312 +1,521 @@
-# BẢN ĐẶC TẢ YÊU CẦU PHẦN MỀM VÀ THIẾT KẾ ĐỒ ÁN (SRS)
+# BẢN ĐẶC TẢ YÊU CẦU PHẦN MỀM VÀ THIẾT KẾ HỆ THỐNG TOÀN DIỆN (MASTER SRS)
 
 ## HỆ THỐNG THEO DÕI DANH MỤC VÀ CỐ VẤN TÀI CHÍNH CÁ NHÂN (ROBO-ADVISOR & PORTFOLIO TRACKER)
+### TÍCH HỢP SỔ CÁI KÉP, MÔ HÌNH DỰ BÁO HỌC MÁY VÀ TRỢ LÝ AI COPILOT
 
 ---
 
-## 1. Thông tin chung về đề tài
+## MỤC LỤC
+1. [Thông tin Chung về Đề tài & Mục tiêu Xây dựng](#1-thông-tin-chung-về-đề-tài--mục-tiêu-xây-dựng)
+2. [Tác nhân Hệ thống & Ma trận Phân quyền](#2-tác-nhân-hệ-thống--ma-trận-phân-quyền)
+3. [Kiến trúc Hệ thống Tổng thể (System Architecture)](#3-kiến-trúc-hệ-thống-tổng-thể-system-architecture)
+4. [Đặc tả Toàn trình Luồng Người dùng (End-to-End User Journeys)](#4-đặc-tả-toàn-trình-luồng-người-dùng-end-to-end-user-journeys)
+   * 4.1. Sơ đồ Trạng thái Toàn trình (Flowchart)
+   * 4.2. Sơ đồ Tuần tự Tương tác (Sequence Diagram)
+   * 4.3. Đặc tả 6 Giai đoạn Vận hành Chi tiết
+5. [Thiết kế Nghiệp vụ Cốt lõi: Lõi Sổ cái Kép (Core Double-Entry Ledger)](#5-thiết-kế-nghiệp-vụ-cốt-lõi-lõi-sổ-cái-kép-core-double-entry-ledger)
+   * 5.1. Bản chất Kế toán: Khai báo Vốn Ban đầu (Equity Injection)
+   * 5.2. Các Bút toán Kép Mẫu (Cổ phiếu, Vàng, Tiết kiệm)
+   * 5.3. Bất biến Kế toán & Kiểm soát Tranh chấp Đồng thời (Concurrency Control)
+   * 5.4. Động cơ Lãi suất kép Tự động (Automated Compound Interest Engine)
+6. [Động cơ Tối ưu hóa Danh mục & Khớp lệnh Lô chẵn (Portfolio Optimization)](#6-động-cơ-tối-ưu-hóa-danh-mục--khớp-lệnh-lô-chẵn-portfolio-optimization)
+   * 6.1. Mô hình Tối ưu hóa Markowitz MVO Thích ứng Động
+   * 6.2. Dịch chuyển Tỷ trọng Chiến thuật (TAA Shift) kết hợp Tín hiệu Học máy
+   * 6.3. Thuật toán Quy đổi Tỷ trọng sang Khối lượng Thực tế (Lô 100 HOSE & Chỉ vàng)
+7. [Trợ lý Tài chính Thông minh (Financial Copilot - Spring AI)](#7-trợ-lý-tài-chính-thông-minh-financial-copilot---spring-ai)
+   * 7.1. Kiến trúc Bảo mật Zero-Trust LLM
+   * 7.2. Tra cứu Ngữ cảnh Lai (In-Database Hybrid Search với RRF thuần túy)
+   * 7.3. Thiết kế Tool Calling & Nguyên tắc Human-in-the-Loop
+8. [Thiết kế Cơ sở Dữ liệu Cốt lõi (Complete Schema DDL - PostgreSQL & pgvector)](#8-thiết-kế-cơ-sở-dữ-liệu-cốt-lõi-complete-schema-ddl---postgresql--pgvector)
+9. [Tác vụ Đối soát Sổ cái & Kiểm toán Tự động (Batch Reconciliation & Audit)](#9-tác-vụ-đối-soát-sổ-cái--kiểm-toán-tự-động-batch-reconciliation--audit)
+10. [Yêu cầu Phi chức năng & Cam kết Kỹ thuật](#10-yêu-cầu-phi-chức-năng--cam-kết-kỹ-thuật)
+
+---
+
+## 1. Thông tin Chung về Đề tài & Mục tiêu Xây dựng
 
 * **Tên đề tài:** Xây dựng nền tảng Theo dõi Tài sản và Cố vấn Đầu tư Cá nhân, tích hợp Sổ cái kép, Mô hình dự báo Học máy và Trợ lý AI.
 * **Mã chuyên ngành:** Kỹ thuật Phần mềm (Software Engineering).
-* **Mục tiêu:**
-* Xây dựng công cụ giúp người dùng tự khai báo, quản lý và theo dõi hiệu suất danh mục tài sản thực tế của họ. Áp dụng Sổ cái kép (Double-entry Ledger) để đảm bảo tính chính xác của luồng tiền khi người dùng cập nhật thay đổi danh mục.
-* Ứng dụng mô hình học máy (Machine Learning) để huấn luyện, đánh giá và dự báo xu hướng thị trường Đa tài sản (Cổ phiếu VN30 & Vàng thế giới/SJC) theo chu kỳ trung hạn, tích hợp trực tiếp vào hệ thống Java qua ONNX Runtime.
-* Ứng dụng Generative AI (Spring AI) với cơ chế Tool Calling an toàn (Zero-Trust LLM Architecture) nhằm hỗ trợ người dùng phân tích danh mục và lập bản nháp tái cơ cấu tài sản.
+* **Mục tiêu cốt lõi:**
+  1. **Quản lý Tài sản Chuẩn xác (ACID Ledger):** Xây dựng công cụ giúp người dùng tự khai báo, quản lý và theo dõi hiệu suất danh mục tài sản thực tế (Cổ phiếu VN30, Vàng miếng SJC/Nhẫn 9999, Tiền gửi tiết kiệm, Tiền mặt). Áp dụng **Sổ cái kép (Double-Entry Bookkeeping)** chuẩn ngân hàng để loại bỏ 100% sai lệch tiền tệ, đảm bảo tính bất biến kế toán.
+  2. **Dự báo Chu kỳ Vĩ mô qua Học máy (Embedded ML):** Huấn luyện mô hình phân loại trạng thái thị trường chu kỳ trung hạn ($T+20$ phiên nến ngày), đóng gói theo chuẩn **ONNX** và nhúng trực tiếp vào Spring Boot qua **ONNX Runtime** để thực thi suy luận trong RAM dưới $3\text{ ms}$ mà không cần server Python riêng.
+  3. **Tối ưu hóa Danh mục Khoa học (Portfolio Optimizer):** Kết hợp kết quả khảo sát khẩu vị rủi ro cá nhân với dự báo từ mô hình học máy để tự động giải bài toán phân bổ tài sản Markowitz (MVO/TAA), tự động làm tròn khối lượng khớp lệnh theo bước giá thực tế (lô chẵn 100 cổ phiếu sàn HOSE, đơn vị chỉ vàng).
+  4. **Trợ lý AI Đàm thoại An toàn (Zero-Trust Financial Copilot):** Tích hợp Spring AI với cơ chế **Zero-Trust Tool Calling** và **In-Database Hybrid Search (RRF thuần túy)** trên PostgreSQL, tuân thủ nghiêm ngặt nguyên tắc **Human-in-the-Loop** (Người dùng toàn quyền quyết định thực hiện ngoài đời thực trước khi ghi nhận sổ cái).
 
 ---
 
-## 2. Tác nhân hệ thống (Actors & Use Cases)
+## 2. Tác nhân Hệ thống & Ma trận Phân quyền
 
-| Tác nhân (Actor)                  | Bản chất               | Vai trò và Trách nhiệm chính                                                                                                                                                                                            |
-| ----------------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Nhà đầu tư (Investor)** | Người dùng cuối      | Thực hiện khảo sát rủi ro, khai báo số vốn hiện có. Tự nhập liệu các giao dịch mua/bán đã thực hiện ở ngoài đời thực. Theo dõi giá trị tài sản biến động theo thời gian thực, nhận tư vấn tái cơ cấu từ Copilot. |
-| **Quản trị viên (Admin)**  | Người dùng nội bộ   | Quản lý danh mục tài sản được phép giao dịch, cấu hình hạn mức giao dịch, theo dõi báo cáo đối soát sổ cái định kỳ và giám sát hiệu năng hệ thống.                                          |
-| **Financial Copilot**         | LLM Agent (Spring AI)    | Đóng vai trò Cố vấn. Phân tích cơ cấu danh mục do người dùng khai báo, kết hợp dự báo thị trường từ ML để đưa ra lời khuyên mua/bán (Ví dụ: "Nên chốt lời mã X, chuyển sang gửi tiết kiệm").                              |
-| **ML Inference Engine**       | Module tính toán       | Đọc các chỉ báo kỹ thuật thị trường và thực thi các mô hình LightGBM/LSTM (Cổ phiếu & Vàng) để xuất ra xác suất xu hướng thị trường và dự báo biến động rủi ro đa tài sản.                 |
-| **Reconciliation Worker**     | Batch Job (Spring Batch) | Tự động quét và đối soát tính toàn vẹn của sổ cái, kiểm tra nguyên tắc cân bằng nợ - có và đối chiếu snapshot số dư.                                                                              |
+| Tác nhân (Actor) | Bản chất | Vai trò và Trách nhiệm chính |
+| :--- | :--- | :--- |
+| **Nhà đầu tư (Investor)** | Người dùng cuối | Thực hiện khảo sát khẩu vị rủi ro, khai báo số vốn và tài sản ban đầu. Tự nhập liệu các giao dịch mua/bán đã thực hiện ở ngoài đời thực. Theo dõi NAV, nhận tư vấn tái cơ cấu từ Copilot và xác nhận cập nhật sổ cái. |
+| **Quản trị viên (Admin)** | Người dùng nội bộ | Quản lý danh mục tài sản hợp lệ (`assets`), cập nhật giá thị trường đóng cửa hàng ngày (`market_prices`), giám sát báo cáo đối soát sổ cái định kỳ và mở khóa tài khoản bị nghi ngờ sai lệch. |
+| **Financial Copilot** | LLM Agent (Spring AI) | Trợ lý đàm thoại thông minh. Tiếp nhận kết quả tính toán từ thuật toán tối ưu hóa Java, sử dụng Hybrid Search tra cứu cẩm nang tài chính để giải thích kế hoạch tái cơ cấu cho người dùng bằng ngôn ngữ tự nhiên. |
+| **ML Inference Engine** | Module tính toán JVM | Thực thi song song 2 mô hình LightGBM ONNX (`stock_regime.onnx` và `gold_trend.onnx`) để xuất ra nhãn xu hướng chu kỳ $T+20$ và xác suất tin cậy $P_{\text{confidence}}$. |
+| **Reconciliation Worker** | Batch Job (Spring Batch) | Tự động quét hàng ngày: Tính lãi lũy kế cho sổ tiết kiệm, xử lý tái tục lãi kép khi đáo hạn, và đối soát tính toàn vẹn $\sum \text{Debit} - \sum \text{Credit} = 0$ trên toàn hệ thống. |
 
 ---
 
-## 3. Kiến trúc Hệ thống Tổng thể
+## 3. Kiến trúc Hệ thống Tổng thể (System Architecture)
+
+Hệ thống được thiết kế theo phong cách **Monolith theo Module (Modular Monolith)** tuân thủ triệt để kiến trúc **Hexagonal (Ports & Adapters)**, tập trung toàn bộ hạ tầng dữ liệu vào **PostgreSQL 16** nhằm tối ưu hóa hiệu năng, giảm thiểu chi phí vận hành (OpEx) và loại bỏ bài toán bất đồng bộ dữ liệu (Dual-Write):
 
 ```
-[ Client / Web Application ]
-             │
-             ▼
-[ API Gateway / Spring Security ]
-             │
- ┌───────────┴────────────────────────────────────────────────┐
- │                                                            │
- ▼ (Synchronous ACID)                                         ▼ (AI & Analytics)
-[ Core Ledger Service ] (Java 21)                     [ Financial Copilot Service ]
- ├── Double-entry Engine (PostgreSQL)                  ├── Spring AI / Tool Calling
- ├── Invariants & Concurrency Controller               ├── Ephemeral Draft Engine (Redis)
- └── Transactional Outbox Persistence                  └── Portfolio Optimizer (Markowitz)
-             │                                                        ▲
-             ▼ (WAL CDC / Debezium)                                   │
-[ Apache Kafka Message Broker ] ──────────────────────────────────────┤
-             │                                                        │
-             ▼                                                        ▼
-[ Market Data & ML Service ] ─────────────────────────► [ Embedded ONNX Runtime ]
- ├── Time-Series OHLCV Pipeline (VN30 & Gold)           (LightGBM / LSTM Inference)
- └── Technical Indicators Feature Extractor
+[ Web Application / Mobile Client (React / Flutter) ]
+                        │
+                        ▼ (HTTPS / RESTful API / JWT)
+[ API Gateway & Security Layer (Spring Security 6) ]
+                        │
+    ┌───────────────────┴─────────────────────────────────────────┐
+    │                                                             │
+    ▼ (ACID Core Ledger)                                          ▼ (Advisory & Optimization)
+[ Core Ledger Service ] (Java 21)                     [ Financial Advisory Service ]
+ ├── Double-Entry Ingestion Engine                     ├── Spring AI Context Orchestrator
+ ├── Invariants & Concurrency Controller               ├── Zero-Trust Tool Calling Layer
+ ├── Savings & Compound Interest Engine                └── In-Database Hybrid Search (RRF)
+ └── Outbox Event Persistence                                     │
+    │                                                             ▼
+    │ (Transactional Write)                           [ Portfolio Optimizer ] (Deterministic Math)
+    │                                                  ├── Markowitz MVO Quadratic Solver
+    ▼                                                  └── Lot-Size Truncation (HOSE 100 / Gold)
+┌──────────────────────────────────────────────┐                  ▲
+│        HỆ QUẢN TRỊ CSDL POSTGRESQL 16        │                  │ (Feature Ingestion)
+├──────────────────────────────────────────────┤                  │
+│ • Core Ledger: accounts, entries, txs        │      [ Embedded ONNX Runtime Engine ]
+│ • Market Valuation: assets, market_prices    │       ├── stock_regime.onnx (Inference < 1.5ms)
+│ • In-Database Vector Store (pgvector + HNSW) │       └── gold_trend.onnx  (Inference < 1.5ms)
+│ • Full-Text Search Engine (tsvector + GIN)   │
+└──────────────────────────────────────────────┘
+                        ▲
+                        │ (Daily Cron / Nightly Job)
+[ Batch & Audit Engine (Spring Batch) ]
+ ├── Daily Savings Accrued Interest Calculator
+ ├── Maturity Rollover (Compound Interest Worker)
+ └── Full-Ledger Audit & Balance Verifier
 ```
 
 ---
 
-## 4. Đặc tả Chi tiết các Phân hệ Chức năng (Functional Requirements)
+## 4. Đặc tả Toàn trình Luồng Người dùng (End-to-End User Journeys)
 
-### Phân hệ 1: Quản lý Người dùng & Hồ sơ Rủi ro (User & Risk Profiling)
+### 4.1. Sơ đồ Trạng thái Toàn trình (Flowchart)
 
-* **FR-1.1 Xác thực & Phân quyền:** Đăng ký, đăng nhập dựa trên JWT/OAuth2. Mọi thao tác tài chính bắt buộc phải xác thực lại bằng mã OTP/2FA.
-* **FR-1.2 Khảo sát khẩu vị rủi ro:**
-* Cung cấp bộ khảo sát đánh giá năng lực tài chính và khả năng chấp nhận rủi ro.
-* Phân loại người dùng vào 3 nhóm khẩu vị: **Bảo thủ (Conservative)**, **Cân bằng (Balanced - Chiến lược 3-3-3)**, **Tăng trưởng (Aggressive)**.
-* **FR-1.3 Thiết lập mục tiêu danh mục:** Cho phép áp dụng cơ cấu tài sản chuẩn từ hệ thống hoặc tùy chỉnh tỷ lệ phân bổ mục tiêu theo tỷ lệ phần trăm (Tổng tỷ trọng bắt buộc bằng 100%).
-
----
-
-### Phân hệ 2: Sổ cái Lưu vết Giao dịch (Portfolio Ledger - ACID Engine)
-*(Chỉ dùng để lưu lại lịch sử khai báo của người dùng, giúp tính toán hiệu suất P&L chính xác, hệ thống không trực tiếp giữ tiền thật)*
-
-* **FR-2.1 Quản lý Danh mục Đa Tài sản (Holdings):** Mỗi người dùng sở hữu các sổ phụ ghi nhận tài sản: Tiền mặt tự do (VND), Sổ tiền gửi tiết kiệm (kỳ hạn & lãi suất), Vàng miếng/nhẫn (chỉ/lượng), và danh mục từng mã Cổ phiếu.
-* **FR-2.2 Lưu vết Bút toán Kép (Double-entry Invariants):**
-* Áp dụng kế toán kép để lưu vết dòng tiền khi người dùng khai báo thay đổi danh mục (Ví dụ: "Dùng 50tr tiền mặt mua Vàng" $\rightarrow$ Ghi Có sổ Tiền mặt 50tr, Ghi Nợ sổ Vàng 50tr).
-* Mọi biến động tài sản bắt buộc phải tạo từ ít nhất hai dòng bút toán (Debit/Credit).
-* Đảm bảo cân bằng luồng tiền tuyệt đối:
-
-$$
-\sum \text{Debit} - \sum \text{Credit} = 0
-$$
-
-* **FR-2.3 Xử lý Tranh chấp Đồng thời (Concurrency Control):**
-* Áp dụng **Optimistic Locking** (`@Version`) kết hợp cơ chế thử lại (Retry with Exponential Backoff) để xử lý các request giao dịch song song.
-* Đảm bảo số dư không bao giờ bị âm hoặc rơi vào tình trạng chi tiêu vượt mức (Double-spending).
-* **FR-2.4 Ghi nhận Khai báo thủ công:** Cung cấp API để người dùng khai báo các hành động thực tế: "Nạp thêm vốn", "Rút vốn ra", "Đã mua/bán tài sản ngoài đời". Hệ thống tự động định giá lại tài sản danh mục dựa trên dữ liệu thị trường mới nhất.
-* **FR-2.5 Quản lý Tiền gửi Tiết kiệm & Động cơ Lãi suất kép (Compound Interest Engine):**
-* Cho phép người dùng ghi nhận các sổ tiết kiệm: Số tiền gốc ($P$), Ngân hàng, Kỳ hạn (1, 3, 6, 12 tháng), Lãi suất (%/năm), Ngày gửi, và tùy chọn `auto_rollover` (Tự động tái tục).
-* Hàng ngày, hệ thống chạy Batch Job tính lãi lũy kế (Daily Accrued Interest) để cập nhật giá trị ròng tài sản theo thời gian thực:
-
-$$
-\text{Lãi lũy kế} = P \times \frac{\text{Lãi suất}}{365} \times \text{Số ngày gửi}
-$$
-
-* **Cơ chế Lãi kép (Compound Interest):** Khi đến ngày đáo hạn (Maturity Date):
-  * Nếu `auto_rollover = true`: Hệ thống tự động sinh bút toán kép kết chuyển tiền lãi nhập vào tiền gốc ($P_{new} = P + \text{Lãi}$), tự động gia hạn một kỳ hạn mới với số gốc mới (Hiện thực hóa lãi kép thực tế).
-  * Nếu `auto_rollover = false`: Tiền gốc và lãi được chuyển về tài khoản Tiền mặt tự do (VND).
-
----
-
-### Phân hệ 3: Kiến trúc Sự kiện & Transactional Outbox (Event-Driven Subsystem)
-
-* **FR-3.1 Ghi nhận Outbox Đồng nhất:** Khi ghi nhận giao dịch thành công tại Core Ledger, một bản ghi sự kiện phải được ghi đồng thời vào bảng `outbox_events` trong cùng một Transaction ACID.
-* **FR-3.2 Phát tán Sự kiện (Event Streaming):** Sử dụng Change Data Capture (Debezium/Kafka Connect) đọc WAL của PostgreSQL để đẩy các sự kiện `TransactionCreatedEvent`, `BalanceUpdatedEvent` lên Kafka.
-* **FR-3.3 Tiêu thụ Sự kiện Không trùng lặp (Idempotent Consumer):** Các consumer hạ tầng kiểm tra mã định danh `event_id` trước khi xử lý, đảm bảo khả năng chịu lỗi và tính bất biến khi mạng bị retry.
-
----
-
-### Phân hệ 4: Nghiên cứu, Huấn luyện & Tích hợp Mô hình Học máy (Machine Learning Pipeline)
-
-Phân hệ phục vụ cho nghiên cứu thực nghiệm và tích hợp sản phẩm:
-
-```
-[ Thu thập Dữ liệu Nến OHLCV ] ──► [ Feature Engineering (30+ Đặc trưng) ]
-                                                │
-                                                ▼
-                                   [ Purged Walk-Forward Split ]
-                                                │
-                                                ▼
-                                   [ Huấn luyện & Đánh giá Model ]
-                                   (Baseline, LightGBM, Bi-LSTM)
-                                                │
-                                                ▼
-                                   [ Xuất File Chuẩn ONNX ]
-                                                │
-                                                ▼
-                                   [ Nhúng vào Java qua ONNX Runtime ]
-
+```mermaid
+flowchart TD
+    %% Khởi tạo
+    A([Bắt đầu]) --> B[Đăng ký / Đăng nhập tài khoản]
+    B --> C{Đã có Hồ sơ Rủi ro?}
+    
+    %% Giai đoạn 1: Khảo sát
+    C -- Chưa --> D[Làm Khảo sát 5 Câu hỏi Chuẩn hóa]
+    D --> E[Tính Risk Score 0-100 & Hệ số λ]
+    E --> F[Đề xuất Tỷ trọng Chiến lược SAA]
+    F --> G[Người dùng xác nhận / tùy chỉnh SAA]
+    G --> H[Lưu hồ sơ vào Database]
+    
+    %% Giai đoạn 2: Khai báo
+    C -- Đã có --> I{Đã khai báo tài sản?}
+    H --> I
+    I -- Chưa --> J[Khai báo Tài sản hiện có: Cổ phiếu, Vàng, Tiết kiệm, Tiền mặt]
+    J --> K[Tạo bút toán Equity Injection vào Sổ cái kép]
+    K --> L[Tính toán NAV ban đầu]
+    
+    %% Giai đoạn 3: Giám sát
+    I -- Đã có --> L
+    L --> M[Dashboard: Theo dõi Biến động NAV & Lãi lỗ P&L]
+    M --> N[Batch Job: Tính Lãi lũy kế Tiết kiệm hàng ngày]
+    
+    %% Giai đoạn 4: Cảnh báo Tái cơ cấu
+    M --> O{Kiểm tra Điều kiện Tái cơ cấu}
+    O -- Tỷ trọng lệch > 5% HOẶC Đến kỳ cuối tháng --> P[Gửi cảnh báo Tái cơ cấu]
+    O -- Tỷ trọng cân bằng --> M
+    
+    %% Giai đoạn 5: Copilot & Thực thi
+    P --> Q[Copilot gọi ONNX dự báo T+20 & Optimizer tính TAA]
+    Q --> R[Hiển thị Bảng kế hoạch Tái cơ cấu trực quan]
+    R --> S[Người dùng tự ra app ngoài đời thực hiện khớp lệnh]
+    S --> T[Người dùng bấm 'Xác nhận đã thực hiện']
+    T --> U[Sổ cái kép ghi nhận Bút toán Tái cơ cấu ACID]
+    U --> M
 ```
 
-* **FR-4.1 Thu thập Dữ liệu Chuỗi thời gian Đa Tài sản (Dataset Ingestion):**
-* *Dữ liệu cổ phiếu:* Đồng bộ lịch sử giá nến ngày (OHLCV) của các mã thuộc rổ VN30 và chỉ số VN-Index giai đoạn 2018 – 2026.
-* *Dữ liệu vàng:* Đồng bộ lịch sử giá nến ngày của Hợp đồng tương lai Vàng thế giới (`GC=F` / `XAUUSD`) kết hợp dữ liệu giá vàng miếng SJC trong nước giai đoạn 2018 – 2026.
-* **FR-4.2 Kỹ nghệ Đặc trưng Đa Tài sản (Multi-Asset Feature Engineering):**
-* *Chỉ báo động lượng & xu hướng trung hạn:* Đường trung bình động SMA/EMA (20, 50), RSI (14), MACD Histogram, Bollinger Bands (tính toán độc lập cho cả Cổ phiếu và Vàng).
-* *Chỉ báo độ biến động & Rủi ro (Volatility):* Average True Range (ATR), Rolling Standard Deviation (20 phiên) để đo lường độ giật của thị trường.
-* *Đặc trưng tương quan liên thị trường (Cross-Asset Features):* Tỷ lệ giá Vàng/VN-Index (Gold-to-Equity Ratio) và Hệ số tương quan động lăn (Rolling Correlation 30 ngày) giữa Cổ phiếu và Vàng làm chỉ báo sớm về khẩu vị rủi ro vĩ mô.
-* *Đặc trưng trễ theo chu kỳ (Lags):* Tỷ suất sinh lời quá khứ tại các mốc $T-5, T-10, T-20$ (tương đương 1 tuần, 2 tuần, 1 tháng giao dịch).
-* **FR-4.3 Bài toán & Nhãn huấn luyện Kép Đa Tài sản (Multi-Asset Labeling Strategy):**
-* Định nghĩa bài toán phân loại đa lớp xu hướng chu kỳ 1 tháng giao dịch ($T+20$ phiên nến ngày) cho cả Cổ phiếu và Vàng:
-  * **1. Nhánh Cổ phiếu (Stock Regime Model):**
-    * `Nhãn +1 (Bullish / Risk-On):` Tỷ suất $T+20 > +5.0\%$ $\rightarrow$ Thị trường cổ phiếu vào pha tăng trưởng, khuyến nghị nâng tỷ trọng Cổ phiếu.
-    * `Nhãn 0 (Neutral / Sideway):` Lợi nhuận $T+20 \in [-5.0\%, +5.0\%]$ $\rightarrow$ Thị trường tích lũy, duy trì tỷ trọng cân bằng.
-    * `Nhãn -1 (Bearish / Risk-Off):` Tỷ suất $T+20 < -5.0\%$ $\rightarrow$ Thị trường suy yếu, cảnh báo giảm tỷ trọng Cổ phiếu.
-  * **2. Nhánh Vàng (Gold Trend Model):**
-    * `Nhãn +1 (Bullish):` Tỷ suất sinh lời Vàng $T+20 > +3.0\%$ $\rightarrow$ Vàng vào chu kỳ tăng giá mạnh (nhu cầu phòng thủ hoặc áp lực lạm phát), khuyến nghị tích lũy thêm Vàng.
-    * `Nhãn 0 (Neutral):` Lợi nhuận Vàng $T+20 \in [-3.0\%, +3.0\%]$ $\rightarrow$ Giá vàng ổn định đi ngang.
-    * `Nhãn -1 (Bearish):` Tỷ suất sinh lời Vàng $T+20 < -3.0\%$ $\rightarrow$ Giá vàng hạ nhiệt, dòng tiền ưu tiên tài sản sinh lời cao hơn.
-* **FR-4.4 Quy trình Huấn luyện & So sánh:**
-* Chia dữ liệu kiểm thử theo phương pháp **Purged Walk-Forward Time-Series Split** để triệt tiêu hiện tượng nhìn trước tương lai (Data Leakage / Look-ahead bias).
-* Huấn luyện và so sánh giữa các thuật toán: **Logistic Regression**, **Random Forest**, **Bi-LSTM**, và **LightGBM**.
-* Tinh chỉnh siêu tham số (Hyperparameter Tuning) tự động bằng **Optuna**.
-* **FR-4.5 Đóng gói & Thực thi Mô hình Kép trong Java (Inference Engine):**
-* Xuất 2 mô hình tối ưu sang định dạng chuẩn công nghiệp **ONNX**: `stock_regime.onnx` (Dự báo Cổ phiếu) và `gold_trend.onnx` (Dự báo Vàng).
-* Nhúng thư viện `onnxruntime` trực tiếp trong Spring Boot để thực thi suy luận song song trong bộ nhớ RAM, đạt tổng độ trễ dưới $3\text{ ms}$ mà không cần phụ thuộc vào API server Python.
+---
+
+### 4.2. Sơ đồ Tuần tự Tương tác (Sequence Diagram)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Nhà đầu tư
+    participant Web as Giao diện Web/App
+    participant Copilot as Financial Copilot (Spring AI)
+    participant Opt as Portfolio Optimizer (Java)
+    participant ML as ONNX Runtime (JVM)
+    participant Ledger as Core Ledger (Java 21)
+    participant DB as PostgreSQL 16
+    actor Market as Thị trường Thực tế (Sàn/Tiệm vàng)
+
+    %% Khảo sát rủi ro
+    User->>Web: Hoàn thành 5 câu hỏi khảo sát rủi ro
+    Web->>Ledger: POST /api/v1/profile/risk-survey
+    Ledger->>DB: Lưu Risk Score, λ và SAA Target Weights
+    DB-->>Ledger: OK
+    Ledger-->>Web: Trả về tỷ trọng SAA khuyến nghị
+
+    %% Kích hoạt tái cơ cấu
+    Note over Web,Ledger: Phát hiện lệch tỷ trọng thực tế > 5% (Drift Detection)
+    User->>Web: Yêu cầu tư vấn tái cơ cấu danh mục
+    Web->>Copilot: Hỏi: "Tôi nên tái cơ cấu danh mục thế nào?"
+    Copilot->>Opt: Gọi nội bộ generateRebalancePlan()
+    Opt->>Ledger: Lấy số dư thực tế từ các tài khoản (Holdings)
+    Opt->>ML: Dự báo nhãn xu hướng T+20 cho Cổ phiếu & Vàng
+    ML-->>Opt: Trả về Signal (+1, 0, -1) & P_confidence
+    Opt->>Opt: Giải bài toán Markowitz MVO & Làm tròn lô 100 cp / Chỉ vàng
+    Opt-->>Copilot: Trả về JSON Kế hoạch Tái cơ cấu chi tiết
+    Copilot->>DB: Hybrid Search (RRF) cẩm nang tài chính để lấy dẫn chứng
+    Copilot-->>Web: Hiển thị Bảng kế hoạch hành động & Lời giải thích tự nhiên
+
+    %% Thực thi Human-in-the-Loop
+    User->>Market: Tự thao tác đặt lệnh bán/mua ngoài đời thực
+    Market-->>User: Khớp lệnh thực tế hoàn tất
+    User->>Web: Nhấp "Xác nhận đã thực hiện theo kế hoạch"
+    Web->>Ledger: POST /api/v1/ledger/rebalance/confirm
+    Note over Ledger: Mở Transaction ACID: Kiểm tra Σ Debit = Σ Credit
+    Ledger->>DB: Ghi Transaction, Entries, cập nhật Accounts & Holdings
+    DB-->>Ledger: Commit thành công
+    Ledger-->>Web: Phản hồi 200 OK
+    Web-->>User: Dashboard cập nhật trạng thái cân bằng mới
+```
 
 ---
 
-### Phân hệ 5: Tối ưu hóa Danh mục Đầu tư (Portfolio Optimization Engine)
+### 4.3. Đặc tả 6 Giai đoạn Vận hành Chi tiết
 
-* **FR-5.1 Tính toán Ma trận Hiệp phương sai & Lãi suất Phi Rủi ro (Risk-Free Benchmark):**
-* Kết hợp kết quả dự báo biến động từ mô hình ML với lịch sử giá để tính ma trận hiệp phương sai động giữa Cổ phiếu và Vàng.
-* **Xác định Lãi suất Phi Rủi ro ($R_f$):** Tiền gửi tiết kiệm ngân hàng đóng vai trò là mốc tham chiếu an toàn chuẩn ($R_f$). Hệ thống không dùng ML để dự báo lãi suất tiết kiệm mà sử dụng lãi suất bình quân kỳ hạn 6-12 tháng làm thước đo cơ hội (Opportunity Cost) để tối ưu hóa chỉ số Sharpe trong phân bổ tài sản.
-* **FR-5.2 Mô hình Hóa Tối ưu Danh mục & Luân chuyển Tài sản (Asset Rotation):**
-* Áp dụng Lý thuyết Danh mục Hiện đại (Markowitz Efficient Frontier) kết hợp ma trận hiệp phương sai động giữa Cổ phiếu, Vàng và Tiền gửi.
-* **Chiến lược luân chuyển tài sản thông minh:** Tự động tối ưu hóa tỷ trọng khi có sự phân hóa xu hướng (Ví dụ: Khi Cổ phiếu Bearish nhưng Vàng Bullish, thuật toán tự động tăng tỷ trọng Vàng và Tiền gửi, giảm Cổ phiếu để bảo toàn vốn và tối ưu Sharpe Ratio).
-* **FR-5.3 Chu kỳ Tái cơ cấu & Phát hiện Sai lệch (Rebalance Trigger):**
-* *Định kỳ hàng tháng (Monthly Rebalance):* Tự động tổng hợp báo cáo P&L vào ngày cuối tháng, đối chiếu với dự báo chu kỳ mới từ mô hình ML.
-* *Cảnh báo chuyển đổi trạng thái (Regime Shift):* Bắn cảnh báo tức thì khi mô hình phát hiện thị trường chuyển đột ngột từ *Risk-On* sang *Risk-Off*.
-* *Ngưỡng sai lệch tỷ trọng (Drift Detection):* Kích hoạt gợi ý tái cơ cấu khi tỷ trọng thực tế bị lệch quá $\pm 5\%$ so với mục tiêu ban đầu do biến động giá.
+#### Giai đoạn 1: Onboarding & Khảo sát Khẩu vị Rủi ro (FR-1)
+* Người dùng thực hiện bộ 5 câu hỏi chuẩn hóa (Kỳ hạn, Dòng tiền, Mục tiêu, Phản ứng sụt giảm, Kinh nghiệm).
+* Hệ thống tính toán $\text{Risk Score} \in [0, 100]$ và ánh xạ sang Hệ số ngại rủi ro $\lambda = 10.0 - 0.09 \times \text{Risk Score}$.
+* Khởi tạo tỷ trọng chiến lược ban đầu (Strategic Asset Allocation - SAA Baseline).
 
----
+#### Giai đoạn 2: Khai báo Danh mục Khởi tạo & Sổ cái Kép (FR-2)
+* Người dùng khai báo các tài sản thực tế đang sở hữu ngoài đời: Cổ phiếu VN30 (mã, số lượng, giá vốn), Vàng (loại, chỉ/lượng, giá mua), Sổ tiết kiệm (ngân hàng, tiền gốc, lãi suất, kỳ hạn, ngày gửi, tùy chọn `auto_rollover`), Tiền mặt tự do.
+* Hệ thống tự động kích hoạt bút toán **Khai báo Vốn chủ sở hữu (`CAPITAL_INJECTION`)**: Ghi Nợ (Debit) tài sản tương ứng và Ghi Có (Credit) tài khoản đối ứng nguồn vốn `EQUITY_CAPITAL`.
 
-### Phân hệ 6: Trợ lý Tài chính Thông minh (Financial Copilot - Spring AI)
+#### Giai đoạn 3: Theo dõi Thường nhật, Định giá NAV & Mô phỏng Lãi kép
+* Cập nhật giá thị trường cuối ngày để tính Tổng tài sản ròng ($\text{NAV} = \sum \text{Khối lượng}_i \times \text{Giá thị trường}_i$).
+* Tính toán tỷ suất Lãi/Lỗ chưa thực hiện (Unrealized P&L).
+* Công cụ mô phỏng tích sản lãi kép dòng tiền đều (Future Value of Annuity) hỗ trợ lập kế hoạch mục tiêu tài chính tương lai.
 
-* **FR-6.1 Kiến trúc Bảo mật Zero-Trust LLM:**
-* Không truyền `userId` hoặc `accountId` qua tham số prompt của mô hình.
-* Toàn bộ ngữ cảnh danh tính được trích xuất ngầm từ `SecurityContextHolder` của Spring Security trong luồng HTTP của người dùng.
-* **FR-6.2 Tra cứu Ngữ cảnh Nghiệp vụ (RAG Module):** Sử dụng Vector Database truy vấn các tài liệu về quy tắc tài chính cá nhân để giải thích lý do tái cơ cấu cho người dùng.
-* **FR-6.3 Sinh Kế hoạch Tái cơ cấu (Actionable Plan Generation):**
-* Khi nhận thấy rủi ro, Copilot gọi Tool nội bộ `generateRebalancePlan()` để tính toán một kế hoạch hành động tối ưu (Ví dụ: Bán 20% cổ phiếu HPG, mở sổ tiết kiệm 3 tháng).
-* Bản kế hoạch được hiển thị dạng bảng trực quan.
-* **FR-6.4 Tương tác và Xác nhận Khai báo:**
-* Người dùng đọc lời khuyên của LLM. Nếu đồng ý, họ sẽ ra ngoài đời thực hiện giao dịch (ví dụ lên app TCBS để bán cổ phiếu).
-* Sau khi làm xong ở ngoài, người dùng quay lại hệ thống bấm nút "Xác nhận đã thực hiện theo kế hoạch", hệ thống sẽ tự động tạo các bút toán sổ cái để cập nhật trạng thái danh mục khớp với thực tế.
-* **FR-6.5 Công cụ Mô phỏng Tích sản & Sức mạnh Lãi kép (Wealth Projection Tool):**
-* Copilot được trang bị Tool nội bộ `simulateCompoundGrowth(initialAmount, monthlyContribution, interestRate, years)` tính toán giá trị tương lai của dòng tiền đều (Future Value of Annuity):
+#### Giai đoạn 4: Cảnh báo Tái cơ cấu (Rebalance Triggers)
+Hệ thống giám sát và tự động kích hoạt đề xuất tái cơ cấu khi thỏa mãn 1 trong 3 điều kiện:
+1. **Ngưỡng lệch tỷ trọng (Drift Detection):** Tỷ trọng thực tế của bất kỳ lớp tài sản nào lệch quá $\pm 5\%$ so với mục tiêu.
+2. **Cảnh báo đổi pha thị trường (Regime Shift):** Mô hình ML phát hiện thị trường chuyển đột ngột từ *Risk-On* sang *Risk-Off*.
+3. **Định kỳ cuối tháng (Monthly Rebalance):** Đánh giá lại danh mục vào ngày làm việc cuối cùng của tháng.
 
-$$
-FV = P \times (1 + r)^n + PMT \times \frac{(1 + r)^n - 1}{r}
-$$
+#### Giai đoạn 5: Thực thi Ngoài đời & Xác nhận Sổ cái (Human-in-the-Loop)
+* Financial Copilot hiển thị bảng kế hoạch hành động chi tiết (Bán bao nhiêu cổ phiếu mã nào, mua mấy chỉ vàng, mở sổ tiết kiệm bao nhiêu tiền).
+* Người dùng tự thao tác giao dịch trên ứng dụng chứng khoán hoặc tiệm vàng thực tế.
+* Người dùng quay lại ứng dụng nhấp **"Xác nhận đã thực hiện"** $\rightarrow$ Hệ thống sinh bút toán kép ghi nhận thay đổi số dư.
 
-* Cho phép người dùng trò chuyện tự nhiên để mô phỏng lộ trình tích sản (Ví dụ: "Nếu mỗi tháng gửi thêm 10 triệu với lãi kép 6%/năm thì sau 5 năm tích lũy được bao nhiêu?"), Copilot sẽ vẽ biểu đồ tăng trưởng tiền gốc so với tiền lãi kép sinh ra.
+#### Giai đoạn 6: Quản lý Đáo hạn Tiết kiệm & Tự động Hóa Lãi kép
+* Batch Job chạy cuối ngày tự tính lãi lũy kế (Daily Accrued Interest) để phản ánh NAV chuẩn xác.
+* Đến ngày đáo hạn:
+  * Nếu `auto_rollover = true`: Tự động nhập lãi vào gốc ($P_{\text{new}} = P + \text{Lãi}$), mở kỳ hạn mới (Hiện thực hóa Lãi kép).
+  * Nếu `auto_rollover = false`: Tự động kết chuyển cả gốc và lãi về ví tiền mặt `VND_WALLET`.
 
 ---
 
-### Phân hệ 7: Đối soát Sổ cái & Kiểm toán Tự động (Batch Reconciliation & Audit)
+## 5. Thiết kế Nghiệp vụ Cốt lõi: Lõi Sổ cái Kép (Core Double-Entry Ledger)
 
-* **FR-7.1 Tác vụ Đối soát Định kỳ:** Thiết lập Job Spring Batch chạy tự động vào cuối ngày để quét toàn bộ hệ thống:
-* Kiểm tra tính cân bằng $\sum \text{Debit} - \sum \text{Credit} = 0$ cho từng mã giao dịch.
-* Đối chiếu tổng số dư lịch sử từ các dòng bút toán với bảng snapshot số dư hiện tại.
-* **FR-7.2 Xử lý Sai lệch:** Tự động khóa tạm thời tài khoản có dấu hiệu sai lệch số dư (`status = FROZEN_AUDIT`) và bắn thông báo khẩn cấp tới kênh giám sát của Quản trị viên.
-* **FR-7.3 Kết xuất Báo cáo:** Cho phép quản trị viên xuất báo cáo kết quả đối soát ra tệp Excel (`.xlsx`) phục vụ công tác thanh tra.
+### 5.1. Bản chất Kế toán: Khai báo Vốn Ban đầu (Equity Injection)
+Trong kế toán kép, tiền và tài sản không tự sinh ra từ hư vô. Mọi tài sản người dùng khai báo đều đối ứng với nguồn vốn ban đầu:
+* Tài khoản tài sản: `VND_WALLET`, `STOCK_{TICKER}`, `GOLD_{TYPE}`, `SAVINGS_DEPOSIT`.
+* Tài khoản nguồn vốn đối ứng: `EQUITY_CAPITAL`.
+* Bất biến kế toán tuyệt đối:
+$$\sum_{j \in \text{Entries}_k} \text{Debit}_j - \sum_{j \in \text{Entries}_k} \text{Credit}_j = 0$$
 
 ---
 
-## 5. Thiết kế Cơ sở Dữ liệu Cốt lõi (Core Schema DDL)
+### 5.2. Các Bút toán Kép Mẫu
+
+#### A. Khai báo vốn ban đầu (Ví dụ: Có sẵn 50 triệu tiền mặt và 1.000 cổ phiếu HPG giá vốn 25.000đ):
+* Entry 1: Ghi Nợ `VND_WALLET`: $+50,000,000\text{ VND}$
+* Entry 2: Ghi Nợ `STOCK_HPG`: $+25,000,000\text{ VND}$ (1.000 cp $\times$ 25.000đ)
+* Entry 3: Ghi Có `EQUITY_CAPITAL`: $-75,000,000\text{ VND}$
+* Tổng: $\sum \text{Debit} - \sum \text{Credit} = 75,000,000 - 75,000,000 = 0$.
+
+#### B. Mua tài sản từ tiền mặt khả dụng (Ví dụ: Chi 40 triệu mua 5 chỉ vàng SJC):
+* Entry 1: Ghi Nợ `GOLD_SJC`: $+40,000,000\text{ VND}$ (Ghi tăng tài sản vàng)
+* Entry 2: Ghi Có `VND_WALLET`: $-40,000,000\text{ VND}$ (Ghi giảm tiền mặt khả dụng)
+* Tổng: $+40,000,000 - 40,000,000 = 0$.
+
+#### C. Bút toán Lãi kép khi Đáo hạn Tiết kiệm (`auto_rollover = true`):
+* Số tiền gửi ban đầu: $100,000,000\text{ VND}$, tiền lãi kỳ hạn 6 tháng: $3,000,000\text{ VND}$.
+* Entry 1: Ghi Nợ `SAVINGS_DEPOSIT`: $+3,000,000\text{ VND}$ (Nhập lãi vào gốc tiền gửi)
+* Entry 2: Ghi Có `INTEREST_INCOME`: $-3,000,000\text{ VND}$ (Ghi nhận doanh thu tài chính)
+* Số tiền gốc mới của kỳ hạn tiếp theo: $103,000,000\text{ VND}$.
+
+---
+
+### 5.3. Bất biến Kế toán & Kiểm soát Tranh chấp Đồng thời (Concurrency Control)
+1. **Chống chi tiêu âm / Double-spending:** Mọi thao tác rút vốn hoặc mua tài sản đều kiểm tra ràng buộc số dư: $\text{Balance}_{\text{khả dụng}} \ge \text{Amount}_{\text{giao dịch}}$.
+2. **Optimistic Locking:** Bảng `accounts` sử dụng trường `version BIGINT DEFAULT 0` kết hợp `@Version` của JPA. Khi có 2 request giao dịch song song tranh chấp cùng một tài khoản, request đến sau sẽ kích hoạt `OptimisticLockException` và được thử lại tự động (Retry with Exponential Backoff).
+3. **Độ chính xác số học:** Sử dụng kiểu dữ liệu `BigDecimal` trong Java (chế độ làm tròn `RoundingMode.HALF_EVEN`) và kiểu `NUMERIC(19, 4)` trong PostgreSQL, triệt tiêu $100\%$ sai số làm tròn số thập phân.
+
+---
+
+## 6. Động cơ Tối ưu hóa Danh mục & Khớp lệnh Lô chẵn (Portfolio Optimization)
+
+### 6.1. Mô hình Tối ưu hóa Markowitz MVO Thích ứng Động
+Bài toán tối ưu hóa tìm vector tỷ trọng $w = [w_{\text{Cổ phiếu}}, w_{\text{Vàng}}, w_{\text{Tiết kiệm}}]^T$:
+
+$$\max_{w} U(w) = w^T \mu(t) - \frac{1}{2} \lambda (w^T \Sigma(t) w)$$
+
+* **Hệ ràng buộc:** $\sum_{i=1}^{n} w_i = 1$ và $w_i \ge 0$ (Không bán khống - Long-only).
+* **$\lambda$ (Hệ số ngại rủi ro):** Trích xuất từ hồ sơ khảo sát rủi ro của người dùng.
+* **$\mu(t)$ (Lợi nhuận kỳ vọng) & $\Sigma(t)$ (Ma trận hiệp phương sai):** Được cập nhật liên tục từ kết quả suy luận của mô hình học máy.
+
+---
+
+### 6.2. Dịch chuyển Tỷ trọng Chiến thuật (TAA Shift) kết hợp Tín hiệu Học máy
+Tỷ trọng đề xuất chiến thuật $w_i^{\text{TAA}}$ dịch chuyển quanh mốc neo chiến lược $w_i^{\text{SAA}}$:
+
+$$\Delta w_i = \text{Signal}_i \times P_{\text{confidence}} \times \Delta w_{\max}$$
+
+* $\text{Signal}_i \in \{+1 \text{ (Tăng)}, 0 \text{ (Ngang)}, -1 \text{ (Giảm)}\}$.
+* $\Delta w_{\max} = 15\%$: Biên độ dịch chuyển tối đa cho phép trong 1 chu kỳ.
+* **Cơ chế Biên An toàn (Safety Bounds):**
+  $$w_i^{\text{SAA}} - 15\% \le w_i^{\text{TAA}} \le w_i^{\text{SAA}} + 15\%$$
+  Dù mô hình ML có bi quan hay lạc quan đến đâu, danh mục luôn bị chặn trần/chặn sàn quanh tỷ trọng mỏ neo SAA, không bao giờ rơi vào trạng thái "tất tay" (all-in).
+
+---
+
+### 6.3. Thuật toán Quy đổi Tỷ trọng sang Khối lượng Thực tế (Lô 100 HOSE & Chỉ vàng)
+Mô hình toán học xuất ra số tiền cần điều chỉnh $\Delta V_i$. Thuật toán Java quy đổi số tiền thành khối lượng giao dịch thực tế tuân thủ quy định thị trường Việt Nam:
+
+1. **Khớp lệnh Cổ phiếu (Sàn HOSE - Lô chẵn 100 cổ phiếu):**
+   $$\Delta Q_{\text{stock}} = \left\lfloor \frac{\Delta V_{\text{stock}}}{P_{\text{stock}} \times 100} \right\rfloor \times 100$$
+2. **Khớp lệnh Vàng (Đơn vị tính: Chỉ vàng, $1 \text{ Lượng} = 10 \text{ Chỉ}$):**
+   $$\Delta Q_{\text{gold}} = \left\lfloor \frac{\Delta V_{\text{gold}}}{P_{\text{gold/chỉ}}} \right\rfloor$$
+3. **Phần tiền lẻ phát sinh do làm tròn lô:** Tự động điều chuyển về tài khoản tiền mặt khả dụng `VND_WALLET` hoặc dồn vào Sổ tiết kiệm ngân hàng.
+
+---
+
+## 7. Trợ lý Tài chính Thông minh (Financial Copilot - Spring AI)
+
+### 7.1. Kiến trúc Bảo mật Zero-Trust LLM
+* **Không truyền định danh người dùng vào Prompt:** Tuyệt đối không truyền `userId` hay `accountId` vào câu lệnh prompt của mô hình ngôn ngữ lớn để chặn đứng $100\%$ nguy cơ tấn công **IDOR (Insecure Direct Object Reference)** và **Prompt Injection**.
+* Danh tính và quyền hạn người dùng được trích xuất ngầm từ `SecurityContextHolder` trong phiên đăng nhập JWT.
+
+---
+
+### 7.2. Tra cứu Ngữ cảnh Lai (In-Database Hybrid Search với RRF thuần túy)
+Thay vì sử dụng các mô hình Neural Cross-Encoder Reranker cồng kềnh gây chậm trễ thêm $50\text{--}200\text{ ms}$, hệ thống triển khai **Tìm kiếm lai kết hợp RRF ngay trong PostgreSQL** với thời gian truy vấn $< 5\text{ ms}$:
 
 ```sql
--- 1. Bảng tài khoản con (Sub-accounts)
-CREATE TABLE accounts (
+WITH 
+vector_candidates AS (
+    SELECT id, ROW_NUMBER() OVER (ORDER BY embedding <=> :query_embedding) AS rank_vec
+    FROM vector_store
+    ORDER BY embedding <=> :query_embedding
+    LIMIT 20
+),
+keyword_candidates AS (
+    SELECT id, ROW_NUMBER() OVER (ORDER BY ts_rank(tsv, plainto_tsquery('simple', :query_text)) DESC) AS rank_kw
+    FROM vector_store
+    WHERE tsv @@ plainto_tsquery('simple', :query_text)
+    LIMIT 20
+)
+SELECT 
+    v.id, v.content, v.metadata,
+    COALESCE(1.0 / (60 + vc.rank_vec), 0.0) + 
+    COALESCE(1.0 / (60 + kc.rank_kw), 0.0) AS rrf_score
+FROM vector_store v
+LEFT JOIN vector_candidates vc ON v.id = vc.id
+LEFT JOIN keyword_candidates kc ON v.id = kc.id
+WHERE vc.id IS NOT NULL OR kc.id IS NOT NULL
+ORDER BY rrf_score DESC
+LIMIT 5;
+```
+
+---
+
+### 7.3. Thiết kế Tool Calling & Nguyên tắc Human-in-the-Loop
+* **Tool Calling nội bộ:** Copilot được trang bị 2 tool chính:
+  1. `generateRebalancePlan()`: Gọi bộ giải toán Java Optimizer để lấy kế hoạch mua/bán chính xác dưới dạng JSON.
+  2. `simulateCompoundGrowth(principal, monthlyContribution, rate, years)`: Mô phỏng lãi kép dòng tiền đều.
+* **Nguyên tắc Anti-Hallucination:** LLM **không bao giờ được phép tự tính toán số tiền**. LLM chỉ nhận cấu trúc JSON xác định từ Java và chuyển ngữ thành lời văn giải thích dễ hiểu.
+* **Human-in-the-Loop:** Copilot không có quyền tự ý ghi đè cơ sở dữ liệu sổ cái. Người dùng phải bấm nút xác nhận thì bút toán mới được tạo.
+
+---
+
+## 8. Thiết kế Cơ sở Dữ liệu Cốt lõi (Complete Schema DDL - PostgreSQL & pgvector)
+
+```sql
+-- Kích hoạt extension pgvector
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- ============================================================================
+-- PHÂN HỆ 1: QUẢN LÝ NGƯỜI DÙNG & HỒ SƠ RỦI RO
+-- ============================================================================
+
+-- 1. Bảng Người dùng hệ thống
+CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL,
-    asset_type VARCHAR(32) NOT NULL, -- 'VND', 'GOLD_SJC', 'STOCK_HPG', v.v.
-    balance NUMERIC(19, 4) NOT NULL DEFAULT 0.0000,
-    version BIGINT NOT NULL DEFAULT 0, -- Phục vụ Optimistic Locking
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT uk_user_asset UNIQUE (user_id, asset_type)
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    risk_score INT DEFAULT 50,                         -- Khảo sát rủi ro (0 - 100)
+    risk_aversion_lambda NUMERIC(5, 2) DEFAULT 5.00,    -- Hệ số ngại rủi ro λ (1.0 đến 10.0)
+    risk_profile VARCHAR(32) DEFAULT 'BALANCED',       -- 'CONSERVATIVE', 'BALANCED', 'GROWTH'
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Bảng giao dịch tài chính tổng quát
+-- 2. Bảng Tỷ trọng Mục tiêu (Dùng cho SAA/TAA & Phát hiện lệch Drift Detection)
+CREATE TABLE portfolio_targets (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    asset_class VARCHAR(32) NOT NULL,                  -- 'STOCK', 'GOLD', 'CASH_SAVINGS'
+    target_weight NUMERIC(5, 4) NOT NULL,              -- Tỷ trọng mục tiêu, ví dụ: 0.4000 (40%)
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_user_target_class UNIQUE (user_id, asset_class)
+);
+
+-- ============================================================================
+-- PHÂN HỆ 2: DANH MỤC TÀI SẢN & GIÁ THỊ TRƯỜNG (MARKET VALUATION)
+-- ============================================================================
+
+-- 3. Bảng Danh mục Tài sản hợp lệ
+CREATE TABLE assets (
+    ticker VARCHAR(32) PRIMARY KEY,                    -- 'VND', 'HPG', 'VCB', 'GOLD_SJC', v.v.
+    name VARCHAR(100) NOT NULL,
+    asset_class VARCHAR(32) NOT NULL                   -- 'CASH', 'STOCK', 'GOLD', 'SAVINGS'
+);
+
+-- 4. Bảng Lịch sử Giá thị trường & Định giá NAV hàng ngày
+CREATE TABLE market_prices (
+    id BIGSERIAL PRIMARY KEY,
+    ticker VARCHAR(32) NOT NULL REFERENCES assets(ticker),
+    price NUMERIC(19, 4) NOT NULL,                     -- Giá khớp đóng cửa gần nhất
+    trade_date DATE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_ticker_date UNIQUE (ticker, trade_date)
+);
+CREATE INDEX idx_market_prices_ticker_date ON market_prices(ticker, trade_date DESC);
+
+-- ============================================================================
+-- PHÂN HỆ 3: LÕI SỔ CÁI KÉP (CORE DOUBLE-ENTRY LEDGER - ACID ENGINE)
+-- ============================================================================
+
+-- 5. Bảng Tài khoản con (Sub-accounts trong Sổ cái)
+CREATE TABLE accounts (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    account_code VARCHAR(64) NOT NULL,                 -- 'VND_WALLET', 'EQUITY_CAPITAL', 'STOCK_HPG', 'GOLD_SJC'
+    asset_type VARCHAR(32) NOT NULL REFERENCES assets(ticker),
+    balance NUMERIC(19, 4) NOT NULL DEFAULT 0.0000,
+    version BIGINT NOT NULL DEFAULT 0,                 -- Optimistic Locking (@Version)
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_user_account UNIQUE (user_id, account_code)
+);
+
+-- 6. Bảng Giao dịch tài chính tổng quát
 CREATE TABLE transactions (
     id BIGSERIAL PRIMARY KEY,
     transaction_code VARCHAR(64) NOT NULL UNIQUE,
-    user_id BIGINT NOT NULL,
-    type VARCHAR(32) NOT NULL, -- 'DEPOSIT', 'WITHDRAW', 'REBALANCE', 'EXCHANGE'
-    status VARCHAR(32) NOT NULL, -- 'PENDING', 'POSTED', 'FAILED'
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    type VARCHAR(32) NOT NULL,                         -- 'CAPITAL_INJECTION', 'BUY', 'SELL', 'REBALANCE'
+    status VARCHAR(32) NOT NULL,                       -- 'PENDING', 'POSTED', 'FAILED'
     description TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 3. Bảng các dòng bút toán kép (Entries)
+-- 7. Bảng các dòng Bút toán Kép (Entries)
 CREATE TABLE entries (
     id BIGSERIAL PRIMARY KEY,
-    transaction_id BIGINT NOT NULL REFERENCES transactions(id),
+    transaction_id BIGINT NOT NULL REFERENCES transactions(id) ON DELETE CASCADE,
     account_id BIGINT NOT NULL REFERENCES accounts(id),
-    amount NUMERIC(19, 4) NOT NULL, -- Dương: Tăng số dư (Debit), Âm: Giảm số dư (Credit)
+    amount NUMERIC(19, 4) NOT NULL,                    -- Dương: Nợ (Debit), Âm: Có (Credit)
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
-
--- Index phục vụ kiểm toán và tính toán số dư
 CREATE INDEX idx_entries_account_id ON entries(account_id);
 CREATE INDEX idx_entries_tx_id ON entries(transaction_id);
 
--- 4. Bảng Sổ tiền gửi tiết kiệm & Cơ chế Lãi kép
+-- ============================================================================
+-- PHÂN HỆ 4: QUẢN LÝ TIỀN GỬI TIẾT KIỆM & LÃI KÉP (SAVINGS & COMPOUND INTEREST)
+-- ============================================================================
+
+-- 8. Bảng Sổ tiền gửi tiết kiệm
 CREATE TABLE savings_deposits (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    account_id BIGINT NOT NULL REFERENCES accounts(id),
     bank_name VARCHAR(64) NOT NULL,
-    principal_amount NUMERIC(19, 4) NOT NULL, -- Số tiền gốc gửi ban đầu
-    interest_rate NUMERIC(5, 2) NOT NULL,     -- Lãi suất %/năm (ví dụ: 6.00)
-    term_months INT NOT NULL,                 -- Kỳ hạn gửi (1, 3, 6, 12 tháng)
+    principal_amount NUMERIC(19, 4) NOT NULL,          -- Số tiền gốc gửi ban đầu
+    interest_rate NUMERIC(5, 2) NOT NULL,              -- Lãi suất %/năm (Ví dụ: 6.00)
+    term_months INT NOT NULL,                          -- Kỳ hạn gửi (1, 3, 6, 12 tháng)
     start_date DATE NOT NULL,
-    maturity_date DATE NOT NULL,              -- Ngày đáo hạn
-    auto_rollover BOOLEAN NOT NULL DEFAULT TRUE, -- TRUE: Tự động nhập gốc & lãi (Lãi kép)
-    accrued_interest NUMERIC(19, 4) NOT NULL DEFAULT 0.0000, -- Lãi lũy kế tạm tính
-    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE', -- 'ACTIVE', 'SETTLED', 'CLOSED'
+    maturity_date DATE NOT NULL,                       -- Ngày đáo hạn
+    auto_rollover BOOLEAN NOT NULL DEFAULT TRUE,       -- TRUE: Tự động nhập lãi vào gốc (Lãi kép)
+    accrued_interest NUMERIC(19, 4) NOT NULL DEFAULT 0.0000, -- Lãi lũy kế tạm tính hàng ngày
+    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE',      -- 'ACTIVE', 'SETTLED', 'CLOSED'
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX idx_savings_user_maturity ON savings_deposits(user_id, maturity_date, status);
 
--- 4. Bảng Transactional Outbox
+-- ============================================================================
+-- PHÂN HỆ 5: TRANSACTIONAL OUTBOX
+-- ============================================================================
+
+-- 9. Bảng Transactional Outbox
 CREATE TABLE outbox_events (
     id UUID PRIMARY KEY,
     aggregate_type VARCHAR(64) NOT NULL,
     aggregate_id VARCHAR(64) NOT NULL,
     event_type VARCHAR(64) NOT NULL,
     payload JSONB NOT NULL,
-    status VARCHAR(32) NOT NULL DEFAULT 'PENDING', -- 'PENDING', 'SENT'
+    status VARCHAR(32) NOT NULL DEFAULT 'PENDING',      -- 'PENDING', 'SENT'
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX idx_outbox_status_created ON outbox_events(status, created_at);
 
+-- ============================================================================
+-- PHÂN HỆ 6: HYBRID SEARCH KNOWLEDGE BASE (PGVECTOR + FULL-TEXT SEARCH)
+-- ============================================================================
+
+-- 10. Bảng Vector Store nâng cấp cho Hybrid Search
+CREATE TABLE vector_store (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    content TEXT NOT NULL,                             -- Trích đoạn cẩm nang tri thức tài chính
+    metadata JSONB,                                    -- Metadata lọc nghiệp vụ: {"topic": "GOLD"}
+    embedding VECTOR(1536),                            -- Không gian nhúng vector (OpenAI 1536 chiều)
+    tsv TSVECTOR GENERATED ALWAYS AS (to_tsvector('simple', content)) STORED
+);
+CREATE INDEX idx_vector_store_hnsw ON vector_store USING hnsw (embedding vector_cosine_ops);
+CREATE INDEX idx_vector_store_tsv ON vector_store USING gin (tsv);
 ```
 
 ---
 
-## 6. Kế hoạch Thực nghiệm và Tiêu chí Đánh giá Mô hình Học máy
+## 9. Tác vụ Đối soát Sổ cái & Kiểm toán Tự động (Batch Reconciliation & Audit)
 
-Để đưa vào chương Thực nghiệm và Đánh giá trong cuốn báo cáo tốt nghiệp, phần mô hình học máy được cấu hình theo bảng tiêu chuẩn thực nghiệm sau:
-
-### 6.1 Bố cục Dữ liệu và Thiết lập Đánh giá
-
-* **Tập dữ liệu:** Dữ liệu chuỗi thời gian nến ngày giai đoạn 2018 – 2026.
-* **Chiến lược phân chia:** 70% Train, 15% Validation, 15% Test (Áp dụng Walk-Forward Split để giữ nguyên trật tự thời gian).
-* **Hàm mục tiêu tối ưu:** Multi-class Log Loss kết hợp Weighted Cross-Entropy để xử lý mất cân bằng lớp.
-
-### 6.2 Bảng So sánh Kết quả Thực nghiệm Dự kiến
-
-| Mô hình (Model)                        | Accuracy        | Precision (Tăng) | Recall (Tăng)  | Macro F1-Score | Thời gian Inference (CPU) |
-| ---------------------------------------- | --------------- | ----------------- | --------------- | -------------- | -------------------------- |
-| **Logistic Regression (Baseline)** | 51.2%           | 49.3%             | 46.8%           | 0.48           | **0.5 ms**           |
-| **Random Forest**                  | 56.8%           | 54.1%             | 52.0%           | 0.54           | 2.8 ms                     |
-| **Bi-LSTM (Deep Learning)**        | 60.5%           | 58.7%             | 57.2%           | 0.59           | 11.2 ms                    |
-| **LightGBM (Tối ưu nhất)**      | **63.4%** | **62.8%**   | **61.5%** | **0.63** | **1.2 ms**           |
-
-*Ghi chú học thuật:* Khác với các mô hình lướt sóng ngắn hạn $T+1$ hay $T+5$ vốn bị chi phối bởi nhiễu ngẫu nhiên (White Noise) và bẫy Random Walk, bài toán phân loại trạng thái chu kỳ $T+20$ (1 tháng) phản ánh đúng động lực xu hướng trung hạn và khẩu vị tích sản tài chính cá nhân. Macro F1-score đạt ngưỡng $> 0.60$ cùng độ trễ suy luận khoảng $1.2\text{ ms}$ trên CPU chứng minh tính hiệu quả vượt trội của LightGBM khi chuyển đổi sang mô hình ONNX để chạy trong môi trường Spring Boot.
+Hệ thống thiết lập Spring Batch Job chạy tự động lúc **23:59:00 hàng ngày** để kiểm toán độc lập:
+1. **Kiểm tra Cân bằng Bút toán Kép:**
+   Quét toàn bộ các giao dịch phát sinh trong ngày:
+   $$\forall \text{tx} \in \text{Transactions}: \quad \left| \sum \text{Entries}_{\text{amount}} \right| < 10^{-4}$$
+2. **Đối chiếu Snapshot Số dư với Lịch sử Dòng tiền:**
+   So sánh số dư hiện tại trong bảng `accounts` với tổng tích lũy lịch sử từ bảng `entries`:
+   $$\text{Balance}_{\text{account}} \stackrel{?}{=} \sum_{e \in \text{entries}} e.\text{amount}$$
+3. **Cơ chế Xử lý Sai lệch:** Nếu phát hiện bất kỳ sự chênh lệch nào dù chỉ 1 đồng, tài khoản sẽ tự động chuyển sang trạng thái `FROZEN_AUDIT`, đồng thời kích hoạt cảnh báo khẩn cấp tới Quản trị viên hệ thống để kiểm tra nhật ký giao dịch.
 
 ---
 
-## 7. Yêu cầu Phi chức năng (Non-Functional Requirements)
+## 10. Yêu cầu Phi chức năng & Cam kết Kỹ thuật
 
-| Nhóm yêu cầu                                      | Chỉ số kỹ thuật cam kết                                                                                                                                                                                                       |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Độ chính xác dữ liệu (Integrity)**     | $100\%$ không xảy ra sai số làm tròn. Mọi tính toán tiền tệ trong Java sử dụng lớp `BigDecimal` (chế độ làm tròn `RoundingMode.HALF_EVEN`), trên PostgreSQL sử dụng kiểu dữ liệu `NUMERIC(19, 4)`. |
-| **Khả năng chịu tải (Throughput)**         | Hệ thống Core Ledger đạt tối thiểu**500 giao dịch/giây (TPS)** trên môi trường kiểm thử với k6 mà không xảy ra hiện tượng treo luồng hoặc lỗi sai lệch số dư.                                     |
-| **Bảo mật AI (AI Application Security)**     | Triển khai theo khuyến nghị**OWASP Top 10 for LLM**: Chặn đứng $100\%$ nguy cơ tấn công IDOR bằng cách loại bỏ định danh khỏi Tool Calling, áp dụng Human-in-the-Loop cho toàn bộ thao tác ghi.       |
-| **Độ trễ suy luận ML (Inference Latency)** | Thời gian thực thi mô hình ONNX dự báo xu hướng trực tiếp trong bộ nhớ JVM$\le 5\text{ ms}$ cho mỗi yêu cầu phân tích.                                                                                          |
-| **Tính module hóa (Modularity)**             | Tuân thủ triệt để kiến trúc Hexagonal (Ports & Adapters); phân tách hoàn toàn lớp nghiệp vụ thuần túy khỏi các framework bên ngoài.                                                                            |
-
----
-
-> **Hướng dẫn sử dụng:** Bạn có thể sao chép trực tiếp toàn bộ tài liệu Markdown này và dán vào Google Docs hoặc Microsoft Word. Toàn bộ các bảng biểu, tiêu đề, mã DDL và công thức toán học đều tương thích với trình soạn thảo tài liệu chuẩn.
+| Nhóm yêu cầu | Chỉ số kỹ thuật cam kết | Giải pháp kỹ thuật thực thi |
+| :--- | :--- | :--- |
+| **Độ chính xác dữ liệu (Integrity)** | $100\%$ không xảy ra sai số làm tròn số học. | Sử dụng `BigDecimal` (`HALF_EVEN`) trong Java và `NUMERIC(19, 4)` trong PostgreSQL. |
+| **Khả năng chịu tải (Throughput)** | Đạt tối thiểu **500 TPS** cho các tác vụ ghi sổ cái. | HikariCP Connection Pool, Index tối ưu, Optimistic Locking chống khóa cứng bảng. |
+| **Độ trễ suy luận ML (Inference)** | Thời gian suy luận song song 2 mô hình $\le 3\text{ ms}$. | Nhúng Microsoft ONNX Runtime trực tiếp trong RAM JVM, loại bỏ hoàn toàn server Python. |
+| **Độ trễ tìm kiếm AI (RAG Latency)** | Thời gian truy xuất tài liệu Hybrid Search $\le 5\text{ ms}$. | Thuật toán RRF thực thi bằng câu lệnh SQL CTE duy nhất trong PostgreSQL, loại bỏ Neural Reranker. |
+| **Bảo mật ứng dụng AI (AI Security)** | Ngăn chặn $100\%$ nguy cơ tấn công IDOR / Prompt Injection. | Kiến trúc Zero-Trust LLM: Không truyền định danh người dùng vào prompt; áp dụng Human-in-the-Loop. |
+| **Tính module hóa (Modularity)** | Độc lập giữa Nghiệp vụ (Core) và Hạ tầng (Adapters). | Kiến trúc Hexagonal (Ports & Adapters), giao tiếp qua Domain Services và Interfaces. |
