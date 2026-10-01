@@ -1,6 +1,7 @@
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, TrendingDown, TrendingUp } from 'lucide-react';
 import { PortfolioValuation, UserProfile } from '../../types';
 import { formatVND } from '../../utils/formatters';
+import { VNINDEX_SUMMARY } from '../../data/vnindexData';
 
 interface HeaderProps {
   valuation: PortfolioValuation | null;
@@ -10,6 +11,8 @@ interface HeaderProps {
 }
 
 export function Header({ valuation, profile, loading, onRefresh }: HeaderProps) {
+  const isPos = VNINDEX_SUMMARY.changePercent >= 0;
+
   return (
     <header className="h-16 px-8 bg-surface-container-lowest border-b border-border-subtle flex items-center justify-between sticky top-0 z-30">
       <div className="flex items-center gap-4">
@@ -17,6 +20,16 @@ export function Header({ valuation, profile, loading, onRefresh }: HeaderProps) 
         <span className="text-xs px-2.5 py-0.5 rounded-full bg-surface-container border border-border-subtle text-text-muted font-medium">
           v1.0.0-PROD
         </span>
+
+        {/* Live VN-Index Status Chip */}
+        <div className="hidden md:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container border border-border-subtle text-xs">
+          <span className="text-text-muted font-semibold">VN-Index:</span>
+          <span className="font-bold text-text-primary font-mono">{VNINDEX_SUMMARY.currentPoints.toFixed(2)}</span>
+          <span className={`text-[11px] font-bold font-mono flex items-center ${isPos ? 'text-accent-emerald' : 'text-accent-rose'}`}>
+            {isPos ? <TrendingUp className="w-3 h-3 inline mr-0.5" /> : <TrendingDown className="w-3 h-3 inline mr-0.5" />}
+            {isPos ? '+' : ''}{VNINDEX_SUMMARY.changePercent.toFixed(2)}%
+          </span>
+        </div>
       </div>
 
       <div className="flex items-center gap-4">

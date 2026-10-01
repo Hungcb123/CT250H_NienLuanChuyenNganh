@@ -1,6 +1,6 @@
 // Core TypeScript Definitions for EquiFolio Frontend
 
-export type TabType = 'overview' | 'ledger' | 'markowitz' | 'savings' | 'survey' | 'copilot';
+export type TabType = 'overview' | 'market' | 'ledger' | 'markowitz' | 'savings' | 'survey' | 'copilot';
 
 export interface HoldingItem {
   accountCode: string;

@@ -27,4 +27,9 @@ public class MarketController {
     public ResponseEntity<ApiResponse<List<MarketPrice>>> getLatestPrices() {
         return ResponseEntity.ok(ApiResponse.success(marketService.getLatestMarketPrices()));
     }
+
+    @GetMapping("/vnindex")
+    public ResponseEntity<ApiResponse<java.util.Map<String, Object>>> getVNIndex() {
+        return ResponseEntity.ok(ApiResponse.success(marketService.getVNIndexSummary()));
+    }
 }

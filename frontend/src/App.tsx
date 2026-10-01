@@ -4,6 +4,7 @@ import { getPortfolioValuation, getRebalancePlan, getUserProfile } from './servi
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { OverviewTab } from './components/tabs/OverviewTab';
+import { MarketTab } from './components/tabs/MarketTab';
 import { LedgerTab } from './components/tabs/LedgerTab';
 import { MarkowitzTab } from './components/tabs/MarkowitzTab';
 import { SavingsTab } from './components/tabs/SavingsTab';
@@ -74,6 +75,8 @@ export default function App() {
               onConfirmRebalance={handleConfirmRebalance}
             />
           )}
+
+          {activeTab === 'market' && <MarketTab />}
 
           {activeTab === 'ledger' && <LedgerTab />}
 

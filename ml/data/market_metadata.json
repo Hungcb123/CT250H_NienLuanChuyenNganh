@@ -1,0 +1,240 @@
+{
+  "ACB": {
+    "ticker": "ACB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 21100.0
+  },
+  "BCM": {
+    "ticker": "BCM.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 39500.0
+  },
+  "BID": {
+    "ticker": "BID.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 35450.0
+  },
+  "BVH": {
+    "ticker": "BVH.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 74500.0
+  },
+  "CTG": {
+    "ticker": "CTG.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 30050.0
+  },
+  "FPT": {
+    "ticker": "FPT.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 62700.0
+  },
+  "GAS": {
+    "ticker": "GAS.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 82000.0
+  },
+  "GVR": {
+    "ticker": "GVR.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 32750.0
+  },
+  "HDB": {
+    "ticker": "HDB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 28000.0
+  },
+  "HPG": {
+    "ticker": "HPG.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 20050.0
+  },
+  "MBB": {
+    "ticker": "MBB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 19550.0
+  },
+  "MSN": {
+    "ticker": "MSN.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 70900.0
+  },
+  "MWG": {
+    "ticker": "MWG.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 72600.0
+  },
+  "PLX": {
+    "ticker": "PLX.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 36650.0
+  },
+  "POW": {
+    "ticker": "POW.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 12900.0
+  },
+  "SAB": {
+    "ticker": "SAB.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 43300.0
+  },
+  "SHB": {
+    "ticker": "SHB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 11350.0
+  },
+  "SSB": {
+    "ticker": "SSB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 17750.0
+  },
+  "SSI": {
+    "ticker": "SSI.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 20150.0
+  },
+  "STB": {
+    "ticker": "STB.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 70300.0
+  },
+  "TCB": {
+    "ticker": "TCB.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 33000.0
+  },
+  "TPB": {
+    "ticker": "TPB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 14400.0
+  },
+  "VCB": {
+    "ticker": "VCB.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 57600.0
+  },
+  "VHM": {
+    "ticker": "VHM.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 68400.0
+  },
+  "VIB": {
+    "ticker": "VIB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 13400.0
+  },
+  "VIC": {
+    "ticker": "VIC.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 220000.0
+  },
+  "VJC": {
+    "ticker": "VJC.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 129600.0
+  },
+  "VNM": {
+    "ticker": "VNM.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 58600.0
+  },
+  "VPB": {
+    "ticker": "VPB.VN",
+    "bars": 1305,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 23300.0
+  },
+  "VRE": {
+    "ticker": "VRE.VN",
+    "bars": 1296,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 24150.0
+  },
+  "E1VFVN30": {
+    "ticker": "E1VFVN30.VN",
+    "bars": 724,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 34220.0
+  },
+  "FUEVN100": {
+    "ticker": "FUEVN100.VN",
+    "bars": 789,
+    "startDate": "2023-07-17",
+    "endDate": "2026-10-01",
+    "latestClose": 24840.0
+  },
+  "FUEVFVND": {
+    "ticker": "FUEVFVND.VN",
+    "bars": 789,
+    "startDate": "2023-07-17",
+    "endDate": "2026-10-01",
+    "latestClose": 32990.0
+  },
+  "GC": {
+    "ticker": "GC=F",
+    "bars": 1258,
+    "startDate": "2021-10-01",
+    "endDate": "2026-10-01",
+    "latestClose": 4214.7998046875
+  }
+}

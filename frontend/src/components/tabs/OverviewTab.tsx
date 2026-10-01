@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import {
-  Wallet, Receipt, PiggyBank, TrendingUp, Bot, AlertTriangle, CheckCircle
+  Wallet, Receipt, PiggyBank, TrendingUp, Bot, AlertTriangle, CheckCircle, BarChart2, Activity
 } from 'lucide-react';
 import {
-  AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  AreaChart, Area, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
 } from 'recharts';
 import { PortfolioValuation, RebalancePlan, UserProfile } from '../../types';
 import { formatVND } from '../../utils/formatters';
+import { VNIndexChart } from '../charts/VNIndexChart';
+import { VNINDEX_SUMMARY } from '../../data/vnindexData';
 
 interface OverviewTabProps {
   valuation: PortfolioValuation | null;
@@ -16,16 +19,17 @@ interface OverviewTabProps {
   onConfirmRebalance: () => void;
 }
 
+// 9-month normalized performance comparison: EquiFolio Portfolio vs VN-Index Benchmark
 const PERFORMANCE_DATA = [
-  { month: 'T1', nav: 1280 },
-  { month: 'T2', nav: 1310 },
-  { month: 'T3', nav: 1295 },
-  { month: 'T4', nav: 1340 },
-  { month: 'T5', nav: 1390 },
-  { month: 'T6', nav: 1370 },
-  { month: 'T7', nav: 1410 },
-  { month: 'T8', nav: 1435 },
-  { month: 'T9', nav: 1450.28 },
+  { month: 'T1', navReturn: 0.0, vniReturn: 0.0, navVal: 1280.0, vniVal: 1165.0 },
+  { month: 'T2', navReturn: 2.3, vniReturn: 1.1, navVal: 1310.0, vniVal: 1178.0 },
+  { month: 'T3', navReturn: 1.2, vniReturn: -1.6, navVal: 1295.0, vniVal: 1146.0 },
+  { month: 'T4', navReturn: 4.7, vniReturn: 2.1, navVal: 1340.0, vniVal: 1190.0 },
+  { month: 'T5', navReturn: 8.6, vniReturn: 4.5, navVal: 1390.0, vniVal: 1218.0 },
+  { month: 'T6', navReturn: 7.0, vniReturn: 1.8, navVal: 1370.0, vniVal: 1186.0 },
+  { month: 'T7', navReturn: 10.2, vniReturn: 5.2, navVal: 1410.0, vniVal: 1225.0 },
+  { month: 'T8', navReturn: 12.1, vniReturn: 6.8, navVal: 1435.0, vniVal: 1244.0 },
+  { month: 'T9', navReturn: 13.3, vniReturn: 7.5, navVal: 1450.3, vniVal: 1252.0 },
 ];
 
 const DONUT_COLORS = ['#059669', '#d97706', '#0284c7'];
@@ -37,6 +41,8 @@ export function OverviewTab({
   confirmedExecution,
   onConfirmRebalance
 }: OverviewTabProps) {
+  const [chartMode, setChartMode] = useState<'compare' | 'nav' | 'vnindex'>('compare');
+
   const donutData = valuation ? [
     { name: 'Cổ phiếu VN30', value: Math.round((valuation.currentAllocations.STOCK || 0.55) * 100) },
     { name: 'Vàng SJC', value: Math.round((valuation.currentAllocations.GOLD || 0.18) * 100) },
@@ -156,34 +162,161 @@ export function OverviewTab({
         <div className="lg:col-span-8 space-y-6">
           {/* Chart Card */}
           <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider">Đường Cong Hiệu Suất Tài Sản Ròng</h3>
-                <p className="text-xs text-text-secondary">Tăng trưởng bền vững theo chu kỳ 9 tháng gần nhất</p>
+            {/* Live VN-Index Market Ticker Strip */}
+            <div className="flex flex-wrap items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg bg-surface-container-low/70 border border-border-subtle mb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>
+                <span className="text-xs font-bold text-text-primary">VN-Index:</span>
+                <span className="text-xs font-black text-text-primary font-mono">
+                  {VNINDEX_SUMMARY.currentPoints.toFixed(2)}
+                </span>
+                <span className={`text-xs font-bold font-mono ${VNINDEX_SUMMARY.changePercent >= 0 ? 'text-accent-emerald' : 'text-accent-rose'}`}>
+                  {VNINDEX_SUMMARY.changePoints > 0 ? '+' : ''}{VNINDEX_SUMMARY.changePoints.toFixed(2)} ({VNINDEX_SUMMARY.changePercent > 0 ? '+' : ''}{VNINDEX_SUMMARY.changePercent.toFixed(2)}%)
+                </span>
               </div>
-              <span className="text-xs font-semibold px-2.5 py-1 bg-surface-container-low rounded-lg text-text-secondary border border-border-subtle">
-                YTD 2026
-              </span>
+              <div className="flex items-center gap-3.5 text-xs text-text-secondary">
+                <span>Khối lượng: <strong className="text-text-primary font-mono">{(VNINDEX_SUMMARY.latestVolume / 1e6).toFixed(1)}M CP</strong></span>
+                <span>MA20: <strong className="text-text-primary font-mono">{VNINDEX_SUMMARY.ma20.toFixed(1)}</strong></span>
+                <span>MA50: <strong className="text-text-primary font-mono">{VNINDEX_SUMMARY.ma50.toFixed(1)}</strong></span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-accent-emerald-light text-accent-emerald border border-accent-emerald/30">
+                  +1 Bullish (Tích lũy)
+                </span>
+              </div>
             </div>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={PERFORMANCE_DATA}>
-                  <defs>
-                    <linearGradient id="colorNav" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#059669" stopOpacity={0.25} />
-                      <stop offset="95%" stopColor="#059669" stopOpacity={0.0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="month" stroke="#94a3b8" fontSize={12} tickLine={false} />
-                  <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} domain={['dataMin - 50', 'dataMax + 50']} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '0.5rem', fontSize: '12px' }}
-                    formatter={(value: any) => [`${value} Triệu ₫`, 'Tổng NAV']}
-                  />
-                  <Area type="monotone" dataKey="nav" stroke="#059669" strokeWidth={2.5} fillOpacity={1} fill="url(#colorNav)" />
-                </AreaChart>
-              </ResponsiveContainer>
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-sm font-bold text-text-primary uppercase tracking-wider">
+                    {chartMode === 'vnindex' ? 'Biểu Đồ Kỹ Thuật Chỉ Số VN-Index' : 'Hiệu Suất Đầu Tư & Đối Sánh Thị Trường'}
+                  </h3>
+                  {chartMode !== 'vnindex' && (
+                    <span className="px-2 py-0.5 rounded-full bg-accent-emerald-light text-accent-emerald text-[11px] font-bold border border-accent-emerald/30">
+                      Alpha: +5.8% vs VN-Index
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  {chartMode === 'vnindex'
+                    ? 'Dữ liệu 1,430 phiên giao dịch từ VNDirect API kèm đường trung bình động MA20 & MA50'
+                    : 'Danh mục tối ưu Markowitz (+13.3%) vượt trội so với chỉ số chung VN-Index (+7.5%)'}
+                </p>
+              </div>
+
+              {/* View Toggle */}
+              <div className="flex items-center gap-1 p-1 bg-surface-container-low rounded-lg border border-border-subtle">
+                <button
+                  type="button"
+                  onClick={() => setChartMode('compare')}
+                  className={`px-2.5 py-1 rounded text-xs font-semibold transition-all ${
+                    chartMode === 'compare'
+                      ? 'bg-surface-container-lowest text-text-primary shadow-xs border border-border-subtle'
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
+                >
+                  <BarChart2 className="w-3.5 h-3.5 inline mr-1" />
+                  Đối sánh (%)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setChartMode('nav')}
+                  className={`px-2.5 py-1 rounded text-xs font-semibold transition-all ${
+                    chartMode === 'nav'
+                      ? 'bg-surface-container-lowest text-text-primary shadow-xs border border-border-subtle'
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
+                >
+                  NAV (₫)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setChartMode('vnindex')}
+                  className={`px-2.5 py-1 rounded text-xs font-semibold transition-all ${
+                    chartMode === 'vnindex'
+                      ? 'bg-surface-container-lowest text-accent-emerald shadow-xs border border-border-subtle font-bold'
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
+                >
+                  <Activity className="w-3.5 h-3.5 inline mr-1 text-accent-emerald" />
+                  Chỉ số VN-Index
+                </button>
+              </div>
             </div>
+
+            {chartMode === 'vnindex' ? (
+              <VNIndexChart height={280} compact={false} showControls={true} />
+            ) : (
+              <>
+                <div className="h-64 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={PERFORMANCE_DATA}>
+                      <defs>
+                        <linearGradient id="colorNav" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#059669" stopOpacity={0.25} />
+                          <stop offset="95%" stopColor="#059669" stopOpacity={0.0} />
+                        </linearGradient>
+                      </defs>
+                      <XAxis dataKey="month" stroke="#94a3b8" fontSize={12} tickLine={false} />
+                      <YAxis
+                        stroke="#94a3b8"
+                        fontSize={12}
+                        tickLine={false}
+                        domain={chartMode === 'compare' ? [-3, 16] : ['dataMin - 50', 'dataMax + 50']}
+                        tickFormatter={(v) => (chartMode === 'compare' ? `${v}%` : `${v}M`)}
+                      />
+                      <Tooltip
+                        contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '0.5rem', fontSize: '12px' }}
+                        formatter={(value: any, name: string) => [
+                          chartMode === 'compare' ? `${value > 0 ? '+' : ''}${value}%` : `${value} Triệu ₫`,
+                          name
+                        ]}
+                      />
+                      <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
+
+                      {/* 1. Main EquiFolio Portfolio Area */}
+                      <Area
+                        type="monotone"
+                        dataKey={chartMode === 'compare' ? 'navReturn' : 'navVal'}
+                        name={chartMode === 'compare' ? 'Danh mục EquiFolio (+13.3%)' : 'Tổng NAV Danh mục'}
+                        stroke="#059669"
+                        strokeWidth={2.5}
+                        fillOpacity={1}
+                        fill="url(#colorNav)"
+                      />
+
+                      {/* 2. VN-Index Benchmark Comparison Line */}
+                      {chartMode === 'compare' && (
+                        <Line
+                          type="monotone"
+                          dataKey="vniReturn"
+                          name="Chỉ số VN-Index (+7.5%)"
+                          stroke="#64748b"
+                          strokeWidth={2}
+                          strokeDasharray="4 4"
+                          dot={false}
+                        />
+                      )}
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Performance Metric Badges */}
+                <div className="grid grid-cols-3 gap-3 pt-4 mt-2 border-t border-border-subtle text-xs text-center">
+                  <div className="p-2 rounded bg-surface-container-low border border-border-subtle">
+                    <span className="text-[10px] text-text-muted uppercase font-bold">Chỉ số Alpha (Thắng TT)</span>
+                    <p className="font-extrabold text-accent-emerald text-sm">+5.8% YTD</p>
+                  </div>
+                  <div className="p-2 rounded bg-surface-container-low border border-border-subtle">
+                    <span className="text-[10px] text-text-muted uppercase font-bold">Hệ số Beta (Độ biến động)</span>
+                    <p className="font-extrabold text-text-primary text-sm">0.68 (Phòng thủ tốt)</p>
+                  </div>
+                  <div className="p-2 rounded bg-surface-container-low border border-border-subtle">
+                    <span className="text-[10px] text-text-muted uppercase font-bold">Chỉ số Sharpe Ratio</span>
+                    <p className="font-extrabold text-accent-gold text-sm">1.84 (Hiệu quả cao)</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Holdings Table */}

@@ -1,4 +1,4 @@
-import { Shield, Wallet, Receipt, LineChart, PiggyBank, Award, Bot } from 'lucide-react';
+import { Shield, Wallet, Receipt, LineChart, PiggyBank, Award, Bot, Activity } from 'lucide-react';
 import { TabType } from '../../types';
 
 interface SidebarProps {
@@ -9,6 +9,7 @@ interface SidebarProps {
 export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   const navItems: Array<{ id: TabType; label: string; icon: typeof Wallet }> = [
     { id: 'overview', label: 'Tổng quan tài sản', icon: Wallet },
+    { id: 'market', label: 'Thị trường & VN-Index', icon: Activity },
     { id: 'ledger', label: 'Sổ cái kép ACID', icon: Receipt },
     { id: 'markowitz', label: 'Tối ưu Markowitz', icon: LineChart },
     { id: 'savings', label: 'Sổ tiết kiệm & Lãi kép', icon: PiggyBank },
