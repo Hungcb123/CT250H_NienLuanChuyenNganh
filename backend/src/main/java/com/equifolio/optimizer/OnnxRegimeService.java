@@ -63,12 +63,13 @@ public class OnnxRegimeService {
 
             try (OrtSession.Result result = session.run(Collections.singletonMap("float_input", tensor))) {
                 // LightGBM ONNX outputs: label (int64) or probabilities
-                Optional<OnnxValue> labelOpt = result.get(0);
-                if (labelOpt.isPresent()) {
-                    long[] labels = (long[]) labelOpt.get().getValue();
-                    long classIdx = labels[0];
-                    // 0 -> -1 (Bearish), 1 -> 0 (Sideway), 2 -> +1 (Bullish)
-                    return (int) classIdx - 1;
+                if (result != null && result.size() > 0) {
+                    OnnxValue labelVal = result.get(0);
+                    if (labelVal != null && labelVal.getValue() instanceof long[] labels) {
+                        long classIdx = labels[0];
+                        // 0 -> -1 (Bearish), 1 -> 0 (Sideway), 2 -> +1 (Bullish)
+                        return (int) classIdx - 1;
+                    }
                 }
             }
         } catch (Exception e) {
