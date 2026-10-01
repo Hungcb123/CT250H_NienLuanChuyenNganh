@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VietRobo Terminal - Swiss Wealth Architecture</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#98805d",
+            "primary-fixed-dim": "#bec6e0",
+            "border-subtle": "#e2e8f0",
+            "border-highlight": "#cbd5e1",
+            "tertiary-container": "#271901",
+            "primary": "#000000",
+            "on-background": "#1b1b1d",
+            "surface-container-high": "#eaedf2",
+            "inverse-primary": "#bec6e0",
+            "accent-emerald": "#059669",
+            "primary-container": "#1e293b",
+            "accent-rose": "#e11d48",
+            "surface-bright": "#fcf8fa",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#76777d",
+            "text-secondary": "#475569",
+            "secondary-fixed": "#cce5ff",
+            "on-primary-fixed": "#131b2e",
+            "inverse-surface": "#303032",
+            "on-error-container": "#93000a",
+            "surface-dim": "#dcd9db",
+            "secondary-fixed-dim": "#93ccff",
+            "primary-fixed": "#dae2fd",
+            "surface-container": "#f1f3f7",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#e2e6ed",
+            "text-muted": "#94a3b8",
+            "on-tertiary-fixed-variant": "#574425",
+            "on-primary-fixed-variant": "#3f465c",
+            "accent-rose-light": "#ffe4e6",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-tint": "#565e74",
+            "on-surface-variant": "#45464d",
+            "on-secondary-fixed": "#001d31",
+            "tertiary-fixed-dim": "#dec29a",
+            "tertiary": "#000000",
+            "secondary": "#006398",
+            "surface-variant": "#e4e2e4",
+            "on-secondary": "#ffffff",
+            "accent-gold-light": "#fef3c7",
+            "tertiary-fixed": "#fcdeb5",
+            "outline-variant": "#c6c6cd",
+            "on-primary-container": "#7c839b",
+            "surface-container-low": "#f8f9fa",
+            "on-surface": "#1b1b1d",
+            "background": "#fcf8fa",
+            "on-secondary-fixed-variant": "#004b73",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "surface": "#fcfcfd",
+            "secondary-container": "#e0f2fe",
+            "inverse-on-surface": "#f3f0f2",
+            "text-primary": "#090d16",
+            "on-secondary-container": "#00476e",
+            "accent-gold": "#b45309",
+            "on-tertiary-fixed": "#271901",
+            "accent-emerald-light": "#ecfdf5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "margin": "2.5rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "title-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "title-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fcfcfd;
+      color: #090d16;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="bg-surface text-text-primary min-h-screen">
+<!-- ==================== SIDE NAVIGATION (Shared Component) ==================== -->
+<aside class="fixed top-0 left-0 bottom-0 z-40 w-72 flex flex-col justify-between bg-surface-container-lowest border-r border-border-subtle h-screen select-none">
+<div class="p-6">
+<!-- Brand & Security Header -->
+<div class="flex items-center gap-3 pb-6 border-b border-border-subtle">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-border-subtle shadow-sm">
+<span class="material-symbols-outlined text-accent-gold" data-icon="shield" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div>
+<h1 class="text-title-lg font-title-lg text-primary tracking-tight font-semibold">VietRobo Terminal</h1>
+<p class="text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Swiss Wealth Architecture</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="mt-6 space-y-1.5">
+<!-- Active: Tổng quan tài sản (Closest match to Executive Master Dashboard) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-low text-text-primary font-semibold border-l-2 border-accent-gold transition-all duration-150 active:scale-[0.99]" href="#overview">
+<span class="material-symbols-outlined text-accent-gold" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-label-lg font-label-lg">Tổng quan tài sản</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99]" href="#ledger">
+<span class="material-symbols-outlined text-text-muted" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-lg font-label-lg">Sổ cái kép ACID</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99]" href="#markowitz">
+<span class="material-symbols-outlined text-text-muted" data-icon="query_stats">query_stats</span>
+<span class="text-label-lg font-label-lg">Tối ưu Markowitz</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99]" href="#savings">
+<span class="material-symbols-outlined text-text-muted" data-icon="savings">savings</span>
+<span class="text-label-lg font-label-lg">Sổ tiết kiệm &amp; Lãi kép</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99]" href="#copilot">
+<span class="material-symbols-outlined text-text-muted" data-icon="smart_toy">smart_toy</span>
+<span class="text-label-lg font-label-lg">AI Copilot</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Bottom Action & System Integrity -->
+<div class="p-6 border-t border-border-subtle bg-surface-container-lowest">
+<button class="w-full mb-4 py-2.5 px-3 rounded-lg bg-surface-container-low border border-border-subtle text-accent-gold hover:bg-surface-container transition-all flex items-center justify-center gap-2 text-label-md font-label-md">
+<span class="material-symbols-outlined text-accent-gold" data-icon="support_agent">support_agent</span>
+<span>Tư vấn viên Private Banker</span>
+</button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-container-low text-label-sm font-label-sm transition-colors" href="#biometrics">
+<span class="material-symbols-outlined text-text-muted" data-icon="verified_user">verified_user</span>
+<span>Bảo mật sinh trắc học</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-container-low text-label-sm font-label-sm transition-colors" href="#settings">
+<span class="material-symbols-outlined text-text-muted" data-icon="settings">settings</span>
+<span>Cài đặt hệ sinh thái</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ==================== TOP NAVIGATION BAR (Shared Component) ==================== -->
+<header class="fixed top-0 right-0 left-72 z-30 h-16 flex items-center justify-between px-8 bg-surface-container-lowest border-b border-border-subtle">
+<div class="flex items-center gap-6">
+<span class="text-title-lg font-title-lg text-text-primary font-semibold tracking-tight">VietRobo Wealth</span>
+<!-- Nav Links -->
+<nav class="hidden md:flex items-center gap-6 ml-4">
+<a class="text-text-primary font-semibold border-b-2 border-accent-gold pb-1 text-label-md font-label-md" href="#">Thị trường toàn cầu</a>
+<a class="text-text-secondary hover:text-text-primary pb-1 text-label-md font-label-md transition-colors" href="#">Báo cáo Family Office</a>
+<a class="text-text-secondary hover:text-text-primary pb-1 text-label-md font-label-md transition-colors" href="#">Ủy thác đầu tư</a>
+</nav>
+</div>
+<!-- Right Controls & VIP Profile -->
+<div class="flex items-center gap-4">
+<!-- Status Badge -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-border-subtle">
+<span class="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-text-secondary">NAV 128.450.000.000 ₫</span>
+</div>
+<!-- Quick Action Buttons -->
+<button class="px-3.5 py-1.5 rounded-lg bg-primary text-surface-bright text-label-md font-label-md hover:bg-primary-container transition-all shadow-sm">
+        Chuyển khoản ACID
+      </button>
+<!-- Icons Cluster -->
+<div class="flex items-center gap-1 text-text-secondary border-l border-border-subtle pl-3">
+<button class="p-2 rounded-lg hover:bg-surface-container-low transition-colors" title="Thông báo">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-low transition-colors" title="Bảo mật">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-low transition-colors" title="Khóa phiên">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</button>
+</div>
+<!-- User Avatar -->
+<div class="flex items-center gap-2 pl-2">
+<div class="w-8 h-8 rounded-full bg-accent-gold-light border border-accent-gold flex items-center justify-center text-accent-gold font-bold text-label-sm">
+          NT
+        </div>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN DASHBOARD CONTENT ==================== -->
+<main class="ml-72 pt-16 p-8 min-h-screen space-y-6">
+<!-- 1. HEADER THANH LỊCH (Executive Profile & Ledger Attestation) -->
+<section class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+<div>
+<div class="flex items-center gap-3">
+<h2 class="text-headline-sm font-headline-sm text-text-primary tracking-tight">Nguyễn Tuấn</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-accent-gold-light text-accent-gold text-label-sm font-label-sm border border-accent-gold/20">
+            Khách hàng Private VIP
+          </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-text-secondary text-label-sm font-label-sm">
+            Risk Score: 68/100 (λ = 3.88)
+          </span>
+</div>
+<p class="text-body-sm font-body-sm text-text-secondary mt-1">Khẩu vị: Tăng trưởng Cân bằng • Danh mục Family Office ủy thác tự động</p>
+</div>
+<!-- Ledger Verification & Controls -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- ACID Ledger Badge -->
+<div class="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-surface-container-low border border-border-subtle">
+<span class="w-2.5 h-2.5 rounded-full bg-accent-emerald shadow-[0_0_8px_rgba(5,150,105,0.4)]"></span>
+<div class="text-left">
+<p class="text-label-sm font-label-sm text-text-muted">Kiểm toán Sổ cái kép Realtime</p>
+<p class="text-label-md font-label-md text-text-primary">ACID: Σ Debit - Σ Credit = 0.00 ₫ <span class="text-accent-emerald font-semibold">(100%)</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-low border border-border-subtle text-text-primary hover:bg-surface-container transition-all flex items-center gap-1.5 text-label-md font-label-md">
+<span class="material-symbols-outlined text-text-secondary text-[18px]" data-icon="policy">policy</span>
+<span>Đối soát sổ cái</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-primary text-surface-bright hover:bg-primary-container transition-all flex items-center gap-1.5 text-label-md font-label-md shadow-sm">
+<span class="material-symbols-outlined text-surface-bright text-[18px]" data-icon="published_with_changes">published_with_changes</span>
+<span>Thực thi Tái cơ cấu</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 2. DẢI KPI THƯỢNG LƯU (Executive Summary Cards) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Card 1: NAV -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+<div class="flex items-center justify-between text-text-muted mb-2">
+<span class="text-label-sm font-label-sm uppercase tracking-wider">Tổng Tài Sản Ròng (NAV)</span>
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="account_balance">account_balance</span>
+</div>
+<div class="text-headline-md font-headline-md text-text-primary font-bold tracking-tight">
+          1,450,280,000 ₫
+        </div>
+<div class="mt-3 flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent-emerald-light text-accent-emerald text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+            +12.4% YTD (+162.5M)
+          </span>
+<!-- Minimal Sparkline SVG -->
+<svg class="w-20 h-6 text-accent-emerald" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 80 24">
+<path d="M1 20 L15 17 L30 19 L45 11 L60 14 L79 3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- Card 2: Tiền Mặt & Thanh Khoản -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+<div class="flex items-center justify-between text-text-muted mb-2">
+<span class="text-label-sm font-label-sm uppercase tracking-wider">Tiền Mặt &amp; Thanh Khoản</span>
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="payments">payments</span>
+</div>
+<div class="text-headline-md font-headline-md text-text-primary font-bold tracking-tight">
+          85,280,000 ₫
+        </div>
+<div class="mt-3 flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-text-secondary">Tỷ trọng: <strong class="text-text-primary font-semibold">5.9% NAV</strong></span>
+<span class="text-accent-emerald font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-emerald"></span> Sẵn sàng giải ngân
+          </span>
+</div>
+</div>
+<!-- Card 3: Sổ Tiết Kiệm & Lãi Kép -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+<div class="flex items-center justify-between text-text-muted mb-2">
+<span class="text-label-sm font-label-sm uppercase tracking-wider">Tiết Kiệm &amp; Lãi Kép</span>
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="savings">savings</span>
+</div>
+<div class="text-headline-md font-headline-md text-text-primary font-bold tracking-tight">
+          300,000,000 ₫
+        </div>
+<div class="mt-3 flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-text-secondary">3 sổ Auto-Rollover</span>
+<span class="text-accent-gold font-semibold">+1,650,000 ₫/tháng</span>
+</div>
+</div>
+<!-- Card 4: ONNX ML Monitor -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+<div class="flex items-center justify-between text-text-muted mb-2">
+<span class="text-label-sm font-label-sm uppercase tracking-wider">Giám Sát Chu Kỳ ONNX</span>
+<span class="text-[10px] font-semibold text-accent-emerald bg-accent-emerald-light px-1.5 py-0.5 rounded">&lt;2ms</span>
+</div>
+<div class="space-y-2 mt-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-text-secondary font-medium">VN30 Index:</span>
+<span class="inline-flex items-center gap-1 font-semibold text-accent-emerald">
+              +1 Bullish <span class="text-[11px] text-text-muted font-normal">(86.4%)</span>
+</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-text-secondary font-medium">Vàng SJC 9999:</span>
+<span class="inline-flex items-center gap-1 font-semibold text-text-secondary">
+              0 Neutral <span class="text-[11px] text-text-muted font-normal">(62.1%)</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. BANNER CẢNH BÁO TÁI CƠ CẤU THÔNG MINH (Rebalance Alert) -->
+<section class="bg-accent-gold-light/40 border border-accent-gold/30 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-accent-gold-light border border-accent-gold/40 flex items-center justify-center text-accent-gold flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h3 class="text-label-lg font-label-lg text-text-primary font-bold">
+            Cảnh báo Lệch Tỷ Trọng Danh Mục: Cổ phiếu VN30 đang chiếm 47.2%
+          </h3>
+<p class="text-body-sm font-body-sm text-text-secondary mt-0.5">
+            Vượt trần quy định 40% (+5% biên độ an toàn). Mô hình Markowitz MVO khuyến nghị chốt lời từng phần sang vàng vật chất để tối ưu Sharpe.
+          </p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest border border-accent-gold/40 text-accent-gold hover:bg-accent-gold hover:text-white transition-all text-label-md font-label-md whitespace-nowrap shadow-sm self-end md:self-center">
+        Xem Chi Tiết Kế Hoạch Lô Chẵn
+      </button>
+</section>
+<!-- 4. BỐ CỤC 2 CỘT CHÍNH (Balanced Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- ==================== CỘT TRÁI (7 Cột) ==================== -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Khối Phân Bổ Danh Mục Trực Quan -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h3 class="text-title-lg font-title-lg text-text-primary font-bold">Phân Bổ Danh Mục Tối Ưu</h3>
+<p class="text-body-sm font-body-sm text-text-muted">So sánh Thực tế vs Chiến lược TAA vs Chuẩn SAA dài hạn</p>
+</div>
+<div class="flex items-center gap-3 text-label-sm font-label-sm">
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-slate-900"></span>Cổ phiếu</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-600"></span>Vàng</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-sky-600"></span>Tiết kiệm</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-600"></span>Tiền mặt</span>
+</div>
+</div>
+<!-- Comparative Multi-bars -->
+<div class="space-y-3.5 pt-2">
+<!-- Thực tế Hiện Tại -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1.5">
+<span class="font-semibold text-text-primary">Danh mục Thực Tế (Hiện hành)</span>
+<span class="text-accent-rose font-semibold">Lệch +7.2% Cổ phiếu</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-slate-900" style="width: 47.2%;" title="Cổ phiếu: 47.2%"></div>
+<div class="bg-amber-600" style="width: 26.2%;" title="Vàng: 26.2%"></div>
+<div class="bg-sky-600" style="width: 20.7%;" title="Tiết kiệm: 20.7%"></div>
+<div class="bg-emerald-600" style="width: 5.9%;" title="Tiền mặt: 5.9%"></div>
+</div>
+<div class="flex justify-between text-[11px] text-text-muted mt-1">
+<span>CP: 47.2%</span>
+<span>Vàng: 26.2%</span>
+<span>Tiết kiệm: 20.7%</span>
+<span>Tiền mặt: 5.9%</span>
+</div>
+</div>
+<!-- TAA Tối Ưu Sharpe -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1.5">
+<span class="font-semibold text-text-primary">Mô Hình Markowitz TAA (Đề Xuất)</span>
+<span class="text-accent-emerald font-semibold">Tối ưu Sharpe = 1.84</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden flex opacity-90">
+<div class="bg-slate-900" style="width: 42%;"></div>
+<div class="bg-amber-600" style="width: 28%;"></div>
+<div class="bg-sky-600" style="width: 22%;"></div>
+<div class="bg-emerald-600" style="width: 8%;"></div>
+</div>
+<div class="flex justify-between text-[11px] text-text-muted mt-1">
+<span>Mục tiêu CP: 42.0%</span>
+<span>Vàng: 28.0%</span>
+<span>Tiết kiệm: 22.0%</span>
+<span>Tiền mặt: 8.0%</span>
+</div>
+</div>
+<!-- Chuẩn SAA Dài Hạn -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1.5">
+<span class="text-text-secondary">Khung Chuẩn SAA (Chiến lược dài hạn)</span>
+<span class="text-text-muted">Target Cân Bằng</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden flex opacity-60">
+<div class="bg-slate-900" style="width: 40%;"></div>
+<div class="bg-amber-600" style="width: 30%;"></div>
+<div class="bg-sky-600" style="width: 20%;"></div>
+<div class="bg-emerald-600" style="width: 10%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bảng Vị Thế Danh Mục (Asset Portfolio Holdings) -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h3 class="text-title-lg font-title-lg text-text-primary font-bold">Vị Thế Danh Mục (Holdings)</h3>
+<p class="text-body-sm font-body-sm text-text-muted">Chỉ số rủi ro: Sharpe Ratio: 1.84 • Max Drawdown: -8.2%</p>
+</div>
+<span class="text-label-sm font-label-sm px-2.5 py-1 rounded bg-surface-container text-text-secondary">
+              5 Hạng mục
+            </span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle text-label-sm font-label-sm text-text-muted">
+<th class="py-2.5 font-semibold">TÀI SẢN</th>
+<th class="py-2.5 font-semibold">KHỐI LƯỢNG</th>
+<th class="py-2.5 font-semibold text-right">GIÁ TRỊ THỊ TRƯỜNG</th>
+<th class="py-2.5 font-semibold text-right">LÃI / LỖ (P&amp;L)</th>
+<th class="py-2.5 font-semibold text-right">TỶ TRỌNG</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle text-body-sm font-body-sm">
+<!-- Row 1: HPG -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-semibold text-text-primary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-900"></span> HPG (Hòa Phát)
+                  </td>
+<td class="py-3 text-text-secondary">10,000 cp</td>
+<td class="py-3 text-right font-medium">284,000,000 ₫</td>
+<td class="py-3 text-right font-semibold text-accent-emerald">+39,200,000 ₫</td>
+<td class="py-3 text-right text-text-secondary">19.6%</td>
+</tr>
+<!-- Row 2: FPT -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-semibold text-text-primary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-900"></span> FPT Corp
+                  </td>
+<td class="py-3 text-text-secondary">3,000 cp</td>
+<td class="py-3 text-right font-medium">400,500,000 ₫</td>
+<td class="py-3 text-right font-semibold text-accent-emerald">+81,000,000 ₫</td>
+<td class="py-3 text-right text-text-secondary">27.6%</td>
+</tr>
+<!-- Row 3: Vàng SJC -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-semibold text-text-primary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-600"></span> Vàng SJC 9999
+                  </td>
+<td class="py-3 text-text-secondary">4.5 lượng</td>
+<td class="py-3 text-right font-medium">380,500,000 ₫</td>
+<td class="py-3 text-right font-semibold text-accent-emerald">+23,400,000 ₫</td>
+<td class="py-3 text-right text-text-secondary">26.2%</td>
+</tr>
+<!-- Row 4: Tiết kiệm VCB -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-semibold text-text-primary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-sky-600"></span> Tiết kiệm VCB 6M
+                  </td>
+<td class="py-3 text-text-secondary">Lãi 5.2%/năm</td>
+<td class="py-3 text-right font-medium">300,000,000 ₫</td>
+<td class="py-3 text-right font-semibold text-accent-emerald">+7,800,000 ₫</td>
+<td class="py-3 text-right text-text-secondary">20.7%</td>
+</tr>
+<!-- Row 5: Tiền mặt -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-semibold text-text-primary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span> Ví Tiền Mặt VND
+                  </td>
+<td class="py-3 text-text-secondary">Thanh khoản tức thì</td>
+<td class="py-3 text-right font-medium">85,280,000 ₫</td>
+<td class="py-3 text-right text-text-muted">0.00 ₫</td>
+<td class="py-3 text-right text-text-secondary">5.9%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Nhật ký Bút Toán Sổ Cái Kép (Double-Entry Audit Stream) -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h3 class="text-title-lg font-title-lg text-text-primary font-bold">Nhật Ký Bút Toán Sổ Cái Kép ACID</h3>
+<p class="text-body-sm font-body-sm text-text-muted">Tính toàn vẹn kiểm toán bất biến (Double-Entry Integrity Stream)</p>
+</div>
+<span class="flex items-center gap-1.5 text-label-sm font-label-sm text-accent-emerald bg-accent-emerald-light px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified">verified</span>
+              Balanced
+            </span>
+</div>
+<div class="space-y-3 font-mono text-body-sm">
+<!-- Entry 1 -->
+<div class="p-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center justify-between">
+<div>
+<span class="text-text-muted text-[11px] block">TX_09421 • 10:45:12</span>
+<span class="font-semibold text-text-primary">Nợ TK 112 (Tiền gửi) / Có TK 515 (Cổ tức HPG)</span>
+</div>
+<div class="text-right">
+<span class="text-accent-emerald font-semibold">+10,000,000 ₫</span>
+<span class="block text-[11px] text-text-muted">Status: COMMITTED</span>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="p-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center justify-between">
+<div>
+<span class="text-text-muted text-[11px] block">TX_09420 • Hôm qua</span>
+<span class="font-semibold text-text-primary">Nợ TK 128 (Tiết kiệm VCB) / Có TK 112 (Tiền gửi)</span>
+</div>
+<div class="text-right">
+<span class="text-text-primary font-semibold">100,000,000 ₫</span>
+<span class="block text-[11px] text-text-muted">Auto-Rollover</span>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="p-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center justify-between">
+<div>
+<span class="text-text-muted text-[11px] block">TX_09419 • 14/05/2024</span>
+<span class="font-semibold text-text-primary">Nợ TK 121 (FPT) / Có TK 112 (Tiền gửi VCB)</span>
+</div>
+<div class="text-right">
+<span class="text-text-primary font-semibold">120,500,000 ₫</span>
+<span class="block text-[11px] text-text-muted">ACID Validated</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== CỘT PHẢI (5 Cột) ==================== -->
+<div class="lg:col-span-5 space-y-6">
+<!-- Thẻ Đề Xuất Tái Cơ Cấu Tự Động (MVO Lô Chẵn Thực Tế) -->
+<div class="bg-surface-container-lowest border-2 border-accent-gold/40 rounded-xl p-6 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-accent-gold text-white text-[11px] font-bold px-3 py-1 rounded-bl-lg">
+            Khuyến Nghị Markowitz MVO
+          </div>
+<div class="mb-4">
+<h3 class="text-title-lg font-title-lg text-text-primary font-bold">Kế Hoạch Khớp Lệnh Lô Chẵn</h3>
+<p class="text-body-sm font-body-sm text-text-muted">Đưa danh mục về tỷ trọng vàng cân bằng rủi ro</p>
+</div>
+<!-- Step-by-Step Actions -->
+<div class="space-y-3.5 mb-5">
+<!-- Step 1 -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-border-subtle">
+<div class="flex items-center justify-between mb-1">
+<span class="text-label-sm font-label-sm font-bold text-accent-rose bg-accent-rose-light px-2 py-0.5 rounded">
+                  BƯỚC 1: BÁN
+                </span>
+<span class="text-label-md font-label-md text-accent-emerald font-bold">+34,080,000 ₫</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-primary font-medium">1,200 cp HPG (Lô 100 HOSE)</p>
+<p class="text-[11px] text-text-muted">Chốt lời cục bộ khi cổ phiếu vượt biên độ trần.</p>
+</div>
+<!-- Step 2 -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-border-subtle">
+<div class="flex items-center justify-between mb-1">
+<span class="text-label-sm font-label-sm font-bold text-accent-gold bg-accent-gold-light px-2 py-0.5 rounded">
+                  BƯỚC 2: MUA
+                </span>
+<span class="text-label-md font-label-md text-text-secondary font-bold">-25,500,000 ₫</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-primary font-medium">3 Chỉ Vàng Nhẫn 9999</p>
+<p class="text-[11px] text-text-muted">Tăng tỷ trọng tài sản phòng thủ an toàn chu kỳ mới.</p>
+</div>
+<!-- Step 3 -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-border-subtle">
+<div class="flex items-center justify-between mb-1">
+<span class="text-label-sm font-label-sm font-bold text-secondary bg-secondary-container px-2 py-0.5 rounded">
+                  BƯỚC 3: LƯU
+                </span>
+<span class="text-label-md font-label-md text-accent-emerald font-bold">+8,580,000 ₫</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-primary font-medium">Ví Tiền Mặt / Tích lũy lãi kép</p>
+<p class="text-[11px] text-text-muted">Thặng dư bổ sung bộ đệm thanh khoản khả dụng.</p>
+</div>
+</div>
+<!-- Human-in-the-Loop Safeguard Notice -->
+<div class="p-3 rounded-lg bg-surface-container text-body-sm font-body-sm text-text-secondary mb-5 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-accent-gold text-[18px] flex-shrink-0 mt-0.5" data-icon="shield">shield</span>
+<p class="text-[11px] leading-relaxed">
+<strong>Nguyên tắc Human-in-the-Loop:</strong> Quý khách tự đặt lệnh trên app chứng khoán &amp; tiệm vàng ngoài đời, sau đó ấn xác nhận bên dưới để hệ thống cập nhật sổ cái kép.
+            </p>
+</div>
+<!-- CTA Buttons -->
+<div class="space-y-2">
+<button class="w-full py-3 rounded-lg bg-primary text-surface-bright font-semibold hover:bg-primary-container transition-all flex items-center justify-center gap-2 text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="task_alt">task_alt</span>
+<span>Xác nhận Đã Khớp Lệnh Thực Tế</span>
+</button>
+<button class="w-full py-2.5 rounded-lg bg-transparent border border-border-subtle text-text-secondary hover:text-text-primary hover:bg-surface-container-low transition-all text-label-md">
+              Xem phân tích chi tiết
+            </button>
+</div>
+</div>
+<!-- Trợ Lý AI Copilot (Spring AI - Private Banker Companion) -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm flex flex-col justify-between h-[420px]">
+<div>
+<div class="flex items-center justify-between pb-4 border-b border-border-subtle mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-900 text-surface-bright flex items-center justify-center font-bold text-label-md shadow-sm">
+                  AI
+                </div>
+<div>
+<h4 class="text-label-lg font-label-lg text-text-primary font-bold">Spring AI Copilot</h4>
+<p class="text-[11px] text-text-muted">Cố Vấn Tài Chính Private Banker</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-accent-emerald-light text-accent-emerald text-[11px] font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-emerald"></span> Online
+              </span>
+</div>
+<!-- Dialogue Stream -->
+<div class="space-y-3 overflow-y-auto max-h-[220px] pr-1">
+<div class="flex gap-2.5">
+<div class="p-3.5 rounded-xl rounded-tl-none bg-surface-container-low border border-border-subtle text-body-sm font-body-sm text-text-primary leading-relaxed">
+<p class="font-semibold text-accent-gold mb-1">Kính gửi ông Nguyễn Tuấn,</p>
+                  Theo lý thuyết đường biên hiệu quả Markowitz (MVO) và hệ số rủi ro cá nhân (λ = 3.88), tỷ trọng cổ phiếu 47.2% đang làm phương sai danh mục tăng 3.1%. 
+                  <br/><br/>
+                  Việc chốt lời 1,200 HPG để chuyển dịch 25.5M sang Vàng nhẫn 9999 sẽ giúp khôi phục hệ số Sharpe tối ưu 1.84 mà vẫn duy trì dòng tiền thặng dư an toàn.
+                </div>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="pt-3 border-t border-border-subtle">
+<div class="flex items-center gap-2">
+<input class="w-full text-body-sm rounded-lg border-border-subtle bg-surface-container-low px-3 py-2 text-text-primary placeholder:text-text-muted focus:border-secondary focus:ring-2 focus:ring-secondary/15 outline-none" placeholder="Hỏi AI về chiến lược danh mục..." type="text"/>
+<button class="p-2 rounded-lg bg-primary text-surface-bright hover:bg-primary-container transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -96,6 +96,69 @@ Hệ thống được thiết kế theo phong cách **Monolith theo Module (Modu
 
 ---
 
+### 3.1. Ngăn xếp Công nghệ Frontend & Ngôn ngữ Thiết kế (Frontend Stack & Design System)
+
+Giao diện Web Client được xây dựng theo kiến trúc **Single Page Application (SPA)** hiện đại, tách biệt hoàn toàn khỏi Backend thông qua giao thức RESTful API / JSON:
+
+* **Core Framework:** **React 18 / 19** kết hợp **TypeScript** và **Vite** (Build tool thế hệ mới với Hot Module Replacement dưới $100\text{ ms}$).
+* **Kiểu dữ liệu an toàn (Type-Safety):** Sử dụng TypeScript định nghĩa khớp $100\%$ các DTO từ Backend (`TransactionDTO`, `RebalancePlanDTO`, `AssetHoldingDTO`, `RiskSurveyResponse`).
+* **Hệ thống Thiết kế & Bảng Màu (Design System - Clean Light Mode):**
+  * Định hướng thẩm mỹ: Phong cách chuẩn Ngân hàng số & Fintech quốc tế (**Stripe, Wise, Robinhood Light Mode**), lấy **Nền trắng tinh khiết (`#FFFFFF`)** kết hợp **Xanh ngọc lục bảo (`#059669`)** làm màu chủ đạo. Loại bỏ hoàn toàn phong cách viễn tưởng (Cyberpunk/Dark Neon) để tạo dựng niềm tin tài chính và tính minh bạch kế toán.
+  * **Bộ mã màu quy chuẩn (Design Tokens):**
+    * `--bg-app`: `#FFFFFF` (Nền chính) và `--bg-card`: `#F8FAFC` (Nền thẻ phụ Slate 50).
+    * `--border-color`: `#E2E8F0` (Đường viền mảnh 1px thanh lịch).
+    * `--primary-green`: `#059669` (Màu thương hiệu, đường cong NAV tăng trưởng, nút bấm hành động CTA).
+    * `--text-main`: `#0F172A` (Màu chữ đen than Slate 900 sắc nét, độ tương phản cao).
+    * `--text-muted`: `#64748B` (Màu nhãn phụ Slate 500).
+    * `--color-stock`: `#059669` (Màu Cổ phiếu VN30).
+    * `--color-gold`: `#D97706` (Màu Vàng SJC - Hổ phách Amber 600).
+    * `--color-savings`: `#0284C7` (Màu Tiết kiệm ngân hàng - Sky Blue 600).
+    * `--color-danger`: `#DC2626` (Màu cảnh báo rủi ro / Lệnh bán - Red 600).
+* **Bộ Thư viện Chuyên dụng:**
+  * **Biểu đồ Tài chính:** **Recharts** – Vẽ đường cong hiệu suất NAV mượt mà có dải màu gradient nhạt, biểu đồ Donut cơ cấu 3 lớp tài sản, và biểu đồ tăng trưởng dòng tiền lãi kép.
+  * **Bộ Biểu tượng (Icons):** **Lucide React** – Hệ thống icon tối giản, sắc nét chuẩn giao diện tài chính ngân hàng.
+  * **Quản lý Trạng thái & Gọi API:** **Axios** kết hợp **TanStack Query (React Query)** – Tự động cache dữ liệu, tối ưu hóa tái đồng bộ khi phát sinh giao dịch mới, tự động gắn JWT Bearer Token vào Request Header.
+
+---
+
+### 3.2. Quyết định Kỹ thuật: Lựa chọn Vite thay vì Next.js cho Bài toán Này
+
+Trong quá trình thiết kế kiến trúc, nhóm phát triển đã tiến hành phân tích trade-off chuyên sâu giữa **Next.js (SSR)** và **Vite (React SPA)** cho dự án này:
+
+| Tiêu chí So sánh | Vite (React SPA) - **ĐƯỢC CHỌN** | Next.js (SSR / Hybrid) |
+| :--- | :--- | :--- |
+| **Bản chất Nghiệp vụ** | Dashboard quản lý tài sản cá nhân nằm sau lớp bảo vệ JWT. **Hoàn toàn không cần SEO** vì Google Bot không thể đăng nhập vào xem số dư. | Sinh ra để tối ưu hóa SEO cho web thương mại điện tử, báo chí, blog. Không phát huy tác dụng cho Dashboard nội bộ. |
+| **Xử lý Biểu đồ Tài chính** | Chạy $100\%$ mượt mà ở Client, không bao giờ bị lỗi. | Các thư viện chart (Recharts, Chart.js) cần đối tượng `window`. Trên Next.js rất dễ dính lỗi **Hydration Mismatch / `window is not defined`**, ép buộc mọi trang dashboard phải gắn `'use client'`. |
+| **Tài nguyên Triển khai** | Build ra thư mục tĩnh thuần túy `dist/`. Chạy container Nginx chỉ ngốn **$\approx 20\text{ MB}$ RAM**. | Bắt buộc phải duy trì một Node.js Server chạy 24/7 để phục vụ SSR, tiêu tốn **$200\text{--}400\text{ MB}$ RAM**. |
+| **Độ phức tạp Hệ thống** | Tinh gọn, không lo lỗi CORS/Cookie cross-domain phức tạp. | Dễ phát sinh lỗi cấu hình mạng cross-domain giữa server Next.js và server Spring Boot. |
+
+$\Rightarrow$ **Kết luận Kiến trúc:** Lựa chọn **React + Vite** là giải pháp tối ưu số một về độ ổn định, hiệu năng hiển thị biểu đồ và khả năng mở rộng.
+
+---
+
+### 3.3. Chiến lược Đóng gói & Triển khai Hệ thống (Deployment Strategy)
+
+Hệ thống hỗ trợ **3 kịch bản triển khai linh hoạt**:
+
+1. **Kịch bản 1: Cloud Decoupled (Khuyên dùng cho Môi trường Test & Production):**
+   * *Frontend (Vite):* Chạy lệnh `npm run build` xuất ra thư mục tĩnh `dist/`, triển khai tự động lên **Vercel, Netlify hoặc Cloudflare Pages (Miễn phí 100%, có CDN toàn cầu)** thông qua GitHub Actions CI/CD.
+   * *Backend (Spring Boot) & Database (PostgreSQL 16):* Đóng gói Docker container triển khai trên Railway, Render, hoặc máy chủ VPS.
+2. **Kịch bản 2: Docker Compose Production (Triển khai trên VPS / Server độc lập):**
+   * Sử dụng file `docker-compose.yml` điều phối 3 container:
+     * `frontend`: Chạy Nginx Alpine phục vụ static files và cấu hình Reverse Proxy `/api` sang Backend.
+     * `backend`: Chạy ứng dụng Spring Boot 3 trên nền tảng Java 21 (Eclipse Temurin).
+     * `database`: Chạy PostgreSQL 16 tích hợp sẵn extension `pgvector`.
+3. **Kịch bản 3: All-in-One Embedded JAR (Tùy chọn Hoàn hảo khi Báo cáo / Bảo vệ Đồ án):**
+   * Sao chép toàn bộ thư mục build `dist/*` của Vite vào thư mục `src/main/resources/static/` của dự án Spring Boot.
+   * Maven/Gradle đóng gói toàn bộ Frontend và Backend thành **1 file `.jar` duy nhất**.
+   * Khi chấm đồ án, chỉ cần chạy đúng 1 câu lệnh duy nhất:
+     ```bash
+     java -jar portfolio-tracker-all-in-one.jar
+     ```
+     Hệ thống tự động phục vụ cả giao diện người dùng và toàn bộ RESTful API trên cùng cổng `8080`, loại bỏ $100\%$ rủi ro về cài đặt môi trường Node.js hay xung đột port trên máy chấm thi của Hội đồng.
+
+---
+
 ## 4. Đặc tả Toàn trình Luồng Người dùng (End-to-End User Journeys)
 
 ### 4.1. Sơ đồ Trạng thái Toàn trình (Flowchart)
