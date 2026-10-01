@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Shield, Wallet, Receipt, LineChart, PiggyBank, Bot,
-  TrendingUp, CheckCircle, RefreshCw, Award, AlertTriangle,
-  ArrowUpRight, ArrowDownRight, UserCheck, ChevronRight
+  TrendingUp, CheckCircle, Award, AlertTriangle, RefreshCw
 } from 'lucide-react';
 import {
   AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -39,19 +38,20 @@ export default function App() {
   // Survey state
   const [surveyScores, setSurveyScores] = useState<number[]>([14, 14, 14, 14, 12]);
 
+  const loadData = async () => {
+    setLoading(true);
+    const [valData, planData, profData] = await Promise.all([
+      getPortfolioValuation(),
+      getRebalancePlan(),
+      getUserProfile(),
+    ]);
+    setValuation(valData);
+    setPlan(planData);
+    setProfile(profData);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    async function loadData() {
-      setLoading(true);
-      const [valData, planData, profData] = await Promise.all([
-        getPortfolioValuation(),
-        getRebalancePlan(),
-        getUserProfile(),
-      ]);
-      setValuation(valData);
-      setPlan(planData);
-      setProfile(profData);
-      setLoading(false);
-    }
     loadData();
   }, []);
 
@@ -189,12 +189,20 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Live NAV Status */}
+            {/* Live NAV Status & Refresh */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-border-subtle">
-              <span className="w-2 h-2 rounded-full bg-accent-emerald"></span>
+              <span className={`w-2 h-2 rounded-full ${loading ? 'bg-amber-500 animate-ping' : 'bg-accent-emerald'}`}></span>
               <span className="text-xs font-semibold text-text-secondary">
                 NAV: {valuation ? formatVND(valuation.totalNetWorth) : '1,450,280,000 ₫'}
               </span>
+              <button 
+                onClick={loadData}
+                disabled={loading}
+                title="Làm mới dữ liệu từ API"
+                className="ml-1 p-0.5 rounded hover:bg-surface-container-high transition-colors"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 text-text-muted hover:text-accent-emerald ${loading ? 'animate-spin' : ''}`} />
+              </button>
             </div>
 
             {/* User Profile Capsule */}
@@ -660,38 +668,125 @@ export default function App() {
 
               <div className="space-y-4">
                 {[
-                  { q: "1. Kỳ hạn đầu tư dự kiến", desc: "Thời gian bạn dự kiến duy trì đầu tư mà không cần rút vốn chi tiêu?", score: surveyScores[0], opt: "3 đến 5 năm (14đ)" },
-                  { q: "2. Tính ổn định dòng tiền", desc: "Tình hình tài chính và quỹ dự phòng khẩn cấp hàng tháng?", score: surveyScores[1], opt: "Dư 20-40% & Quỹ dự phòng 6 tháng (14đ)" },
-                  { q: "3. Mục tiêu tài chính ưu tiên", desc: "Mục tiêu quan trọng nhất đối với danh mục tài sản này?", score: surveyScores[2], opt: "Tăng trưởng cân bằng vốn (14đ)" },
-                  { q: "4. Thử nghiệm khi giảm -15%", desc: "Phản ứng của bạn nếu danh mục sụt giảm -15% trong 1 tháng?", score: surveyScores[3], opt: "Bình tĩnh theo dõi, giữ nguyên kỷ luật (14đ)" },
-                  { q: "5. Kinh nghiệm thực tế", desc: "Kinh nghiệm đầu tư cổ phiếu, vàng và các kênh tài sản?", score: surveyScores[4], opt: "Đã đầu tư chứng khoán trên 1 năm (12đ)" },
-                ].map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-lg border border-border-subtle bg-surface-container-low flex items-center justify-between text-xs">
-                    <div>
-                      <span className="font-bold text-text-primary text-sm">{item.q}</span>
-                      <p className="text-text-secondary mt-0.5">{item.desc}</p>
-                      <span className="inline-block mt-2 font-semibold text-accent-emerald">{item.opt}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="px-3 py-1 rounded-full bg-surface-container text-xs font-bold text-text-primary border border-border-subtle">
+                  {
+                    q: "1. Kỳ hạn đầu tư dự kiến",
+                    desc: "Thời gian bạn dự kiến duy trì đầu tư mà không cần rút vốn chi tiêu?",
+                    score: surveyScores[0],
+                    options: [
+                      { text: "Dưới 1 năm", val: 0 },
+                      { text: "1 đến 3 năm", val: 7 },
+                      { text: "3 đến 5 năm", val: 14 },
+                      { text: "Trên 5 năm", val: 20 },
+                    ]
+                  },
+                  {
+                    q: "2. Tính ổn định dòng tiền",
+                    desc: "Tình hình tài chính và quỹ dự phòng khẩn cấp hàng tháng?",
+                    score: surveyScores[1],
+                    options: [
+                      { text: "Không có quỹ dự phòng", val: 0 },
+                      { text: "Dư <10% & Dự phòng mỏng", val: 7 },
+                      { text: "Dư 20-40% & Quỹ 6 tháng", val: 14 },
+                      { text: "Dư >40% & Quỹ >12 tháng", val: 20 },
+                    ]
+                  },
+                  {
+                    q: "3. Mục tiêu tài chính ưu tiên",
+                    desc: "Mục tiêu quan trọng nhất đối với danh mục tài sản này?",
+                    score: surveyScores[2],
+                    options: [
+                      { text: "Bảo toàn vốn tuyệt đối", val: 0 },
+                      { text: "Bù đắp lạm phát nhẹ", val: 7 },
+                      { text: "Tăng trưởng cân bằng vốn", val: 14 },
+                      { text: "Tối đa hóa tài sản dài hạn", val: 20 },
+                    ]
+                  },
+                  {
+                    q: "4. Thử nghiệm khi giảm -15%",
+                    desc: "Phản ứng của bạn nếu danh mục sụt giảm -15% trong 1 tháng?",
+                    score: surveyScores[3],
+                    options: [
+                      { text: "Bán cắt lỗ toàn bộ", val: 0 },
+                      { text: "Lo lắng, bán một nửa", val: 7 },
+                      { text: "Bình tĩnh, giữ kỷ luật", val: 14 },
+                      { text: "Mua thêm quyết liệt", val: 20 },
+                    ]
+                  },
+                  {
+                    q: "5. Kinh nghiệm thực tế",
+                    desc: "Kinh nghiệm đầu tư cổ phiếu, vàng và các kênh tài sản?",
+                    score: surveyScores[4],
+                    options: [
+                      { text: "Chưa từng đầu tư", val: 0 },
+                      { text: "Chỉ gửi tiết kiệm ngân hàng", val: 6 },
+                      { text: "Đã đầu tư chứng khoán >1 năm", val: 12 },
+                      { text: "Chuyên sâu thị trường >3 năm", val: 20 },
+                    ]
+                  },
+                ].map((item, qIdx) => (
+                  <div key={qIdx} className="p-4 rounded-lg border border-border-subtle bg-surface-container-low text-xs space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="font-bold text-text-primary text-sm">{item.q}</span>
+                        <p className="text-text-secondary mt-0.5">{item.desc}</p>
+                      </div>
+                      <span className="px-3 py-1 rounded-full bg-surface-container text-xs font-bold text-accent-emerald border border-border-subtle">
                         {item.score} / 20đ
                       </span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                      {item.options.map((opt, oIdx) => (
+                        <button
+                          key={oIdx}
+                          type="button"
+                          onClick={() => {
+                            const updated = [...surveyScores];
+                            updated[qIdx] = opt.val;
+                            setSurveyScores(updated);
+                          }}
+                          className={`p-2.5 rounded-lg border text-left text-xs transition-all ${
+                            item.score === opt.val
+                              ? 'border-accent-emerald bg-accent-emerald-light/40 text-accent-emerald font-bold shadow-xs'
+                              : 'border-border-subtle bg-surface-container-lowest text-text-secondary hover:border-slate-300'
+                          }`}
+                        >
+                          <div className="font-semibold">{opt.text}</div>
+                          <div className="text-[10px] text-text-muted mt-0.5">+{opt.val} điểm</div>
+                        </button>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="p-5 rounded-xl border border-accent-emerald/30 bg-accent-emerald-light/30 flex items-center justify-between">
-                <div>
-                  <h4 className="text-sm font-bold text-text-primary">Kết Quả Khảo Sát Tổng Hợp</h4>
-                  <p className="text-xs text-text-secondary mt-1">Tổng điểm: 68/100 • Hệ số ngại rủi ro λ = 3.88 • Nhóm Cân Bằng (Balanced)</p>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs font-bold px-3 py-1.5 rounded-lg bg-accent-emerald text-white">
-                    Tỷ trọng SAA: 35% Cổ phiếu - 35% Vàng - 30% Tiết kiệm
-                  </span>
-                </div>
-              </div>
+              {(() => {
+                const totalScore = surveyScores.reduce((acc: number, curr: number) => acc + curr, 0);
+                const lambdaRisk = (10.0 - 0.09 * totalScore).toFixed(2);
+                let profileLabel = 'Thận Trọng (Conservative)';
+                let saaSummary = '20% Cổ phiếu • 20% Vàng • 60% Tiết kiệm';
+                if (totalScore >= 75) {
+                  profileLabel = 'Tăng Trưởng (Aggressive)';
+                  saaSummary = '60% Cổ phiếu • 25% Vàng • 15% Tiết kiệm';
+                } else if (totalScore >= 50) {
+                  profileLabel = 'Cân Bằng (Balanced)';
+                  saaSummary = '35% Cổ phiếu • 35% Vàng • 30% Tiết kiệm';
+                }
+                return (
+                  <div className="p-5 rounded-xl border border-accent-emerald/30 bg-accent-emerald-light/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h4 className="text-sm font-bold text-text-primary">Kết Quả Khảo Sát Tổng Hợp</h4>
+                      <p className="text-xs text-text-secondary mt-1">
+                        Tổng điểm: <span className="font-bold text-accent-emerald">{totalScore}/100</span> • Hệ số ngại rủi ro λ = <span className="font-bold">{lambdaRisk}</span> • Nhóm <span className="font-bold text-text-primary">{profileLabel}</span>
+                      </p>
+                    </div>
+                    <div className="text-left sm:text-right">
+                      <span className="text-xs font-bold px-3 py-1.5 rounded-lg bg-accent-emerald text-white inline-block">
+                        Tỷ trọng SAA: {saaSummary}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           )}
 
