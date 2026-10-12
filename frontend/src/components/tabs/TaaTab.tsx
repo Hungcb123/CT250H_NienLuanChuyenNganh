@@ -427,48 +427,82 @@ export function TaaTab({
                     <th className="py-2.5 px-3 font-semibold">Khối Lượng</th>
                     <th className="py-2.5 px-3 font-semibold">Giá Dự Tính</th>
                     <th className="py-2.5 px-3 font-semibold text-right">Tổng Giá Trị</th>
+                    <th className="py-2.5 px-3 font-semibold text-right">Phí & Thuế</th>
+                    <th className="py-2.5 px-3 font-semibold text-right">Dòng Tiền Ròng</th>
                     <th className="py-2.5 px-3 font-semibold">Ghi Chú</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border-subtle">
-                  {plan.actions.map((act, idx) => (
-                    <tr key={idx} className="hover:bg-surface-container-low/50 transition-colors">
-                      <td className="py-3 px-3">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          act.actionType === 'BUY'
-                            ? 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/20'
-                            : act.actionType === 'SELL'
-                            ? 'bg-accent-rose-light text-accent-rose border border-accent-rose/20'
-                            : 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20'
-                        }`}>
-                          {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' : act.actionType}
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 font-bold text-text-primary font-mono-num">
-                        {act.ticker}
-                      </td>
-                      <td className="py-3 px-3 font-mono-num text-text-primary font-semibold">
-                        {act.roundedQuantity.toLocaleString()} {act.ticker === 'GOLD_SJC' ? 'chỉ' : 'CP'}
-                      </td>
-                      <td className="py-3 px-3 font-mono-num text-text-secondary">
-                        {formatVND(act.estimatedPrice)}
-                      </td>
-                      <td className="py-3 px-3 font-mono-num font-bold text-text-primary text-right">
-                        {formatVND(act.estimatedTotalMoney)}
-                      </td>
-                      <td className="py-3 px-3 text-text-muted text-[11px]">
-                        {act.note}
-                      </td>
-                    </tr>
-                  ))}
+                  {plan.actions.map((act, idx) => {
+                    const feeAndTax = (act.estimatedFee || 0) + (act.estimatedTax || 0);
+                    const netCash = act.netMoney !== undefined ? act.netMoney : act.estimatedTotalMoney;
+                    return (
+                      <tr key={idx} className="hover:bg-surface-container-low/50 transition-colors">
+                        <td className="py-3 px-3">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            act.actionType === 'BUY'
+                              ? 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/20'
+                              : act.actionType === 'SELL'
+                              ? 'bg-accent-rose-light text-accent-rose border border-accent-rose/20'
+                              : 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20'
+                          }`}>
+                            {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' : act.actionType}
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 font-bold text-text-primary font-mono-num">
+                          {act.ticker}
+                        </td>
+                        <td className="py-3 px-3 font-mono-num text-text-primary font-semibold">
+                          {act.roundedQuantity.toLocaleString()} {act.ticker === 'GOLD_SJC' ? 'chỉ' : 'CP'}
+                        </td>
+                        <td className="py-3 px-3 font-mono-num text-text-secondary">
+                          {formatVND(act.estimatedPrice)}
+                        </td>
+                        <td className="py-3 px-3 font-mono-num font-bold text-text-primary text-right">
+                          {formatVND(act.estimatedTotalMoney)}
+                        </td>
+                        <td className="py-3 px-3 font-mono-num text-text-muted text-right text-[11px]">
+                          {feeAndTax > 0 ? formatVND(feeAndTax) : '-'}
+                        </td>
+                        <td className="py-3 px-3 font-mono-num font-bold text-right text-xs">
+                          <span className={act.actionType === 'SELL' ? 'text-accent-emerald' : act.actionType === 'BUY' ? 'text-accent-rose' : 'text-text-primary'}>
+                            {act.actionType === 'SELL' ? '+' : act.actionType === 'BUY' ? '-' : ''}{formatVND(Math.abs(netCash))}
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-text-muted text-[11px]">
+                          {act.note}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
 
+            {/* Fee & Tax Transparency Summary Bar */}
+            {((plan.totalEstimatedFees || 0) > 0 || (plan.totalEstimatedTax || 0) > 0) && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-surface-container-low border border-border-subtle text-xs">
+                <div>
+                  <span className="text-text-muted text-[11px] block">Phí Môi Giới (0.1% Mua/Bán):</span>
+                  <span className="font-mono-num font-bold text-text-primary">{formatVND(plan.totalEstimatedFees || 0)}</span>
+                </div>
+                <div>
+                  <span className="text-text-muted text-[11px] block">Thuế TNCN Bán CK (0.1%):</span>
+                  <span className="font-mono-num font-bold text-text-primary">{formatVND(plan.totalEstimatedTax || 0)}</span>
+                </div>
+                <div>
+                  <span className="text-text-muted text-[11px] block">Tác Động Tiền Mặt Ròng:</span>
+                  <span className={`font-mono-num font-bold ${(plan.netCashImpact || 0) >= 0 ? 'text-accent-emerald' : 'text-accent-rose'}`}>
+                    {(plan.netCashImpact || 0) >= 0 ? '+' : ''}{formatVND(plan.netCashImpact || 0)}
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* Execute Button */}
             <div className="pt-3 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-3">
               <span className="text-xs text-text-secondary">
-                Tổng cộng <strong>{plan.actions.length} lệnh</strong> điều phối tài sản sẽ được ghi nhận vào Sổ Cái Kép ACID.
+                Tổng cộng <strong>{plan.actions.length} lệnh</strong> điều phối tài sản sẽ được ghi nhận vào Sổ Cái Kép ACID (đã khấu trừ phí & thuế).
               </span>
               <button
                 onClick={onConfirmRebalance}

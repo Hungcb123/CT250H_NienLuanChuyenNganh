@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle, PlusCircle, ArrowDownRight, ArrowUpRight, ShieldCheck, X, FileCheck2 } from 'lucide-react';
-import { TransactionItem, EquityInjectionPayload, LedgerAuditReport } from '../../types';
-import { getTransactions, recordEquityInjection, getLedgerAuditReport } from '../../services/api';
+import { CheckCircle, PlusCircle, ArrowDownRight, ArrowUpRight, ShieldCheck, X, FileCheck2, Coins } from 'lucide-react';
+import { TransactionItem, EquityInjectionPayload, LedgerAuditReport, DividendPayload } from '../../types';
+import { getTransactions, recordEquityInjection, getLedgerAuditReport, recordDividend } from '../../services/api';
 import { formatVND } from '../../utils/formatters';
 import { useToast } from '../../context/ToastContext';
 
@@ -25,11 +25,19 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  // Modal form state
+  // Modal form state: Capital Injection
   const [selectedTicker, setSelectedTicker] = useState('VND');
   const [amount, setAmount] = useState<string>('50000000');
   const [entryPrice, setEntryPrice] = useState<number>(1);
   const [description, setDescription] = useState('');
+
+  // Modal form state: Corporate Action / Dividend
+  const [showDividendModal, setShowDividendModal] = useState(false);
+  const [dividendSubmitting, setDividendSubmitting] = useState(false);
+  const [dividendTicker, setDividendTicker] = useState('HPG');
+  const [dividendType, setDividendType] = useState<'CASH' | 'STOCK'>('CASH');
+  const [dividendTotalCash, setDividendTotalCash] = useState('10000000'); // VND
+  const [dividendStockQty, setDividendStockQty] = useState('1000'); // Shares
 
   const [auditReport, setAuditReport] = useState<LedgerAuditReport | null>(null);
   const [auditing, setAuditing] = useState(false);
@@ -107,6 +115,39 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
     }
   };
 
+  const handleDividendSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setDividendSubmitting(true);
+    try {
+      const val = dividendType === 'CASH' ? parseFloat(dividendTotalCash) : parseFloat(dividendStockQty);
+      if (isNaN(val) || val <= 0) {
+        toast.warning("Vui lòng nhập giá trị hợp lệ (> 0)", "Dữ liệu không hợp lệ");
+        return;
+      }
+      const payload: DividendPayload = {
+        ticker: dividendTicker,
+        dividendType: dividendType,
+        totalAmount: val,
+        taxPercent: dividendType === 'CASH' ? 5.0 : 0.0,
+        notes: `Ghi nhận cổ tức ${dividendType === 'CASH' ? 'tiền mặt' : 'cổ phiếu'} mã ${dividendTicker}`
+      };
+      await recordDividend(payload);
+      setShowDividendModal(false);
+      await fetchTransactions();
+      onRefresh?.();
+      toast.success(
+        dividendType === 'CASH'
+          ? `Ghi nhận cổ tức tiền mặt ${dividendTicker} thành công! Đã khấu trừ 5% thuế TNCN và hạch toán vào ví.`
+          : `Ghi nhận cổ phiếu thưởng ${dividendTicker} thành công! Số lượng cổ phiếu đã tăng và giá vốn bình quân (WAC) đã được pha loãng.`,
+        "Ghi sổ Cổ tức thành công"
+      );
+    } catch (err: any) {
+      toast.error("Lỗi ghi nhận cổ tức: " + (err.message || err), "Thất bại");
+    } finally {
+      setDividendSubmitting(false);
+    }
+  };
+
   const totalCalculatedVnd = (parseFloat(amount) || 0) * (entryPrice || 1);
 
   return (
@@ -139,8 +180,17 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
           </button>
 
           <button
+            onClick={() => setShowDividendModal(true)}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-primary text-xs font-semibold transition-all shadow-xs cursor-pointer"
+            title="Ghi nhận cổ tức tiền mặt (thuế TNCN 5%) hoặc cổ phiếu thưởng"
+          >
+            <Coins className="w-4 h-4 text-amber-500" />
+            <span>Ghi nhận Cổ tức</span>
+          </button>
+
+          <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold shadow-xs"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold shadow-xs cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Khai báo tài sản / Nạp vốn</span>
@@ -505,6 +555,183 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
                 Đóng
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Corporate Action / Dividend Modal */}
+      {showDividendModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="p-5 border-b border-border-subtle flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center text-amber-500">
+                  <Coins className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-text-primary">
+                    Ghi Nhận Cổ Tức & Quyền Tài Sản
+                  </h3>
+                  <p className="text-[11px] text-text-muted">
+                    Hạch toán cổ tức tiền mặt hoặc cổ phiếu thưởng theo luật định TTCK Việt Nam
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowDividendModal(false)}
+                className="text-text-muted hover:text-text-primary p-1 rounded-lg cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleDividendSubmit} className="p-5 overflow-y-auto space-y-4 text-xs">
+              {/* Asset Picker */}
+              <div>
+                <label className="font-bold text-text-primary block mb-1.5">
+                  Mã Cổ Phiếu Trả Cổ Tức:
+                </label>
+                <div className="grid grid-cols-4 gap-2">
+                  {['HPG', 'TCB', 'FPT', 'VNM'].map((tk) => (
+                    <button
+                      key={tk}
+                      type="button"
+                      onClick={() => setDividendTicker(tk)}
+                      className={`p-2 rounded-lg border text-xs font-bold font-mono transition-all cursor-pointer ${
+                        dividendTicker === tk
+                          ? 'bg-accent-emerald text-white border-accent-emerald'
+                          : 'bg-surface-container hover:bg-surface-container-high border-border-subtle text-text-secondary'
+                      }`}
+                    >
+                      {tk}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Type Switcher */}
+              <div>
+                <label className="font-bold text-text-primary block mb-1.5">
+                  Hình Thức Nhận Cổ Tức:
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setDividendType('CASH')}
+                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      dividendType === 'CASH'
+                        ? 'bg-amber-500/10 border-amber-500/40 text-amber-500'
+                        : 'bg-surface-container border-border-subtle text-text-secondary'
+                    }`}
+                  >
+                    <span className="font-bold block text-xs">Tiền Mặt (Cash)</span>
+                    <span className="text-[10px] text-text-muted block mt-0.5">Khấu trừ thuế TNCN 5%</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDividendType('STOCK')}
+                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      dividendType === 'STOCK'
+                        ? 'bg-indigo-500/10 border-indigo-500/40 text-indigo-400'
+                        : 'bg-surface-container border-border-subtle text-text-secondary'
+                    }`}
+                  >
+                    <span className="font-bold block text-xs">Cổ Phiếu (Stock)</span>
+                    <span className="text-[10px] text-text-muted block mt-0.5">Pha loãng giá vốn (WAC)</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Input for Cash vs Stock */}
+              {dividendType === 'CASH' ? (
+                <div className="space-y-3">
+                  <div>
+                    <label className="font-bold text-text-primary block mb-1">
+                      Tổng Tiền Cổ Tức Danh Nghĩa (Gross, VNĐ):
+                    </label>
+                    <input
+                      type="number"
+                      min="1000"
+                      step="1000"
+                      value={dividendTotalCash}
+                      onChange={(e) => setDividendTotalCash(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg bg-surface-container border border-border-subtle text-text-primary font-mono text-sm focus:outline-hidden focus:border-accent-emerald"
+                      placeholder="VD: 10000000"
+                      required
+                    />
+                  </div>
+
+                  {/* Tax calculation box */}
+                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle space-y-1.5 text-[11px]">
+                    <div className="flex justify-between text-text-muted">
+                      <span>Cổ tức danh nghĩa:</span>
+                      <span className="font-mono-num font-semibold text-text-primary">
+                        {formatVND(parseFloat(dividendTotalCash) || 0)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-accent-rose">
+                      <span>Thuế TNCN khấu trừ tại nguồn (5%):</span>
+                      <span className="font-mono-num font-semibold">
+                        -{formatVND((parseFloat(dividendTotalCash) || 0) * 0.05)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-accent-emerald font-bold pt-1 border-t border-border-subtle text-xs">
+                      <span>Thực nhận vào Ví VND (Net):</span>
+                      <span className="font-mono-num">
+                        +{formatVND((parseFloat(dividendTotalCash) || 0) * 0.95)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div>
+                    <label className="font-bold text-text-primary block mb-1">
+                      Số Lượng Cổ Phiếu Nhận Thêm (CP):
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      step="1"
+                      value={dividendStockQty}
+                      onChange={(e) => setDividendStockQty(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg bg-surface-container border border-border-subtle text-text-primary font-mono text-sm focus:outline-hidden focus:border-accent-emerald"
+                      placeholder="VD: 1000"
+                      required
+                    />
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle text-[11px] text-text-muted space-y-1">
+                    <div className="font-semibold text-text-primary">Cơ chế pha loãng WAC chuẩn Việt Nam:</div>
+                    <p>
+                      Số lượng cổ phiếu trong danh mục tăng thêm <strong>{parseInt(dividendStockQty) || 0} CP</strong> mà không thay đổi tổng số vốn đã giải ngân.
+                    </p>
+                    <p className="text-accent-emerald">
+                      Giá vốn bình quân trên mỗi cổ phiếu sẽ tự động giảm xuống, phản ánh chính xác hiệu suất đầu tư thực tế.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Action buttons */}
+              <div className="pt-2 flex items-center justify-end gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setShowDividendModal(false)}
+                  className="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-text-secondary text-xs font-semibold cursor-pointer"
+                >
+                  Hủy
+                </button>
+                <button
+                  type="submit"
+                  disabled={dividendSubmitting}
+                  className="px-5 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                >
+                  {dividendSubmitting ? 'Đang hạch toán ACID...' : 'Xác Nhận Ghi Sổ Cổ Tức'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

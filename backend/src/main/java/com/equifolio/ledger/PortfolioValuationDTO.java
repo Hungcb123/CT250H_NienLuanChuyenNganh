@@ -13,6 +13,11 @@ public class PortfolioValuationDTO {
     private BigDecimal goldValue = BigDecimal.ZERO;
     private BigDecimal savingsValue = BigDecimal.ZERO;
 
+    private BigDecimal totalCostBasis = BigDecimal.ZERO;
+    private BigDecimal totalUnrealizedPnL = BigDecimal.ZERO;
+    private BigDecimal totalPnLPercent = BigDecimal.ZERO;
+    private BigDecimal totalRealizedPnL = BigDecimal.ZERO;
+
     private Map<String, BigDecimal> currentAllocations = new HashMap<>(); // 'STOCK', 'GOLD', 'CASH_SAVINGS'
     private List<HoldingItem> holdings = new ArrayList<>();
 
@@ -25,6 +30,10 @@ public class PortfolioValuationDTO {
         private BigDecimal currentPrice;
         private BigDecimal marketValue;
         private BigDecimal allocationPercent;
+        private BigDecimal costPrice = BigDecimal.ZERO;
+        private BigDecimal totalCostBasis = BigDecimal.ZERO;
+        private BigDecimal unrealizedPnL = BigDecimal.ZERO;
+        private BigDecimal unrealizedPnLPercent = BigDecimal.ZERO;
 
         public HoldingItem() {}
 
@@ -63,6 +72,18 @@ public class PortfolioValuationDTO {
 
         public BigDecimal getAllocationPercent() { return allocationPercent; }
         public void setAllocationPercent(BigDecimal allocationPercent) { this.allocationPercent = allocationPercent; }
+
+        public BigDecimal getCostPrice() { return costPrice; }
+        public void setCostPrice(BigDecimal costPrice) { this.costPrice = costPrice; }
+
+        public BigDecimal getTotalCostBasis() { return totalCostBasis; }
+        public void setTotalCostBasis(BigDecimal totalCostBasis) { this.totalCostBasis = totalCostBasis; }
+
+        public BigDecimal getUnrealizedPnL() { return unrealizedPnL; }
+        public void setUnrealizedPnL(BigDecimal unrealizedPnL) { this.unrealizedPnL = unrealizedPnL; }
+
+        public BigDecimal getUnrealizedPnLPercent() { return unrealizedPnLPercent; }
+        public void setUnrealizedPnLPercent(BigDecimal unrealizedPnLPercent) { this.unrealizedPnLPercent = unrealizedPnLPercent; }
     }
 
     public PortfolioValuationDTO() {}
@@ -81,6 +102,18 @@ public class PortfolioValuationDTO {
 
     public BigDecimal getSavingsValue() { return savingsValue; }
     public void setSavingsValue(BigDecimal savingsValue) { this.savingsValue = savingsValue; }
+
+    public BigDecimal getTotalCostBasis() { return totalCostBasis; }
+    public void setTotalCostBasis(BigDecimal totalCostBasis) { this.totalCostBasis = totalCostBasis; }
+
+    public BigDecimal getTotalUnrealizedPnL() { return totalUnrealizedPnL; }
+    public void setTotalUnrealizedPnL(BigDecimal totalUnrealizedPnL) { this.totalUnrealizedPnL = totalUnrealizedPnL; }
+
+    public BigDecimal getTotalPnLPercent() { return totalPnLPercent; }
+    public void setTotalPnLPercent(BigDecimal totalPnLPercent) { this.totalPnLPercent = totalPnLPercent; }
+
+    public BigDecimal getTotalRealizedPnL() { return totalRealizedPnL; }
+    public void setTotalRealizedPnL(BigDecimal totalRealizedPnL) { this.totalRealizedPnL = totalRealizedPnL; }
 
     public Map<String, BigDecimal> getCurrentAllocations() { return currentAllocations; }
     public void setCurrentAllocations(Map<String, BigDecimal> currentAllocations) { this.currentAllocations = currentAllocations; }

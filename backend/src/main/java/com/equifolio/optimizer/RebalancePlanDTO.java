@@ -13,6 +13,11 @@ public class RebalancePlanDTO {
     private Map<String, BigDecimal> targetAllocations = new HashMap<>();
     private List<RebalanceAction> actions = new ArrayList<>();
     private String executiveSummary;
+    private BigDecimal totalEstimatedSell = BigDecimal.ZERO;
+    private BigDecimal totalEstimatedBuy = BigDecimal.ZERO;
+    private BigDecimal totalEstimatedFees = BigDecimal.ZERO;
+    private BigDecimal totalEstimatedTax = BigDecimal.ZERO;
+    private BigDecimal netCashImpact = BigDecimal.ZERO;
 
     public static class RebalanceAction {
         private String actionType; // 'BUY', 'SELL', 'HOLD'
@@ -23,6 +28,9 @@ public class RebalancePlanDTO {
         private BigDecimal roundedQuantity; // Lô chẵn 100 cp hoặc số chỉ vàng nguyên
         private BigDecimal estimatedPrice;
         private BigDecimal estimatedTotalMoney;
+        private BigDecimal estimatedFee = BigDecimal.ZERO;
+        private BigDecimal estimatedTax = BigDecimal.ZERO;
+        private BigDecimal netMoney = BigDecimal.ZERO;
         private String note;
 
         public RebalanceAction() {}
@@ -65,6 +73,15 @@ public class RebalancePlanDTO {
         public BigDecimal getEstimatedTotalMoney() { return estimatedTotalMoney; }
         public void setEstimatedTotalMoney(BigDecimal estimatedTotalMoney) { this.estimatedTotalMoney = estimatedTotalMoney; }
 
+        public BigDecimal getEstimatedFee() { return estimatedFee; }
+        public void setEstimatedFee(BigDecimal estimatedFee) { this.estimatedFee = estimatedFee; }
+
+        public BigDecimal getEstimatedTax() { return estimatedTax; }
+        public void setEstimatedTax(BigDecimal estimatedTax) { this.estimatedTax = estimatedTax; }
+
+        public BigDecimal getNetMoney() { return netMoney; }
+        public void setNetMoney(BigDecimal netMoney) { this.netMoney = netMoney; }
+
         public String getNote() { return note; }
         public void setNote(String note) { this.note = note; }
     }
@@ -88,4 +105,19 @@ public class RebalancePlanDTO {
 
     public String getExecutiveSummary() { return executiveSummary; }
     public void setExecutiveSummary(String executiveSummary) { this.executiveSummary = executiveSummary; }
+
+    public BigDecimal getTotalEstimatedSell() { return totalEstimatedSell; }
+    public void setTotalEstimatedSell(BigDecimal totalEstimatedSell) { this.totalEstimatedSell = totalEstimatedSell; }
+
+    public BigDecimal getTotalEstimatedBuy() { return totalEstimatedBuy; }
+    public void setTotalEstimatedBuy(BigDecimal totalEstimatedBuy) { this.totalEstimatedBuy = totalEstimatedBuy; }
+
+    public BigDecimal getTotalEstimatedFees() { return totalEstimatedFees; }
+    public void setTotalEstimatedFees(BigDecimal totalEstimatedFees) { this.totalEstimatedFees = totalEstimatedFees; }
+
+    public BigDecimal getTotalEstimatedTax() { return totalEstimatedTax; }
+    public void setTotalEstimatedTax(BigDecimal totalEstimatedTax) { this.totalEstimatedTax = totalEstimatedTax; }
+
+    public BigDecimal getNetCashImpact() { return netCashImpact; }
+    public void setNetCashImpact(BigDecimal netCashImpact) { this.netCashImpact = netCashImpact; }
 }

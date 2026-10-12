@@ -976,6 +976,11 @@ export function MarkowitzTab({
                     <span className="block text-[11px] text-accent-blue font-mono-num">
                       Giá ước tính: {formatVND(act.estimatedPrice)}
                     </span>
+                    {((act.estimatedFee || 0) > 0 || (act.estimatedTax || 0) > 0) && (
+                      <span className="block text-[10px] text-text-muted font-mono-num">
+                        Phí & Thuế: {formatVND((act.estimatedFee || 0) + (act.estimatedTax || 0))}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

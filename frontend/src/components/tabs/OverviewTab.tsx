@@ -8,7 +8,8 @@ import {
   PieChart, Pie, Cell, CartesianGrid
 } from 'recharts';
 import {
-  PortfolioValuation, RebalancePlan, UserProfile, TransactionItem, SavingsDepositItem
+  PortfolioValuation, RebalancePlan, UserProfile, TransactionItem, SavingsDepositItem,
+  PortfolioHistoryResponse, RiskMetrics
 } from '../../types';
 import { formatVND } from '../../utils/formatters';
 import { VNIndexChart } from '../charts/VNIndexChart';
@@ -16,7 +17,10 @@ import { VNINDEX_SUMMARY, VNIndexSummary } from '../../data/vnindexData';
 import { TradingDrawer } from '../trading/TradingDrawer';
 import { CustomTargetsModal } from '../profile/CustomTargetsModal';
 import { useTheme } from '../../context/ThemeContext';
-import { getTransactions, getSavingsDeposits, getVNIndexSummaryApi, updatePortfolioTargets } from '../../services/api';
+import {
+  getTransactions, getSavingsDeposits, getVNIndexSummaryApi, updatePortfolioTargets,
+  getPortfolioHistory, getRiskMetrics
+} from '../../services/api';
 import { useToast } from '../../context/ToastContext';
 
 interface OverviewTabProps {
@@ -144,6 +148,9 @@ export function OverviewTab({
   const [transactions, setTransactions] = useState<TransactionItem[]>([]);
   const [savingsDeposits, setSavingsDeposits] = useState<SavingsDepositItem[]>([]);
   const [vniSummary, setVniSummary] = useState<VNIndexSummary>(VNINDEX_SUMMARY);
+  const [historyData, setHistoryData] = useState<PortfolioHistoryResponse | null>(null);
+  const [riskMetrics, setRiskMetrics] = useState<RiskMetrics | null>(null);
+  const [loadingHistory, setLoadingHistory] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -179,6 +186,29 @@ export function OverviewTab({
     fetchAux();
     return () => { active = false; };
   }, [valuation]);
+
+  useEffect(() => {
+    let active = true;
+    const fetchHistoryAndRisk = async () => {
+      setLoadingHistory(true);
+      try {
+        const [hist, risk] = await Promise.all([
+          getPortfolioHistory(timeframe),
+          getRiskMetrics()
+        ]);
+        if (active) {
+          if (hist) setHistoryData(hist);
+          if (risk) setRiskMetrics(risk);
+        }
+      } catch (err) {
+        console.error("Failed to load portfolio history / risk metrics", err);
+      } finally {
+        if (active) setLoadingHistory(false);
+      }
+    };
+    fetchHistoryAndRisk();
+    return () => { active = false; };
+  }, [timeframe, valuation]);
 
   const hasAssets = valuation && valuation.totalNetWorth > 0;
   const stockPct = Math.round((valuation?.currentAllocations.STOCK || 0) * 100);
@@ -262,15 +292,18 @@ export function OverviewTab({
       }
     }
 
-    // If transactions match, unit cost = totalCostPaid / totalQuantityBought
-    // If no transactions match, unit cost = current price (i.e. newly bought at market price -> zero P/L)
-    const costPrice = totalQuantityBought > 0 
-      ? Math.round(totalCostPaid / totalQuantityBought) 
-      : h.currentPrice;
+    // Prefer backend WAC (Weighted Average Cost) and unrealized P&L from LedgerService
+    const costPrice = (h.costPrice !== undefined && h.costPrice > 0)
+      ? h.costPrice
+      : (totalQuantityBought > 0 ? Math.round(totalCostPaid / totalQuantityBought) : h.currentPrice);
 
     const currentPrice = h.currentPrice;
-    const pnlAmount = (currentPrice - costPrice) * h.quantity;
-    const pnlPercent = costPrice > 0 ? ((currentPrice - costPrice) / costPrice) * 100 : 0;
+    const pnlAmount = h.unrealizedPnL !== undefined 
+      ? h.unrealizedPnL 
+      : ((currentPrice - costPrice) * h.quantity);
+    const pnlPercent = h.unrealizedPnLPercent !== undefined 
+      ? h.unrealizedPnLPercent 
+      : (costPrice > 0 ? ((currentPrice - costPrice) / costPrice) * 100 : 0);
 
     return {
       ticker: h.ticker,
@@ -291,15 +324,15 @@ export function OverviewTab({
     };
   });
 
-  const totalInvestedCost = resolvedHoldings.reduce((sum, item) => {
+  const totalInvestedCost = valuation?.totalCostBasis ?? resolvedHoldings.reduce((sum, item) => {
     return item.assetClass !== 'CASH' ? sum + item.rawCost : sum;
   }, 0);
-  const totalUnrealizedPnL = resolvedHoldings.reduce((sum, item) => {
+  const totalUnrealizedPnL = valuation?.totalUnrealizedPnL ?? resolvedHoldings.reduce((sum, item) => {
     return sum + item.pnlAmount;
   }, 0);
-  const portfolioPnLPercent = totalInvestedCost > 0 
+  const portfolioPnLPercent = valuation?.totalPnLPercent ?? (totalInvestedCost > 0 
     ? (totalUnrealizedPnL / totalInvestedCost) * 100 
-    : 0;
+    : 0);
 
   const donutData = hasAssets ? [
     {
@@ -347,9 +380,21 @@ export function OverviewTab({
     ? (valuation.cashBalance / valuation.totalNetWorth) * 100
     : 0;
 
-  const currentChartData = TIMEFRAME_DATA[timeframe];
-  const lastPoint = currentChartData[currentChartData.length - 1];
-  const alphaVal = (lastPoint.navReturn - lastPoint.vniReturn).toFixed(1);
+  const currentChartData = (historyData?.points && historyData.points.length > 0)
+    ? historyData.points.map(pt => ({
+        date: pt.date.length >= 10 ? `${pt.date.substring(8, 10)}/${pt.date.substring(5, 7)}` : pt.date,
+        navReturn: Number((pt.navReturn ?? 0).toFixed(1)),
+        vniReturn: Number((pt.vniReturn ?? 0).toFixed(1)),
+        navVal: Number((pt.nav / 1_000_000).toFixed(1)),
+        vniVal: Number((pt.vnindex ?? 1250).toFixed(1))
+      }))
+    : TIMEFRAME_DATA[timeframe];
+  const lastPoint = currentChartData[currentChartData.length - 1] || { navReturn: 0, vniReturn: 0, navVal: 0, vniVal: 0, date: '' };
+  const alphaVal = historyData?.alphaPercent !== undefined
+    ? (historyData.alphaPercent > 0 ? `+${historyData.alphaPercent.toFixed(1)}` : `${historyData.alphaPercent.toFixed(1)}`)
+    : ((lastPoint.navReturn - lastPoint.vniReturn) >= 0 
+        ? `+${(lastPoint.navReturn - lastPoint.vniReturn).toFixed(1)}`
+        : `${(lastPoint.navReturn - lastPoint.vniReturn).toFixed(1)}`);
 
   return (
     <div className="space-y-6">
@@ -498,6 +543,41 @@ export function OverviewTab({
           </div>
         </div>
       </section>
+
+      {/* Drift Alert Banner */}
+      {plan?.driftDetected && (
+        <section className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 shadow-xs relative overflow-hidden transition-all">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-wider">
+                    Cảnh Báo Lệch Tỷ Trọng Mục Tiêu
+                  </span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-500">
+                    Độ lệch lớn nhất: +{plan.maxDriftPercent.toFixed(1)}%
+                  </span>
+                </div>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Danh mục của bạn đã vượt ngưỡng dung sai cân bằng (tolerance &gt; 5%). Đề xuất tái cơ cấu để đưa tỷ trọng về vùng tối ưu và kiểm soát rủi ro.
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={onConfirmRebalance}
+              disabled={executing}
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-xs transition-all flex items-center gap-1.5 shrink-0 cursor-pointer disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${executing ? 'animate-spin' : ''}`} />
+              <span>{executing ? 'Đang tái cơ cấu...' : 'Tái cơ cấu ngay'}</span>
+            </button>
+          </div>
+        </section>
+      )}
 
       {/* 2. Four Key Wealth Metric Cards (Restrained Accent & Clean Typography) */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -729,6 +809,9 @@ export function OverviewTab({
                     {tf === 'ALL' ? 'Tất cả' : tf}
                   </button>
                 ))}
+                {loadingHistory && (
+                  <RefreshCw className="w-3.5 h-3.5 text-accent-emerald animate-spin ml-2" />
+                )}
               </div>
             )}
 
@@ -806,19 +889,32 @@ export function OverviewTab({
                   </ResponsiveContainer>
                 </div>
 
-                {/* 3 Bottom Financial Metrics */}
-                <div className="grid grid-cols-3 gap-3 pt-4 mt-3 border-t border-border-subtle text-center">
+                {/* 4 Bottom Financial Risk Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 mt-3 border-t border-border-subtle text-center">
                   <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle">
                     <span className="text-[10px] text-text-muted uppercase font-bold tracking-wider">Chỉ số Alpha (Vượt TT)</span>
-                    <p className="font-black font-mono-num text-accent-emerald text-base mt-0.5">+{alphaVal}%</p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle">
-                    <span className="text-[10px] text-text-muted uppercase font-bold tracking-wider">Hệ số Beta (Biến động)</span>
-                    <p className="font-black font-mono-num text-text-primary text-base mt-0.5">0.68 <span className="text-xs font-normal text-text-muted">(Ổn định)</span></p>
+                    <p className="font-black font-mono-num text-accent-emerald text-base mt-0.5">{alphaVal}%</p>
                   </div>
                   <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle">
                     <span className="text-[10px] text-text-muted uppercase font-bold tracking-wider">Sharpe Ratio</span>
-                    <p className="font-black font-mono-num text-text-primary text-base mt-0.5">1.84 <span className="text-xs font-normal text-text-muted">(Tối ưu)</span></p>
+                    <p className="font-black font-mono-num text-text-primary text-base mt-0.5">
+                      {riskMetrics ? riskMetrics.sharpeRatio.toFixed(2) : '1.84'}{' '}
+                      <span className="text-xs font-normal text-text-muted">
+                        ({riskMetrics?.interpretation || 'Tối ưu'})
+                      </span>
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle">
+                    <span className="text-[10px] text-text-muted uppercase font-bold tracking-wider">Max Drawdown (MDD)</span>
+                    <p className="font-black font-mono-num text-accent-rose text-base mt-0.5">
+                      {riskMetrics ? `-${Math.abs(riskMetrics.maxDrawdownPercent).toFixed(1)}%` : '-4.2%'}
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle">
+                    <span className="text-[10px] text-text-muted uppercase font-bold tracking-wider">Biến động năm (Vol)</span>
+                    <p className="font-black font-mono-num text-text-primary text-base mt-0.5">
+                      {riskMetrics ? `${riskMetrics.annualizedVolatilityPercent.toFixed(1)}%` : '14.5%'}
+                    </p>
                   </div>
                 </div>
               </>
@@ -1166,6 +1262,24 @@ export function OverviewTab({
                     </div>
                   </div>
                 ))}
+                {((plan.totalEstimatedFees || 0) > 0 || (plan.totalEstimatedTax || 0) > 0) && (
+                  <div className="p-2.5 rounded-xl border border-border-subtle bg-surface-container-high/40 text-[11px] space-y-1">
+                    <div className="flex justify-between text-text-muted">
+                      <span>Phí môi giới (0.1%):</span>
+                      <span className="font-mono-num font-semibold text-text-secondary">{formatVND(plan.totalEstimatedFees || 0)}</span>
+                    </div>
+                    <div className="flex justify-between text-text-muted">
+                      <span>Thuế TNCN bán (0.1%):</span>
+                      <span className="font-mono-num font-semibold text-text-secondary">{formatVND(plan.totalEstimatedTax || 0)}</span>
+                    </div>
+                    <div className="flex justify-between text-text-primary font-bold pt-1 border-t border-border-subtle">
+                      <span>Tác động tiền ròng:</span>
+                      <span className={`font-mono-num ${(plan.netCashImpact || 0) >= 0 ? 'text-accent-emerald' : 'text-accent-rose'}`}>
+                        {(plan.netCashImpact || 0) >= 0 ? '+' : ''}{formatVND(plan.netCashImpact || 0)}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

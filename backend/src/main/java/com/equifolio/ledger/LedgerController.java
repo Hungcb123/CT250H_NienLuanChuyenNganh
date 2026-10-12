@@ -109,4 +109,26 @@ public class LedgerController {
         CompoundSimulationDTO dto = ledgerService.simulateCompoundGrowth(principal, monthlyContribution, annualRate, years);
         return ResponseEntity.ok(ApiResponse.success("Mô phỏng tích sản lãi kép thành công", dto));
     }
+
+    @GetMapping("/history")
+    public ResponseEntity<ApiResponse<PortfolioHistoryDTO>> getPortfolioHistory(
+            @RequestParam(name = "timeframe", required = false, defaultValue = "1M") String timeframe) {
+        Long userId = SecurityUtils.getCurrentUserIdOrDefault(1L);
+        PortfolioHistoryDTO history = ledgerService.getPortfolioHistory(userId, timeframe);
+        return ResponseEntity.ok(ApiResponse.success(history));
+    }
+
+    @GetMapping("/risk-metrics")
+    public ResponseEntity<ApiResponse<RiskMetricsDTO>> getRiskMetrics() {
+        Long userId = SecurityUtils.getCurrentUserIdOrDefault(1L);
+        RiskMetricsDTO metrics = ledgerService.calculateRiskMetrics(userId);
+        return ResponseEntity.ok(ApiResponse.success(metrics));
+    }
+
+    @PostMapping("/dividend")
+    public ResponseEntity<ApiResponse<TransactionDTO>> recordDividend(@Valid @RequestBody DividendRequest request) {
+        Long userId = SecurityUtils.getCurrentUserIdOrDefault(1L);
+        TransactionDTO dto = ledgerService.recordDividend(userId, request);
+        return ResponseEntity.ok(ApiResponse.success("Ghi nhận cổ tức thành công", dto));
+    }
 }

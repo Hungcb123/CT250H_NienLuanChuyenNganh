@@ -3,6 +3,7 @@ package com.equifolio.copilot;
 import com.equifolio.ledger.CompoundSimulationDTO;
 import com.equifolio.ledger.LedgerService;
 import com.equifolio.ledger.PortfolioValuationDTO;
+import com.equifolio.ledger.RiskMetricsDTO;
 import com.equifolio.optimizer.OnnxRegimeService;
 import com.equifolio.optimizer.PortfolioOptimizerService;
 import com.equifolio.optimizer.RebalancePlanDTO;
@@ -347,6 +348,32 @@ public class CopilotService {
         promptBuilder.append("- Cổ phiếu: ").append(stockFormatted).append(" (chiếm ").append(stockPct).append("% NAV)\n");
         promptBuilder.append("- Vàng miếng SJC: ").append(goldFormatted).append(" (chiếm ").append(goldPct).append("% NAV)\n");
         promptBuilder.append("- Tiền gửi Tiết kiệm: ").append(savingsFormatted).append(" (chiếm ").append(cashSavPct).append("% NAV)\n\n");
+
+        promptBuilder.append("[HIỆU SUẤT LÃI/LỖ & GIÁ VỐN DANH MỤC (PORTFOLIO P&L)]\n");
+        promptBuilder.append("- Tổng giá vốn: ").append(currencyFormat.format(valuation.getTotalCostBasis())).append(" ₫\n");
+        promptBuilder.append("- Lãi/Lỗ chưa chốt (Unrealized P&L): ").append(currencyFormat.format(valuation.getTotalUnrealizedPnL())).append(" ₫ (").append(valuation.getTotalPnLPercent()).append("%)\n");
+        promptBuilder.append("- Lãi/Lỗ đã chốt lũy kế (Realized P&L): ").append(currencyFormat.format(valuation.getTotalRealizedPnL())).append(" ₫\n");
+        promptBuilder.append("- Chi tiết từng mã nắm giữ:\n");
+        for (PortfolioValuationDTO.HoldingItem h : valuation.getHoldings()) {
+            if ("STOCK".equalsIgnoreCase(h.getAssetClass()) || "GOLD".equalsIgnoreCase(h.getAssetClass())) {
+                promptBuilder.append("  + Mã ").append(h.getTicker()).append(": ")
+                        .append(h.getQuantity()).append(" đơn vị | ")
+                        .append("Giá vốn: ").append(currencyFormat.format(h.getCostPrice())).append(" ₫ | ")
+                        .append("Thị giá: ").append(currencyFormat.format(h.getCurrentPrice())).append(" ₫ | ")
+                        .append("P&L: ").append(h.getUnrealizedPnLPercent()).append("% (").append(currencyFormat.format(h.getUnrealizedPnL())).append(" ₫)\n");
+            }
+        }
+        promptBuilder.append("\n");
+
+        RiskMetricsDTO risk = ledgerService.calculateRiskMetrics(user.getId());
+        if (risk != null) {
+            promptBuilder.append("[CHỈ SỐ RỦI RO & ĐO LƯỜNG HIỆU SUẤT CHUẨN MỰC]\n");
+            promptBuilder.append("- Sharpe Ratio: ").append(risk.getSharpeRatio()).append("\n");
+            promptBuilder.append("- Max Drawdown (Sụt giảm tối đa): ").append(risk.getMaxDrawdownPercent()).append("%\n");
+            promptBuilder.append("- Độ biến động năm (Annual Volatility): ").append(risk.getAnnualizedVolatilityPercent()).append("%\n");
+            promptBuilder.append("- Alpha vượt trội vs VN-Index: ").append(risk.getAlphaPercent()).append("%\n");
+            promptBuilder.append("- Đánh giá rủi ro: ").append(risk.getInterpretation()).append("\n\n");
+        }
 
         promptBuilder.append("[MỤC TIÊU PHÂN BỔ SAA & TÁI CƠ CẤU]\n");
         promptBuilder.append("- Mục tiêu SAA chuẩn: Cổ phiếu 35%, Vàng 35%, Tiết kiệm & Tiền mặt 30%\n");

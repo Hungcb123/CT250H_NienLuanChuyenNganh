@@ -126,8 +126,12 @@ public class PortfolioOptimizerService {
 
                                 if (roundedQty.compareTo(BigDecimal.ZERO) > 0) {
                                     BigDecimal totalEst = roundedQty.multiply(price).setScale(0, RoundingMode.HALF_EVEN);
+                                    BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                                    BigDecimal tax = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                                    BigDecimal net = totalEst.subtract(fee).subtract(tax);
+
                                     totalSoldEst = totalSoldEst.add(totalEst);
-                                    actions.add(new RebalancePlanDTO.RebalanceAction(
+                                    RebalancePlanDTO.RebalanceAction action = new RebalancePlanDTO.RebalanceAction(
                                             "SELL",
                                             item.getTicker(),
                                             item.getAssetName(),
@@ -139,7 +143,11 @@ public class PortfolioOptimizerService {
                                             "Tỷ trọng nhóm " + assetClass + " đang vượt mục tiêu " +
                                                     excessClassWeight.multiply(new BigDecimal("100")).setScale(1, RoundingMode.HALF_EVEN) +
                                                     "%. Khuyến nghị chốt lời lô chẵn sàn HOSE để bảo toàn vốn."
-                                    ));
+                                    );
+                                    action.setEstimatedFee(fee);
+                                    action.setEstimatedTax(tax);
+                                    action.setNetMoney(net);
+                                    actions.add(action);
                                 }
                             }
                         }
@@ -165,7 +173,10 @@ public class PortfolioOptimizerService {
                         BigDecimal roundedGoldQty = BigDecimal.valueOf(exactGoldQty.longValue());
                         if (roundedGoldQty.compareTo(BigDecimal.ZERO) > 0) {
                             BigDecimal totalEst = roundedGoldQty.multiply(goldPrice).setScale(0, RoundingMode.HALF_EVEN);
-                            actions.add(new RebalancePlanDTO.RebalanceAction(
+                            BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                            BigDecimal net = totalEst.add(fee);
+
+                            RebalancePlanDTO.RebalanceAction action = new RebalancePlanDTO.RebalanceAction(
                                     "BUY",
                                     "GOLD_SJC",
                                     "Vàng miếng SJC 999.9",
@@ -177,7 +188,11 @@ public class PortfolioOptimizerService {
                                     "Tỷ trọng nhóm Vàng hiện đang thiếu " +
                                             deficitWeight.multiply(new BigDecimal("100")).setScale(1, RoundingMode.HALF_EVEN) +
                                             "%. Khuyến nghị mua tích lũy " + roundedGoldQty + " chỉ SJC để phòng vệ rủi ro vĩ mô."
-                            ));
+                            );
+                            action.setEstimatedFee(fee);
+                            action.setEstimatedTax(BigDecimal.ZERO);
+                            action.setNetMoney(net);
+                            actions.add(action);
                         }
                     }
                 } else if ("SAVINGS".equalsIgnoreCase(assetClass)) {
@@ -190,7 +205,7 @@ public class PortfolioOptimizerService {
                         long roundedMillion = (transferMoney.longValue() / 1_000_000) * 1_000_000;
                         if (roundedMillion >= 1_000_000) {
                             BigDecimal depAmount = BigDecimal.valueOf(roundedMillion);
-                            actions.add(new RebalancePlanDTO.RebalanceAction(
+                            RebalancePlanDTO.RebalanceAction action = new RebalancePlanDTO.RebalanceAction(
                                     "OPEN_SAVINGS",
                                     "VND",
                                     "Tiền gửi tiết kiệm ngân hàng (Vietcombank 6T)",
@@ -202,12 +217,41 @@ public class PortfolioOptimizerService {
                                     "Tỷ trọng Tiết kiệm đang thiếu " +
                                             deficitWeight.multiply(new BigDecimal("100")).setScale(1, RoundingMode.HALF_EVEN) +
                                             "%, trong khi tiền mặt rảnh rỗi đang dư thừa. Khuyến nghị mở sổ tiết kiệm 6 tháng để tối ưu lãi suất phi rủi ro Rf (5.5%/năm)."
-                            ));
+                            );
+                            action.setEstimatedFee(BigDecimal.ZERO);
+                            action.setEstimatedTax(BigDecimal.ZERO);
+                            action.setNetMoney(depAmount);
+                            actions.add(action);
                         }
                     }
                 }
             }
         }
+
+        // Tổng hợp ước tính phí, thuế và dòng tiền
+        BigDecimal planTotalSell = BigDecimal.ZERO;
+        BigDecimal planTotalBuy = BigDecimal.ZERO;
+        BigDecimal planTotalFees = BigDecimal.ZERO;
+        BigDecimal planTotalTax = BigDecimal.ZERO;
+
+        for (RebalancePlanDTO.RebalanceAction act : actions) {
+            if ("SELL".equalsIgnoreCase(act.getActionType())) {
+                planTotalSell = planTotalSell.add(act.getEstimatedTotalMoney());
+                planTotalFees = planTotalFees.add(act.getEstimatedFee());
+                planTotalTax = planTotalTax.add(act.getEstimatedTax());
+            } else if ("BUY".equalsIgnoreCase(act.getActionType())) {
+                planTotalBuy = planTotalBuy.add(act.getEstimatedTotalMoney());
+                planTotalFees = planTotalFees.add(act.getEstimatedFee());
+            } else if ("OPEN_SAVINGS".equalsIgnoreCase(act.getActionType())) {
+                planTotalBuy = planTotalBuy.add(act.getEstimatedTotalMoney());
+            }
+        }
+
+        plan.setTotalEstimatedSell(planTotalSell);
+        plan.setTotalEstimatedBuy(planTotalBuy);
+        plan.setTotalEstimatedFees(planTotalFees);
+        plan.setTotalEstimatedTax(planTotalTax);
+        plan.setNetCashImpact(planTotalSell.subtract(planTotalBuy).subtract(planTotalFees).subtract(planTotalTax));
 
         // Tóm tắt kế hoạch
         if (isDrift) {
@@ -242,6 +286,8 @@ public class PortfolioOptimizerService {
 
         BigDecimal totalSold = BigDecimal.ZERO;
         BigDecimal totalBought = BigDecimal.ZERO;
+        BigDecimal totalFees = BigDecimal.ZERO;
+        BigDecimal totalTax = BigDecimal.ZERO;
 
         for (RebalancePlanDTO.RebalanceAction action : plan.getActions()) {
             if ("OPEN_SAVINGS".equalsIgnoreCase(action.getActionType())) {
@@ -287,45 +333,61 @@ public class PortfolioOptimizerService {
                 }
 
                 if (qty.compareTo(BigDecimal.ZERO) > 0) {
+                    BigDecimal fee = money.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                    BigDecimal tax = money.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                    BigDecimal netProceeds = money.subtract(fee).subtract(tax);
+
                     assetAccount.setBalance(assetAccount.getBalance().subtract(qty));
-                    vndWallet.setBalance(vndWallet.getBalance().add(money));
+                    vndWallet.setBalance(vndWallet.getBalance().add(netProceeds));
 
                     assetAccount = accountRepository.save(assetAccount);
                     vndWallet = accountRepository.save(vndWallet);
 
-                    Entry debitEntry = new Entry(transaction, vndWallet, money);
+                    Entry debitEntry = new Entry(transaction, vndWallet, netProceeds);
                     Entry creditEntry = new Entry(transaction, assetAccount, qty.negate());
 
                     transaction.addEntry(debitEntry);
                     transaction.addEntry(creditEntry);
 
                     totalSold = totalSold.add(money);
+                    totalFees = totalFees.add(fee);
+                    totalTax = totalTax.add(tax);
                 }
             } else if ("BUY".equalsIgnoreCase(action.getActionType())) {
-                if (vndWallet.getBalance().compareTo(money) < 0) {
-                    if (vndWallet.getBalance().compareTo(price) >= 0) {
-                        long affordableQty = vndWallet.getBalance().divide(price, 0, RoundingMode.FLOOR).longValue();
+                BigDecimal fee = money.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                BigDecimal totalRequired = money.add(fee);
+
+                if (vndWallet.getBalance().compareTo(totalRequired) < 0) {
+                    BigDecimal unitCost = price.multiply(new BigDecimal("1.001"));
+                    if (vndWallet.getBalance().compareTo(unitCost) >= 0) {
+                        long affordableQty = vndWallet.getBalance().divide(unitCost, 0, RoundingMode.FLOOR).longValue();
+                        if ("STOCK".equalsIgnoreCase(action.getAssetClass())) {
+                            affordableQty = (affordableQty / 100) * 100;
+                        }
                         qty = BigDecimal.valueOf(affordableQty);
                         money = qty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
+                        fee = money.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
+                        totalRequired = money.add(fee);
                     } else {
                         continue;
                     }
                 }
 
                 if (qty.compareTo(BigDecimal.ZERO) > 0) {
-                    vndWallet.setBalance(vndWallet.getBalance().subtract(money));
+                    vndWallet.setBalance(vndWallet.getBalance().subtract(totalRequired));
                     assetAccount.setBalance(assetAccount.getBalance().add(qty));
 
                     vndWallet = accountRepository.save(vndWallet);
                     assetAccount = accountRepository.save(assetAccount);
 
                     Entry debitEntry = new Entry(transaction, assetAccount, qty);
-                    Entry creditEntry = new Entry(transaction, vndWallet, money.negate());
+                    Entry creditEntry = new Entry(transaction, vndWallet, totalRequired.negate());
 
                     transaction.addEntry(debitEntry);
                     transaction.addEntry(creditEntry);
 
                     totalBought = totalBought.add(money);
+                    totalFees = totalFees.add(fee);
                 }
             }
         }
@@ -347,10 +409,12 @@ public class PortfolioOptimizerService {
         result.setActionCount(plan.getActions().size());
         result.setTotalSoldMoney(totalSold);
         result.setTotalBoughtMoney(totalBought);
-        result.setNetCashChange(totalSold.subtract(totalBought));
+        result.setTotalFees(totalFees);
+        result.setTotalTax(totalTax);
+        result.setNetCashChange(totalSold.subtract(totalBought).subtract(totalFees).subtract(totalTax));
         result.setUpdatedValuation(newValuation);
         result.setUpdatedPlan(newPlan);
-        result.setMessage("Đã thực thi tái cơ cấu thành công với mã giao dịch " + txCode + ". Độ lệch danh mục đã được cân bằng lại tối ưu.");
+        result.setMessage("Đã thực thi tái cơ cấu thành công với mã giao dịch " + txCode + ". Tổng phí môi giới & thuế khấu trừ: " + totalFees.add(totalTax).setScale(0, RoundingMode.HALF_EVEN) + " ₫. Danh mục đã về vùng cân bằng tối ưu.");
 
         return result;
     }

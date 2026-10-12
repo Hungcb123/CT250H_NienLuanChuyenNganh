@@ -8,6 +8,8 @@ public class RebalanceExecutionResultDTO {
     private int actionCount;
     private BigDecimal totalSoldMoney = BigDecimal.ZERO;
     private BigDecimal totalBoughtMoney = BigDecimal.ZERO;
+    private BigDecimal totalFees = BigDecimal.ZERO;
+    private BigDecimal totalTax = BigDecimal.ZERO;
     private BigDecimal netCashChange = BigDecimal.ZERO;
     private PortfolioValuationDTO updatedValuation;
     private RebalancePlanDTO updatedPlan;
@@ -26,6 +28,12 @@ public class RebalanceExecutionResultDTO {
 
     public BigDecimal getTotalBoughtMoney() { return totalBoughtMoney; }
     public void setTotalBoughtMoney(BigDecimal totalBoughtMoney) { this.totalBoughtMoney = totalBoughtMoney; }
+
+    public BigDecimal getTotalFees() { return totalFees; }
+    public void setTotalFees(BigDecimal totalFees) { this.totalFees = totalFees; }
+
+    public BigDecimal getTotalTax() { return totalTax; }
+    public void setTotalTax(BigDecimal totalTax) { this.totalTax = totalTax; }
 
     public BigDecimal getNetCashChange() { return netCashChange; }
     public void setNetCashChange(BigDecimal netCashChange) { this.netCashChange = netCashChange; }

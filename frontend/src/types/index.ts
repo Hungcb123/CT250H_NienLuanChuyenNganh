@@ -11,6 +11,10 @@ export interface HoldingItem {
   currentPrice: number;
   marketValue: number;
   allocationPercent: number;
+  costPrice?: number;
+  totalCostBasis?: number;
+  unrealizedPnL?: number;
+  unrealizedPnLPercent?: number;
 }
 
 export interface PortfolioValuation {
@@ -19,6 +23,10 @@ export interface PortfolioValuation {
   stockValue: number;
   goldValue: number;
   savingsValue: number;
+  totalCostBasis?: number;
+  totalUnrealizedPnL?: number;
+  totalPnLPercent?: number;
+  totalRealizedPnL?: number;
   currentAllocations: {
     STOCK?: number;
     GOLD?: number;
@@ -38,6 +46,9 @@ export interface RebalanceAction {
   roundedQuantity: number;
   estimatedPrice: number;
   estimatedTotalMoney: number;
+  estimatedFee?: number;
+  estimatedTax?: number;
+  netMoney?: number;
   note: string;
 }
 
@@ -48,6 +59,53 @@ export interface RebalancePlan {
   targetAllocations: Record<string, number>;
   executiveSummary: string;
   actions: RebalanceAction[];
+  totalEstimatedSell?: number;
+  totalEstimatedBuy?: number;
+  totalEstimatedFees?: number;
+  totalEstimatedTax?: number;
+  netCashImpact?: number;
+}
+
+export interface SnapshotPoint {
+  date: string;
+  nav: number;
+  stockValue?: number;
+  goldValue?: number;
+  savingsValue?: number;
+  cashValue?: number;
+  navReturn: number;
+  vniReturn: number;
+  vnindex: number;
+}
+
+export interface PortfolioHistoryResponse {
+  timeframe: string;
+  currentNav: number;
+  portfolioReturnPercent: number;
+  vniReturnPercent: number;
+  alphaPercent: number;
+  points: SnapshotPoint[];
+}
+
+export interface RiskMetrics {
+  sharpeRatio: number;
+  maxDrawdownPercent: number;
+  annualizedVolatilityPercent: number;
+  annualizedReturnPercent: number;
+  riskFreeRatePercent: number;
+  alphaPercent: number;
+  beta: number;
+  riskRating: string;
+  interpretation: string;
+}
+
+export interface DividendPayload {
+  ticker: string;
+  dividendType: 'CASH' | 'STOCK';
+  amountPerShare?: number;
+  totalAmount: number;
+  taxPercent?: number;
+  notes?: string;
 }
 
 export interface UserProfile {
