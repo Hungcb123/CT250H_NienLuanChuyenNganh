@@ -32,3 +32,4 @@ postgres_data/
 # Environment Variables
 .env
 .env.local
+.gitnexus

@@ -1,6 +1,7 @@
 package com.equifolio.ledger;
 
 import com.equifolio.profile.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Transaction {
     @Column(name = "transaction_code", nullable = false, unique = true, length = 64)
     private String transactionCode;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

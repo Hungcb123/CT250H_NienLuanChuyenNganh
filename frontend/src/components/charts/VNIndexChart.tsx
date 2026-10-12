@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   ComposedChart, Area, Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid
 } from 'recharts';
@@ -6,8 +6,11 @@ import { TrendingUp, TrendingDown, Eye, BarChart2 } from 'lucide-react';
 import {
   VNINDEX_SUMMARY,
   VNINDEX_DAILY_SERIES,
-  VNINDEX_MACRO_5Y
+  VNINDEX_MACRO_5Y,
+  VNIndexSummary
 } from '../../data/vnindexData';
+import { useTheme } from '../../context/ThemeContext';
+import { getVNIndexSummaryApi } from '../../services/api';
 
 interface VNIndexChartProps {
   height?: number;
@@ -22,10 +25,31 @@ export function VNIndexChart({
   showControls = true,
   compact = false
 }: VNIndexChartProps) {
+  const { isDark } = useTheme();
   const [timeframe, setTimeframe] = useState<TimeframeType>('6M');
   const [showMA20, setShowMA20] = useState(true);
   const [showMA50, setShowMA50] = useState(true);
   const [showVolume, setShowVolume] = useState(true);
+  const [summary, setSummary] = useState<VNIndexSummary>(VNINDEX_SUMMARY);
+
+  useEffect(() => {
+    getVNIndexSummaryApi().then(data => {
+      if (data && data.currentPoints) {
+        setSummary({
+          latestDate: data.latestDate,
+          currentPoints: data.currentPoints,
+          changePoints: data.changePoints,
+          changePercent: data.changePercent,
+          high52w: data.high52w,
+          low52w: data.low52w,
+          avgVolume20: data.avgVolume20,
+          latestVolume: data.latestVolume,
+          ma20: data.ma20,
+          ma50: data.ma50
+        });
+      }
+    });
+  }, []);
 
   // Filter data based on selected timeframe
   const chartData = useMemo(() => {
@@ -63,7 +87,7 @@ export function VNIndexChart({
     };
   }, [chartData]);
 
-  const isPositive = VNINDEX_SUMMARY.changePercent >= 0;
+  const isPositive = summary.changePercent >= 0;
 
   return (
     <div className="w-full">
@@ -74,7 +98,7 @@ export function VNIndexChart({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xl font-black text-text-primary tracking-tight">
-                  {VNINDEX_SUMMARY.currentPoints.toLocaleString('vi-VN', { minimumFractionDigits: 2 })}
+                  {summary.currentPoints.toLocaleString('vi-VN', { minimumFractionDigits: 2 })}
                 </span>
                 <span
                   className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold ${
@@ -84,15 +108,15 @@ export function VNIndexChart({
                   }`}
                 >
                   {isPositive ? <TrendingUp className="w-3.5 h-3.5" /> : <TrendingDown className="w-3.5 h-3.5" />}
-                  {VNINDEX_SUMMARY.changePoints > 0 ? '+' : ''}{VNINDEX_SUMMARY.changePoints.toFixed(2)} ({isPositive ? '+' : ''}{VNINDEX_SUMMARY.changePercent.toFixed(2)}%)
+                  {summary.changePoints > 0 ? '+' : ''}{summary.changePoints.toFixed(2)} ({isPositive ? '+' : ''}{summary.changePercent.toFixed(2)}%)
                 </span>
               </div>
               <div className="flex items-center gap-3 mt-1 text-[11px] text-text-muted">
-                <span>Khối lượng: <strong className="text-text-primary">{(VNINDEX_SUMMARY.latestVolume / 1e6).toFixed(1)}M CP</strong></span>
+                <span>Khối lượng: <strong className="text-text-primary">{(summary.latestVolume / 1e6).toFixed(1)}M CP</strong></span>
                 <span>•</span>
-                <span>52T: <strong className="text-text-primary">{VNINDEX_SUMMARY.low52w.toFixed(0)} - {VNINDEX_SUMMARY.high52w.toFixed(0)}</strong></span>
+                <span>52T: <strong className="text-text-primary">{summary.low52w.toFixed(0)} - {summary.high52w.toFixed(0)}</strong></span>
                 <span>•</span>
-                <span>Ngày: <strong className="text-text-primary">{VNINDEX_SUMMARY.latestDate}</strong></span>
+                <span>Ngày: <strong className="text-text-primary">{summary.latestDate}</strong></span>
               </div>
             </div>
           </div>
@@ -106,33 +130,39 @@ export function VNIndexChart({
                   type="button"
                   onClick={() => setShowMA20(!showMA20)}
                   className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all flex items-center gap-1 ${
-                    showMA20 ? 'bg-amber-50 text-amber-700 border border-amber-200 shadow-2xs' : 'text-text-muted hover:text-text-primary'
+                    showMA20
+                      ? 'bg-accent-gold-light text-accent-gold border border-accent-gold/40 shadow-2xs font-bold'
+                      : 'text-text-muted hover:text-text-primary'
                   }`}
                   title="Đường trung bình động 20 phiên (Ngắn hạn)"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-gold"></span>
                   MA20
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowMA50(!showMA50)}
                   className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all flex items-center gap-1 ${
-                    showMA50 ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-2xs' : 'text-text-muted hover:text-text-primary'
+                    showMA50
+                      ? 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/40 shadow-2xs font-bold'
+                      : 'text-text-muted hover:text-text-primary'
                   }`}
                   title="Đường trung bình động 50 phiên (Trung hạn)"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
                   MA50
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowVolume(!showVolume)}
                   className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all flex items-center gap-1 ${
-                    showVolume ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-2xs' : 'text-text-muted hover:text-text-primary'
+                    showVolume
+                      ? 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/40 shadow-2xs font-bold'
+                      : 'text-text-muted hover:text-text-primary'
                   }`}
                   title="Khối lượng giao dịch"
                 >
-                  <BarChart2 className="w-3 h-3 text-emerald-600" />
+                  <BarChart2 className="w-3 h-3 text-accent-emerald" />
                   Vol
                 </button>
               </div>
@@ -146,7 +176,7 @@ export function VNIndexChart({
                     onClick={() => setTimeframe(tf)}
                     className={`px-2.5 py-1 rounded text-xs font-semibold transition-all ${
                       timeframe === tf
-                        ? 'bg-surface-container-lowest text-text-primary shadow-xs border border-border-subtle'
+                        ? 'bg-surface-container-high text-accent-emerald shadow-xs border border-accent-emerald/30 font-bold'
                         : 'text-text-muted hover:text-text-primary'
                     }`}
                   >
@@ -165,14 +195,14 @@ export function VNIndexChart({
           <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
             <defs>
               <linearGradient id="vniGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#059669" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#059669" stopOpacity={0.0} />
+                <stop offset="5%" stopColor="#00c087" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#00c087" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#272938' : '#f1f5f9'} vertical={false} />
             <XAxis
               dataKey="displayDate"
-              stroke="#94a3b8"
+              stroke={isDark ? '#64748b' : '#94a3b8'}
               fontSize={11}
               tickLine={false}
               interval="preserveStartEnd"
@@ -180,7 +210,7 @@ export function VNIndexChart({
             />
             <YAxis
               yAxisId="price"
-              stroke="#94a3b8"
+              stroke={isDark ? '#64748b' : '#94a3b8'}
               fontSize={11}
               domain={[minVal, maxVal]}
               tickLine={false}
@@ -194,11 +224,12 @@ export function VNIndexChart({
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#ffffff',
-                borderColor: '#e2e8f0',
+                backgroundColor: isDark ? '#1a1b26' : '#ffffff',
+                borderColor: isDark ? '#2e3142' : '#e2e8f0',
                 borderRadius: '0.5rem',
                 fontSize: '12px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                color: isDark ? '#f3f4f6' : '#0f172a',
+                boxShadow: isDark ? '0 8px 24px rgba(0,0,0,0.5)' : '0 4px 12px rgba(0,0,0,0.08)'
               }}
               formatter={(value: any, name: string) => {
                 if (name === 'Điểm số VN-Index') {
@@ -224,8 +255,8 @@ export function VNIndexChart({
                 yAxisId="volume"
                 dataKey="volumeM"
                 name="Khối lượng (M)"
-                fill="#cbd5e1"
-                opacity={0.4}
+                fill={isDark ? '#3d4257' : '#cbd5e1'}
+                opacity={0.5}
                 barSize={3}
               />
             )}
@@ -236,7 +267,7 @@ export function VNIndexChart({
               type="monotone"
               dataKey="close"
               name="Điểm số VN-Index"
-              stroke="#059669"
+              stroke="#00c087"
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#vniGradient)"
@@ -249,7 +280,7 @@ export function VNIndexChart({
                 type="monotone"
                 dataKey="ma20"
                 name="MA20"
-                stroke="#d97706"
+                stroke="#f59e0b"
                 strokeWidth={1.5}
                 dot={false}
                 strokeDasharray="3 3"
@@ -263,7 +294,7 @@ export function VNIndexChart({
                 type="monotone"
                 dataKey="ma50"
                 name="MA50"
-                stroke="#6366f1"
+                stroke="#818cf8"
                 strokeWidth={1.5}
                 dot={false}
               />
@@ -278,30 +309,30 @@ export function VNIndexChart({
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <span className="w-3 h-1 bg-accent-emerald rounded"></span>
-              <span>VN-Index Close</span>
+              <span className="text-text-secondary">VN-Index Close</span>
             </span>
             {showMA20 && (
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-0.5 bg-amber-500 border-t border-dashed border-amber-500"></span>
-                <span>MA20 ({VNINDEX_SUMMARY.ma20.toFixed(1)})</span>
+                <span className="w-3 h-0.5 bg-accent-gold border-t border-dashed border-accent-gold"></span>
+                <span className="text-text-secondary">MA20 ({VNINDEX_SUMMARY.ma20.toFixed(1)})</span>
               </span>
             )}
             {showMA50 && (
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-0.5 bg-indigo-500"></span>
-                <span>MA50 ({VNINDEX_SUMMARY.ma50.toFixed(1)})</span>
+                <span className="w-3 h-0.5 bg-indigo-400"></span>
+                <span className="text-text-secondary">MA50 ({VNINDEX_SUMMARY.ma50.toFixed(1)})</span>
               </span>
             )}
             {showVolume && (
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-slate-300 rounded-xs"></span>
-                <span>Volume</span>
+                <span className="w-2.5 h-2.5 bg-surface-container-highest rounded-xs"></span>
+                <span className="text-text-secondary">Volume</span>
               </span>
             )}
           </div>
           <div className="flex items-center gap-1.5 text-text-secondary">
             <Eye className="w-3.5 h-3.5 text-accent-emerald" />
-            <span>Trạng thái: <strong>Kiểm định MA50 • Chế độ Bullish (+1)</strong></span>
+            <span>Trạng thái: <strong className="text-text-primary">Kiểm định MA50 • Chế độ Bullish (+1)</strong></span>
           </div>
         </div>
       )}

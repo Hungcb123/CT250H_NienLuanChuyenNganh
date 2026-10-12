@@ -18,7 +18,7 @@ ON CONFLICT (ticker) DO NOTHING;
 -- 2. Giá thị trường mẫu (Đơn vị: VND)
 INSERT INTO market_prices (ticker, price, trade_date) VALUES
 ('VND', 1.0000, CURRENT_DATE),
-('HPG', 28500.0000, CURRENT_DATE),
+('HPG', 20150.0000, CURRENT_DATE),
 ('TCB', 24200.0000, CURRENT_DATE),
 ('FPT', 134000.0000, CURRENT_DATE),
 ('VNM', 68000.0000, CURRENT_DATE),

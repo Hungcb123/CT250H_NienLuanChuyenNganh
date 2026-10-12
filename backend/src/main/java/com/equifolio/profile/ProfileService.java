@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -26,12 +27,16 @@ public class ProfileService {
             demo.setId(1L);
             demo.setUsername("alex_nguyen");
             demo.setEmail("alex.nguyen@equifolio.vn");
-            demo.setPasswordHash("$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy");
+            demo.setPasswordHash("$2a$10$nWNg7Kr302JjEnwZWY8r.OlRwH5gNj5NCYIWWY6tXmMRwqdOWFoRe");
             demo.setRiskScore(63);
             demo.setRiskAversionLambda(new BigDecimal("4.33"));
             demo.setRiskProfile("BALANCED");
             return userRepository.save(demo);
         });
+    }
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElseGet(this::getOrCreateDemoUser);
     }
 
     @Transactional
@@ -58,18 +63,24 @@ public class ProfileService {
             profile = "CONSERVATIVE";
             allocation.put("STOCK", new BigDecimal("0.1500"));
             allocation.put("GOLD", new BigDecimal("0.2500"));
+            allocation.put("SAVINGS", new BigDecimal("0.4500"));
+            allocation.put("CASH", new BigDecimal("0.1500"));
             allocation.put("CASH_SAVINGS", new BigDecimal("0.6000"));
             summary = "Hồ sơ của bạn thuộc nhóm Bảo thủ. Ưu tiên số một là bảo toàn vốn gốc, hạn chế biến động và tạo dòng tiền tích sản ổn định qua Tiền gửi tiết kiệm và Vàng.";
         } else if (totalScore < 70) {
             profile = "BALANCED";
             allocation.put("STOCK", new BigDecimal("0.3500"));
             allocation.put("GOLD", new BigDecimal("0.3500"));
+            allocation.put("SAVINGS", new BigDecimal("0.2000"));
+            allocation.put("CASH", new BigDecimal("0.1000"));
             allocation.put("CASH_SAVINGS", new BigDecimal("0.3000"));
             summary = "Hồ sơ của bạn thuộc nhóm Cân bằng. Bạn có năng lực tài chính ổn định và chấp nhận mức độ biến động vừa phải để tối ưu hóa tăng trưởng tài sản trung và dài hạn.";
         } else {
             profile = "GROWTH";
             allocation.put("STOCK", new BigDecimal("0.6000"));
             allocation.put("GOLD", new BigDecimal("0.2000"));
+            allocation.put("SAVINGS", new BigDecimal("0.1500"));
+            allocation.put("CASH", new BigDecimal("0.0500"));
             allocation.put("CASH_SAVINGS", new BigDecimal("0.2000"));
             summary = "Hồ sơ của bạn thuộc nhóm Tăng trưởng. Bạn có khẩu vị rủi ro cao, sẵn sàng đón nhận biến động để tối đa hóa tỷ suất sinh lời từ thị trường Cổ phiếu.";
         }
@@ -91,5 +102,45 @@ public class ProfileService {
         }
 
         return new RiskSurveyResponse(totalScore, profile, lambda, allocation, summary);
+    }
+
+    @Transactional
+    public Map<String, BigDecimal> updateCustomTargets(Long userId, UpdateTargetsRequest req) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng ID: " + userId));
+
+        BigDecimal total = req.getStock().add(req.getGold()).add(req.getSavings()).add(req.getCash());
+        if (total.subtract(BigDecimal.ONE).abs().compareTo(new BigDecimal("0.01")) > 0) {
+            throw new IllegalArgumentException("Tổng tỷ trọng 4 lớp tài sản phải bằng 100% (Hiện tại: " +
+                    total.multiply(new BigDecimal("100")).setScale(1, RoundingMode.HALF_EVEN) + "%)");
+        }
+
+        Map<String, BigDecimal> allocation = new HashMap<>();
+        allocation.put("STOCK", req.getStock());
+        allocation.put("GOLD", req.getGold());
+        allocation.put("SAVINGS", req.getSavings());
+        allocation.put("CASH", req.getCash());
+        allocation.put("CASH_SAVINGS", req.getCash().add(req.getSavings()));
+
+        for (Map.Entry<String, BigDecimal> entry : allocation.entrySet()) {
+            PortfolioTarget target = portfolioTargetRepository
+                    .findByUserIdAndAssetClass(userId, entry.getKey())
+                    .orElse(new PortfolioTarget(user, entry.getKey(), entry.getValue()));
+            target.setTargetWeight(entry.getValue());
+            target.setUpdatedAt(Instant.now());
+            portfolioTargetRepository.save(target);
+        }
+
+        return allocation;
+    }
+
+    @Transactional(readOnly = true)
+    public Map<String, BigDecimal> getTargetsByUserId(Long userId) {
+        List<PortfolioTarget> targets = portfolioTargetRepository.findByUserId(userId);
+        Map<String, BigDecimal> map = new HashMap<>();
+        for (PortfolioTarget t : targets) {
+            map.put(t.getAssetClass(), t.getTargetWeight());
+        }
+        return map;
     }
 }

@@ -2,16 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+/* DEFAULT: TCInvest Dark Mode (As requested by user) */
 :root {
+  color-scheme: dark;
+  --color-surface: 15 16 21;
+  --color-surface-dim: 10 11 15;
+  --color-surface-bright: 25 27 36;
+  --color-surface-container-lowest: 23 24 33;
+  --color-surface-container-low: 28 30 41;
+  --color-surface-container: 33 36 49;
+  --color-surface-container-high: 40 43 59;
+  --color-surface-container-highest: 52 56 76;
+  --color-primary: 243 245 248;
+  --color-primary-container: 33 36 49;
+  --color-secondary: 56 189 248;
+  --color-secondary-container: 14 65 92;
+  --color-accent-gold: 245 158 11;
+  --color-accent-gold-light: rgba(245, 158, 11, 0.15);
+  --color-accent-emerald: 0 192 135;
+  --color-accent-emerald-light: rgba(0, 192, 135, 0.15);
+  --color-accent-rose: 255 67 89;
+  --color-accent-rose-light: rgba(255, 67, 89, 0.15);
+  --color-accent-blue: 56 189 248;
+  --color-text-primary: 243 245 248;
+  --color-text-secondary: 155 163 181;
+  --color-text-muted: 107 115 133;
+  --color-border-subtle: 39 42 56;
+  --color-border-highlight: 58 62 82;
+}
+
+/* White Mode / Light Mode */
+html.light, [data-theme="light"] {
   color-scheme: light;
+  --color-surface: 248 250 252;
+  --color-surface-dim: 241 245 249;
+  --color-surface-bright: 255 255 255;
+  --color-surface-container-lowest: 255 255 255;
+  --color-surface-container-low: 248 250 252;
+  --color-surface-container: 241 245 249;
+  --color-surface-container-high: 226 232 240;
+  --color-surface-container-highest: 203 213 225;
+  --color-primary: 15 23 42;
+  --color-primary-container: 30 41 59;
+  --color-secondary: 2 132 199;
+  --color-secondary-container: 224 242 254;
+  --color-accent-gold: 180 83 9;
+  --color-accent-gold-light: #fef3c7;
+  --color-accent-emerald: 5 150 105;
+  --color-accent-emerald-light: #ecfdf5;
+  --color-accent-rose: 225 29 72;
+  --color-accent-rose-light: #ffe4e6;
+  --color-accent-blue: 2 132 199;
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 71 85 105;
+  --color-text-muted: 148 163 184;
+  --color-border-subtle: 226 232 240;
+  --color-border-highlight: 203 213 225;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #fcfcfd;
-  color: #090d16;
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: rgb(var(--color-surface));
+  color: rgb(var(--color-text-primary));
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom Text Selection */
+::selection {
+  background-color: rgb(var(--color-accent-emerald));
+  color: #ffffff;
 }
 
 /* Custom Scrollbar */
@@ -20,12 +83,40 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f3f7;
+  background: rgb(var(--color-surface-dim));
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgb(var(--color-surface-container-highest));
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: rgb(var(--color-border-highlight));
+}
+
+/* Financial Tabular Numbers */
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-feature-settings: 'tnum' on, 'zero' on;
+  letter-spacing: -0.02em;
+}
+
+/* Toast Animations */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(110%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toastProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
 }

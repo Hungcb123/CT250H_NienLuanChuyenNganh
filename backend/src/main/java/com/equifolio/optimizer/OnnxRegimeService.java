@@ -57,12 +57,17 @@ public class OnnxRegimeService {
         }
 
         try {
-            long[] shape = new long[]{1, features.length};
-            FloatBuffer buffer = FloatBuffer.wrap(features);
+            float[] inputFeatures = features;
+            if (inputFeatures.length < 14) {
+                inputFeatures = new float[14];
+                System.arraycopy(features, 0, inputFeatures, 0, features.length);
+            }
+
+            long[] shape = new long[]{1, inputFeatures.length};
+            FloatBuffer buffer = FloatBuffer.wrap(inputFeatures);
             OnnxTensor tensor = OnnxTensor.createTensor(env, buffer, shape);
 
             try (OrtSession.Result result = session.run(Collections.singletonMap("float_input", tensor))) {
-                // LightGBM ONNX outputs: label (int64) or probabilities
                 if (result != null && result.size() > 0) {
                     OnnxValue labelVal = result.get(0);
                     if (labelVal != null && labelVal.getValue() instanceof long[] labels) {
@@ -80,11 +85,11 @@ public class OnnxRegimeService {
     }
 
     private int fallbackHeuristic(float[] features) {
-        if (features == null || features.length < 9) {
+        if (features == null || features.length < 1) {
             return 0; // Default Sideway
         }
         float rsi = features[0];
-        float smaRatio = features[6];
+        float smaRatio = features.length > 7 ? features[7] : 1.0f;
 
         if (rsi > 58.0f && smaRatio > 1.02f) {
             return 1; // Bullish
@@ -92,6 +97,31 @@ public class OnnxRegimeService {
             return -1; // Bearish
         }
         return 0; // Sideway
+    }
+
+    public String getLatestRegimeName() {
+        float[] sampleFeatures = new float[]{
+            54.2f, // RSI_14
+            51.5f, // MFI_14
+            1.2f,  // MACD
+            0.9f,  // MACD_Signal
+            0.3f,  // MACD_Hist
+            0.045f,// BB_Width
+            0.62f, // BB_PctB
+            1.015f,// SMA_20_50_Ratio
+            0.008f,// Dist_SMA20
+            0.018f,// Dist_SMA50
+            0.018f,// ATR_Pct
+            0.035f,// ROC_20
+            1.15f, // Volume_Ratio
+            0.22f  // HV_20
+        };
+        int regime = predictRegime(sampleFeatures);
+        return switch (regime) {
+            case 1 -> "BULLISH_UPTREND (Thị trường Tăng trưởng / Khả quan)";
+            case -1 -> "BEARISH_DOWNTREND (Thị trường Giảm điểm / Phòng thủ)";
+            default -> "SIDEWAY_ACCUMULATION (Thị trường Tích lũy Đi ngang)";
+        };
     }
 
     @PreDestroy

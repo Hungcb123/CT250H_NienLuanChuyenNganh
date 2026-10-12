@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react';
 import { TabType, PortfolioValuation, RebalancePlan, UserProfile } from './types';
-import { getPortfolioValuation, getRebalancePlan, getUserProfile } from './services/api';
+import { getPortfolioValuation, getRebalancePlan, getUserProfile, executeRebalancePlan } from './services/api';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { OverviewTab } from './components/tabs/OverviewTab';
 import { MarketTab } from './components/tabs/MarketTab';
 import { LedgerTab } from './components/tabs/LedgerTab';
 import { MarkowitzTab } from './components/tabs/MarkowitzTab';
+import { TaaTab } from './components/tabs/TaaTab';
 import { SavingsTab } from './components/tabs/SavingsTab';
 import { SurveyTab } from './components/tabs/SurveyTab';
 import { CopilotTab } from './components/tabs/CopilotTab';
+import { AuthModal } from './components/auth/AuthModal';
+import { useAuth } from './context/AuthContext';
+import { useToast } from './context/ToastContext';
 
 export default function App() {
+  const { user: authUser, isAuthenticated } = useAuth();
+  const toast = useToast();
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [valuation, setValuation] = useState<PortfolioValuation | null>(null);
   const [plan, setPlan] = useState<RebalancePlan | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [confirmedExecution, setConfirmedExecution] = useState(false);
+  const [executingRebalance, setExecutingRebalance] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   // Survey state (5 questions: 0, 7, 14, 20)
   const [surveyScores, setSurveyScores] = useState<number[]>([14, 14, 14, 14, 12]);
@@ -33,6 +41,9 @@ export default function App() {
       setValuation(valData);
       setPlan(planData);
       setProfile(profData);
+      if (planData?.driftDetected) {
+        setConfirmedExecution(false);
+      }
     } catch (e) {
       console.error("Failed to load portfolio data", e);
     } finally {
@@ -42,14 +53,39 @@ export default function App() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [isAuthenticated]);
 
-  const handleConfirmRebalance = () => {
-    setConfirmedExecution(true);
-    setTimeout(() => {
-      alert("Hệ thống Sổ cái kép đã ghi nhận bút toán tái cơ cấu! Trạng thái danh mục đã được cân bằng lại.");
-    }, 300);
+  const handleConfirmRebalance = async () => {
+    setExecutingRebalance(true);
+    try {
+      const res = await executeRebalancePlan();
+      setConfirmedExecution(true);
+      await loadData();
+      toast.success(
+        res.message || "Hệ thống Sổ cái kép đã ghi nhận bút toán tái cơ cấu! Trạng thái danh mục đã được cân bằng lại.",
+        "Tái cơ cấu thành công"
+      );
+    } catch (err: any) {
+      const errorMsg = err.message || String(err);
+      if (
+        errorMsg.includes("đăng nhập") ||
+        errorMsg.includes("401") ||
+        errorMsg.includes("Unauthorized")
+      ) {
+        setIsAuthModalOpen(true);
+        toast.warning(
+          "Vui lòng đăng nhập để thực hiện tái cơ cấu danh mục tài sản.",
+          "Yêu cầu xác thực danh tính"
+        );
+      } else {
+        toast.error(errorMsg, "Lỗi thực thi tái cơ cấu");
+      }
+    } finally {
+      setExecutingRebalance(false);
+    }
   };
+
+  const activeUserProfile = authUser || profile;
 
   return (
     <div className="min-h-screen bg-surface flex text-text-primary">
@@ -60,9 +96,10 @@ export default function App() {
       <div className="ml-72 flex-1 flex flex-col min-h-screen">
         <Header
           valuation={valuation}
-          profile={profile}
+          profile={activeUserProfile}
           loading={loading}
           onRefresh={loadData}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
         />
 
         <main className="p-8 space-y-6 flex-1">
@@ -70,30 +107,72 @@ export default function App() {
             <OverviewTab
               valuation={valuation}
               plan={plan}
-              profile={profile}
+              profile={activeUserProfile}
               confirmedExecution={confirmedExecution}
               onConfirmRebalance={handleConfirmRebalance}
+              executing={executingRebalance}
+              onNavigateToSurvey={() => setActiveTab('survey')}
+              onTradeSuccess={loadData}
             />
           )}
 
-          {activeTab === 'market' && <MarketTab />}
+          {activeTab === 'market' && (
+            <MarketTab
+              valuation={valuation}
+              onTradeSuccess={loadData}
+              onNavigateTab={(tab) => setActiveTab(tab as TabType)}
+            />
+          )}
 
-          {activeTab === 'ledger' && <LedgerTab />}
+          {activeTab === 'ledger' && <LedgerTab onRefresh={loadData} />}
 
-          {activeTab === 'markowitz' && <MarkowitzTab plan={plan} />}
+          {activeTab === 'markowitz' && (
+            <MarkowitzTab
+              plan={plan}
+              profile={activeUserProfile}
+              valuation={valuation}
+              onConfirmRebalance={handleConfirmRebalance}
+              confirmedExecution={confirmedExecution}
+              executing={executingRebalance}
+              onRefreshData={loadData}
+            />
+          )}
 
-          {activeTab === 'savings' && <SavingsTab />}
+          {activeTab === 'taa' && (
+            <TaaTab
+              plan={plan}
+              profile={activeUserProfile}
+              valuation={valuation}
+              onRefreshData={loadData}
+              onConfirmRebalance={handleConfirmRebalance}
+              executing={executingRebalance}
+            />
+          )}
+
+          {activeTab === 'savings' && <SavingsTab onRefresh={loadData} />}
 
           {activeTab === 'survey' && (
             <SurveyTab
               surveyScores={surveyScores}
               setSurveyScores={setSurveyScores}
+              onApplyProfile={async () => {
+                setConfirmedExecution(false);
+                await loadData();
+                setActiveTab('overview');
+              }}
             />
           )}
 
           {activeTab === 'copilot' && <CopilotTab />}
         </main>
       </div>
+
+      {/* Auth Modal for Login and Registration */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={loadData}
+      />
     </div>
   );
 }

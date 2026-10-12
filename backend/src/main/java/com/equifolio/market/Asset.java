@@ -1,9 +1,11 @@
 package com.equifolio.market;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "assets")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Asset {
 
     @Id

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface SavingsDepositRepository extends JpaRepository<SavingsDeposit, Long> {
+    List<SavingsDeposit> findByUserIdOrderByCreatedAtDesc(Long userId);
     List<SavingsDeposit> findByUserIdAndStatus(Long userId, String status);
     List<SavingsDeposit> findByStatusAndMaturityDateLessThanEqual(String status, LocalDate date);
 }
