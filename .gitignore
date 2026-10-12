@@ -33,3 +33,4 @@ postgres_data/
 .env
 .env.local
 .gitnexus
+gen-lang-client-*.json

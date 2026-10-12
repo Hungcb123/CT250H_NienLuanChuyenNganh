@@ -10,12 +10,17 @@ import com.equifolio.profile.User;
 import com.equifolio.profile.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.auth.oauth2.AccessToken;
+import com.google.auth.oauth2.GoogleCredentials;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
@@ -23,6 +28,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.NumberFormat;
 import java.time.Duration;
 import java.util.*;
@@ -39,12 +46,24 @@ public class CopilotService {
     private final JdbcTemplate jdbcTemplate;
     private final ObjectMapper objectMapper;
 
+    @Value("${gemini.service-account-key-path:}")
+    private String configuredSaKeyPath;
+
+    @Value("${gemini.project-id:gen-lang-client-0656432358}")
+    private String configuredProjectId;
+
+    @Value("${gemini.location:us-central1}")
+    private String configuredLocation;
+
+    @Value("${gemini.model:gemini-2.5-flash-lite}")
+    private String configuredModel;
+
     @Value("${gemini.api-key:}")
     private String configuredApiKey;
 
-    @Value("${gemini.model:gemini-1.5-flash}")
-    private String configuredModel;
-
+    private GoogleCredentials googleCredentials;
+    private String resolvedProjectId;
+    private boolean serviceAccountLoaded = false;
     private volatile String runtimeApiKey = null;
 
     public CopilotService(LedgerService ledgerService,
@@ -59,6 +78,76 @@ public class CopilotService {
         this.userRepository = userRepository;
         this.jdbcTemplate = jdbcTemplate;
         this.objectMapper = objectMapper;
+    }
+
+    @PostConstruct
+    public void init() {
+        resolvedProjectId = configuredProjectId;
+        File keyFile = resolveServiceAccountKeyFile();
+
+        if (keyFile != null && keyFile.exists() && keyFile.canRead()) {
+            try {
+                byte[] keyBytes = Files.readAllBytes(keyFile.toPath());
+                JsonNode root = objectMapper.readTree(keyBytes);
+                String pjId = root.path("project_id").asText();
+                if (pjId != null && !pjId.isBlank()) {
+                    resolvedProjectId = pjId;
+                }
+
+                googleCredentials = GoogleCredentials.fromStream(new ByteArrayInputStream(keyBytes))
+                        .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
+                googleCredentials.refreshIfExpired();
+                serviceAccountLoaded = true;
+
+                log.info("Loaded Google Cloud Service Account successfully from [{}] (Project: {}, Vertex AI Model: {}). Sẵn sàng phục vụ Copilot.",
+                        keyFile.getName(), resolvedProjectId, configuredModel);
+            } catch (Exception e) {
+                log.warn("Failed to load Google Cloud Service Account key from [{}]: {}. Sẽ dùng fallback cấu hình.",
+                        keyFile.getAbsolutePath(), e.getMessage());
+            }
+        } else {
+            log.info("Không tìm thấy file Google Service Account key. Sẽ sử dụng API key hoặc Local RAG mode.");
+        }
+    }
+
+    private File resolveServiceAccountKeyFile() {
+        if (configuredSaKeyPath != null && !configuredSaKeyPath.isBlank()) {
+            File f = new File(configuredSaKeyPath);
+            if (f.exists()) return f;
+        }
+
+        String envCredentials = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+        if (envCredentials != null && !envCredentials.isBlank()) {
+            File f = new File(envCredentials);
+            if (f.exists()) return f;
+        }
+
+        // Tự động tìm kiếm file key chuẩn trong thư mục hiện tại hoặc thư mục cha
+        List<String> candidatePaths = List.of(
+                "gen-lang-client-0656432358-9a6fb12696b2.json",
+                "../gen-lang-client-0656432358-9a6fb12696b2.json",
+                "../../gen-lang-client-0656432358-9a6fb12696b2.json"
+        );
+
+        for (String p : candidatePaths) {
+            File f = new File(p);
+            if (f.exists() && f.isFile()) {
+                return f;
+            }
+        }
+
+        // Quét wildcard gen-lang-client-*.json ở thư mục cha và thư mục hiện tại
+        File[] searchDirs = new File[]{ new File("."), new File(".."), new File("../..") };
+        for (File dir : searchDirs) {
+            if (dir.exists() && dir.isDirectory()) {
+                File[] matches = dir.listFiles((d, name) -> name.startsWith("gen-lang-client-") && name.endsWith(".json"));
+                if (matches != null && matches.length > 0) {
+                    return matches[0];
+                }
+            }
+        }
+
+        return null;
     }
 
     public void setRuntimeApiKey(String key) {
@@ -87,11 +176,25 @@ public class CopilotService {
     }
 
     public boolean hasApiKey() {
-        return getEffectiveApiKey(null) != null;
+        return serviceAccountLoaded || getEffectiveApiKey(null) != null;
+    }
+
+    public boolean isServiceAccountLoaded() {
+        return serviceAccountLoaded;
     }
 
     public String getModelName() {
         return configuredModel;
+    }
+
+    public String getProviderName() {
+        return serviceAccountLoaded ? "Google Cloud Vertex AI (Service Account)" : "Google Gemini";
+    }
+
+    public String getAuthMode() {
+        if (serviceAccountLoaded) return "SERVICE_ACCOUNT";
+        if (getEffectiveApiKey(null) != null) return "API_KEY";
+        return "LOCAL_RAG";
     }
 
     public CopilotChatResponse processMessage(Long userId, String userQuery) {
@@ -121,15 +224,30 @@ public class CopilotService {
         BigDecimal goldPct = valuation.getCurrentAllocations().getOrDefault("GOLD", BigDecimal.ZERO).multiply(new BigDecimal("100")).setScale(1, RoundingMode.HALF_EVEN);
         BigDecimal cashSavPct = valuation.getCurrentAllocations().getOrDefault("CASH_SAVINGS", BigDecimal.ZERO).multiply(new BigDecimal("100")).setScale(1, RoundingMode.HALF_EVEN);
 
-        // 3. Kiểm tra xem có Google Gemini API Key hay không
+        // Chuẩn bị prompt hoàn chỉnh với ngữ cảnh tài chính
+        String financialPrompt = buildFinancialPrompt(
+                user, valuation, plan, marketRegime, references,
+                navFormatted, cashFormatted, stockFormatted, goldFormatted, savingsFormatted,
+                stockPct, goldPct, cashSavPct, userQuery, currencyFormat
+        );
+
+        // 3. Ưu tiên 1: Gọi Google Cloud Vertex AI qua Service Account Key
+        if (serviceAccountLoaded && googleCredentials != null) {
+            try {
+                String aiReply = callGeminiVertexAi(financialPrompt, configuredModel);
+                if (aiReply != null && !aiReply.isBlank()) {
+                    return new CopilotChatResponse(aiReply, references);
+                }
+            } catch (Exception e) {
+                log.warn("Vertex AI Gemini call failed (Will try API key or Native context engine): {}", e.getMessage());
+            }
+        }
+
+        // 4. Ưu tiên 2: Gọi Google Gemini Generative Language API qua API Key (nếu có)
         String effectiveApiKey = getEffectiveApiKey(clientApiKey);
         if (effectiveApiKey != null && !effectiveApiKey.isEmpty()) {
             try {
-                String geminiReply = callGeminiWithFinancialContext(
-                        user, valuation, plan, marketRegime, references,
-                        navFormatted, cashFormatted, stockFormatted, goldFormatted, savingsFormatted,
-                        stockPct, goldPct, cashSavPct, userQuery, effectiveApiKey
-                );
+                String geminiReply = callGeminiGenerativeLanguageApi(financialPrompt, effectiveApiKey, configuredModel);
                 if (geminiReply != null && !geminiReply.isBlank()) {
                     return new CopilotChatResponse(geminiReply, references);
                 }
@@ -138,7 +256,7 @@ public class CopilotService {
             }
         }
 
-        // 4. Fallback: Động cơ ngữ cảnh nội bộ (Native Context RAG Engine)
+        // 5. Fallback: Động cơ ngữ cảnh nội bộ (Native Context RAG Engine)
         StringBuilder reply = new StringBuilder();
         reply.append("Chào bạn **").append(user.getUsername()).append("**,\n\n");
 
@@ -196,30 +314,25 @@ public class CopilotService {
 
         reply.append("*Lưu ý nguyên tắc Zero-Trust: EquiFolio Copilot chỉ cung cấp các phân tích toán học và gợi ý định lượng khách quan. Nhà đầu tư chủ động xem xét và chịu trách nhiệm đối với quyết định đặt lệnh ngoài đời thực.*");
 
-        if (effectiveApiKey == null || effectiveApiKey.isEmpty()) {
-            reply.append("\n\n💡 *Gợi ý: Bạn có thể nhập Google Gemini API Key tại nút góc trên để Copilot trò chuyện sâu sắc hơn với mô hình Google Gemini 1.5 Flash!*");
-        }
-
         return new CopilotChatResponse(reply.toString(), references);
     }
 
-    private String callGeminiWithFinancialContext(User user,
-                                                  PortfolioValuationDTO valuation,
-                                                  RebalancePlanDTO plan,
-                                                  String marketRegime,
-                                                  List<String> references,
-                                                  String navFormatted,
-                                                  String cashFormatted,
-                                                  String stockFormatted,
-                                                  String goldFormatted,
-                                                  String savingsFormatted,
-                                                  BigDecimal stockPct,
-                                                  BigDecimal goldPct,
-                                                  BigDecimal cashSavPct,
-                                                  String userQuery,
-                                                  String apiKey) throws Exception {
+    private String buildFinancialPrompt(User user,
+                                        PortfolioValuationDTO valuation,
+                                        RebalancePlanDTO plan,
+                                        String marketRegime,
+                                        List<String> references,
+                                        String navFormatted,
+                                        String cashFormatted,
+                                        String stockFormatted,
+                                        String goldFormatted,
+                                        String savingsFormatted,
+                                        BigDecimal stockPct,
+                                        BigDecimal goldPct,
+                                        BigDecimal cashSavPct,
+                                        String userQuery,
+                                        NumberFormat currencyFormat) {
 
-        NumberFormat currencyFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
         StringBuilder promptBuilder = new StringBuilder();
         promptBuilder.append("Bạn là EquiFolio Copilot, trợ lý tư vấn tài chính định lượng và quản lý tài sản cá nhân thông minh (Robo-Advisor) của nền tảng EquiFolio.\n");
         promptBuilder.append("Dưới đây là dữ liệu tài chính thời gian thực của người dùng được trích xuất từ Hệ thống Sổ cái kép ngân hàng (Double-Entry Ledger) và Mô hình Học máy ONNX:\n\n");
@@ -271,10 +384,84 @@ public class CopilotService {
         promptBuilder.append(userQuery);
         promptBuilder.append("\"\n");
 
-        return callGeminiApi(promptBuilder.toString(), apiKey, configuredModel);
+        return promptBuilder.toString();
     }
 
-    private String callGeminiApi(String prompt, String apiKey, String model) throws Exception {
+    /**
+     * Gọi Google Cloud Vertex AI qua Google Credentials (Service Account Key)
+     */
+    private String callGeminiVertexAi(String prompt, String model) throws Exception {
+        googleCredentials.refreshIfExpired();
+        AccessToken token = googleCredentials.getAccessToken();
+        String accessToken = token.getTokenValue();
+
+        String activeModel = model;
+        String endpoint = String.format("https://%s-aiplatform.googleapis.com/v1/projects/%s/locations/%s/publishers/google/models/%s:generateContent",
+                configuredLocation, resolvedProjectId, configuredLocation, activeModel);
+
+        Map<String, Object> textPart = Map.of("text", prompt);
+        Map<String, Object> content = Map.of(
+                "role", "user",
+                "parts", List.of(textPart)
+        );
+        Map<String, Object> generationConfig = Map.of(
+                "temperature", 0.4,
+                "maxOutputTokens", 2048
+        );
+        Map<String, Object> requestBody = Map.of(
+                "contents", List.of(content),
+                "generationConfig", generationConfig
+        );
+
+        String jsonPayload = objectMapper.writeValueAsString(requestBody);
+
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(endpoint))
+                .timeout(Duration.ofSeconds(45))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + accessToken)
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload, StandardCharsets.UTF_8))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+
+        // Tự động fallback sang gemini-2.5-flash-lite nếu model chỉ định bị 404
+        if (response.statusCode() == 404 && !activeModel.equals("gemini-2.5-flash-lite")) {
+            log.warn("Vertex AI Model [{}] trả về 404, tự động chuyển sang [gemini-2.5-flash-lite]...", activeModel);
+            String fallbackEndpoint = String.format("https://%s-aiplatform.googleapis.com/v1/projects/%s/locations/%s/publishers/google/models/gemini-2.5-flash-lite:generateContent",
+                    configuredLocation, resolvedProjectId, configuredLocation);
+            HttpRequest retryReq = HttpRequest.newBuilder()
+                    .uri(URI.create(fallbackEndpoint))
+                    .timeout(Duration.ofSeconds(45))
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer " + accessToken)
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonPayload, StandardCharsets.UTF_8))
+                    .build();
+            response = client.send(retryReq, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+        }
+
+        if (response.statusCode() == 200) {
+            JsonNode root = objectMapper.readTree(response.body());
+            JsonNode candidates = root.path("candidates");
+            if (candidates.isArray() && !candidates.isEmpty()) {
+                JsonNode parts = candidates.get(0).path("content").path("parts");
+                if (parts.isArray() && !parts.isEmpty()) {
+                    return parts.get(0).path("text").asText();
+                }
+            }
+        }
+
+        throw new IllegalStateException("Google Cloud Vertex AI error (HTTP " + response.statusCode() + "): " + response.body());
+    }
+
+    /**
+     * Fallback gọi Google Generative Language API nếu dùng direct API Key
+     */
+    private String callGeminiGenerativeLanguageApi(String prompt, String apiKey, String model) throws Exception {
         String endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey.trim();
 
         Map<String, Object> textPart = Map.of("text", prompt);

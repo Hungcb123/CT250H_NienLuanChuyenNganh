@@ -31,8 +31,9 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // API Key State & Modal
-  const [hasApiKey, setHasApiKey] = useState(false);
-  const [modelName, setModelName] = useState('gemini-1.5-flash');
+  const [hasApiKey, setHasApiKey] = useState(true);
+  const [isServiceAccount, setIsServiceAccount] = useState(false);
+  const [modelName, setModelName] = useState('gemini-2.5-flash-lite');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [apiKeyInput, setApiKeyInput] = useState('');
   const [showKey, setShowKey] = useState(false);
@@ -42,6 +43,7 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
     try {
       const status = await getCopilotStatus();
       setHasApiKey(status.hasApiKey);
+      setIsServiceAccount(!!status.serviceAccountLoaded || status.authMode === 'SERVICE_ACCOUNT');
       if (status.model) setModelName(status.model);
     } catch {
       // fallback
@@ -130,7 +132,7 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
           {hasApiKey ? (
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-emerald-light text-accent-emerald text-xs font-bold border border-accent-emerald/30 shadow-xs">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Google Gemini ({modelName})</span>
+              <span>Google Gemini ({modelName}) {isServiceAccount ? '• Cloud Active' : ''}</span>
             </span>
           ) : (
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-text-secondary text-xs font-semibold border border-border-subtle">
@@ -141,11 +143,11 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-primary text-xs font-medium transition-all"
-            title="Cài đặt Google Gemini API Key"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-muted hover:text-text-primary text-xs font-medium transition-all"
+            title="Cài đặt kết nối AI"
           >
             <Key className="w-3.5 h-3.5 text-accent-emerald" />
-            <span>{hasApiKey ? 'Đổi API Key' : 'Nhập API Key'}</span>
+            <span>{isServiceAccount ? 'Cloud SA' : (hasApiKey ? 'Đổi Key' : 'Nhập Key')}</span>
           </button>
         </div>
       </div>
@@ -283,8 +285,20 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
               </button>
             </div>
 
+            {isServiceAccount && (
+              <div className="p-3 rounded-lg bg-accent-emerald-light/60 border border-accent-emerald/30 text-xs text-text-primary flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-accent-emerald shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold text-accent-emerald">Đang kích hoạt Google Cloud Service Account</div>
+                  <div className="text-[11px] text-text-secondary mt-0.5">
+                    Backend đã kết nối trực tiếp Vertex AI ({modelName}) qua file Service Account Key. Bạn có thể sử dụng ngay mà không cần nhập key thủ công.
+                  </div>
+                </div>
+              </div>
+            )}
+
             <p className="text-xs text-text-secondary leading-relaxed">
-              EquiFolio sẽ kết nối trực tiếp với <strong>Google Gemini API</strong> để tự động tổng hợp số liệu tài chính thời gian thực (NAV, số dư tiền mặt, tỷ lệ tài sản, lệnh lô 100 HOSE, tín hiệu chu kỳ ONNX) vào câu trả lời.
+              EquiFolio kết nối trực tiếp với <strong>Google Cloud Gemini ({modelName})</strong> để tự động tổng hợp số liệu tài chính thời gian thực (NAV, số dư tiền mặt, tỷ lệ tài sản, lệnh lô 100 HOSE, tín hiệu chu kỳ ONNX) vào câu trả lời.
             </p>
 
             <div className="space-y-1.5">

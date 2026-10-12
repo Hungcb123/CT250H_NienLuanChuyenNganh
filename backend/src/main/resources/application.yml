@@ -42,10 +42,13 @@ app:
       - "http://localhost:3000"
       - "http://127.0.0.1:5173"
 
-# Cấu hình Google Gemini AI Copilot
+# Cấu hình Google Gemini AI Copilot (Google Cloud Vertex AI qua Service Account)
 gemini:
+  service-account-key-path: ${GEMINI_SA_KEY_PATH:}
+  project-id: ${GEMINI_PROJECT_ID:gen-lang-client-0656432358}
+  location: ${GEMINI_LOCATION:us-central1}
+  model: ${GEMINI_MODEL:gemini-2.5-flash-lite}
   api-key: ${GEMINI_API_KEY:}
-  model: ${GEMINI_MODEL:gemini-1.5-flash}
 
 # Cấu hình JWT Token
 jwt:

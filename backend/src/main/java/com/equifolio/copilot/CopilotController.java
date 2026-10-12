@@ -30,20 +30,24 @@ public class CopilotController {
         Map<String, Object> status = Map.of(
                 "hasApiKey", copilotService.hasApiKey(),
                 "model", copilotService.getModelName(),
-                "provider", "Google Gemini"
+                "provider", copilotService.getProviderName(),
+                "authMode", copilotService.getAuthMode(),
+                "serviceAccountLoaded", copilotService.isServiceAccountLoaded()
         );
         return ResponseEntity.ok(ApiResponse.success(status));
     }
 
     @PostMapping("/key")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> updateApiKey(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<ApiResponse<Map<String, Object>>> updateApiKey(@RequestBody(required = false) Map<String, String> payload) {
         String apiKey = payload != null ? payload.get("apiKey") : null;
         copilotService.setRuntimeApiKey(apiKey);
         Map<String, Object> result = Map.of(
                 "saved", true,
                 "hasApiKey", copilotService.hasApiKey(),
-                "model", copilotService.getModelName()
+                "model", copilotService.getModelName(),
+                "provider", copilotService.getProviderName(),
+                "authMode", copilotService.getAuthMode()
         );
-        return ResponseEntity.ok(ApiResponse.success("Đã cập nhật Google Gemini API Key thành công", result));
+        return ResponseEntity.ok(ApiResponse.success("Đã cập nhật trạng thái Copilot AI", result));
     }
 }

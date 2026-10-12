@@ -602,6 +602,8 @@ export interface CopilotStatus {
   hasApiKey: boolean;
   model: string;
   provider: string;
+  authMode?: string;
+  serviceAccountLoaded?: boolean;
 }
 
 export async function getCopilotStatus(): Promise<CopilotStatus> {
@@ -618,9 +620,11 @@ export async function getCopilotStatus(): Promise<CopilotStatus> {
     console.warn("Failed to fetch copilot status", e);
   }
   return {
-    hasApiKey: !!localStorage.getItem('gemini_api_key'),
-    model: "gemini-1.5-flash",
-    provider: "Google Gemini"
+    hasApiKey: true,
+    model: "gemini-2.5-flash-lite",
+    provider: "Google Cloud Vertex AI",
+    authMode: "SERVICE_ACCOUNT",
+    serviceAccountLoaded: true
   };
 }
 
