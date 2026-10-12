@@ -47,6 +47,9 @@ class LedgerServiceTest {
     @Mock
     private SavingsDepositRepository savingsDepositRepository;
 
+    @Mock
+    private PortfolioSnapshotRepository portfolioSnapshotRepository;
+
     private LedgerService ledgerService;
 
     private User mockUser;
@@ -65,7 +68,8 @@ class LedgerServiceTest {
                 assetRepository,
                 userRepository,
                 marketService,
-                savingsDepositRepository
+                savingsDepositRepository,
+                portfolioSnapshotRepository
         );
 
         mockUser = new User();
