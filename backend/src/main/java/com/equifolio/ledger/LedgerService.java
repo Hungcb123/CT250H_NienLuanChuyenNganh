@@ -263,16 +263,16 @@ public class LedgerService {
         Asset vndAsset = assetRepository.findById("VND")
                 .orElseThrow(() -> new IllegalStateException("Không tìm thấy tài sản tiền tệ VND"));
 
-        Account equityAccount = accountRepository.findByUserIdAndAccountCode(user.getId(), "EQUITY_CAPITAL")
-                .orElseGet(() -> accountRepository.save(new Account(user, "EQUITY_CAPITAL", vndAsset, BigDecimal.ZERO)));
+        Account interestIncomeAccount = accountRepository.findByUserIdAndAccountCode(user.getId(), "INTEREST_INCOME")
+                .orElseGet(() -> accountRepository.save(new Account(user, "INTEREST_INCOME", vndAsset, BigDecimal.ZERO)));
 
         savingsAccount.setBalance(BigDecimal.ZERO);
         vndWallet.setBalance(vndWallet.getBalance().add(totalPayout));
-        equityAccount.setBalance(equityAccount.getBalance().add(accrued));
+        interestIncomeAccount.setBalance(interestIncomeAccount.getBalance().add(accrued));
 
         savingsAccount = accountRepository.save(savingsAccount);
         vndWallet = accountRepository.save(vndWallet);
-        equityAccount = accountRepository.save(equityAccount);
+        interestIncomeAccount = accountRepository.save(interestIncomeAccount);
 
         String txCode = "TX_SAV_SETTLE_" + System.currentTimeMillis();
         Transaction tx = new Transaction(txCode, user, "SAVINGS_SETTLE",
@@ -280,7 +280,7 @@ public class LedgerService {
 
         Entry debitWallet = new Entry(tx, vndWallet, totalPayout);
         Entry creditSavings = new Entry(tx, savingsAccount, deposit.getPrincipalAmount().negate());
-        Entry creditIncome = new Entry(tx, equityAccount, accrued.negate());
+        Entry creditIncome = new Entry(tx, interestIncomeAccount, accrued.negate());
 
         tx.addEntry(debitWallet);
         tx.addEntry(creditSavings);
@@ -488,7 +488,7 @@ public class LedgerService {
         List<PortfolioValuationDTO.HoldingItem> holdingItems = new ArrayList<>();
 
         for (Account acc : accounts) {
-            if ("EQUITY_CAPITAL".equalsIgnoreCase(acc.getAccountCode())) {
+            if ("EQUITY_CAPITAL".equalsIgnoreCase(acc.getAccountCode()) || "INTEREST_INCOME".equalsIgnoreCase(acc.getAccountCode())) {
                 continue; // Bỏ qua tài khoản đối ứng kế toán khi định giá tài sản thực tế
             }
 
@@ -969,12 +969,19 @@ public class LedgerService {
         double baseVni = 1252.0;
         double targetVni = 1286.4;
 
+        BigDecimal initialCost = currentVal.getTotalCostBasis();
+        double startNavFactor = 1.0;
+        if (initialCost != null && initialCost.compareTo(BigDecimal.ZERO) > 0 && currentNav.compareTo(BigDecimal.ZERO) > 0) {
+            startNavFactor = initialCost.divide(currentNav, 4, RoundingMode.HALF_EVEN).doubleValue();
+        }
+
         for (int i = 0; i <= totalDays; i++) {
             LocalDate date = startDate.plusDays(i);
             double progress = (double) i / totalDays;
 
-            double noise = Math.sin(i * 0.7) * 0.012 + Math.cos(i * 0.4) * 0.008;
-            double navFactor = 0.93 + (0.07 * progress) + noise;
+            double noise = Math.sin(i * 0.7) * 0.008 + Math.cos(i * 0.4) * 0.005;
+            double baseFactor = startNavFactor + (1.0 - startNavFactor) * progress;
+            double navFactor = baseFactor + noise;
             if (i == totalDays) {
                 navFactor = 1.0;
             }
@@ -1021,11 +1028,17 @@ public class LedgerService {
             case "1W":
                 cutoffDate = today.minusDays(7);
                 break;
+            case "1M":
+                cutoffDate = today.minusMonths(1);
+                break;
             case "3M":
                 cutoffDate = today.minusMonths(3);
                 break;
             case "6M":
                 cutoffDate = today.minusMonths(6);
+                break;
+            case "YTD":
+                cutoffDate = LocalDate.of(today.getYear(), 1, 1);
                 break;
             case "1Y":
                 cutoffDate = today.minusYears(1);
@@ -1033,7 +1046,6 @@ public class LedgerService {
             case "ALL":
                 cutoffDate = LocalDate.MIN;
                 break;
-            case "1M":
             default:
                 cutoffDate = today.minusMonths(1);
                 tf = "1M";
@@ -1139,32 +1151,38 @@ public class LedgerService {
             return dto;
         }
 
-        double sum = 0.0;
-        for (double r : returns) {
-            sum += r;
-        }
-        double meanDaily = sum / returns.size();
+        PortfolioValuationDTO currentVal = calculatePortfolioValuation(userId);
+        Map<String, BigDecimal> alloc = currentVal.getCurrentAllocations();
+        double wStock = alloc.getOrDefault("STOCK", BigDecimal.ZERO).doubleValue();
+        double wGold = alloc.getOrDefault("GOLD", BigDecimal.ZERO).doubleValue();
+        double wSavings = alloc.getOrDefault("SAVINGS", BigDecimal.ZERO).doubleValue();
+        double wCash = alloc.getOrDefault("CASH", BigDecimal.ZERO).doubleValue();
 
-        double varSum = 0.0;
-        for (double r : returns) {
-            varSum += Math.pow(r - meanDaily, 2);
-        }
-        double dailyStd = Math.sqrt(varSum / returns.size());
+        // Chuẩn hóa Markowitz parameters (khớp với MarkowitzTab)
+        double muStock = 18.5, sigmaStock = 22.0;
+        double muGold = 12.0, sigmaGold = 14.5;
+        double muSavings = 5.5, sigmaSavings = 1.0;
+        double muCash = 5.0, sigmaCash = 0.5;
+        double rf = 4.5; // 4.5% lãi suất phi rủi ro
 
-        double annualReturn = meanDaily * 252 * 100.0;
-        double annualVol = dailyStd * Math.sqrt(252) * 100.0;
-        double rf = 5.0; // 5.0%/năm lãi suất phi rủi ro Việt Nam
+        double expReturn = wStock * muStock + wGold * muGold + wSavings * muSavings + wCash * muCash;
+        double var = Math.pow(wStock * sigmaStock, 2)
+                + Math.pow(wGold * sigmaGold, 2)
+                + Math.pow(wSavings * sigmaSavings, 2)
+                + Math.pow(wCash * sigmaCash, 2)
+                + 2 * wStock * wGold * (-0.15) * sigmaStock * sigmaGold
+                + 2 * wStock * (wSavings + wCash) * (0.02) * sigmaStock * sigmaSavings;
+        double expVol = Math.sqrt(Math.max(0.01, var));
+        double sharpe = (expVol > 0.01) ? ((expReturn - rf) / expVol) : 0.0;
 
-        double sharpe = (annualVol > 0.001) ? ((annualReturn - rf) / annualVol) : 0.0;
-
-        double pReturn = (snaps.get(snaps.size() - 1).getTotalNav().doubleValue() - snaps.get(0).getTotalNav().doubleValue()) / snaps.get(0).getTotalNav().doubleValue() * 100.0;
+        double pReturn = (currentVal.getTotalPnLPercent() != null) ? currentVal.getTotalPnLPercent().doubleValue() : 0.0;
         double vniReturn = (snaps.get(snaps.size() - 1).getVnindexValue().doubleValue() - snaps.get(0).getVnindexValue().doubleValue()) / snaps.get(0).getVnindexValue().doubleValue() * 100.0;
         double alpha = pReturn - vniReturn;
 
         dto.setSharpeRatio(BigDecimal.valueOf(sharpe).setScale(2, RoundingMode.HALF_EVEN));
         dto.setMaxDrawdownPercent(BigDecimal.valueOf(maxDd * 100.0).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setAnnualizedVolatilityPercent(BigDecimal.valueOf(annualVol).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setAnnualizedReturnPercent(BigDecimal.valueOf(annualReturn).setScale(2, RoundingMode.HALF_EVEN));
+        dto.setAnnualizedVolatilityPercent(BigDecimal.valueOf(expVol).setScale(2, RoundingMode.HALF_EVEN));
+        dto.setAnnualizedReturnPercent(BigDecimal.valueOf(expReturn).setScale(2, RoundingMode.HALF_EVEN));
         dto.setRiskFreeRatePercent(BigDecimal.valueOf(rf));
         dto.setAlphaPercent(BigDecimal.valueOf(alpha).setScale(2, RoundingMode.HALF_EVEN));
 

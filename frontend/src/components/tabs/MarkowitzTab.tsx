@@ -946,10 +946,15 @@ export function MarkowitzTab({
                     className={`px-2.5 py-1 rounded-md font-bold text-[11px] tracking-wider uppercase ${
                       act.actionType === 'SELL'
                         ? 'bg-accent-rose-light text-accent-rose border border-accent-rose/20'
-                        : 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/20'
+                        : act.actionType === 'BUY'
+                        ? 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/20'
+                        : act.actionType === 'SETTLE_SAVINGS'
+                        ? 'bg-amber-500/15 text-amber-500 border border-amber-500/20'
+                        : 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20'
                     }`}
                   >
-                    {act.actionType}
+                    {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' :
+                     act.actionType === 'SETTLE_SAVINGS' ? 'TẤT TOÁN SỔ' : act.actionType}
                   </span>
                   <div>
                     <div className="flex items-center gap-2">
@@ -963,7 +968,9 @@ export function MarkowitzTab({
                 <div className="flex items-center justify-between sm:justify-end gap-6 text-right">
                   <div>
                     <span className="font-bold text-text-primary text-sm font-mono-num">
-                      {act.roundedQuantity.toLocaleString('vi-VN')} đơn vị
+                      {act.actionType === 'SETTLE_SAVINGS' || act.actionType === 'OPEN_SAVINGS'
+                        ? '-'
+                        : `${act.roundedQuantity.toLocaleString('vi-VN')} ${act.ticker === 'GOLD_SJC' || act.assetClass === 'GOLD' ? 'chỉ' : 'CP'}`}
                     </span>
                     <span className="block text-[11px] text-text-muted">
                       (Chính xác: {act.exactQuantity.toFixed(1)})

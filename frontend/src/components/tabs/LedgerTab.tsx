@@ -15,7 +15,7 @@ const ASSET_PRICE_MAP: Record<string, { name: string; price: number; type: strin
   TCB: { name: 'Cổ phiếu Techcombank', price: 24200, type: 'STOCK', unit: 'CP' },
   FPT: { name: 'Cổ phiếu CTCP FPT', price: 134000, type: 'STOCK', unit: 'CP' },
   VNM: { name: 'Cổ phiếu Vinamilk', price: 68000, type: 'STOCK', unit: 'CP' },
-  GOLD_SJC: { name: 'Vàng miếng SJC 999.9', price: 8400000, type: 'GOLD', unit: 'Chỉ' }
+  GOLD_SJC: { name: 'Vàng miếng SJC 999.9', price: 8950000, type: 'GOLD', unit: 'Chỉ' }
 };
 
 export function LedgerTab({ onRefresh }: LedgerTabProps) {

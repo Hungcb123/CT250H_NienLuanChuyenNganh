@@ -89,7 +89,7 @@ export function TradingDrawer({
     if (ticker.toUpperCase() === 'GOLD_SJC' || ticker.toUpperCase() === 'GC') {
       return {
         name: 'Vàng miếng SJC 999.9',
-        price: 8400000,
+        price: 8950000,
         sector: 'Kim loại quý',
       };
     }

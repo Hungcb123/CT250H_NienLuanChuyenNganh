@@ -12,6 +12,7 @@ import { SavingsTab } from './components/tabs/SavingsTab';
 import { SurveyTab } from './components/tabs/SurveyTab';
 import { CopilotTab } from './components/tabs/CopilotTab';
 import { AuthModal } from './components/auth/AuthModal';
+import { RebalanceConfirmModal } from './components/trading/RebalanceConfirmModal';
 import { useAuth } from './context/AuthContext';
 import { useToast } from './context/ToastContext';
 
@@ -26,6 +27,7 @@ export default function App() {
   const [confirmedExecution, setConfirmedExecution] = useState(false);
   const [executingRebalance, setExecutingRebalance] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isRebalanceModalOpen, setIsRebalanceModalOpen] = useState(false);
 
   // Survey state (5 questions: 0, 7, 14, 20)
   const [surveyScores, setSurveyScores] = useState<number[]>([14, 14, 14, 14, 12]);
@@ -55,11 +57,24 @@ export default function App() {
     loadData();
   }, [isAuthenticated]);
 
-  const handleConfirmRebalance = async () => {
+  const handleOpenRebalanceModal = () => {
+    if (!isAuthenticated) {
+      setIsAuthModalOpen(true);
+      toast.warning(
+        "Vui lòng đăng nhập để thực hiện tái cơ cấu danh mục tài sản.",
+        "Yêu cầu xác thực danh tính"
+      );
+      return;
+    }
+    setIsRebalanceModalOpen(true);
+  };
+
+  const handleExecuteActualRebalance = async () => {
     setExecutingRebalance(true);
     try {
       const res = await executeRebalancePlan();
       setConfirmedExecution(true);
+      setIsRebalanceModalOpen(false);
       await loadData();
       toast.success(
         res.message || "Hệ thống Sổ cái kép đã ghi nhận bút toán tái cơ cấu! Trạng thái danh mục đã được cân bằng lại.",
@@ -72,6 +87,7 @@ export default function App() {
         errorMsg.includes("401") ||
         errorMsg.includes("Unauthorized")
       ) {
+        setIsRebalanceModalOpen(false);
         setIsAuthModalOpen(true);
         toast.warning(
           "Vui lòng đăng nhập để thực hiện tái cơ cấu danh mục tài sản.",
@@ -109,7 +125,7 @@ export default function App() {
               plan={plan}
               profile={activeUserProfile}
               confirmedExecution={confirmedExecution}
-              onConfirmRebalance={handleConfirmRebalance}
+              onConfirmRebalance={handleOpenRebalanceModal}
               executing={executingRebalance}
               onNavigateToSurvey={() => setActiveTab('survey')}
               onTradeSuccess={loadData}
@@ -131,7 +147,7 @@ export default function App() {
               plan={plan}
               profile={activeUserProfile}
               valuation={valuation}
-              onConfirmRebalance={handleConfirmRebalance}
+              onConfirmRebalance={handleOpenRebalanceModal}
               confirmedExecution={confirmedExecution}
               executing={executingRebalance}
               onRefreshData={loadData}
@@ -144,7 +160,7 @@ export default function App() {
               profile={activeUserProfile}
               valuation={valuation}
               onRefreshData={loadData}
-              onConfirmRebalance={handleConfirmRebalance}
+              onConfirmRebalance={handleOpenRebalanceModal}
               executing={executingRebalance}
             />
           )}
@@ -166,6 +182,15 @@ export default function App() {
           {activeTab === 'copilot' && <CopilotTab />}
         </main>
       </div>
+
+      {/* Rebalance Confirmation Modal with Early Withdrawal Warnings */}
+      <RebalanceConfirmModal
+        isOpen={isRebalanceModalOpen}
+        onClose={() => setIsRebalanceModalOpen(false)}
+        onConfirm={handleExecuteActualRebalance}
+        plan={plan}
+        executing={executingRebalance}
+      />
 
       {/* Auth Modal for Login and Registration */}
       <AuthModal

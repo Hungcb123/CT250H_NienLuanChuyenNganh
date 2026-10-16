@@ -52,11 +52,23 @@ export interface RebalanceAction {
   note: string;
 }
 
+export interface MlPredictionInfo {
+  assetClass: string;
+  modelName: string;
+  signal: number;     // -1, 0, +1
+  confidence: number; // 0.0 → 1.0
+  regimeName: string;
+  deltaWeight: number;
+}
+
 export interface RebalancePlan {
   driftDetected: boolean;
   maxDriftPercent: number;
   currentAllocations: Record<string, number>;
   targetAllocations: Record<string, number>;
+  saaTargets?: Record<string, number>;
+  taaTargets?: Record<string, number>;
+  mlPredictions?: MlPredictionInfo[];
   executiveSummary: string;
   actions: RebalanceAction[];
   totalEstimatedSell?: number;

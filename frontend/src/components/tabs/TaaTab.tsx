@@ -29,11 +29,20 @@ export function TaaTab({
   const [isApplyingTAA, setIsApplyingTAA] = useState(false);
   const [isResettingSAA, setIsResettingSAA] = useState(false);
 
-  // Targets from plan targetAllocations or defaults
   const currentStockTarget = ((plan?.targetAllocations?.STOCK ?? 0.40) * 100);
   const currentGoldTarget = ((plan?.targetAllocations?.GOLD ?? 0.20) * 100);
   const currentSavingsTarget = ((plan?.targetAllocations?.SAVINGS ?? 0.30) * 100);
   const currentCashTarget = ((plan?.targetAllocations?.CASH ?? 0.10) * 100);
+
+  // SAA targets (mỏ neo gốc từ khảo sát)
+  const saaStock = ((plan?.saaTargets?.STOCK ?? plan?.targetAllocations?.STOCK ?? 0.35) * 100);
+  const saaGold = ((plan?.saaTargets?.GOLD ?? plan?.targetAllocations?.GOLD ?? 0.35) * 100);
+  const saaSavings = ((plan?.saaTargets?.SAVINGS ?? plan?.targetAllocations?.SAVINGS ?? 0.20) * 100);
+  const saaCash = ((plan?.saaTargets?.CASH ?? plan?.targetAllocations?.CASH ?? 0.10) * 100);
+
+  // ML predictions
+  const stockPrediction = plan?.mlPredictions?.find(p => p.assetClass === 'STOCK');
+  const goldPrediction = plan?.mlPredictions?.find(p => p.assetClass === 'GOLD');
 
   // Real allocations from valuation
   const realStockWeight = (valuation?.currentAllocations?.STOCK ?? 0) * 100;
@@ -126,10 +135,10 @@ export function TaaTab({
               <TrendingUp className="w-5 h-5 text-accent-emerald shrink-0" />
               <div>
                 <span className="text-sm font-black text-accent-emerald block leading-tight">
-                  Tích Lũy Tăng Trưởng
+                  {stockPrediction?.regimeName || 'BULLISH_UPTREND'}
                 </span>
                 <span className="text-[11px] text-text-secondary font-mono-num">
-                  Xác suất T+20: <strong className="text-accent-emerald">78.4% Tăng</strong>
+                  Độ tin cậy: <strong className="text-accent-emerald">{stockPrediction ? `${(stockPrediction.confidence * 100).toFixed(0)}%` : '78.4%'}</strong>
                 </span>
               </div>
             </div>
@@ -165,19 +174,19 @@ export function TaaTab({
           <div className="grid grid-cols-4 gap-2 mb-5 text-center">
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Cổ phiếu</span>
-              <span className="text-xs font-mono-num font-bold text-accent-blue">40.0%</span>
+              <span className="text-xs font-mono-num font-bold text-accent-blue">{saaStock.toFixed(1)}%</span>
             </div>
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Vàng SJC</span>
-              <span className="text-xs font-mono-num font-bold text-accent-gold">20.0%</span>
+              <span className="text-xs font-mono-num font-bold text-accent-gold">{saaGold.toFixed(1)}%</span>
             </div>
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Tiết kiệm</span>
-              <span className="text-xs font-mono-num font-bold text-indigo-500">30.0%</span>
+              <span className="text-xs font-mono-num font-bold text-indigo-500">{saaSavings.toFixed(1)}%</span>
             </div>
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Tiền mặt</span>
-              <span className="text-xs font-mono-num font-bold text-accent-emerald">10.0%</span>
+              <span className="text-xs font-mono-num font-bold text-accent-emerald">{saaCash.toFixed(1)}%</span>
             </div>
           </div>
 
@@ -203,7 +212,7 @@ export function TaaTab({
             ) : (
               <>
                 <RotateCcw className="w-3.5 h-3.5" />
-                Khôi Phục Chuẩn SAA (40% CP | 20% Vàng)
+                Khôi Phục Chuẩn SAA ({saaStock.toFixed(0)}% CP | {saaGold.toFixed(0)}% Vàng)
               </>
             )}
           </button>
@@ -229,25 +238,25 @@ export function TaaTab({
             </span>
           </div>
           <p className="text-xs text-text-secondary mb-4 leading-relaxed">
-            Dựa trên xác suất <strong>78.4% tăng trưởng</strong> của rổ VN30. Tận dụng dòng tiền tiết kiệm thanh khoản để gia tăng <strong>+10% cổ phiếu</strong>, trong khi vẫn giữ nguyên mốc neo phòng hộ an toàn của <strong>Vàng SJC (20%)</strong>.
+            Dựa trên mô hình học máy ONNX (VN30 & Vàng SJC). Tinh chỉnh tỷ trọng động trong khung an toàn Safety Collar ±15% nhằm tối ưu tỷ suất lợi nhuận trên rủi ro.
           </p>
 
           <div className="grid grid-cols-4 gap-2 mb-5 text-center">
             <div className="p-2.5 rounded-lg bg-accent-emerald/5 border border-accent-emerald/30">
               <span className="text-[10px] text-text-muted block font-medium">Cổ phiếu</span>
-              <span className="text-xs font-mono-num font-bold text-accent-emerald">50.0% (+10%)</span>
+              <span className="text-xs font-mono-num font-bold text-accent-emerald">{currentStockTarget.toFixed(1)}%</span>
             </div>
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Vàng SJC</span>
-              <span className="text-xs font-mono-num font-bold text-accent-gold">20.0% (Giữ)</span>
+              <span className="text-xs font-mono-num font-bold text-accent-gold">{currentGoldTarget.toFixed(1)}%</span>
             </div>
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Tiết kiệm</span>
-              <span className="text-xs font-mono-num font-bold text-indigo-500">20.0% (-10%)</span>
+              <span className="text-xs font-mono-num font-bold text-indigo-500">{currentSavingsTarget.toFixed(1)}%</span>
             </div>
             <div className="p-2.5 rounded-lg bg-surface-container-low border border-border-subtle">
               <span className="text-[10px] text-text-muted block font-medium">Tiền mặt</span>
-              <span className="text-xs font-mono-num font-bold text-accent-emerald">10.0%</span>
+              <span className="text-xs font-mono-num font-bold text-accent-emerald">{currentCashTarget.toFixed(1)}%</span>
             </div>
           </div>
 
@@ -268,17 +277,176 @@ export function TaaTab({
             ) : isTAAActive ? (
               <>
                 <CheckCircle2 className="w-3.5 h-3.5 text-accent-emerald" />
-                Đã Kích Hoạt TAA (50% Cổ Phiếu)
+                Đã Kích Hoạt TAA ({currentStockTarget.toFixed(0)}% Cổ Phiếu)
               </>
             ) : (
               <>
                 <Sparkles className="w-3.5 h-3.5" />
-                Áp Dụng TAA (+10% Cổ Phiếu VN30)
+                Áp Dụng TAA Theo Tín Hiệu ML
               </>
             )}
           </button>
         </div>
       </section>
+
+      {/* 2.5 ML Regime Predictions & 3-Column Allocation Comparison */}
+      {plan?.mlPredictions && plan.mlPredictions.length > 0 && (
+        <section className="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 shadow-xs space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-accent-emerald" />
+                <h3 className="text-base font-bold text-text-primary tracking-tight">
+                  Tín Hiệu Học Máy Độc Lập (ONNX T+20) & So Sánh Tỷ Trọng
+                </h3>
+              </div>
+              <p className="text-xs text-text-secondary mt-1">
+                Tự động suy luận từ 14 chỉ báo kỹ thuật trong cơ sở dữ liệu thị trường thực tế
+              </p>
+            </div>
+            <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/20 self-start sm:self-auto">
+              Pipeline ONNX Runtime
+            </span>
+          </div>
+
+          {/* Cards for ML Signal */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {plan.mlPredictions.map((ml) => (
+              <div
+                key={ml.assetClass}
+                className={`p-4 rounded-xl border transition-all ${
+                  ml.signal === 1
+                    ? 'bg-accent-emerald/5 border-accent-emerald/30'
+                    : ml.signal === -1
+                    ? 'bg-accent-rose/5 border-accent-rose/30'
+                    : 'bg-surface-container-low border-border-subtle'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-bold text-sm text-text-primary">
+                    {ml.assetClass === 'STOCK' ? '📈 Cổ Phiếu (VN-Index / VN30)' : '🥇 Vàng Miếng (SJC)'}
+                  </span>
+                  <span className="text-[10px] font-mono font-medium text-text-muted px-2 py-0.5 rounded bg-surface-container border border-border-subtle">
+                    {ml.modelName}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2 rounded-lg bg-surface-container-lowest border border-border-subtle">
+                    <span className="text-[10px] text-text-muted block font-medium">Tín hiệu</span>
+                    <strong
+                      className={`text-xs block mt-0.5 ${
+                        ml.signal === 1
+                          ? 'text-accent-emerald'
+                          : ml.signal === -1
+                          ? 'text-accent-rose'
+                          : 'text-amber-500'
+                      }`}
+                    >
+                      {ml.signal === 1 ? '▲ Bullish (+1)' : ml.signal === -1 ? '▼ Bearish (-1)' : '◆ Sideway (0)'}
+                    </strong>
+                  </div>
+
+                  <div className="p-2 rounded-lg bg-surface-container-lowest border border-border-subtle">
+                    <span className="text-[10px] text-text-muted block font-medium">Độ tin cậy</span>
+                    <strong className="text-xs text-text-primary block mt-0.5 font-mono-num">
+                      {(ml.confidence * 100).toFixed(0)}%
+                    </strong>
+                  </div>
+
+                  <div className="p-2 rounded-lg bg-surface-container-lowest border border-border-subtle">
+                    <span className="text-[10px] text-text-muted block font-medium">Dịch chuyển Δw</span>
+                    <strong
+                      className={`text-xs block mt-0.5 font-mono-num ${
+                        ml.deltaWeight > 0
+                          ? 'text-accent-emerald'
+                          : ml.deltaWeight < 0
+                          ? 'text-accent-rose'
+                          : 'text-text-muted'
+                      }`}
+                    >
+                      {ml.deltaWeight > 0 ? '+' : ''}
+                      {(ml.deltaWeight * 100).toFixed(1)}%
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="mt-3 pt-2.5 border-t border-border-subtle flex items-center justify-between text-[11px] text-text-secondary">
+                  <span>Trạng thái dự báo:</span>
+                  <span className="font-semibold text-text-primary">{ml.regimeName}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 3-Column Allocation Table */}
+          <div className="overflow-x-auto rounded-xl border border-border-subtle">
+            <table className="w-full border-collapse text-xs">
+              <thead>
+                <tr className="bg-surface-container-low border-b border-border-subtle text-text-secondary">
+                  <th className="text-left py-3 px-4 font-bold">Lớp Tài Sản</th>
+                  <th className="text-center py-3 px-4 font-bold">SAA (Mỏ neo khảo sát)</th>
+                  <th className="text-center py-3 px-4 font-bold text-accent-emerald">TAA (Sau hiệu chỉnh ML)</th>
+                  <th className="text-center py-3 px-4 font-bold">Tỷ Trọng Thực Tế</th>
+                  <th className="text-center py-3 px-4 font-bold">Độ Lệch (Drift)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border-subtle">
+                {(['STOCK', 'GOLD', 'SAVINGS', 'CASH'] as const).map((cls) => {
+                  const saaVal = (plan?.saaTargets?.[cls] ?? 0) * 100;
+                  const taaVal = (plan?.taaTargets?.[cls] ?? plan?.targetAllocations?.[cls] ?? 0) * 100;
+                  const actualVal = (plan?.currentAllocations?.[cls] ?? 0) * 100;
+                  const drift = actualVal - taaVal;
+
+                  return (
+                    <tr key={cls} className="hover:bg-surface-container-low/50 transition-colors">
+                      <td className="py-3 px-4 font-bold text-text-primary">
+                        {cls === 'STOCK'
+                          ? '📈 Cổ Phiếu VN30'
+                          : cls === 'GOLD'
+                          ? '🥇 Vàng Miếng SJC'
+                          : cls === 'SAVINGS'
+                          ? '🏦 Tiền Gửi Tiết Kiệm'
+                          : '💵 Tiền Mặt Khả Dụng'}
+                      </td>
+                      <td className="text-center py-3 px-4 font-mono-num font-semibold text-text-secondary">
+                        {saaVal.toFixed(1)}%
+                      </td>
+                      <td
+                        className={`text-center py-3 px-4 font-mono-num font-bold ${
+                          taaVal > saaVal
+                            ? 'text-accent-emerald'
+                            : taaVal < saaVal
+                            ? 'text-accent-rose'
+                            : 'text-text-primary'
+                        }`}
+                      >
+                        {taaVal.toFixed(1)}%
+                        {taaVal !== saaVal && (
+                          <span className="text-[10px] ml-1 opacity-75">
+                            ({taaVal > saaVal ? '+' : ''}{(taaVal - saaVal).toFixed(1)}%)
+                          </span>
+                        )}
+                      </td>
+                      <td className="text-center py-3 px-4 font-mono-num font-semibold text-text-primary">
+                        {actualVal.toFixed(1)}%
+                      </td>
+                      <td
+                        className={`text-center py-3 px-4 font-mono-num font-bold ${
+                          Math.abs(drift) > 5.0 ? 'text-accent-rose' : 'text-text-muted'
+                        }`}
+                      >
+                        {drift > 0 ? '+' : ''}
+                        {drift.toFixed(1)}%
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       {/* 3. Multi-Asset Breakdown & Roles */}
       <section className="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 shadow-xs space-y-4">
@@ -316,7 +484,7 @@ export function TaaTab({
               </div>
             </div>
             <p className="text-[11px] text-text-secondary leading-snug pt-1 border-t border-border-subtle">
-              Động cơ tạo Alpha sinh lời chính. Khi mô hình ONNX dự báo xác suất tăng 78.4%, tỷ trọng được nâng lên 50%.
+              Động cơ tạo Alpha sinh lời chính. {stockPrediction ? `Mô hình ONNX: ${stockPrediction.regimeName} (${(stockPrediction.confidence * 100).toFixed(0)}%).` : 'Luôn bám sát kỷ luật.'}
             </p>
           </div>
 
@@ -339,7 +507,7 @@ export function TaaTab({
               </div>
             </div>
             <p className="text-[11px] text-text-secondary leading-snug pt-1 border-t border-border-subtle">
-              Tài sản phòng hộ rủi ro lạm phát và sốc địa chính trị. Tương quan âm nhẹ với cổ phiếu, luôn giữ vững 20%.
+              Tài sản phòng hộ rủi ro lạm phát và sốc địa chính trị. {goldPrediction ? `Mô hình ONNX: ${goldPrediction.regimeName} (${(goldPrediction.confidence * 100).toFixed(0)}%).` : 'Tương quan âm nhẹ với cổ phiếu, luôn giữ vững mỏ neo.'}
             </p>
           </div>
 
@@ -444,16 +612,21 @@ export function TaaTab({
                               ? 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/20'
                               : act.actionType === 'SELL'
                               ? 'bg-accent-rose-light text-accent-rose border border-accent-rose/20'
+                              : act.actionType === 'SETTLE_SAVINGS'
+                              ? 'bg-amber-500/15 text-amber-500 border border-amber-500/20'
                               : 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20'
                           }`}>
-                            {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' : act.actionType}
+                            {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' :
+                             act.actionType === 'SETTLE_SAVINGS' ? 'TẤT TOÁN SỔ' : act.actionType}
                           </span>
                         </td>
                         <td className="py-3 px-3 font-bold text-text-primary font-mono-num">
-                          {act.ticker}
+                          {act.actionType === 'SETTLE_SAVINGS' ? `Sổ #${act.ticker}` : act.ticker}
                         </td>
                         <td className="py-3 px-3 font-mono-num text-text-primary font-semibold">
-                          {act.roundedQuantity.toLocaleString()} {act.ticker === 'GOLD_SJC' ? 'chỉ' : 'CP'}
+                          {act.actionType === 'SETTLE_SAVINGS' || act.actionType === 'OPEN_SAVINGS'
+                            ? '-'
+                            : `${act.roundedQuantity.toLocaleString()} ${act.ticker === 'GOLD_SJC' || act.assetClass === 'GOLD' ? 'chỉ' : 'CP'}`}
                         </td>
                         <td className="py-3 px-3 font-mono-num text-text-secondary">
                           {formatVND(act.estimatedPrice)}
@@ -465,8 +638,8 @@ export function TaaTab({
                           {feeAndTax > 0 ? formatVND(feeAndTax) : '-'}
                         </td>
                         <td className="py-3 px-3 font-mono-num font-bold text-right text-xs">
-                          <span className={act.actionType === 'SELL' ? 'text-accent-emerald' : act.actionType === 'BUY' ? 'text-accent-rose' : 'text-text-primary'}>
-                            {act.actionType === 'SELL' ? '+' : act.actionType === 'BUY' ? '-' : ''}{formatVND(Math.abs(netCash))}
+                          <span className={act.actionType === 'SELL' || act.actionType === 'SETTLE_SAVINGS' ? 'text-accent-emerald' : act.actionType === 'BUY' ? 'text-accent-rose' : 'text-text-primary'}>
+                            {act.actionType === 'SELL' || act.actionType === 'SETTLE_SAVINGS' ? '+' : act.actionType === 'BUY' ? '-' : ''}{formatVND(Math.abs(netCash))}
                           </span>
                         </td>
                         <td className="py-3 px-3 text-text-muted text-[11px]">

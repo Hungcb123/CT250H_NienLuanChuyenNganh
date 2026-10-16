@@ -11,6 +11,12 @@ public class RebalancePlanDTO {
     private BigDecimal maxDriftPercent;
     private Map<String, BigDecimal> currentAllocations = new HashMap<>();
     private Map<String, BigDecimal> targetAllocations = new HashMap<>();
+
+    // ── TAA fields mới ──
+    private Map<String, BigDecimal> saaTargets = new HashMap<>();       // Tỷ trọng mỏ neo SAA (từ khảo sát)
+    private Map<String, BigDecimal> taaTargets = new HashMap<>();       // Tỷ trọng sau ML adjust
+    private List<MlPredictionInfo> mlPredictions = new ArrayList<>();   // Chi tiết dự báo ML
+
     private List<RebalanceAction> actions = new ArrayList<>();
     private String executiveSummary;
     private BigDecimal totalEstimatedSell = BigDecimal.ZERO;
@@ -18,6 +24,48 @@ public class RebalancePlanDTO {
     private BigDecimal totalEstimatedFees = BigDecimal.ZERO;
     private BigDecimal totalEstimatedTax = BigDecimal.ZERO;
     private BigDecimal netCashImpact = BigDecimal.ZERO;
+
+    /**
+     * Thông tin dự báo ML cho một lớp tài sản.
+     */
+    public static class MlPredictionInfo {
+        private String assetClass;    // "STOCK" hoặc "GOLD"
+        private String modelName;     // "stock_regime.onnx" hoặc "gold_trend.onnx"
+        private int signal;           // -1, 0, +1
+        private double confidence;    // 0.0 → 1.0
+        private String regimeName;    // "BULLISH_UPTREND", etc.
+        private BigDecimal deltaWeight; // Δw = Signal × P × 15%
+
+        public MlPredictionInfo() {}
+
+        public MlPredictionInfo(String assetClass, String modelName, int signal,
+                                double confidence, String regimeName, BigDecimal deltaWeight) {
+            this.assetClass = assetClass;
+            this.modelName = modelName;
+            this.signal = signal;
+            this.confidence = confidence;
+            this.regimeName = regimeName;
+            this.deltaWeight = deltaWeight;
+        }
+
+        public String getAssetClass() { return assetClass; }
+        public void setAssetClass(String assetClass) { this.assetClass = assetClass; }
+
+        public String getModelName() { return modelName; }
+        public void setModelName(String modelName) { this.modelName = modelName; }
+
+        public int getSignal() { return signal; }
+        public void setSignal(int signal) { this.signal = signal; }
+
+        public double getConfidence() { return confidence; }
+        public void setConfidence(double confidence) { this.confidence = confidence; }
+
+        public String getRegimeName() { return regimeName; }
+        public void setRegimeName(String regimeName) { this.regimeName = regimeName; }
+
+        public BigDecimal getDeltaWeight() { return deltaWeight; }
+        public void setDeltaWeight(BigDecimal deltaWeight) { this.deltaWeight = deltaWeight; }
+    }
 
     public static class RebalanceAction {
         private String actionType; // 'BUY', 'SELL', 'HOLD'
@@ -99,6 +147,15 @@ public class RebalancePlanDTO {
 
     public Map<String, BigDecimal> getTargetAllocations() { return targetAllocations; }
     public void setTargetAllocations(Map<String, BigDecimal> targetAllocations) { this.targetAllocations = targetAllocations; }
+
+    public Map<String, BigDecimal> getSaaTargets() { return saaTargets; }
+    public void setSaaTargets(Map<String, BigDecimal> saaTargets) { this.saaTargets = saaTargets; }
+
+    public Map<String, BigDecimal> getTaaTargets() { return taaTargets; }
+    public void setTaaTargets(Map<String, BigDecimal> taaTargets) { this.taaTargets = taaTargets; }
+
+    public List<MlPredictionInfo> getMlPredictions() { return mlPredictions; }
+    public void setMlPredictions(List<MlPredictionInfo> mlPredictions) { this.mlPredictions = mlPredictions; }
 
     public List<RebalanceAction> getActions() { return actions; }
     public void setActions(List<RebalanceAction> actions) { this.actions = actions; }

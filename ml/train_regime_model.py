@@ -210,5 +210,84 @@ def train_and_export_onnx(output_dir: str = "backend/src/main/resources/models")
     print(f"📦 File size: {os.path.getsize(onnx_path) / 1024:.2f} KB")
 
 
+def train_gold_model(output_dir: str = "backend/src/main/resources/models"):
+    """
+    Trains Gold Trend Classifier (T+20) using Gold price data.
+    Labels: 0=Bearish (<-3%), 1=Sideway, 2=Bullish (>+3%).
+    Exports to gold_trend.onnx.
+    """
+    print("\n=== Training Gold Trend Model ===")
+    
+    # Load gold data
+    gold_path = "ml/data/raw/GC.csv"
+    if not os.path.exists(gold_path):
+        print(f"⚠️ Gold data not found at {gold_path}. Falling back to synthetic gold data...")
+        days = 1500
+        dates = pd.date_range(end=pd.Timestamp.today(), periods=days, freq='B')
+        gold_returns = np.random.normal(0.0003, 0.012, days)
+        gold_price = 1800.0 * np.cumprod(1 + gold_returns)
+        df_gold = pd.DataFrame({
+            'Date': dates,
+            'Open': gold_price * 0.998,
+            'High': gold_price * 1.008,
+            'Low': gold_price * 0.992,
+            'Close': gold_price,
+            'Volume': np.random.lognormal(12.0, 0.5, days),
+            'Gold_Close': gold_price  # Self-reference for gold
+        })
+    else:
+        print(f"🥇 Loading real Gold data from: {gold_path}")
+        df_gold = pd.read_csv(gold_path)
+        df_gold['Date'] = pd.to_datetime(df_gold['Date'])
+        df_gold = df_gold.sort_values('Date').reset_index(drop=True)
+        df_gold['Gold_Close'] = df_gold['Close']  # Self-reference
+
+    df_features, feature_cols = calculate_technical_features(df_gold)
+    dataset = create_regime_labels(df_features, horizon=20, threshold=0.03)
+
+    X = dataset[feature_cols].values.astype(np.float32)
+    y = dataset['Target_Regime'].values.astype(np.int64)
+
+    split_idx = int(len(X) * 0.8)
+    X_train, X_test = X[:split_idx], X[split_idx:]
+    y_train, y_test = y[:split_idx], y[split_idx:]
+
+    print(f"Gold samples: {len(dataset)} | Train: {len(X_train)} | Test: {len(X_test)}")
+
+    model = LGBMClassifier(
+        n_estimators=100,
+        learning_rate=0.04,
+        max_depth=4,
+        num_leaves=16,
+        min_child_samples=20,
+        subsample=0.85,
+        colsample_bytree=0.85,
+        reg_alpha=0.1,
+        reg_lambda=1.0,
+        random_state=42,
+        class_weight='balanced',
+        verbose=-1
+    )
+    model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_test)
+    print("\n--- Gold Model Out-of-Sample Evaluation ---")
+    print(classification_report(y_test, y_pred, target_names=['Bearish', 'Sideway', 'Bullish']))
+    print(f"F1-Macro: {f1_score(y_test, y_pred, average='macro'):.4f}")
+
+    os.makedirs(output_dir, exist_ok=True)
+    onnx_path = os.path.join(output_dir, "gold_trend.onnx")
+    initial_type = [('float_input', FloatTensorType([None, len(feature_cols)]))]
+    onnx_model = onnxmltools.convert_lightgbm(model, initial_types=initial_type, target_opset=15)
+
+    with open(onnx_path, "wb") as f:
+        f.write(onnx_model.SerializeToString())
+
+    print(f"✅ Gold ONNX model saved to: {onnx_path}")
+    print(f"📦 File size: {os.path.getsize(onnx_path) / 1024:.2f} KB")
+
+
 if __name__ == '__main__':
     train_and_export_onnx()
+    train_gold_model()
+

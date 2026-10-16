@@ -39,59 +39,59 @@ type TimeframeOption = '1W' | '1M' | '3M' | 'YTD' | '1Y' | 'ALL';
 // Realistic financial time-series data with natural market zig-zags (daily trade volatility)
 const TIMEFRAME_DATA: Record<TimeframeOption, Array<{ date: string; navReturn: number; vniReturn: number; navVal: number; vniVal: number }>> = {
   '1W': [
-    { date: '02/10', navReturn: 0.0, vniReturn: 0.0, navVal: 1432.0, vniVal: 1282.0 },
-    { date: '03/10', navReturn: 0.4, vniReturn: 0.1, navVal: 1437.7, vniVal: 1283.3 },
-    { date: '04/10', navReturn: 0.2, vniReturn: -0.3, navVal: 1434.8, vniVal: 1278.2 },
-    { date: '07/10', navReturn: 0.9, vniReturn: 0.2, navVal: 1444.9, vniVal: 1284.6 },
-    { date: '08/10', navReturn: 1.4, vniReturn: 0.5, navVal: 1450.3, vniVal: 1288.4 },
+    { date: '02/10', navReturn: 0.0, vniReturn: 0.0, navVal: 1845.0, vniVal: 1282.0 },
+    { date: '03/10', navReturn: -0.6, vniReturn: 0.1, navVal: 1833.9, vniVal: 1283.3 },
+    { date: '04/10', navReturn: -1.8, vniReturn: -0.3, navVal: 1811.7, vniVal: 1278.2 },
+    { date: '07/10', navReturn: -3.2, vniReturn: 0.2, navVal: 1785.9, vniVal: 1284.6 },
+    { date: 'Hiện tại', navReturn: -4.8, vniReturn: 0.5, navVal: 1818.7, vniVal: 1288.4 },
   ],
   '1M': [
-    { date: '10/09', navReturn: 0.0, vniReturn: 0.0, navVal: 1393.2, vniVal: 1261.5 },
-    { date: '13/09', navReturn: 0.8, vniReturn: 0.4, navVal: 1404.3, vniVal: 1266.5 },
-    { date: '17/09', navReturn: 0.3, vniReturn: -0.2, navVal: 1397.4, vniVal: 1259.0 },
-    { date: '20/09', navReturn: 1.6, vniReturn: 0.7, navVal: 1415.5, vniVal: 1270.3 },
-    { date: '24/09', navReturn: 1.2, vniReturn: 0.1, navVal: 1409.9, vniVal: 1262.8 },
-    { date: '27/09', navReturn: 2.4, vniReturn: 1.1, navVal: 1426.6, vniVal: 1275.4 },
-    { date: '01/10', navReturn: 2.9, vniReturn: 1.4, navVal: 1433.6, vniVal: 1279.2 },
-    { date: '04/10', navReturn: 3.5, vniReturn: 1.8, navVal: 1442.0, vniVal: 1284.2 },
-    { date: '08/10', navReturn: 4.1, vniReturn: 2.1, navVal: 1450.3, vniVal: 1288.4 },
+    { date: '16/09', navReturn: 0.0, vniReturn: 0.0, navVal: 1850.0, vniVal: 1260.0 },
+    { date: '20/09', navReturn: -0.8, vniReturn: 0.7, navVal: 1835.2, vniVal: 1270.3 },
+    { date: '24/09', navReturn: -1.5, vniReturn: 0.1, navVal: 1822.2, vniVal: 1262.8 },
+    { date: '27/09', navReturn: -1.1, vniReturn: 1.1, navVal: 1829.6, vniVal: 1275.4 },
+    { date: '01/10', navReturn: -2.3, vniReturn: 1.4, navVal: 1807.4, vniVal: 1279.2 },
+    { date: '04/10', navReturn: -3.1, vniReturn: 1.8, navVal: 1792.6, vniVal: 1284.2 },
+    { date: '08/10', navReturn: -4.0, vniReturn: 2.1, navVal: 1776.0, vniVal: 1288.4 },
+    { date: 'Hiện tại', navReturn: -4.8, vniReturn: 2.5, navVal: 1818.7, vniVal: 1286.4 },
   ],
   '3M': [
-    { date: '08/07', navReturn: 0.0, vniReturn: 0.0, navVal: 1335.5, vniVal: 1232.9 },
-    { date: '22/07', navReturn: -1.2, vniReturn: -2.1, navVal: 1319.5, vniVal: 1207.0 },
-    { date: '05/08', navReturn: 1.8, vniReturn: 0.5, navVal: 1359.5, vniVal: 1239.1 },
-    { date: '19/08', navReturn: 3.4, vniReturn: 1.8, navVal: 1380.9, vniVal: 1255.1 },
-    { date: '02/09', navReturn: 5.1, vniReturn: 2.9, navVal: 1403.6, vniVal: 1268.7 },
-    { date: '16/09', navReturn: 4.6, vniReturn: 2.2, navVal: 1396.9, vniVal: 1260.0 },
-    { date: '30/09', navReturn: 7.2, vniReturn: 3.8, navVal: 1431.7, vniVal: 1279.8 },
-    { date: '08/10', navReturn: 8.6, vniReturn: 4.5, navVal: 1450.3, vniVal: 1288.4 },
+    { date: '08/07', navReturn: 0.0, vniReturn: 0.0, navVal: 1890.0, vniVal: 1232.9 },
+    { date: '22/07', navReturn: -1.2, vniReturn: -2.1, navVal: 1867.3, vniVal: 1207.0 },
+    { date: '05/08', navReturn: -0.5, vniReturn: 0.5, navVal: 1880.5, vniVal: 1239.1 },
+    { date: '19/08', navReturn: -1.9, vniReturn: 1.8, navVal: 1854.0, vniVal: 1255.1 },
+    { date: '02/09', navReturn: -2.6, vniReturn: 2.9, navVal: 1840.8, vniVal: 1268.7 },
+    { date: '16/09', navReturn: -3.1, vniReturn: 2.2, navVal: 1831.4, vniVal: 1260.0 },
+    { date: '30/09', navReturn: -4.2, vniReturn: 3.8, navVal: 1810.6, vniVal: 1279.8 },
+    { date: 'Hiện tại', navReturn: -4.8, vniReturn: 4.5, navVal: 1818.7, vniVal: 1288.4 },
   ],
   'YTD': [
-    { date: 'T1/24', navReturn: 0.0, vniReturn: 0.0, navVal: 1280.0, vniVal: 1165.0 },
-    { date: 'T2/24', navReturn: 2.3, vniReturn: 1.1, navVal: 1309.4, vniVal: 1177.8 },
-    { date: 'T3/24', navReturn: 1.2, vniReturn: -1.6, navVal: 1295.4, vniVal: 1146.4 },
-    { date: 'T4/24', navReturn: 4.7, vniReturn: 2.1, navVal: 1340.2, vniVal: 1189.5 },
-    { date: 'T5/24', navReturn: 8.6, vniReturn: 4.5, navVal: 1390.1, vniVal: 1217.4 },
-    { date: 'T6/24', navReturn: 7.0, vniReturn: 1.8, navVal: 1369.6, vniVal: 1186.0 },
-    { date: 'T7/24', navReturn: 10.2, vniReturn: 5.2, navVal: 1410.6, vniVal: 1225.6 },
-    { date: 'T8/24', navReturn: 12.1, vniReturn: 6.8, navVal: 1434.9, vniVal: 1244.2 },
-    { date: 'T9/24', navReturn: 13.3, vniReturn: 7.5, navVal: 1450.3, vniVal: 1252.4 },
+    { date: 'T1', navReturn: 0.0, vniReturn: 0.0, navVal: 1910.0, vniVal: 1165.0 },
+    { date: 'T2', navReturn: 1.2, vniReturn: 1.1, navVal: 1932.9, vniVal: 1177.8 },
+    { date: 'T3', navReturn: -0.4, vniReturn: -1.6, navVal: 1902.3, vniVal: 1146.4 },
+    { date: 'T4', navReturn: 0.5, vniReturn: 2.1, navVal: 1919.5, vniVal: 1189.5 },
+    { date: 'T5', navReturn: -1.8, vniReturn: 4.5, navVal: 1875.6, vniVal: 1217.4 },
+    { date: 'T6', navReturn: -2.4, vniReturn: 1.8, navVal: 1864.1, vniVal: 1186.0 },
+    { date: 'T7', navReturn: -3.2, vniReturn: 5.2, navVal: 1848.8, vniVal: 1225.6 },
+    { date: 'T8', navReturn: -2.8, vniReturn: 6.8, navVal: 1856.5, vniVal: 1244.2 },
+    { date: 'T9', navReturn: -4.0, vniReturn: 7.5, navVal: 1833.6, vniVal: 1252.4 },
+    { date: 'Hiện tại', navReturn: -4.8, vniReturn: 8.2, navVal: 1818.7, vniVal: 1288.4 },
   ],
   '1Y': [
-    { date: 'T10/23', navReturn: 0.0, vniReturn: 0.0, navVal: 1220.0, vniVal: 1100.0 },
-    { date: 'T12/23', navReturn: 3.5, vniReturn: 1.8, navVal: 1262.7, vniVal: 1119.8 },
-    { date: 'T02/24', navReturn: 6.2, vniReturn: 3.2, navVal: 1295.6, vniVal: 1135.2 },
-    { date: 'T04/24', navReturn: 9.8, vniReturn: 5.5, navVal: 1339.6, vniVal: 1160.5 },
-    { date: 'T06/24', navReturn: 12.4, vniReturn: 7.0, navVal: 1371.3, vniVal: 1177.0 },
-    { date: 'T08/24', navReturn: 16.5, vniReturn: 10.2, navVal: 1421.3, vniVal: 1212.2 },
-    { date: 'T10/24', navReturn: 18.9, vniReturn: 12.4, navVal: 1450.3, vniVal: 1236.4 },
+    { date: 'T10/23', navReturn: 0.0, vniReturn: 0.0, navVal: 1860.0, vniVal: 1100.0 },
+    { date: 'T12/23', navReturn: 2.1, vniReturn: 1.8, navVal: 1899.0, vniVal: 1119.8 },
+    { date: 'T02/24', navReturn: 3.5, vniReturn: 3.2, navVal: 1925.1, vniVal: 1135.2 },
+    { date: 'T04/24', navReturn: 1.8, vniReturn: 5.5, navVal: 1893.4, vniVal: 1160.5 },
+    { date: 'T06/24', navReturn: -0.5, vniReturn: 7.0, navVal: 1850.7, vniVal: 1177.0 },
+    { date: 'T08/24', navReturn: -2.1, vniReturn: 10.2, navVal: 1820.9, vniVal: 1212.2 },
+    { date: 'Hiện tại', navReturn: -4.8, vniReturn: 12.4, navVal: 1818.7, vniVal: 1236.4 },
   ],
   'ALL': [
-    { date: '2022', navReturn: 0.0, vniReturn: 0.0, navVal: 1000.0, vniVal: 1000.0 },
-    { date: '2023', navReturn: 18.5, vniReturn: 12.2, navVal: 1185.0, vniVal: 1122.0 },
-    { date: '2024 Q1', navReturn: 28.2, vniReturn: 17.5, navVal: 1282.0, vniVal: 1175.0 },
-    { date: '2024 Q2', navReturn: 37.0, vniReturn: 21.0, navVal: 1370.0, vniVal: 1210.0 },
-    { date: 'Hiện tại', navReturn: 45.0, vniReturn: 25.2, navVal: 1450.3, vniVal: 1252.0 },
+    { date: '2022', navReturn: 0.0, vniReturn: 0.0, navVal: 1910.0, vniVal: 1000.0 },
+    { date: '2023', navReturn: 3.5, vniReturn: 12.2, navVal: 1976.8, vniVal: 1122.0 },
+    { date: '2024 Q1', navReturn: 1.5, vniReturn: 17.5, navVal: 1938.6, vniVal: 1175.0 },
+    { date: '2024 Q2', navReturn: -1.2, vniReturn: 21.0, navVal: 1887.0, vniVal: 1210.0 },
+    { date: 'Hiện tại', navReturn: -4.8, vniReturn: 25.2, navVal: 1818.7, vniVal: 1252.0 },
   ],
 };
 
@@ -216,10 +216,10 @@ export function OverviewTab({
   const savingsPct = Math.round((valuation?.currentAllocations.SAVINGS || 0) * 100);
   const cashAllocationPct = Math.round((valuation?.currentAllocations.CASH || 0) * 100);
 
-  const targetStock = Math.round((plan?.targetAllocations.STOCK ?? 0.35) * 100);
-  const targetGold = Math.round((plan?.targetAllocations.GOLD ?? 0.35) * 100);
-  const targetSavings = Math.round((plan?.targetAllocations.SAVINGS ?? 0.20) * 100);
-  const targetCash = Math.round((plan?.targetAllocations.CASH ?? 0.10) * 100);
+  const targetStock = Math.round(((plan?.taaTargets?.STOCK ?? plan?.targetAllocations?.STOCK) ?? 0.35) * 100);
+  const targetGold = Math.round(((plan?.taaTargets?.GOLD ?? plan?.targetAllocations?.GOLD) ?? 0.35) * 100);
+  const targetSavings = Math.round(((plan?.taaTargets?.SAVINGS ?? plan?.targetAllocations?.SAVINGS) ?? 0.20) * 100);
+  const targetCash = Math.round(((plan?.taaTargets?.CASH ?? plan?.targetAllocations?.CASH) ?? 0.10) * 100);
 
   // Accurate Holdings computation: real cost basis, actual deposit details, and zero fake profits
   const resolvedHoldings = (valuation?.holdings || []).map((h) => {
@@ -569,11 +569,18 @@ export function OverviewTab({
             <button
               type="button"
               onClick={onConfirmRebalance}
-              disabled={executing}
-              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-xs transition-all flex items-center gap-1.5 shrink-0 cursor-pointer disabled:opacity-50"
+              disabled={executing || !plan?.actions || plan.actions.length === 0}
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-xs transition-all flex items-center gap-1.5 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              title={(!plan?.actions || plan.actions.length === 0) ? 'Chưa có lệnh khả thi (Cần thêm tiền mặt khả dụng)' : ''}
             >
               <RefreshCw className={`w-3.5 h-3.5 ${executing ? 'animate-spin' : ''}`} />
-              <span>{executing ? 'Đang tái cơ cấu...' : 'Tái cơ cấu ngay'}</span>
+              <span>
+                {executing
+                  ? 'Đang tái cơ cấu...'
+                  : (!plan?.actions || plan.actions.length === 0)
+                  ? 'Chưa có lệnh khả thi'
+                  : 'Tái cơ cấu ngay'}
+              </span>
             </button>
           </div>
         </section>
@@ -825,8 +832,8 @@ export function OverviewTab({
                     <AreaChart data={currentChartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                       <defs>
                         <linearGradient id="colorNavLinear" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#10b981" stopOpacity={0.25} />
-                          <stop offset="95%" stopColor="#10b981" stopOpacity={0.0} />
+                          <stop offset="5%" stopColor={lastPoint.navReturn < 0 && chartMode === 'compare' ? '#f43f5e' : '#10b981'} stopOpacity={0.25} />
+                          <stop offset="95%" stopColor={lastPoint.navReturn < 0 && chartMode === 'compare' ? '#f43f5e' : '#10b981'} stopOpacity={0.0} />
                         </linearGradient>
                       </defs>
                       <CartesianGrid
@@ -866,8 +873,8 @@ export function OverviewTab({
                       <Area
                         type="linear"
                         dataKey={chartMode === 'compare' ? 'navReturn' : 'navVal'}
-                        name={chartMode === 'compare' ? `Danh mục (+${lastPoint.navReturn}%)` : 'NAV Danh mục'}
-                        stroke="#10b981"
+                        name={chartMode === 'compare' ? `Danh mục (${lastPoint.navReturn > 0 ? '+' : ''}${lastPoint.navReturn}%)` : 'NAV Danh mục'}
+                        stroke={lastPoint.navReturn < 0 && chartMode === 'compare' ? '#f43f5e' : '#10b981'}
                         strokeWidth={2}
                         fillOpacity={1}
                         fill="url(#colorNavLinear)"
@@ -1246,15 +1253,21 @@ export function OverviewTab({
                       <span className={`font-bold px-1.5 py-0.5 rounded text-[10px] mr-1.5 ${
                         act.actionType === 'SELL' ? 'bg-accent-rose-light text-accent-rose' :
                         act.actionType === 'BUY' ? 'bg-accent-emerald-light text-accent-emerald' :
+                        act.actionType === 'SETTLE_SAVINGS' ? 'bg-amber-500/15 text-amber-500' :
                         'bg-indigo-500/15 text-indigo-400'
                       }`}>
-                        {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' : act.actionType}
+                        {act.actionType === 'OPEN_SAVINGS' ? 'GỬI TIẾT KIỆM' :
+                         act.actionType === 'SETTLE_SAVINGS' ? 'TẤT TOÁN SỔ' : act.actionType}
                       </span>
-                      <span className="font-extrabold text-text-primary font-mono-num">{act.ticker}</span>
+                      <span className="font-extrabold text-text-primary font-mono-num">
+                        {act.actionType === 'SETTLE_SAVINGS' ? `Sổ #${act.ticker}` : act.ticker}
+                      </span>
                     </div>
                     <div className="text-right">
                       <span className="font-bold text-text-primary font-mono-num block">
-                        {act.roundedQuantity.toLocaleString()} CP
+                        {act.actionType === 'SETTLE_SAVINGS' || act.actionType === 'OPEN_SAVINGS'
+                          ? ''
+                          : `${act.roundedQuantity.toLocaleString()} ${act.ticker === 'GOLD_SJC' || act.assetClass === 'GOLD' ? 'chỉ' : 'CP'}`}
                       </span>
                       <span className="text-[10px] text-text-muted font-mono-num">
                         {formatVND(act.estimatedTotalMoney)}
