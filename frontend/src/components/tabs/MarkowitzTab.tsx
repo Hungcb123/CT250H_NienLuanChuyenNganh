@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   TrendingUp, Shield, Cpu, RefreshCw,
   CheckCircle2, AlertTriangle, Layers, Percent, Activity,
@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import { RebalancePlan, UserProfile, PortfolioValuation } from '../../types';
 import { formatVND } from '../../utils/formatters';
-import { submitRiskSurvey, updatePortfolioTargets } from '../../services/api';
+import { submitRiskSurvey, updatePortfolioTargets, getRiskFreeRate } from '../../services/api';
 import { useTheme } from '../../context/ThemeContext';
 
 interface MarkowitzTabProps {
@@ -130,11 +130,24 @@ export function MarkowitzTab({
   // Interactive Risk Aversion Slider Lambda λ (1.0 to 10.0)
   const initialLambda = profile?.riskAversionLambda || 3.88;
   const [lambda, setLambda] = useState<number>(initialLambda);
+  const [riskFreeRate, setRiskFreeRate] = useState<number>(4.5);
+  const [rfName, setRfName] = useState<string>('SBV Interbank Repo');
   const [isSavingLambda, setIsSavingLambda] = useState(false);
   const [saveLambdaSuccess, setSaveLambdaSuccess] = useState(false);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>({ row: 0, col: 1 });
   const [isApplyingTAA, setIsApplyingTAA] = useState(false);
   const [appliedTAASuccess, setAppliedTAASuccess] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    getRiskFreeRate().then((info) => {
+      if (active && info && info.rate) {
+        setRiskFreeRate(info.rate);
+        if (info.indicatorName) setRfName(info.indicatorName);
+      }
+    }).catch(console.warn);
+    return () => { active = false; };
+  }, []);
 
   // Handle applying TAA Tactical Shift (+10% Stock, -10% Cash/Savings, Gold unchanged)
   const handleApplyTAA = async () => {
@@ -305,6 +318,18 @@ export function MarkowitzTab({
               <p className="text-[10px] uppercase font-bold text-text-muted tracking-wider">Quy Mô Tối Ưu Hóa (NAV)</p>
               <p className="text-xs font-bold text-text-primary font-mono-num">
                 {formatVND(currentNetWorth)}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container-low border border-border-subtle">
+            <Percent className="w-4 h-4 text-accent-gold" />
+            <div className="text-left">
+              <p className="text-[10px] uppercase font-bold text-text-muted tracking-wider">Lãi Suất Phi Rủi Ro (Rf)</p>
+              <p className="text-xs font-bold text-text-primary font-mono-num flex items-center gap-1.5">
+                <span>{riskFreeRate.toFixed(2)}%/năm</span>
+                <span className="text-[10px] font-normal text-accent-gold px-1.5 py-0.2 rounded bg-accent-gold-light border border-accent-gold/30">
+                  {rfName.includes('Interbank') ? 'SBV Repo' : 'Live Rf'}
+                </span>
               </p>
             </div>
           </div>

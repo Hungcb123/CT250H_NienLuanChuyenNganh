@@ -273,3 +273,28 @@ export interface CompoundSimulationResult {
   yearlyBreakdown: YearlyGrowthItem[];
 }
 
+export interface GoldPriceItem {
+  ticker: string;
+  name: string;
+  buyPrice: number;
+  sellPrice: number;
+  changeValue: number;
+  changePercent: number;
+  source: string;
+  tradeDate: string;
+}
+
+export interface BankComparisonItem {
+  bankCode: string;
+  bankName: string;
+  ratesByTerm: Record<string, number>;
+  effectiveDate: string;
+}
+
+export interface RiskFreeRateInfo {
+  indicatorCode: string;
+  indicatorName: string;
+  rate: number;
+  unit: string;
+}
+

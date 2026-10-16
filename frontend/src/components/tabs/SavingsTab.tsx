@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import {
-  PiggyBank, PlusCircle, Percent, RefreshCw, X, TrendingUp, Calculator, Calendar, ArrowUpRight, Sparkles
+  PiggyBank, PlusCircle, Percent, RefreshCw, X, TrendingUp, Calculator, Calendar, ArrowUpRight, Sparkles, Building2
 } from 'lucide-react';
-import { SavingsDepositItem, OpenSavingsPayload, CompoundSimulationResult } from '../../types';
+import { SavingsDepositItem, OpenSavingsPayload, CompoundSimulationResult, BankComparisonItem } from '../../types';
 import {
   getSavingsDeposits,
   openSavingsDeposit,
   toggleAutoRollover,
   settleSavingsDeposit,
-  simulateCompoundSavings
+  simulateCompoundSavings,
+  getBankRates,
+  syncExternalMarket
 } from '../../services/api';
 import { formatVND } from '../../utils/formatters';
 import { useToast } from '../../context/ToastContext';
@@ -17,7 +19,7 @@ interface SavingsTabProps {
   onRefresh?: () => void;
 }
 
-const TERM_RATE_MAP: Record<number, number> = {
+const DEFAULT_TERM_RATE_MAP: Record<number, number> = {
   1: 3.20,
   3: 3.80,
   6: 5.50,
@@ -27,7 +29,10 @@ const TERM_RATE_MAP: Record<number, number> = {
 export function SavingsTab({ onRefresh }: SavingsTabProps) {
   const toast = useToast();
   const [deposits, setDeposits] = useState<SavingsDepositItem[]>([]);
+  const [bankRates, setBankRates] = useState<BankComparisonItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [ratesLoading, setRatesLoading] = useState(true);
+  const [syncingMarket, setSyncingMarket] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -79,13 +84,61 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
     }
   };
 
+  const fetchBankRates = async () => {
+    setRatesLoading(true);
+    try {
+      const rates = await getBankRates();
+      setBankRates(rates);
+    } catch (e) {
+      console.error("Failed to load bank rates", e);
+    } finally {
+      setRatesLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchDeposits();
+    fetchBankRates();
   }, []);
+
+  const getRateFor = (bank: string, term: number): number => {
+    const found = bankRates.find((b) => b.bankName.toLowerCase().includes(bank.toLowerCase()) || bank.toLowerCase().includes(b.bankName.toLowerCase()));
+    if (found && found.ratesByTerm && found.ratesByTerm[String(term)]) {
+      return Number(found.ratesByTerm[String(term)]);
+    }
+    return DEFAULT_TERM_RATE_MAP[term] || 5.50;
+  };
+
+  const handleBankChange = (newBank: string) => {
+    setBankName(newBank);
+    setInterestRate(getRateFor(newBank, termMonths));
+  };
 
   const handleTermChange = (term: number) => {
     setTermMonths(term);
-    setInterestRate(TERM_RATE_MAP[term] || 5.50);
+    setInterestRate(getRateFor(bankName, term));
+  };
+
+  const handleSelectBankFromTable = (selectedBank: string, term: number) => {
+    setBankName(selectedBank);
+    setTermMonths(term);
+    setInterestRate(getRateFor(selectedBank, term));
+    setShowModal(true);
+  };
+
+  const handleSyncMarket = async () => {
+    setSyncingMarket(true);
+    try {
+      await syncExternalMarket();
+      await fetchBankRates();
+      await fetchDeposits();
+      onRefresh?.();
+      toast.success("Đã đồng bộ biểu lãi suất ngân hàng và giá thị trường mới nhất!", "Đồng bộ thành công");
+    } catch (err: any) {
+      toast.error("Không thể kết nối dịch vụ ngoài: " + (err.message || err), "Lỗi đồng bộ");
+    } finally {
+      setSyncingMarket(false);
+    }
   };
 
   const handleOpenSubmit = async (e: React.FormEvent) => {
@@ -185,13 +238,26 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold shadow-sm self-start md:self-auto"
-        >
-          <PlusCircle className="w-4 h-4" />
-          <span>Mở sổ tiết kiệm mới</span>
-        </button>
+        <div className="flex items-center gap-2 self-start md:self-auto">
+          <button
+            type="button"
+            onClick={handleSyncMarket}
+            disabled={syncingMarket}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-subtle bg-surface-container hover:bg-surface-container-high transition-all text-xs font-semibold text-text-primary shadow-2xs"
+            title="Đồng bộ biểu lãi suất các ngân hàng từ thị trường ngoài"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${syncingMarket ? 'animate-spin text-accent-emerald' : 'text-text-muted'}`} />
+            <span>{syncingMarket ? 'Đang đồng bộ...' : 'Đồng bộ biểu lãi suất'}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowModal(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold shadow-sm"
+          >
+            <PlusCircle className="w-4 h-4" />
+            <span>Mở sổ tiết kiệm mới</span>
+          </button>
+        </div>
       </div>
 
       {/* KPI Cards for Savings */}
@@ -234,6 +300,91 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
             Nhập lãi vào gốc kỳ tiếp theo
           </span>
         </div>
+      </div>
+
+      {/* Live Bank Rates Comparison Section */}
+      <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-xs space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3">
+          <div className="flex items-center gap-2">
+            <Building2 className="w-4 h-4 text-accent-emerald" />
+            <h3 className="text-sm font-bold text-text-primary">
+              Biểu Lãi Suất Tiết Kiệm Các Ngân Hàng Thương Mại
+            </h3>
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-accent-emerald-light text-accent-emerald border border-accent-emerald/30">
+              Live Feed
+            </span>
+          </div>
+          <span className="text-[11px] text-text-muted">
+            Chọn ngân hàng tối ưu để tự động áp dụng lãi suất tốt nhất khi mở sổ
+          </span>
+        </div>
+
+        {ratesLoading ? (
+          <div className="py-6 text-center text-xs text-text-muted">
+            <div className="w-5 h-5 border-2 border-accent-emerald border-t-transparent rounded-full animate-spin mx-auto mb-1.5"></div>
+            Đang tải biểu lãi suất các ngân hàng...
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs text-left">
+              <thead>
+                <tr className="border-b border-border-subtle text-text-secondary bg-surface-container-low/60">
+                  <th className="py-2.5 px-3 font-semibold">Ngân hàng</th>
+                  <th className="py-2.5 px-3 text-right font-semibold">1 Tháng</th>
+                  <th className="py-2.5 px-3 text-right font-semibold">3 Tháng</th>
+                  <th className="py-2.5 px-3 text-right font-semibold">6 Tháng</th>
+                  <th className="py-2.5 px-3 text-right font-semibold">12 Tháng</th>
+                  <th className="py-2.5 px-3 text-center font-semibold">Hành động</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border-subtle/60 font-mono-num">
+                {bankRates.map((bank) => {
+                  const r1 = bank.ratesByTerm?.['1'] || 0;
+                  const r3 = bank.ratesByTerm?.['3'] || 0;
+                  const r6 = bank.ratesByTerm?.['6'] || 0;
+                  const r12 = bank.ratesByTerm?.['12'] || 0;
+
+                  return (
+                    <tr key={bank.bankCode} className="hover:bg-surface-container-low/50 transition-colors">
+                      <td className="py-2.5 px-3 font-sans font-bold text-text-primary flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-md bg-surface-container flex items-center justify-center text-[10px] font-extrabold text-accent-emerald border border-border-subtle">
+                          {bank.bankCode}
+                        </span>
+                        <span>{bank.bankName}</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right">
+                        <span className="text-text-primary font-medium">{r1.toFixed(2)}%</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right">
+                        <span className="text-text-primary font-medium">{r3.toFixed(2)}%</span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right">
+                        <span className={`font-bold ${r6 >= 5.2 ? 'text-accent-emerald' : 'text-text-primary'}`}>
+                          {r6.toFixed(2)}%
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 text-right">
+                        <span className={`font-bold ${r12 >= 5.7 ? 'text-accent-gold' : 'text-text-primary'}`}>
+                          {r12.toFixed(2)}%
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 text-center font-sans">
+                        <button
+                          type="button"
+                          onClick={() => handleSelectBankFromTable(bank.bankName, 6)}
+                          className="px-2.5 py-1 rounded bg-accent-emerald-light hover:bg-accent-emerald/20 text-accent-emerald font-bold text-[11px] transition-all border border-accent-emerald/30 inline-flex items-center gap-1"
+                        >
+                          <PlusCircle className="w-3 h-3" />
+                          <span>Gửi sổ</span>
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       {/* Deposits List */}
@@ -718,14 +869,27 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
                 <label className="block font-semibold text-text-primary mb-1">Ngân hàng phát hành</label>
                 <select
                   value={bankName}
-                  onChange={(e) => setBankName(e.target.value)}
+                  onChange={(e) => handleBankChange(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg border border-border-subtle bg-surface-container-lowest text-text-primary focus:outline-hidden focus:border-accent-emerald"
                 >
-                  <option value="Vietcombank">Vietcombank (VCB)</option>
-                  <option value="Techcombank">Techcombank (TCB)</option>
-                  <option value="MBBank">MBBank (MB)</option>
-                  <option value="BIDV">BIDV</option>
-                  <option value="ACB">ACB</option>
+                  {bankRates.length > 0 ? (
+                    bankRates.map((b) => (
+                      <option key={b.bankCode} value={b.bankName}>
+                        {b.bankName} ({b.bankCode})
+                      </option>
+                    ))
+                  ) : (
+                    <>
+                      <option value="Vietcombank">Vietcombank (VCB)</option>
+                      <option value="BIDV">BIDV</option>
+                      <option value="VietinBank">VietinBank (CTG)</option>
+                      <option value="Agribank">Agribank (AGR)</option>
+                      <option value="MB Bank">MB Bank (MBB)</option>
+                      <option value="Techcombank">Techcombank (TCB)</option>
+                      <option value="ACB">ACB</option>
+                      <option value="HDBank">HDBank (HDB)</option>
+                    </>
+                  )}
                 </select>
               </div>
 
@@ -760,7 +924,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
                       }`}
                     >
                       {term} Tháng
-                      <span className="block text-[10px] font-normal">{TERM_RATE_MAP[term]}%/năm</span>
+                      <span className="block text-[10px] font-normal">{getRateFor(bankName, term)}%/năm</span>
                     </button>
                   ))}
                 </div>

@@ -55,3 +55,10 @@ jwt:
   secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
   expiration: 86400000 # 24 giờ (ms)
 
+# Cấu hình API Vàng & Thị trường ngoài
+market-data:
+  vnappmob:
+    api-key: ${VNAPPMOB_API_KEY:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3OTM0NTk4MDYsImlhdCI6MTc5MjE2MzgwNiwic2NvcGUiOiJnb2xkIiwicGVybWlzc2lvbiI6MH0.SHtF39PfT9Blqe4KTOG2RHMdhAAGKMuBlY36b3nOvDA}
+    gold-url: "https://vapi.vnappmob.com/api/v2/gold/sjc"
+
+

@@ -12,9 +12,37 @@ import java.util.Map;
 public class MarketController {
 
     private final MarketService marketService;
+    private final ExternalMarketSyncService externalMarketSyncService;
 
-    public MarketController(MarketService marketService) {
+    public MarketController(MarketService marketService, ExternalMarketSyncService externalMarketSyncService) {
         this.marketService = marketService;
+        this.externalMarketSyncService = externalMarketSyncService;
+    }
+
+    @GetMapping("/gold-prices")
+    public ResponseEntity<ApiResponse<List<GoldPriceDTO>>> getGoldPrices() {
+        return ResponseEntity.ok(ApiResponse.success(externalMarketSyncService.getLatestGoldPrices()));
+    }
+
+    @GetMapping("/bank-rates")
+    public ResponseEntity<ApiResponse<List<BankComparisonDTO>>> getBankRates() {
+        return ResponseEntity.ok(ApiResponse.success(externalMarketSyncService.getBankComparison()));
+    }
+
+    @GetMapping("/risk-free-rate")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getRiskFreeRate() {
+        return ResponseEntity.ok(ApiResponse.success(Map.of(
+                "indicatorCode", "RF_INTERBANK_RATE",
+                "indicatorName", "Lãi suất phi rủi ro (SBV Interbank Rate)",
+                "rate", externalMarketSyncService.getRiskFreeRate(),
+                "unit", "%"
+        )));
+    }
+
+    @PostMapping("/sync-external")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> triggerExternalSync() {
+        Map<String, Object> syncResult = externalMarketSyncService.syncAllExternal(true);
+        return ResponseEntity.ok(ApiResponse.success("Đã đồng bộ giá Vàng và Biểu Lãi Suất Ngân Hàng thành công", syncResult));
     }
 
     @GetMapping("/assets")

@@ -12,7 +12,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import com.equifolio.market.ExternalMarketSyncService;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -27,6 +29,9 @@ public class LedgerService {
     private final MarketService marketService;
     private final SavingsDepositRepository savingsDepositRepository;
     private final PortfolioSnapshotRepository portfolioSnapshotRepository;
+
+    @Autowired(required = false)
+    private ExternalMarketSyncService externalMarketSyncService;
 
     public LedgerService(AccountRepository accountRepository,
                          TransactionRepository transactionRepository,
@@ -1163,7 +1168,9 @@ public class LedgerService {
         double muGold = 12.0, sigmaGold = 14.5;
         double muSavings = 5.5, sigmaSavings = 1.0;
         double muCash = 5.0, sigmaCash = 0.5;
-        double rf = 4.5; // 4.5% lãi suất phi rủi ro
+        double rf = (externalMarketSyncService != null)
+                ? externalMarketSyncService.getRiskFreeRate().doubleValue()
+                : 4.5; // Lãi suất phi rủi ro SBV Interbank
 
         double expReturn = wStock * muStock + wGold * muGold + wSavings * muSavings + wCash * muCash;
         double var = Math.pow(wStock * sigmaStock, 2)

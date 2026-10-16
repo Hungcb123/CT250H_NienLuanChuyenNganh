@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 import {
   PortfolioValuation, RebalancePlan, UserProfile, TransactionItem, SavingsDepositItem,
-  PortfolioHistoryResponse, RiskMetrics
+  PortfolioHistoryResponse, RiskMetrics, GoldPriceItem
 } from '../../types';
 import { formatVND } from '../../utils/formatters';
 import { VNIndexChart } from '../charts/VNIndexChart';
@@ -19,7 +19,7 @@ import { CustomTargetsModal } from '../profile/CustomTargetsModal';
 import { useTheme } from '../../context/ThemeContext';
 import {
   getTransactions, getSavingsDeposits, getVNIndexSummaryApi, updatePortfolioTargets,
-  getPortfolioHistory, getRiskMetrics
+  getPortfolioHistory, getRiskMetrics, getGoldPrices
 } from '../../services/api';
 import { useToast } from '../../context/ToastContext';
 
@@ -147,6 +147,7 @@ export function OverviewTab({
   // Aux state: Load actual ledger transactions, active savings deposits, and live VN-Index summary
   const [transactions, setTransactions] = useState<TransactionItem[]>([]);
   const [savingsDeposits, setSavingsDeposits] = useState<SavingsDepositItem[]>([]);
+  const [goldPrices, setGoldPrices] = useState<GoldPriceItem[]>([]);
   const [vniSummary, setVniSummary] = useState<VNIndexSummary>(VNINDEX_SUMMARY);
   const [historyData, setHistoryData] = useState<PortfolioHistoryResponse | null>(null);
   const [riskMetrics, setRiskMetrics] = useState<RiskMetrics | null>(null);
@@ -156,14 +157,16 @@ export function OverviewTab({
     let active = true;
     const fetchAux = async () => {
       try {
-        const [txs, deps, vni] = await Promise.all([
+        const [txs, deps, vni, gold] = await Promise.all([
           getTransactions(),
           getSavingsDeposits(),
-          getVNIndexSummaryApi()
+          getVNIndexSummaryApi(),
+          getGoldPrices()
         ]);
         if (active) {
           setTransactions(txs || []);
           setSavingsDeposits(deps || []);
+          if (gold && gold.length > 0) setGoldPrices(gold);
           if (vni && vni.currentPoints) {
             setVniSummary({
               latestDate: vni.latestDate,
@@ -719,9 +722,9 @@ export function OverviewTab({
         <div className="lg:col-span-8 space-y-6">
           {/* Performance & Benchmark Chart Card */}
           <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 shadow-xs">
-            {/* Live VN-Index Market Ticker Strip */}
-            <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-surface-container-low border border-border-subtle mb-5">
-              <div className="flex items-center gap-2">
+            {/* Live Market Ticker Strip (VN-Index & Gold SJC/9999 Live Feed) */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-surface-container-low border border-border-subtle mb-5">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>
                 <span className="text-xs font-bold text-text-secondary">VN-Index:</span>
                 <span className="text-xs font-black text-text-primary font-mono-num">
@@ -730,11 +733,30 @@ export function OverviewTab({
                 <span className={`text-xs font-bold font-mono-num ${vniSummary.changePercent >= 0 ? 'text-accent-emerald' : 'text-accent-rose'}`}>
                   {vniSummary.changePoints > 0 ? '+' : ''}{vniSummary.changePoints.toFixed(2)} ({vniSummary.changePercent > 0 ? '+' : ''}{vniSummary.changePercent.toFixed(2)}%)
                 </span>
+                <span className="text-border-subtle hidden sm:inline">|</span>
+                <span className="text-xs text-text-muted hidden sm:inline">KL: <strong className="text-text-primary font-mono-num">{(vniSummary.latestVolume / 1e6).toFixed(1)}M</strong></span>
+                <span className="text-xs text-text-muted hidden sm:inline">MA20: <strong className="text-text-primary font-mono-num">{vniSummary.ma20.toFixed(1)}</strong></span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-text-muted flex-wrap">
-                <span>Khối lượng: <strong className="text-text-primary font-mono-num">{(vniSummary.latestVolume / 1e6).toFixed(1)}M CP</strong></span>
-                <span>MA20: <strong className="text-text-primary font-mono-num">{vniSummary.ma20.toFixed(1)}</strong></span>
-                <span>MA50: <strong className="text-text-primary font-mono-num">{vniSummary.ma50.toFixed(1)}</strong></span>
+
+              {/* Gold Live Prices Strip */}
+              <div className="flex items-center gap-3 text-xs flex-wrap border-t lg:border-t-0 pt-2 lg:pt-0 border-border-subtle">
+                {goldPrices.map((gp) => (
+                  <div key={gp.ticker} className="flex items-center gap-1.5 bg-surface-container px-2.5 py-1 rounded-lg border border-border-subtle">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-gold"></span>
+                    <span className="font-semibold text-text-secondary text-[11px]">{gp.ticker === 'GOLD_SJC' ? 'SJC' : 'Nhẫn 9999'}:</span>
+                    <span className="font-bold text-text-primary font-mono-num text-[11px]">
+                      {(gp.sellPrice / 1000000).toFixed(2)}Tr
+                    </span>
+                    <span className="text-[10px] text-accent-emerald font-semibold font-mono-num">
+                      +{gp.changePercent}%
+                    </span>
+                  </div>
+                ))}
+                {goldPrices.length > 0 && (
+                  <span className="text-[10px] text-text-muted hidden xl:inline" title="Nguồn cấp dữ liệu thị trường vàng">
+                    ({goldPrices[0].source})
+                  </span>
+                )}
               </div>
             </div>
 

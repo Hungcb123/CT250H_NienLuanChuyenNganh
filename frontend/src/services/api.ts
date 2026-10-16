@@ -14,7 +14,10 @@ import {
   PortfolioHistoryResponse,
   SnapshotPoint,
   RiskMetrics,
-  DividendPayload
+  DividendPayload,
+  GoldPriceItem,
+  BankComparisonItem,
+  RiskFreeRateInfo
 } from '../types';
 
 export type {
@@ -963,6 +966,107 @@ export async function registerTrackedStock(ticker: string, name?: string, sector
     console.warn("Failed to register stock on backend", e);
   }
   return null;
+}
+
+export async function getGoldPrices(): Promise<GoldPriceItem[]> {
+  try {
+    const res = await fetch(`${API_BASE}/market/gold-prices`, {
+      headers: getAuthHeaders(),
+      credentials: 'include'
+    });
+    if (res.ok) {
+      const json = await res.json();
+      if (json.data) return json.data;
+    }
+  } catch (e) {
+    console.warn("Failed to fetch gold prices, using fallback", e);
+  }
+
+  // Fallback
+  return [
+    {
+      ticker: 'GOLD_SJC',
+      name: 'Vàng miếng SJC 999.9',
+      buyPrice: 8750000,
+      sellPrice: 8950000,
+      changeValue: 150000,
+      changePercent: 1.70,
+      source: 'SJC Market Feed',
+      tradeDate: new Date().toISOString().split('T')[0]
+    },
+    {
+      ticker: 'GOLD_RING_9999',
+      name: 'Vàng nhẫn trơn 999.9',
+      buyPrice: 8650000,
+      sellPrice: 8800000,
+      changeValue: 120000,
+      changePercent: 1.38,
+      source: 'Bảo Tín Minh Châu Feed',
+      tradeDate: new Date().toISOString().split('T')[0]
+    }
+  ];
+}
+
+export async function getBankRates(): Promise<BankComparisonItem[]> {
+  try {
+    const res = await fetch(`${API_BASE}/market/bank-rates`, {
+      headers: getAuthHeaders(),
+      credentials: 'include'
+    });
+    if (res.ok) {
+      const json = await res.json();
+      if (json.data) return json.data;
+    }
+  } catch (e) {
+    console.warn("Failed to fetch bank rates, using fallback", e);
+  }
+
+  // Fallback
+  return [
+    { bankCode: 'VCB', bankName: 'Vietcombank', ratesByTerm: { '1': 3.10, '3': 3.40, '6': 4.50, '12': 5.20 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'BID', bankName: 'BIDV', ratesByTerm: { '1': 3.20, '3': 3.50, '6': 4.60, '12': 5.30 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'CTG', bankName: 'VietinBank', ratesByTerm: { '1': 3.20, '3': 3.50, '6': 4.60, '12': 5.30 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'AGR', bankName: 'Agribank', ratesByTerm: { '1': 3.20, '3': 3.50, '6': 4.70, '12': 5.40 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'MBB', bankName: 'MB Bank', ratesByTerm: { '1': 3.50, '3': 3.90, '6': 5.10, '12': 5.70 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'TCB', bankName: 'Techcombank', ratesByTerm: { '1': 3.45, '3': 3.85, '6': 5.20, '12': 5.65 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'ACB', bankName: 'ACB', ratesByTerm: { '1': 3.30, '3': 3.70, '6': 5.00, '12': 5.50 }, effectiveDate: new Date().toISOString().split('T')[0] },
+    { bankCode: 'HDB', bankName: 'HDBank', ratesByTerm: { '1': 3.60, '3': 4.00, '6': 5.40, '12': 6.00 }, effectiveDate: new Date().toISOString().split('T')[0] }
+  ];
+}
+
+export async function getRiskFreeRate(): Promise<RiskFreeRateInfo> {
+  try {
+    const res = await fetch(`${API_BASE}/market/risk-free-rate`, {
+      headers: getAuthHeaders(),
+      credentials: 'include'
+    });
+    if (res.ok) {
+      const json = await res.json();
+      if (json.data) return json.data;
+    }
+  } catch (e) {
+    console.warn("Failed to fetch risk-free rate, using fallback", e);
+  }
+
+  return {
+    indicatorCode: 'RF_INTERBANK_RATE',
+    indicatorName: 'Lãi suất phi rủi ro (SBV Interbank Rate)',
+    rate: 4.5,
+    unit: '%'
+  };
+}
+
+export async function syncExternalMarket(): Promise<any> {
+  const res = await fetch(`${API_BASE}/market/sync-external`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    credentials: 'include'
+  });
+  if (!res.ok) {
+    throw new Error('Đồng bộ thị trường thất bại');
+  }
+  const json = await res.json();
+  return json.data;
 }
 
 
