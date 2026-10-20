@@ -389,13 +389,15 @@ export function ResearchWorkbench() {
               : "tắt — giữ SAA; đang kiểm chứng ngoài mẫu"}
           </p>
           <p className="text-sm">
-            {models.stockEngine === 'native'
+            {models.stockEngine === 'shock-onnx'
+              ? 'VNINDEX dùng ensemble shock_shrink chạy ONNX trực tiếp trong backend Java, kỳ hạn 20 phiên. Điểm xu hướng chưa hiệu chỉnh thành xác suất.'
+              : models.stockEngine === 'native'
               ? 'VNINDEX dùng ensemble native shock_shrink, horizon 20 phiên. Điểm xu hướng chưa hiệu chỉnh thành xác suất.'
               : `Hợp đồng ONNX: ${models.models.featureVersion} · 12 chỉ báo từ giá đóng cửa.`}
           </p>
-          {models.stockEngine === 'native' && models.nativeStockPrediction && (
+          {(models.stockEngine === 'native' || models.stockEngine === 'shock-onnx') && models.nativeStockPrediction && (
             <div className="border-t border-border-subtle py-4 space-y-2">
-              <h3 className="font-semibold">Cổ phiếu VNINDEX · ensemble native</h3>
+              <h3 className="font-semibold">Cổ phiếu VNINDEX · ensemble {models.stockEngine === 'shock-onnx' ? 'ONNX' : 'native'}</h3>
               <p className="text-sm">
                 {models.nativeStockPrediction.available
                   ? `Ngày ${models.nativeStockPrediction.session} · ${netScoreLabel(models.nativeStockPrediction.netScore)}: ${models.nativeStockPrediction.netScore == null ? 'Chưa có' : Math.abs(models.nativeStockPrediction.netScore).toFixed(3)}`
@@ -411,7 +413,7 @@ export function ResearchWorkbench() {
               ["Cổ phiếu VNINDEX", models.stockPrediction, models.models.stock],
               ["Vàng SJC", models.goldPrediction, models.models.gold],
             ] as const
-          ).filter(([name]) => models.stockEngine !== 'native' || name !== 'Cổ phiếu VNINDEX').map(([name, prediction, model]) => (
+          ).filter(([name]) => !['native', 'shock-onnx'].includes(models.stockEngine ?? '') || name !== 'Cổ phiếu VNINDEX').map(([name, prediction, model]) => (
             <div
               className="border-t border-border-subtle py-4 space-y-2"
               key={name}

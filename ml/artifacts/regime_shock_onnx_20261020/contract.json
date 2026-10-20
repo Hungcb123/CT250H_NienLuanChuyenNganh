@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "recipe_id": "a01cb65ae2c96091eb876ba4d0613dee03583eb5f02444d584dc458c59e103b5",
+  "features": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ETF_ROC20",
+    "ETF_HV20",
+    "ETF_Corr30_VNINDEX",
+    "ETF_ReturnSpread20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200",
+    "IntradayRangeSigma",
+    "CloseLocation",
+    "UpperWickSigma",
+    "BodySigma",
+    "VolumeLogRatio60",
+    "RangeVolumeInteraction",
+    "Drawdown120",
+    "Drawdown252",
+    "HV20_60_Ratio",
+    "DownsideHV60",
+    "momentum_z3",
+    "momentum_z5",
+    "momentum_z10",
+    "momentum_z20",
+    "momentum_z60",
+    "shock_now",
+    "shock_lag1",
+    "shock_lag2",
+    "downside_energy_share20",
+    "negative_share5",
+    "negative_share20",
+    "volatility5_20",
+    "drawdown_z20",
+    "drawdown_z60",
+    "skew20",
+    "momentum_acceleration"
+  ],
+  "source_bundle_sha256": "6d8a5c73e47b59171d84f8a66b23225c95e9eb14d4056d9a9cb37ea1a99ea90c",
+  "boundary": "2026-10-01",
+  "parameters": [
+    0.75,
+    0.75,
+    1.5
+  ],
+  "class_order": [
+    "bearish",
+    "sideway",
+    "bullish"
+  ],
+  "class_scores_are_probabilities": false,
+  "state_policy": "Caller validates sessions and sets contiguous only for the actual predecessor; persist returned ema after success.",
+  "inputs": {
+    "features": "tensor(double)",
+    "horizon_sigma": "tensor(double)",
+    "parameters": "tensor(double)",
+    "previous_ema": "tensor(double)",
+    "contiguous": "tensor(bool)"
+  },
+  "parity": {
+    "rows": 1537,
+    "matching_labels": 1537,
+    "max_absolute_errors": {
+      "classifier": 4.807229451730954e-07,
+      "quantile": 4.440892098500626e-16,
+      "forest": 3.3306690738754696e-15,
+      "magnitude": 2.220446049250313e-15,
+      "shock": 1.7763568394002505e-15,
+      "analog": 2.220446049250313e-16,
+      "class_scores": 1.5737242514690664e-07
+    },
+    "ema_sequence_rows": 32,
+    "tolerance": 1e-05,
+    "predictive_accuracy_evaluation": false
+  },
+  "benchmark": {
+    "runs": 20,
+    "threads": 2,
+    "includes_feature_engineering": false,
+    "timings": {
+      "python_native": {
+        "median_ms": 771.348120500079,
+        "p95_ms": 910.6727579999642
+      },
+      "onnxruntime_cpu": {
+        "median_ms": 26.76503750080883,
+        "p95_ms": 31.906708999667902
+      }
+    }
+  }
+}

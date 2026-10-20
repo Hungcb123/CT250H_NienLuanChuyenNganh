@@ -1,0 +1,54 @@
+{
+  "horizon": 60,
+  "features": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ETF_ROC20",
+    "ETF_HV20",
+    "ETF_Corr30_VNINDEX",
+    "ETF_ReturnSpread20"
+  ],
+  "boundary": "2026-10-01",
+  "experimental": true,
+  "validation_status": "NOT_EVALUATED",
+  "training_rows": 2301,
+  "max_label_end_date": "2026-10-01",
+  "parity_rows": 2361,
+  "max_absolute_error": 3.265446916200787e-07,
+  "class_scores_are_probabilities": false,
+  "fixture": {
+    "features": [
+      36.62529754638672,
+      -0.35151025652885437,
+      0.07553723454475403,
+      -0.4270474910736084,
+      0.055093441158533096,
+      -0.0403200201690197,
+      1.0169312953948975,
+      -0.029768088832497597,
+      -0.01334079634398222,
+      0.7008109092712402,
+      -4.290591716766357,
+      14.825929641723633,
+      -2.8944380283355713,
+      12.079349517822266,
+      0.6755005717277527,
+      1.396153450012207
+    ],
+    "class_scores": [
+      0.770453837449113,
+      0.12409625669022162,
+      0.10544990586066538
+    ]
+  }
+}

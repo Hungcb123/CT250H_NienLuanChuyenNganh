@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NativeRegimeService {
+  @org.springframework.beans.factory.annotation.Autowired(required=false)
+  private EmbeddedRegimeService embedded;
+  @Value("${ml.stock-model:shock-onnx}")
+  private String engine = "native";
   private final URI uri;
   private final String token;
   private final ObjectMapper mapper;
@@ -28,6 +32,8 @@ public class NativeRegimeService {
   public NativeRegimeForecast predict() { return predict(20); }
 
   public NativeRegimeForecast predict(int horizon) {
+    if ("shock-onnx".equals(engine))
+      return embedded == null ? NativeRegimeForecast.unavailable("ONNX_UNAVAILABLE") : embedded.predict(horizon);
     if (!java.util.Set.of(20,60,120).contains(horizon)) return NativeRegimeForecast.unavailable("UNSUPPORTED_HORIZON");
     try {
       var request = HttpRequest.newBuilder(horizon == 20 ? uri : URI.create(uri + "?horizon=" + horizon)).timeout(Duration.ofSeconds(25))

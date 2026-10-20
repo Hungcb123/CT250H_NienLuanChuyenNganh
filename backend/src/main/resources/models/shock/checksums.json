@@ -1,0 +1,10 @@
+{
+  "contract.json": "91a4947f77f1ee996ea4f826d386c0732d564d468d177466121e1361125d69fe",
+  "market_seed.json": "18cdcc42e63aaf457920dbacbe7ea72629fb09b6d614d6878f396039fbc59ee0",
+  "parity_fixture.json": "227d8d62a2176993e7a7e91b3b82f89f14b24cbede4d80a2ac20ac2e43998cd5",
+  "regime_t120.json": "e7b23e6a8f511b22cbdca0cdb9ee80ac947b5e75877d387abdac8394dd8a8253",
+  "regime_t120.onnx": "f59331481b5007e99357fc5cd748ee6222f3ab8bc6d1f59b71c6d736b00f1703",
+  "regime_t60.json": "2a18a6442ccac6c97e1fd7a030ae04ae08315501bafca4254ed9ad27b2c3dac4",
+  "regime_t60.onnx": "ec04a95c91ace480fe9bfa156ff728d1da903fad23ed06526ad27bf5b0bf3810",
+  "shock_regime.onnx": "dfb43f12fa49826647f674ea9f07f0f70cc379710c7555c12dbb25a527ee7bef"
+}

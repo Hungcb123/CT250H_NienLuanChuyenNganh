@@ -19,7 +19,7 @@ public class ResearchController {
   private final ObjectMapper json;
   @org.springframework.beans.factory.annotation.Autowired
   private NativeRegimeService nativeRegime;
-  @org.springframework.beans.factory.annotation.Value("${ml.stock-model:native}")
+  @org.springframework.beans.factory.annotation.Value("${ml.stock-model:shock-onnx}")
   private String stockModel;
 
   public ResearchController(
@@ -41,7 +41,7 @@ public class ResearchController {
     result.put("models", models.modelStatus());
     result.put("stockEngine", stockModel);
     result.put("goldPrediction", models.predictGoldRegime());
-    if ("native".equals(stockModel)) {
+    if ("native".equals(stockModel) || "shock-onnx".equals(stockModel)) {
       var forecast = nativeRegime.predict();
       result.put("nativeStockPrediction", forecast);
       result.put("stockPrediction", new RegimePrediction(forecast.signal(), 0, forecast.regimeName()));

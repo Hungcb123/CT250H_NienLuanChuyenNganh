@@ -76,10 +76,11 @@ knowledge:
 # Experimental: current OOS TAA underperforms SAA. Explicit opt-in only.
 ml:
   taa-enabled: ${ML_TAA_ENABLED:false}
-  stock-model: ${ML_STOCK_MODEL:native}
+  stock-model: ${ML_STOCK_MODEL:shock-onnx}
+  shock-directory: ${REGIME_ONNX_DIRECTORY:classpath:models/shock/}
   native-url: ${REGIME_NATIVE_URL:http://127.0.0.1:8091}
   native-token: ${REGIME_API_TOKEN:}
-  native-managed: ${REGIME_MANAGED:true}
+  native-managed: ${REGIME_MANAGED:false}
   native-python: ${REGIME_PYTHON:python3}
   native-script: ${REGIME_WORKER_SCRIPT:../ml/serve_regime_shock.py}
 

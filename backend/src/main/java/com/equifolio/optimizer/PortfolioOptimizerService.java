@@ -37,13 +37,13 @@ public class PortfolioOptimizerService {
     @org.springframework.beans.factory.annotation.Autowired
     private EquityPreferenceService equityPreferences;
 
-    @org.springframework.beans.factory.annotation.Value("${ml.stock-model:native}")
+    @org.springframework.beans.factory.annotation.Value("${ml.stock-model:shock-onnx}")
     private String stockModel;
 
     @jakarta.annotation.PostConstruct
     void validateStockModelConfiguration() {
-        if (!"native".equals(stockModel) && !"onnx".equals(stockModel))
-            throw new IllegalStateException("ml.stock-model must be native or onnx");
+        if (!"native".equals(stockModel) && !"onnx".equals(stockModel) && !"shock-onnx".equals(stockModel))
+            throw new IllegalStateException("ml.stock-model must be shock-onnx, native or onnx");
     }
 
     public PortfolioOptimizerService(LedgerService ledgerService,
@@ -116,7 +116,7 @@ public class PortfolioOptimizerService {
         plan.setSaaTargets(new HashMap<>(saaMap));
 
         // ═══ ML: Gọi ONNX dự báo regime T+20 ═══
-        boolean useNative = "native".equals(stockModel) || horizon != 20;
+        boolean useNative = "native".equals(stockModel) || "shock-onnx".equals(stockModel) || horizon != 20;
         NativeRegimeForecast nativeStock = useNative
                 ? (nativeRegimeService == null ? NativeRegimeForecast.unavailable("WORKER_UNAVAILABLE") : (horizon == 20 ? nativeRegimeService.predict() : nativeRegimeService.predict(horizon)))
                 : null;
