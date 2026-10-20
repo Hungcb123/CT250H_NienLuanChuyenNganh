@@ -1,0 +1,366 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "weighted_prior": [
+      0.3069987546530358,
+      0.5488518803768289,
+      0.144149364970135
+    ],
+    "effective_weight_rows": 326.2050192393454
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "weighted_prior": [
+      0.24601620829133394,
+      0.5537003665389114,
+      0.2002834251697548
+    ],
+    "effective_weight_rows": 334.95687977126215
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "weighted_prior": [
+      0.2003042279373424,
+      0.6340588419832852,
+      0.16563693007937236
+    ],
+    "effective_weight_rows": 342.202334569703
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "weighted_prior": [
+      0.14021817611338835,
+      0.5198839663795533,
+      0.3398978575070583
+    ],
+    "effective_weight_rows": 347.87498435161774
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "weighted_prior": [
+      0.126296972333624,
+      0.5278370022887494,
+      0.3458660253776266
+    ],
+    "effective_weight_rows": 352.17076342442795
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "weighted_prior": [
+      0.08886364795611464,
+      0.49703172337654405,
+      0.4141046286673416
+    ],
+    "effective_weight_rows": 355.35482517690076
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "weighted_prior": [
+      0.12288697634622349,
+      0.5687135722826224,
+      0.3083994513711537
+    ],
+    "effective_weight_rows": 357.6811931801213
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "weighted_prior": [
+      0.1149748668814995,
+      0.5964820594584777,
+      0.28854307366002296
+    ],
+    "effective_weight_rows": 358.045576465057
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "weighted_prior": [
+      0.08589378398932447,
+      0.5802214598021846,
+      0.3338847562084909
+    ],
+    "effective_weight_rows": 359.6266691213708
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "weighted_prior": [
+      0.06614499951487612,
+      0.6981463170663413,
+      0.23570868341878318
+    ],
+    "effective_weight_rows": 360.76159202625274
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "weighted_prior": [
+      0.17556752683049012,
+      0.619113713002393,
+      0.20531876016711667
+    ],
+    "effective_weight_rows": 361.11652020487446
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "weighted_prior": [
+      0.2632340948007592,
+      0.5175308214097672,
+      0.2192350837894738
+    ],
+    "effective_weight_rows": 322.0129022711462
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "weighted_prior": [
+      0.24097272163025035,
+      0.5800472453400679,
+      0.178980033029682
+    ],
+    "effective_weight_rows": 317.0791237210423
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "weighted_prior": [
+      0.18352064468390358,
+      0.6815275983782246,
+      0.1349517569378719
+    ],
+    "effective_weight_rows": 322.83197315163864
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "weighted_prior": [
+      0.13014524374935818,
+      0.6046269280008181,
+      0.26522782824982394
+    ],
+    "effective_weight_rows": 330.1889415513909
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "weighted_prior": [
+      0.12935547539817482,
+      0.5823061561973528,
+      0.2883383684044723
+    ],
+    "effective_weight_rows": 337.83605941426515
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "weighted_prior": [
+      0.12784798519011184,
+      0.670911458843681,
+      0.2012405559662066
+    ],
+    "effective_weight_rows": 344.275588575495
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "weighted_prior": [
+      0.0895802920652956,
+      0.5917359331034043,
+      0.3186837748313004
+    ],
+    "effective_weight_rows": 349.3620579996858
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "weighted_prior": [
+      0.09938205191211973,
+      0.6588812455554851,
+      0.24173670253239513
+    ],
+    "effective_weight_rows": 353.23370036446363
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "weighted_prior": [
+      0.10829060560294984,
+      0.6886392894234762,
+      0.20307010497357364
+    ],
+    "effective_weight_rows": 356.1124699056391
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "weighted_prior": [
+      0.12413145750582223,
+      0.7081060191391952,
+      0.16776252335498265
+    ],
+    "effective_weight_rows": 358.2200652072235
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "weighted_prior": [
+      0.11614488902289154,
+      0.7268863614854596,
+      0.15696874949164907
+    ],
+    "effective_weight_rows": 358.5504852855342
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "weighted_prior": [
+      0.18382713174691384,
+      0.5962420468233788,
+      0.2199308214297074
+    ],
+    "effective_weight_rows": 359.9851113043254
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "weighted_prior": [
+      0.12979336793091797,
+      0.5811742056138569,
+      0.28903242645522514
+    ],
+    "effective_weight_rows": 361.0157704901813
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "weighted_prior": [
+      0.10803177605073128,
+      0.6183106945975059,
+      0.273657529351763
+    ],
+    "effective_weight_rows": 361.752731834162
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "weighted_prior": [
+      0.09608830117396303,
+      0.623088260046745,
+      0.2808234387792925
+    ],
+    "effective_weight_rows": 362.2779524746637
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "weighted_prior": [
+      0.14703985796339142,
+      0.5923646366579017,
+      0.2605955053787064
+    ],
+    "effective_weight_rows": 362.6514028357677
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "weighted_prior": [
+      0.21587617494514785,
+      0.5999228552494883,
+      0.18420096980536393
+    ],
+    "effective_weight_rows": 362.9165066753762
+  }
+]

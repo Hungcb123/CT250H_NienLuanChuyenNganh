@@ -1,0 +1,18 @@
+{
+  "role": "Three-class fixed-target DEVELOPMENT only",
+  "groups": 5,
+  "frozen_days": 1560,
+  "inner_boundaries_audited": 40,
+  "refit_boundaries_audited": 140,
+  "hyperparameter_trials": 300,
+  "equal_budget_per_group_outer_fold": 15,
+  "legacy_control_exact_predictions": 1560,
+  "vix_availability_audited": true,
+  "source_sha256": {
+    "control_predictions.csv": "159da1979ff3425be5cecbdcd03d612dc6187c4b870d80e1963562875cbc92e0",
+    "ohlcv_predictions.csv": "c4f9f23d6386e08f8fa01d8531bd391d655c1d794bb42450e97607835a6074af",
+    "vix_predictions.csv": "ab765e76f2d297c3de10537c6c6446339be37ba228382a936f3f45b05d8aa2b0",
+    "indices_predictions.csv": "39a374b2619816df92423083307f623e973c40da409ea4cdf8b679df4a12dc45",
+    "combined_predictions.csv": "14a6ae28ce2541ff1fa19701c72aafff6bfc92980c02b2d00094f8c37a41fd6b"
+  }
+}

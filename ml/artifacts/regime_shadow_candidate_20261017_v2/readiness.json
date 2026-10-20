@@ -1,0 +1,17 @@
+{
+  "candidate_id": "equal_standardized_3y_expanding_online120_v1",
+  "status": "awaiting_fresh_prospective_session_not_goal_complete",
+  "runtime_sha256": "a90c5fa58d577aab07f5083e148028453bccdcab8d77f99cebe9708905f2fa3c",
+  "runtime_frozen_at": "2026-10-17T16:51:31.462333+00:00",
+  "latest_reviewed_session": "2026-10-16",
+  "source_snapshot_sha256": "2d55af597b6a78e7a55df8a4b6153a270d7ac250665480895a6c447679c6c775",
+  "parity_report": "ml/reports/regime_shadow/parity_runtime_v2_20261017/parity_report.json",
+  "native_bundle_root": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/bundles",
+  "prospective_predictions": 0,
+  "stale_session_emission_guard": "passed",
+  "guard_reason": "Prospective emission requires SAME completed-session date after 15:05 Vietnam time",
+  "automation_readiness": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/automation_readiness.json",
+  "schedule_installed": true,
+  "tests_passed": 124,
+  "updated_at": "2026-10-18T13:17:25.570280+00:00"
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "study": "refresh",
+    "path": "ml/reports/regime_dynamic_refresh/20261019T061304_727630Z",
+    "comparison": [
+      {
+        "candidate": "both20",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "fast_class_ensemble",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "seeds",
+    "path": "ml/reports/regime_density_seeds/20261019T061537_193740Z",
+    "comparison": [
+      {
+        "candidate": "info_seed5",
+        "fold_wins": 3,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "info_seed5_shrink",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "recency",
+    "path": "ml/reports/regime_density_recency/20261019T061742_245534Z",
+    "comparison": [
+      {
+        "candidate": "info_decay_pool",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "info_decay_shrink",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "calendar",
+    "path": "ml/reports/regime_calendar/20261019T062007_544969Z",
+    "comparison": [
+      {
+        "candidate": "calendar_full",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "calendar_regularized",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "score_smoothing",
+    "path": "ml/reports/regime_forecast_smoothing/20261019T062316_546117Z",
+    "comparison": [
+      {
+        "candidate": "ema5",
+        "fold_wins": 2,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "ema5_shrink",
+        "fold_wins": 2,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  }
+]

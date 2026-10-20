@@ -1,0 +1,15 @@
+{
+  "status": "insufficient_prospective_evidence",
+  "n_matured": 0,
+  "positive_clusters": 0,
+  "metrics": null,
+  "intervals": [],
+  "candidate_id": "equal_standardized_3y_expanding_online120_v1",
+  "predictions": 2,
+  "pending_outcomes": 2,
+  "latest_reviewed_session": "2026-10-20",
+  "protocol_sha256": "c452f79adfa2617ecce14f5de515a66a45b6dd47c73a8f56fd84c3b5f10d1a37",
+  "predictions_ledger_sha256": "b22425cdbcba267120d90d805ec249567111af94aee6a324902c2b92c622ff20",
+  "outcomes_ledger_sha256": null,
+  "evaluated_at": "2026-10-20T08:30:46.912580+00:00"
+}

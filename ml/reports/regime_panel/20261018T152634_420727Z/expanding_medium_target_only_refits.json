@@ -1,0 +1,814 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "prediction_start": "2020-03-27",
+    "n_target": 2469,
+    "n_auxiliary": 0,
+    "unique_dates": 2469,
+    "by_symbol": {
+      "VNINDEX": 2469
+    },
+    "latest_label_end": "2020-03-26",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2469.0,
+    "class_base_mass": [
+      388.0,
+      1619.0,
+      462.0
+    ],
+    "class_cost_factors": [
+      2.1211340206185567,
+      0.5083384805435454,
+      1.7813852813852813
+    ],
+    "weighted_class_mass": [
+      823.0000000000041,
+      823.0000000000156,
+      822.9999999999953
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "prediction_start": "2020-06-29",
+    "n_target": 2532,
+    "n_auxiliary": 0,
+    "unique_dates": 2532,
+    "by_symbol": {
+      "VNINDEX": 2532
+    },
+    "latest_label_end": "2020-06-26",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2532.0,
+    "class_base_mass": [
+      397.0,
+      1636.0,
+      499.0
+    ],
+    "class_cost_factors": [
+      2.1259445843828715,
+      0.5158924205378973,
+      1.691382765531062
+    ],
+    "weighted_class_mass": [
+      843.9999999999974,
+      843.9999999999799,
+      844.0000000000063
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "prediction_start": "2020-09-25",
+    "n_target": 2595,
+    "n_auxiliary": 0,
+    "unique_dates": 2595,
+    "by_symbol": {
+      "VNINDEX": 2595
+    },
+    "latest_label_end": "2020-09-24",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2595.0,
+    "class_base_mass": [
+      403.0,
+      1675.0,
+      517.0
+    ],
+    "class_cost_factors": [
+      2.1464019851116625,
+      0.5164179104477612,
+      1.6731141199226305
+    ],
+    "weighted_class_mass": [
+      864.9999999999965,
+      865.000000000027,
+      864.9999999999957
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "prediction_start": "2020-12-23",
+    "n_target": 2658,
+    "n_auxiliary": 0,
+    "unique_dates": 2658,
+    "by_symbol": {
+      "VNINDEX": 2658
+    },
+    "latest_label_end": "2020-12-22",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2658.0,
+    "class_base_mass": [
+      403.0,
+      1715.0,
+      540.0
+    ],
+    "class_cost_factors": [
+      2.198511166253102,
+      0.5166180758017492,
+      1.6407407407407408
+    ],
+    "weighted_class_mass": [
+      885.9999999999972,
+      885.9999999999864,
+      885.9999999999992
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "prediction_start": "2021-03-30",
+    "n_target": 2721,
+    "n_auxiliary": 0,
+    "unique_dates": 2721,
+    "by_symbol": {
+      "VNINDEX": 2721
+    },
+    "latest_label_end": "2021-03-29",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2721.0,
+    "class_base_mass": [
+      408.0,
+      1743.0,
+      570.0
+    ],
+    "class_cost_factors": [
+      2.2230392156862746,
+      0.5203671830177854,
+      1.5912280701754387
+    ],
+    "weighted_class_mass": [
+      907.0000000000068,
+      907.0000000000307,
+      907.0000000000064
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "prediction_start": "2021-06-30",
+    "n_target": 2784,
+    "n_auxiliary": 0,
+    "unique_dates": 2784,
+    "by_symbol": {
+      "VNINDEX": 2784
+    },
+    "latest_label_end": "2021-06-29",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2784.0,
+    "class_base_mass": [
+      408.0,
+      1772.0,
+      604.0
+    ],
+    "class_cost_factors": [
+      2.2745098039215685,
+      0.5237020316027088,
+      1.5364238410596027
+    ],
+    "weighted_class_mass": [
+      927.999999999994,
+      928.0000000000106,
+      927.9999999999914
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "prediction_start": "2021-09-29",
+    "n_target": 2847,
+    "n_auxiliary": 0,
+    "unique_dates": 2847,
+    "by_symbol": {
+      "VNINDEX": 2847
+    },
+    "latest_label_end": "2021-09-28",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2847.0,
+    "class_base_mass": [
+      422.0,
+      1814.0,
+      611.0
+    ],
+    "class_cost_factors": [
+      2.248815165876777,
+      0.5231532524807057,
+      1.553191489361702
+    ],
+    "weighted_class_mass": [
+      948.9999999999914,
+      949.0000000000085,
+      948.9999999999927
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "prediction_start": "2021-10-15",
+    "n_target": 2859,
+    "n_auxiliary": 0,
+    "unique_dates": 2859,
+    "by_symbol": {
+      "VNINDEX": 2859
+    },
+    "latest_label_end": "2021-10-14",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2859.0,
+    "class_base_mass": [
+      422.0,
+      1826.0,
+      611.0
+    ],
+    "class_cost_factors": [
+      2.258293838862559,
+      0.5219058050383352,
+      1.5597381342062193
+    ],
+    "weighted_class_mass": [
+      952.9999999999965,
+      953.0000000000388,
+      952.9999999999968
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "prediction_start": "2022-01-13",
+    "n_target": 2922,
+    "n_auxiliary": 0,
+    "unique_dates": 2922,
+    "by_symbol": {
+      "VNINDEX": 2922
+    },
+    "latest_label_end": "2022-01-12",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2922.0,
+    "class_base_mass": [
+      422.0,
+      1869.0,
+      631.0
+    ],
+    "class_cost_factors": [
+      2.308056872037915,
+      0.5211342964151953,
+      1.543581616481775
+    ],
+    "weighted_class_mass": [
+      974.000000000003,
+      974.0000000000051,
+      974.000000000007
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "prediction_start": "2022-04-20",
+    "n_target": 2985,
+    "n_auxiliary": 0,
+    "unique_dates": 2985,
+    "by_symbol": {
+      "VNINDEX": 2985
+    },
+    "latest_label_end": "2022-04-19",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 2985.0,
+    "class_base_mass": [
+      423.0,
+      1931.0,
+      631.0
+    ],
+    "class_cost_factors": [
+      2.352245862884161,
+      0.5152770585189022,
+      1.5768621236133122
+    ],
+    "weighted_class_mass": [
+      995.0,
+      995.0000000000045,
+      994.9999999999932
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "prediction_start": "2022-07-20",
+    "n_target": 3048,
+    "n_auxiliary": 0,
+    "unique_dates": 3048,
+    "by_symbol": {
+      "VNINDEX": 3048
+    },
+    "latest_label_end": "2022-07-19",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3048.0,
+    "class_base_mass": [
+      464.0,
+      1951.0,
+      633.0
+    ],
+    "class_cost_factors": [
+      2.189655172413793,
+      0.5207585853408508,
+      1.6050552922590837
+    ],
+    "weighted_class_mass": [
+      1016.0000000000076,
+      1016.0000000000427,
+      1015.9999999999928
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "prediction_start": "2022-10-19",
+    "n_target": 3111,
+    "n_auxiliary": 0,
+    "unique_dates": 3111,
+    "by_symbol": {
+      "VNINDEX": 3111
+    },
+    "latest_label_end": "2022-10-18",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3111.0,
+    "class_base_mass": [
+      483.0,
+      1976.0,
+      652.0
+    ],
+    "class_cost_factors": [
+      2.1469979296066253,
+      0.5247975708502024,
+      1.5904907975460123
+    ],
+    "weighted_class_mass": [
+      1037.000000000005,
+      1036.999999999975,
+      1037.0000000000168
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "prediction_start": "2023-01-17",
+    "n_target": 3174,
+    "n_auxiliary": 0,
+    "unique_dates": 3174,
+    "by_symbol": {
+      "VNINDEX": 3174
+    },
+    "latest_label_end": "2023-01-16",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3174.0,
+    "class_base_mass": [
+      504.0,
+      2002.0,
+      668.0
+    ],
+    "class_cost_factors": [
+      2.0992063492063493,
+      0.5284715284715285,
+      1.5838323353293413
+    ],
+    "weighted_class_mass": [
+      1058.0000000000048,
+      1057.9999999999984,
+      1058.0000000000098
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "prediction_start": "2023-04-21",
+    "n_target": 3237,
+    "n_auxiliary": 0,
+    "unique_dates": 3237,
+    "by_symbol": {
+      "VNINDEX": 3237
+    },
+    "latest_label_end": "2023-04-20",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3237.0,
+    "class_base_mass": [
+      509.0,
+      2050.0,
+      678.0
+    ],
+    "class_cost_factors": [
+      2.119842829076621,
+      0.5263414634146342,
+      1.5914454277286136
+    ],
+    "weighted_class_mass": [
+      1079.0000000000107,
+      1078.999999999964,
+      1078.999999999981
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "prediction_start": "2023-07-17",
+    "n_target": 3295,
+    "n_auxiliary": 0,
+    "unique_dates": 3295,
+    "by_symbol": {
+      "VNINDEX": 3295
+    },
+    "latest_label_end": "2023-07-14",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3295.0,
+    "class_base_mass": [
+      509.0,
+      2099.0,
+      687.0
+    ],
+    "class_cost_factors": [
+      2.157825802226588,
+      0.5232650468477053,
+      1.5987384764677341
+    ],
+    "weighted_class_mass": [
+      1098.3333333333414,
+      1098.3333333332826,
+      1098.3333333333303
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "prediction_start": "2023-10-16",
+    "n_target": 3358,
+    "n_auxiliary": 0,
+    "unique_dates": 3358,
+    "by_symbol": {
+      "VNINDEX": 3358
+    },
+    "latest_label_end": "2023-10-13",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3358.0,
+    "class_base_mass": [
+      519.0,
+      2131.0,
+      708.0
+    ],
+    "class_cost_factors": [
+      2.1567116249197174,
+      0.5252620053183169,
+      1.5809792843691148
+    ],
+    "weighted_class_mass": [
+      1119.3333333333296,
+      1119.3333333333028,
+      1119.3333333333437
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "prediction_start": "2024-01-12",
+    "n_target": 3421,
+    "n_auxiliary": 0,
+    "unique_dates": 3421,
+    "by_symbol": {
+      "VNINDEX": 3421
+    },
+    "latest_label_end": "2024-01-11",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3421.0,
+    "class_base_mass": [
+      531.0,
+      2180.0,
+      710.0
+    ],
+    "class_cost_factors": [
+      2.14752040175769,
+      0.5230886850152905,
+      1.6061032863849765
+    ],
+    "weighted_class_mass": [
+      1140.3333333333278,
+      1140.3333333333183,
+      1140.3333333333194
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "prediction_start": "2024-04-17",
+    "n_target": 3484,
+    "n_auxiliary": 0,
+    "unique_dates": 3484,
+    "by_symbol": {
+      "VNINDEX": 3484
+    },
+    "latest_label_end": "2024-04-16",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3484.0,
+    "class_base_mass": [
+      531.0,
+      2222.0,
+      731.0
+    ],
+    "class_cost_factors": [
+      2.18706842435656,
+      0.5226522652265226,
+      1.5886912904696762
+    ],
+    "weighted_class_mass": [
+      1161.333333333325,
+      1161.3333333332914,
+      1161.333333333328
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "prediction_start": "2024-07-19",
+    "n_target": 3547,
+    "n_auxiliary": 0,
+    "unique_dates": 3547,
+    "by_symbol": {
+      "VNINDEX": 3547
+    },
+    "latest_label_end": "2024-07-18",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3547.0,
+    "class_base_mass": [
+      539.0,
+      2269.0,
+      739.0
+    ],
+    "class_cost_factors": [
+      2.1935683364254794,
+      0.5210812399001028,
+      1.5999097880018043
+    ],
+    "weighted_class_mass": [
+      1182.333333333339,
+      1182.3333333333403,
+      1182.333333333326
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "prediction_start": "2024-10-18",
+    "n_target": 3610,
+    "n_auxiliary": 0,
+    "unique_dates": 3610,
+    "by_symbol": {
+      "VNINDEX": 3610
+    },
+    "latest_label_end": "2024-10-17",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3610.0,
+    "class_base_mass": [
+      543.0,
+      2327.0,
+      740.0
+    ],
+    "class_cost_factors": [
+      2.2160834868017187,
+      0.5171178914195674,
+      1.6261261261261262
+    ],
+    "weighted_class_mass": [
+      1203.3333333333258,
+      1203.3333333333537,
+      1203.3333333333246
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "prediction_start": "2025-01-16",
+    "n_target": 3673,
+    "n_auxiliary": 0,
+    "unique_dates": 3673,
+    "by_symbol": {
+      "VNINDEX": 3673
+    },
+    "latest_label_end": "2025-01-15",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3673.0,
+    "class_base_mass": [
+      545.0,
+      2388.0,
+      740.0
+    ],
+    "class_cost_factors": [
+      2.2464831804281347,
+      0.5127024008933556,
+      1.6545045045045046
+    ],
+    "weighted_class_mass": [
+      1224.3333333333485,
+      1224.3333333333323,
+      1224.3333333333478
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "prediction_start": "2025-02-10",
+    "n_target": 3685,
+    "n_auxiliary": 0,
+    "unique_dates": 3685,
+    "by_symbol": {
+      "VNINDEX": 3685
+    },
+    "latest_label_end": "2025-02-07",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3685.0,
+    "class_base_mass": [
+      545.0,
+      2400.0,
+      740.0
+    ],
+    "class_cost_factors": [
+      2.253822629969419,
+      0.5118055555555555,
+      1.65990990990991
+    ],
+    "weighted_class_mass": [
+      1228.333333333316,
+      1228.3333333334099,
+      1228.3333333333114
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "prediction_start": "2025-05-14",
+    "n_target": 3748,
+    "n_auxiliary": 0,
+    "unique_dates": 3748,
+    "by_symbol": {
+      "VNINDEX": 3748
+    },
+    "latest_label_end": "2025-05-13",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3748.0,
+    "class_base_mass": [
+      565.0,
+      2437.0,
+      746.0
+    ],
+    "class_cost_factors": [
+      2.2112094395280235,
+      0.5126521679660785,
+      1.674709562109026
+    ],
+    "weighted_class_mass": [
+      1249.333333333327,
+      1249.3333333332846,
+      1249.3333333333192
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "prediction_start": "2025-08-11",
+    "n_target": 3811,
+    "n_auxiliary": 0,
+    "unique_dates": 3811,
+    "by_symbol": {
+      "VNINDEX": 3811
+    },
+    "latest_label_end": "2025-08-08",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3811.0,
+    "class_base_mass": [
+      565.0,
+      2458.0,
+      788.0
+    ],
+    "class_cost_factors": [
+      2.248377581120944,
+      0.5168158394358557,
+      1.612098138747885
+    ],
+    "weighted_class_mass": [
+      1270.3333333333287,
+      1270.3333333332926,
+      1270.3333333333317
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "prediction_start": "2025-11-10",
+    "n_target": 3874,
+    "n_auxiliary": 0,
+    "unique_dates": 3874,
+    "by_symbol": {
+      "VNINDEX": 3874
+    },
+    "latest_label_end": "2025-11-07",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3874.0,
+    "class_base_mass": [
+      566.0,
+      2501.0,
+      807.0
+    ],
+    "class_cost_factors": [
+      2.2815076560659597,
+      0.5163268026122885,
+      1.6001652209830648
+    ],
+    "weighted_class_mass": [
+      1291.3333333333378,
+      1291.333333333295,
+      1291.3333333333474
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "prediction_start": "2026-02-09",
+    "n_target": 3937,
+    "n_auxiliary": 0,
+    "unique_dates": 3937,
+    "by_symbol": {
+      "VNINDEX": 3937
+    },
+    "latest_label_end": "2026-02-06",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 3937.0,
+    "class_base_mass": [
+      572.0,
+      2536.0,
+      829.0
+    ],
+    "class_cost_factors": [
+      2.2942890442890445,
+      0.5174815983175605,
+      1.5830317651789305
+    ],
+    "weighted_class_mass": [
+      1312.3333333333403,
+      1312.3333333333046,
+      1312.3333333333333
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "prediction_start": "2026-05-19",
+    "n_target": 4000,
+    "n_auxiliary": 0,
+    "unique_dates": 4000,
+    "by_symbol": {
+      "VNINDEX": 4000
+    },
+    "latest_label_end": "2026-05-18",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 4000.0,
+    "class_base_mass": [
+      588.0,
+      2562.0,
+      850.0
+    ],
+    "class_cost_factors": [
+      2.2675736961451247,
+      0.5204267499349466,
+      1.5686274509803921
+    ],
+    "weighted_class_mass": [
+      1333.3333333333362,
+      1333.3333333333621,
+      1333.3333333333362
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "prediction_start": "2026-08-14",
+    "n_target": 4063,
+    "n_auxiliary": 0,
+    "unique_dates": 4063,
+    "by_symbol": {
+      "VNINDEX": 4063
+    },
+    "latest_label_end": "2026-08-13",
+    "auxiliary_latest_label_end": null,
+    "base_mass": 4063.0,
+    "class_base_mass": [
+      605.0,
+      2606.0,
+      852.0
+    ],
+    "class_cost_factors": [
+      2.2385674931129476,
+      0.5196981325147096,
+      1.5895931142410016
+    ],
+    "weighted_class_mass": [
+      1354.3333333333148,
+      1354.3333333333676,
+      1354.3333333333453
+    ]
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "mode": "posthoc_heterogeneous_development",
+  "created_at": "2026-10-18T16:00:07.364923+00:00",
+  "source_sha256": "cfd6aff94edd204eeb1b66e9bf0cb8fbe878a9c14e0bc9b46817ef154d93f91a",
+  "input_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/legacy_equal_63_predictions.csv": "5a079a343e4ca685b50349e8944a99a880a5218c6971b2f46d9608ce9d188720",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/legacy_trend_63_predictions.csv": "7fdd4be6a61304001f9840594cf224988f8448aa9daae2a1744db6b360a626d7",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/legacy_risk_63_predictions.csv": "66535f965d9dc3cc8581ccb0e1d128278f0be59cc315853d8140515c8bedbb96",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_raw_predictions.csv": "af5a6467cc18850128b7b6b8478c70ea92a689dbeca76f167c1765a52f14d516",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_normalized_predictions.csv": "bec9740cca6500e2ba23ef12cdd4afe9d15d93de323c56e2b924c30d63a78188",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_raw_predictions.csv": "83af3dd9d1197722b2b7a25eb31adcbf22aa36c3982f5669d34f6e91e55f4444",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_normalized_predictions.csv": "60b67a09af6db02ad10314ca69c5d37c68d13cb4eedbadb5319cf10dbe4e4568"
+  },
+  "calendar_hash": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+  "fixed_mixtures": {
+    "density_all": "equal all FOUR density forecasters, no best-only selection",
+    "density_expanding": "equal RAW/NORMALIZED expanding density",
+    "blend_all": "half legacy_equal + half density_all",
+    "blend_expanding": "half legacy_equal + half density_expanding"
+  },
+  "selector_pool": [
+    "legacy_equal",
+    "legacy_trend",
+    "legacy_risk",
+    "density_all",
+    "density_expanding"
+  ],
+  "selector_rule": {
+    "history_rows": 126,
+    "min_class_count": 5,
+    "improvement_margin": 0.03,
+    "refit_market_sessions": 20
+  },
+  "candidates": [
+    "density_all",
+    "density_expanding",
+    "blend_all",
+    "blend_expanding",
+    "delayed_selector"
+  ],
+  "timing": "History rows label_end_date strictly before selection date. Selector refreshes each20 raw sessions, holds selected expert between refreshes. Warmup/insufficient class history falls back to legacy_equal.",
+  "caveats": [
+    "Study motivated by already inspected outer results; all comparisons are DEVELOPMENT only.",
+    "Class-balanced expert vectors are decision scores, not calibrated event probabilities.",
+    "Small overlapping samples give uncertain expert selection; margin is a heuristic, no statistical guarantee.",
+    "No new learner fits, weight grid, label changes or automatic deployment."
+  ]
+}

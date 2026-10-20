@@ -1,0 +1,75 @@
+{
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "bf445fd7933ad9d8c106ba7bef6b5cadf9cfd8a8eed4f699339a26c114898b94",
+  "training_prefix_sha256": "3878a8aa781503cbdf5ed8f85bf0f2e11af50da59e320e5ae65a0118ac4dbf2a",
+  "refit_date": "2025-03-10",
+  "feature_schema": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200",
+    "Drawdown120",
+    "Drawdown252",
+    "HV20_60_Ratio",
+    "DownsideHV60",
+    "Stretch20",
+    "Shock5",
+    "VolRatio5_20",
+    "NegativeDays10",
+    "Drawdown20"
+  ],
+  "experts": [
+    {
+      "window": "3y",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_0.txt",
+      "model_sha256": "425d7c14285c95eb3a1f22f67ab8867922945229aad733168de4c4bfeea6fc9a",
+      "logit_center": -1.8051624121061494,
+      "logit_scale": 0.8899361882189366,
+      "n_core": 668,
+      "n_calibration": 40,
+      "core_start": "2022-03-10",
+      "core_end": "2024-11-07",
+      "core_label_end": "2024-12-05",
+      "calibration_start": "2024-12-06",
+      "calibration_end": "2025-02-07",
+      "calibration_label_end": "2025-03-07"
+    },
+    {
+      "window": "expanding",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_1.txt",
+      "model_sha256": "134a8c96907a519da9acf2e8b06a1d5c4ab2ac48f334f80b018640de63452136",
+      "logit_center": -1.23751972390608,
+      "logit_scale": 0.25,
+      "n_core": 3453,
+      "n_calibration": 40,
+      "core_start": "2011-01-05",
+      "core_end": "2024-11-07",
+      "core_label_end": "2024-12-05",
+      "calibration_start": "2024-12-06",
+      "calibration_end": "2025-02-07",
+      "calibration_label_end": "2025-03-07"
+    }
+  ],
+  "calibration_threshold": 0.9563119166695173
+}

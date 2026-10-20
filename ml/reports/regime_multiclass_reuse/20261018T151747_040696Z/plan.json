@@ -1,0 +1,148 @@
+{
+  "mode": "legacy_parameter_reuse_three_class_development",
+  "reference_report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "labels": {
+    "20": {
+      "name": "T+20",
+      "bull_threshold": 0.05,
+      "bear_threshold": -0.05
+    }
+  },
+  "base_feature_set": "close-etf",
+  "feature_groups": {
+    "trend": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200"
+    ],
+    "risk": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "Drawdown120",
+      "Drawdown252",
+      "HV20_60_Ratio",
+      "DownsideHV60"
+    ]
+  },
+  "feature_version": "long-trend-risk-v1-research",
+  "train_windows": [
+    "3y"
+  ],
+  "refit_market_sessions": 20,
+  "inner_splits": 2,
+  "models": [
+    "LightGBM"
+  ],
+  "optuna": {
+    "n_trials": 15,
+    "timeout_seconds": 60
+  },
+  "score_role": "Nested forward development comparison on already-inspected history; no fresh holdout claim.",
+  "assumptions": [
+    "All variants use identical dates and labels; adding a feature cannot remove a frozen validation date.",
+    "Parameters are selected once at each outer fold start using purged inner folds only.",
+    "The model is refitted periodically using labels known strictly before each prediction block.",
+    "Rolling windows are calendar years measured from the prediction block start.",
+    "Each refit uses the same fixed parameters until the next outer fold.",
+    "A drawdown feature measures current distance below the trailing peak.",
+    "No confidence threshold, new label definition, financial backtest, or ONNX deployment."
+  ],
+  "datasets": [
+    {
+      "horizon": 20,
+      "eligible_history_rows": 2341,
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2020-03-27",
+          "end": "2021-10-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+          "n_refits": 20
+        },
+        {
+          "fold": 2,
+          "start": "2021-10-15",
+          "end": "2023-07-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+          "n_refits": 21
+        },
+        {
+          "fold": 3,
+          "start": "2023-07-17",
+          "end": "2025-02-07",
+          "n_validation": 390,
+          "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+          "n_refits": 20
+        },
+        {
+          "fold": 4,
+          "start": "2025-02-10",
+          "end": "2026-09-03",
+          "n_validation": 390,
+          "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+          "n_refits": 20
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "candidates": [
+    "trend_63",
+    "risk_63",
+    "equal_63",
+    "trend_20",
+    "risk_20",
+    "equal_20"
+  ],
+  "parameters_origin": "Original per-outer-fold purged INNER tuning, reused unchanged; no new tuning",
+  "original_report_sha256": "cb92562ac3a11bb192f888f5e9056787a14fb606feb924ed8586e4909b66eb4e",
+  "original_plan_sha256": "49fada2d388d9c5d8a54c8a850bf7206690d842925fe695780e07eafc78eacef",
+  "source_sha256": "8126239e714d6c843049dfe6334cff9d11655bc3bcaf62d90efa1533c8c91c93",
+  "control": "legacy_trend_63/argmax; also compare legacy_risk_63/argmax",
+  "acceptance": "Only development screen: gain >=.02 mean fold F1, no worst-fold degradation, MCC gain and >=3 improved folds against BOTH original controls. No fresh-test acceptance.",
+  "equal_view_weights": [
+    0.5,
+    0.5
+  ],
+  "decisions": [
+    "argmax",
+    "causal_macro_weights"
+  ]
+}

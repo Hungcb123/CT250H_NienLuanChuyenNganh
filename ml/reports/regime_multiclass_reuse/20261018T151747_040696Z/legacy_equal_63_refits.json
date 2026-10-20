@@ -1,0 +1,394 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "prediction_start": "2020-03-27",
+    "weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 0,
+      "latest_label_end": null
+    }
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "prediction_start": "2020-06-29",
+    "weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 43,
+      "latest_label_end": "2020-06-26 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "prediction_start": "2020-09-25",
+    "weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 106,
+      "latest_label_end": "2020-09-24 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "prediction_start": "2020-12-23",
+    "weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 169,
+      "latest_label_end": "2020-12-22 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "prediction_start": "2021-03-30",
+    "weights": [
+      0.75,
+      1.0,
+      1.5
+    ],
+    "history": {
+      "n": 232,
+      "latest_label_end": "2021-03-29 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "prediction_start": "2021-06-30",
+    "weights": [
+      0.75,
+      1.0,
+      1.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2021-06-29 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "prediction_start": "2021-09-29",
+    "weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2021-09-28 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "prediction_start": "2021-10-15",
+    "weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2021-10-14 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "prediction_start": "2022-01-13",
+    "weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2022-01-12 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "prediction_start": "2022-04-20",
+    "weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2022-04-19 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "prediction_start": "2022-07-20",
+    "weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2022-05-26 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "prediction_start": "2022-10-19",
+    "weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2022-10-18 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "prediction_start": "2023-01-17",
+    "weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2023-01-16 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "prediction_start": "2023-04-21",
+    "weights": [
+      0.75,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2023-04-20 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "prediction_start": "2023-07-17",
+    "weights": [
+      0.75,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2023-07-14 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "prediction_start": "2023-10-16",
+    "weights": [
+      0.75,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2023-10-13 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "prediction_start": "2024-01-12",
+    "weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2024-01-11 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "prediction_start": "2024-04-17",
+    "weights": [
+      0.75,
+      1.0,
+      1.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2024-04-16 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "prediction_start": "2024-07-19",
+    "weights": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2024-07-18 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "prediction_start": "2024-10-18",
+    "weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2024-10-17 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "prediction_start": "2025-01-16",
+    "weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2025-01-15 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "prediction_start": "2025-02-10",
+    "weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2025-02-07 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "prediction_start": "2025-05-14",
+    "weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2025-05-13 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "prediction_start": "2025-08-11",
+    "weights": [
+      0.75,
+      1.0,
+      1.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2025-08-08 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "prediction_start": "2025-11-10",
+    "weights": [
+      0.75,
+      1.0,
+      1.5
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2025-11-07 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "prediction_start": "2026-02-09",
+    "weights": [
+      2.0,
+      1.0,
+      2.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2026-02-06 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "prediction_start": "2026-05-19",
+    "weights": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2026-05-18 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "prediction_start": "2026-08-14",
+    "weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "history": {
+      "n": 252,
+      "latest_label_end": "2026-08-13 00:00:00"
+    }
+  }
+]

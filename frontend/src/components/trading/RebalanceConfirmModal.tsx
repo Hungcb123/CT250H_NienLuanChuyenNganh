@@ -29,7 +29,8 @@ export function RebalanceConfirmModal({
   const buyActions = plan.actions?.filter(a => a.actionType === 'BUY') || [];
   const openSavingsActions = plan.actions?.filter(a => a.actionType === 'OPEN_SAVINGS') || [];
 
-  const hasEarlySettlement = settleActions.length > 0;
+  const earlyActions = settleActions.filter(a => a.earlySettlement);
+  const hasEarlySettlement = earlyActions.length > 0;
   const totalSettleMoney = settleActions.reduce((sum, a) => sum + (a.estimatedTotalMoney || 0), 0);
   const totalFeesAndTax = (plan.totalEstimatedFees || 0) + (plan.totalEstimatedTax || 0);
 
@@ -73,12 +74,12 @@ export function RebalanceConfirmModal({
             <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-500 space-y-2.5">
               <div className="flex items-center gap-2 font-bold text-xs">
                 <PiggyBank className="w-4 h-4 shrink-0 text-amber-500" />
-                <span>Lưu ý: Kế hoạch yêu cầu tất toán trước hạn {settleActions.length} sổ tiết kiệm</span>
+                <span>Lưu ý: Kế hoạch yêu cầu tất toán trước hạn {earlyActions.length} sổ tiết kiệm</span>
               </div>
               <p className="text-[11px] text-text-secondary leading-relaxed">
-                Để có đủ tiền mặt mua Vàng/Cổ phiếu đang thiếu hụt, hệ thống sẽ tất toán sổ tiết kiệm gần ngày đáo hạn nhất với tổng vốn gốc thu hồi là{' '}
+                Để có đủ tiền mặt mua Vàng/Cổ phiếu đang thiếu hụt, hệ thống sẽ tất toán sổ tiết kiệm gần ngày đáo hạn nhất với tổng tiền tất toán dự kiến là{' '}
                 <strong className="text-text-primary font-mono-num font-bold">{formatVND(totalSettleMoney)}</strong>.
-                Rút trước ngày đáo hạn có thể khiến bạn chỉ nhận mức lãi suất không kỳ hạn (0.1% - 0.2%/năm) thay vì lãi suất kỳ hạn cam kết ban đầu.
+                Sổ rút trước hạn dùng lãi suất rút sớm được cấu hình trong ứng dụng. Số tiền dự kiến đã tính theo chính sách này.
               </p>
 
               {/* List of savings being settled */}
@@ -188,7 +189,7 @@ export function RebalanceConfirmModal({
             <div className="flex justify-between text-text-muted">
               <span>Độ lệch tỷ trọng tối đa khắc phục:</span>
               <span className="font-mono-num font-bold text-accent-emerald">
-                {plan.maxDriftPercent.toFixed(1)}% &rarr; 0.0%
+                {plan.maxDriftPercent.toFixed(1)}% · kết quả sẽ được tính lại sau thực thi
               </span>
             </div>
             <div className="flex justify-between pt-1.5 border-t border-border-subtle font-bold">
@@ -213,7 +214,7 @@ export function RebalanceConfirmModal({
           <button
             type="button"
             onClick={handleConfirmClick}
-            disabled={executing || (hasEarlySettlement && !acknowledged)}
+            disabled={executing || !plan.planToken || !plan.actions?.length || (hasEarlySettlement && !acknowledged)}
             className={`px-5 py-2 rounded-xl font-bold text-xs text-white shadow-xs transition-all flex items-center gap-2 cursor-pointer ${
               hasEarlySettlement ? 'bg-amber-500 hover:bg-amber-600' : 'bg-accent-emerald hover:bg-emerald-600'
             } disabled:opacity-50 disabled:cursor-not-allowed`}

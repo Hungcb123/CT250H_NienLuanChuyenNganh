@@ -1,0 +1,132 @@
+{
+  "reference_report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "optuna": {
+    "n_trials": 15,
+    "timeout_seconds": 60
+  },
+  "mode": "historical_risk_development_not_fresh_test",
+  "model": "LightGBM",
+  "feature_group": "trend",
+  "feature_names": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ETF_ROC20",
+    "ETF_HV20",
+    "ETF_Corr30_VNINDEX",
+    "ETF_ReturnSpread20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200"
+  ],
+  "train_window": "3y",
+  "horizon": 20,
+  "refit_market_sessions": 63,
+  "inner_splits": 2,
+  "target_definitions": {
+    "fixed_5pct": {
+      "return": "simple",
+      "bear_below": -0.05,
+      "bull_above": 0.05
+    },
+    "vol_1sigma": {
+      "return": "log",
+      "sigma": "std of trailing completed DAILY log returns, ddof=1, decimal units",
+      "vol_lookback": 20,
+      "horizon": 20,
+      "k": 1.0,
+      "formula": "log(P[t+20]/P[t]) / (daily_sigma[t] * sqrt(20))",
+      "bear_below_z": -1.0,
+      "bull_above_z": 1.0
+    }
+  },
+  "label_encoding": {
+    "0": "bearish (-1)",
+    "1": "sideway (0)",
+    "2": "bullish (+1)"
+  },
+  "boundary_equality": "sideway",
+  "frozen_validation": [
+    {
+      "fold": 1,
+      "start": "2020-03-27",
+      "end": "2021-10-14",
+      "n_validation": 390,
+      "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+      "n_refits": 7
+    },
+    {
+      "fold": 2,
+      "start": "2021-10-15",
+      "end": "2023-07-14",
+      "n_validation": 390,
+      "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+      "n_refits": 7
+    },
+    {
+      "fold": 3,
+      "start": "2023-07-17",
+      "end": "2025-02-07",
+      "n_validation": 390,
+      "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+      "n_refits": 7
+    },
+    {
+      "fold": 4,
+      "start": "2025-02-10",
+      "end": "2026-09-03",
+      "n_validation": 390,
+      "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+      "n_refits": 7
+    }
+  ],
+  "comparison_rule": "Native F1 scores describe DIFFERENT tasks: no cross-target winner. Common risk diagnostics use actual simple return < -5% for both.",
+  "policies": [
+    "fixed_5pct",
+    "vol_1sigma",
+    "binary_5pct"
+  ],
+  "errors": [],
+  "vol_simple_threshold_percentiles": {
+    "vol_lower_simple_threshold": {
+      "0.1": -0.07853604299213557,
+      "0.5": -0.03900628941102028,
+      "0.9": -0.02336260270332732
+    },
+    "vol_upper_simple_threshold": {
+      "0.1": 0.023921470515049788,
+      "0.5": 0.04058953662362043,
+      "0.9": 0.08522964180514907
+    }
+  },
+  "common_outcome": "simple VNINDEX return at T+20 < -5%",
+  "alarm_rate_target": 0.1,
+  "calibration_fraction": 0.2,
+  "tuning_objective": "mean inner-fold average precision on common -5% outcome for ALL policies",
+  "score_meaning": "ranking scores from balanced-weight models; not calibrated event probabilities",
+  "protocol": [
+    "Same features, dates, 3y history windows and refit blocks across all three candidates.",
+    "Core fit excludes last 20% of mature history, reserved for calibration; core labels purged at calibration start.",
+    "Tune only on purged inner folds of first core in each outer fold, then freeze hyperparameters within outer fold.",
+    "Calibration and outer predictions use SAME core model; calibration rows are not refitted into model.",
+    "Threshold = historical calibration 90th percentile (higher); alarm strictly above; realized rate may differ from 10%.",
+    "Equal-count top10% per outer fold uses future score distribution: retrospective ranking diagnostic ONLY.",
+    "Inner validation with no loss event contributes AP=0 for every trial; all-positive validation contributes AP=1. Such folds cannot discriminate rankings.",
+    "New tuning objective and calibration split mean these are NOT reproductions of previous native-F1 runs.",
+    "No independent crash count, profit backtest, final holdout, deployment or export."
+  ]
+}

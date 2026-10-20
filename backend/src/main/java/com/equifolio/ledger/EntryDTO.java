@@ -9,6 +9,9 @@ public class EntryDTO {
     private String assetTicker;
     private String assetName;
     private BigDecimal amount;
+    private BigDecimal monetaryValue;
+    public BigDecimal getMonetaryValue() { return monetaryValue; }
+    public void setMonetaryValue(BigDecimal value) { this.monetaryValue = value; }
     private String entryType; // "DEBIT" or "CREDIT"
 
     public EntryDTO() {}

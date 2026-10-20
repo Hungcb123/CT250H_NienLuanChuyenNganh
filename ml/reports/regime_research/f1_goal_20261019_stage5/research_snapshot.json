@@ -1,0 +1,41 @@
+{
+  "role": "Research prediction snapshots only, no native inference bundle or deployment acceptance",
+  "created_at": "2026-10-19T07:28:52.743142+00:00",
+  "metrics": {
+    "at": "2026-10-19T07:28:52.743142+00:00",
+    "highest_observed_f1": 0.5144884151429698,
+    "highest_mean_worst_f1": 0.3936614920855182,
+    "balanced_candidate": {
+      "name": "shock_shrink",
+      "mean_f1": 0.5137451636929175,
+      "worst_f1": 0.403056383096105,
+      "mean_mcc": 0.300524907816212
+    },
+    "forecast_files_audited": 10,
+    "source_hashes_verified": 49,
+    "focused_tests_passed": 23,
+    "independent_test": false,
+    "accepted": false,
+    "goal_achieved": false,
+    "goal_status": "active",
+    "deployment_changed": false
+  },
+  "files": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage5/independent_metric_audit.json": "1ce245e7b79ac5c270343c468252897e04e4515ec2862c59f1e20f6c099e1a54",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage5/goal_start_comparison.json": "0f3e17f766f3babad646f32107c4462515c902a0d4ebbcb4b9fcbac348beda7c",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage5/recalculate.py": "8707cb7c8f2a27d1ada2a2d093fb80fd30d2e46471c7d35a6685d1f821d70ffa",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage5/comparison.png": "0f2c0a86aacd7d2f11b3c2390ec438bafc1d1870f631c516967e078bec43cb86",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_analog_density/20261019T071721_721598Z/plan.json": "530c03d6c6aa7b1b6f26244bd863960de44746fbccc9d947f80bd08a2cca1865",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_analog_density/20261019T071721_721598Z/report.json": "8591d62e63efa2ca5fdad7ce17b8ea872fc9bcb1f12d8f856f86b095f0d30520",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_analog_density/20261019T071721_721598Z/analog_shrink_predictions.csv": "a5adddd723d31bdda35f4a0b70d9c37bebce8008cb12373be6da048a76292b6c",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_analog_density/20261019T071721_721598Z/timing_audit.json": "11bcde77de853f5777d593c8bc0de426c0c0b65d6bc7da4e83adb485b0f4e30a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_forest/20261019T072038_455776Z/plan.json": "be761f00005d09f32094f0c3bc624bb9733577c2b9c5611e213c674259aceff7",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_forest/20261019T072038_455776Z/report.json": "0c56fc3a9f580191f4ae94a980e107d7c2fbd080aaa56769fd58529adcba8b06",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_forest/20261019T072038_455776Z/shock_shrink_predictions.csv": "4655744f3b338351570247730b736275c298f857885b3a1ce333bbb3315b4e80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_forest/20261019T072038_455776Z/timing_audit.json": "113ea796dca094c6c579507d72e93f732ca00f2d0c4f3f397efeca426458877c"
+  },
+  "rerun": [
+    "python3 ml/experiment_regime_analog_density.py",
+    "python3 ml/experiment_regime_shock_forest.py"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "python": "3.10.12",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "lightgbm": "4.7.0",
+    "scikit-learn": "1.7.2"
+  },
+  "recorded_at": "2026-10-17T16:53:39.904653+00:00",
+  "role": "Frozen runner dependency check for scheduled research collection"
+}

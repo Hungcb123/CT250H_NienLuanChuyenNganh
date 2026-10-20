@@ -39,8 +39,11 @@ public class DnseMarketDataService {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
+    @org.springframework.beans.factory.annotation.Autowired(required=false)
+    private BenchmarkStore benchmarkStore;
+
     // Cache for VNINDEX summary calculated from DNSE index candles
-    private final Map<String, Object> vnIndexSummaryCache = new ConcurrentHashMap<>();
+    private volatile Map<String, Object> vnIndexSummaryCache = Map.of();
 
     public DnseMarketDataService(AssetRepository assetRepository,
                                  MarketPriceRepository marketPriceRepository,
@@ -94,7 +97,7 @@ public class DnseMarketDataService {
      * Synchronize all tracked assets and VN-Index.
      */
     @Transactional
-    public Map<String, Object> syncAll() {
+    public synchronized Map<String, Object> syncAll() {
         LocalDate today = LocalDate.now(VN_ZONE);
         log.info("[DNSE Market Data] Syncing market data up to date: {}", today);
 
@@ -113,9 +116,6 @@ public class DnseMarketDataService {
                 } catch (Exception e) {
                     log.error("[DNSE Market Data] Failed to sync stock {}: {}", asset.getTicker(), e.getMessage());
                 }
-            } else if ("GOLD".equalsIgnoreCase(asset.getAssetClass())) {
-                // Ensure Gold has latest entry for today if trading date missing
-                carryForwardLatestPrice(asset, today);
             } else if ("CASH".equalsIgnoreCase(asset.getAssetClass()) && "VND".equalsIgnoreCase(asset.getTicker())) {
                 ensureVndPrice(asset, today);
             }
@@ -123,9 +123,11 @@ public class DnseMarketDataService {
 
         // 2. Sync VN-Index summary
         try {
-            syncVNIndex();
+            boolean updated = syncVNIndex();
+            syncReport.put("vnindexUpdated", updated);
             syncReport.put("vnindex", vnIndexSummaryCache);
         } catch (Exception e) {
+            syncReport.put("vnindexUpdated", false);
             log.error("[DNSE Market Data] Failed to sync VN-Index: {}", e.getMessage());
         }
 
@@ -212,20 +214,6 @@ public class DnseMarketDataService {
     }
 
     /**
-     * Carry forward the latest known gold price to today if today has no record.
-     */
-    private void carryForwardLatestPrice(Asset asset, LocalDate today) {
-        Optional<MarketPrice> todayPrice = marketPriceRepository.findByAsset_TickerAndTradeDate(asset.getTicker(), today);
-        if (todayPrice.isEmpty()) {
-            marketPriceRepository.findLatestPriceByTicker(asset.getTicker()).ifPresent(latest -> {
-                MarketPrice mp = new MarketPrice(asset, latest.getPrice(), today);
-                marketPriceRepository.save(mp);
-                log.info("[DNSE Market Data] Gold {} carried forward price {} for {}", asset.getTicker(), latest.getPrice(), today);
-            });
-        }
-    }
-
-    /**
      * Ensure VND cash asset has price 1.0 for today.
      */
     private void ensureVndPrice(Asset asset, LocalDate today) {
@@ -239,9 +227,9 @@ public class DnseMarketDataService {
     /**
      * Synchronize VN-Index historical daily series and calculate real-time technical indicators.
      */
-    private void syncVNIndex() {
+    private synchronized boolean syncVNIndex() {
         long now = Instant.now().getEpochSecond();
-        long fromTs = now - (400L * 86400L); // fetch ~400 days for 52-week & MA50 metrics
+        long fromTs = now - (900L * 86400L); // 1Y visible range plus at least 199 prior trading sessions for MA200
 
         String url = String.format("%s/ohlcs/index?symbol=VNINDEX&from=%d&to=%d&resolution=1D",
                 DNSE_CHART_API_BASE, fromTs, now);
@@ -258,7 +246,7 @@ public class DnseMarketDataService {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
                 log.warn("[DNSE Market Data] VNINDEX returned HTTP {}", response.statusCode());
-                return;
+                return false;
             }
 
             JsonNode root = objectMapper.readTree(response.body());
@@ -267,9 +255,10 @@ public class DnseMarketDataService {
             JsonNode volumes = root.get("v");
 
             if (times == null || closes == null || times.isEmpty()) {
-                return;
+                return false;
             }
 
+            if (!times.isArray() || !closes.isArray() || times.size() != closes.size()) return false;
             int n = closes.size();
             List<Double> closeList = new ArrayList<>(n);
             List<Long> volList = new ArrayList<>(n);
@@ -281,6 +270,23 @@ public class DnseMarketDataService {
                 dateList.add(Instant.ofEpochSecond(times.get(i).asLong()).atZone(VN_ZONE).toLocalDate());
             }
 
+            for (int i = 0; i < n; i++) {
+                if (!Double.isFinite(closeList.get(i)) || closeList.get(i) <= 0 || volList.get(i) < 0
+                        || (i > 0 && !dateList.get(i).isAfter(dateList.get(i - 1)))) return false;
+            }
+            List<Map<String, Object>> history = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                Map<String, Object> bar = new LinkedHashMap<>();
+                bar.put("date", dateList.get(i).toString());
+                bar.put("close", closeList.get(i));
+                bar.put("volumeM", volList.get(i) / 1_000_000.0);
+                bar.put("ma20", i >= 19 ? closeList.subList(i - 19, i + 1).stream().mapToDouble(Double::doubleValue).average().orElseThrow() : null);
+                bar.put("ma50", i >= 49 ? closeList.subList(i - 49, i + 1).stream().mapToDouble(Double::doubleValue).average().orElseThrow() : null);
+                history.add(Collections.unmodifiableMap(bar));
+            }
+            Map<String, Object> summary = new LinkedHashMap<>();
+            summary.put("history", List.copyOf(history));
+            summary.put("updatedAt", Instant.now().toString());
             double latestClose = closeList.get(n - 1);
             double prevClose = n >= 2 ? closeList.get(n - 2) : latestClose;
             double changePoints = Math.round((latestClose - prevClose) * 100.0) / 100.0;
@@ -309,24 +315,28 @@ public class DnseMarketDataService {
             int regimeSignal = latestClose >= ma20 ? 1 : 0;
             String regimeStatus = latestClose >= ma20 ? "BULLISH_CONSOLIDATION" : "DEFENSIVE_CORRECTION";
 
-            vnIndexSummaryCache.put("latestDate", latestDate.toString());
-            vnIndexSummaryCache.put("currentPoints", Math.round(latestClose * 100.0) / 100.0);
-            vnIndexSummaryCache.put("changePoints", changePoints);
-            vnIndexSummaryCache.put("changePercent", changePercent);
-            vnIndexSummaryCache.put("high52w", Math.round(high52w * 100.0) / 100.0);
-            vnIndexSummaryCache.put("low52w", Math.round(low52w * 100.0) / 100.0);
-            vnIndexSummaryCache.put("latestVolume", latestVolume);
-            vnIndexSummaryCache.put("avgVolume20", avgVol20);
-            vnIndexSummaryCache.put("ma20", ma20);
-            vnIndexSummaryCache.put("ma50", ma50);
-            vnIndexSummaryCache.put("regimeSignal", regimeSignal);
-            vnIndexSummaryCache.put("regimeStatus", regimeStatus);
-            vnIndexSummaryCache.put("source", "DNSE_OPENAPI_KRX");
+            summary.put("latestDate", latestDate.toString());
+            summary.put("currentPoints", Math.round(latestClose * 100.0) / 100.0);
+            summary.put("changePoints", changePoints);
+            summary.put("changePercent", changePercent);
+            summary.put("high52w", Math.round(high52w * 100.0) / 100.0);
+            summary.put("low52w", Math.round(low52w * 100.0) / 100.0);
+            summary.put("latestVolume", latestVolume);
+            summary.put("avgVolume20", avgVol20);
+            summary.put("ma20", ma20);
+            summary.put("ma50", ma50);
+            summary.put("regimeSignal", regimeSignal);
+            summary.put("regimeStatus", regimeStatus);
+            summary.put("source", "DNSE_OPENAPI_KRX");
 
+            if (benchmarkStore != null) benchmarkStore.publish(history);
+            vnIndexSummaryCache = Map.copyOf(summary);
             log.info("[DNSE Market Data] VN-Index updated: {} pts ({}{}%), MA20={}, MA50={}, Date={}",
                     latestClose, changePoints >= 0 ? "+" : "", changePoints, ma20, ma50, latestDate);
+            return true;
         } catch (Exception e) {
             log.error("[DNSE Market Data] Failed to calculate VN-Index summary: {}", e.getMessage());
+            return false;
         }
     }
 

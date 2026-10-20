@@ -1,0 +1,68 @@
+{
+  "role": "Predeclared next study: dense conditional-return supervision for SAME three-class target; no fit yet",
+  "created_at": "2026-10-18T15:49:33.524205+00:00",
+  "motivation": "Three-family categorical comparison shows weak outer generalization; hard class labels discard magnitude within each class. Test continuous future-return supervision without redefining evaluation labels.",
+  "target": "Evaluation remains VNINDEX T+20 return strictly below -5%, above +5%, else sideway, same1560 dates.",
+  "features": "Same original19 close/ETF/trend; no additional source or universe",
+  "train_windows": [
+    "3y",
+    "expanding"
+  ],
+  "refit_market_sessions": 63,
+  "regression_targets": [
+    "future log return",
+    "future log return / (trailing20 daily log-return sample std * sqrt20)"
+  ],
+  "normalization_formula": "Z=log(P[t+20]/P[t]) / (std(last20 completed daily log returns,ddof=1)*sqrt20); only past sigma enters normalizer.",
+  "quantile_levels": [
+    0.05,
+    0.15,
+    0.25,
+    0.35,
+    0.5,
+    0.65,
+    0.75,
+    0.85,
+    0.95
+  ],
+  "quantile_atom_weights": [
+    0.1,
+    0.1,
+    0.09999999999999998,
+    0.125,
+    0.14999999999999997,
+    0.125,
+    0.10000000000000009,
+    0.09999999999999987,
+    0.10000000000000009
+  ],
+  "forecast_map": "Fit one conditional quantile per level, sort predicted quantiles, convert normalized predictions back to log returns. Quadrature class mass = sum fixed atom weights with return < log(.95), > log(1.05), otherwise sideway. Threshold equality stays sideway.",
+  "decision_rules": [
+    "argmax raw approximate masses",
+    "argmax mass / mature-training class frequency; decision balancing only, not calibrated posterior"
+  ],
+  "parameters": {
+    "n_estimators": 300,
+    "learning_rate": 0.03,
+    "max_depth": 4,
+    "num_leaves": 15,
+    "min_child_samples": 50,
+    "colsample_bytree": 0.7,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": 2,
+    "verbosity": -1,
+    "objective": "quantile"
+  },
+  "hyperparameter_search": false,
+  "total_forecasters": 4,
+  "decisions_per_forecaster": 2,
+  "timing": "All training labels must mature strictly before global prediction/refit boundary. Raw-calendar labels and sigma before any feature filter.",
+  "acceptance": "Compare same dates/labels vs original trend and risk controls: +.02 mean fold F1, no worse worst F1, MCC gain, >=3 improved folds. No independent acceptance from repeatedly inspected history.",
+  "limitations": [
+    "Quantile quadrature probabilities are approximate scores, not asserted calibrated event probabilities.",
+    "Previous quantile risk study used onlyq10 for binary risk; this study requires the full three-class distribution and fixed target.",
+    "No confidence subset, label policy change or automatic deployment."
+  ]
+}

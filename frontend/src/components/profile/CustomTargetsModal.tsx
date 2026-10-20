@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, Sliders, CheckCircle, AlertTriangle, Sparkles, Scale, ShieldCheck, TrendingUp } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
 import { updatePortfolioTargets } from '../../services/api';
 
 interface CustomTargetsModalProps {
@@ -37,10 +37,20 @@ export function CustomTargetsModal({
     }
   }, [isOpen, currentTargets]);
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.focus();
+    return () => { document.body.style.overflow = overflow; previous?.focus(); };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const total = stock + gold + savings + cash;
-  const isValid = total === 100;
+  const isValid = total === 100 && [stock, gold, savings, cash].every(value => Number.isInteger(value) && value >= 0 && value <= 100);
 
   const applyPreset = (s: number, g: number, sav: number, c: number) => {
     setStock(s);
@@ -74,272 +84,90 @@ export function CustomTargetsModal({
     }
   };
 
+  const rows = [
+    { key: 'stock', label: 'Cổ phiếu VN30', value: stock, set: setStock },
+    { key: 'gold', label: 'Vàng SJC', value: gold, set: setGold },
+    { key: 'savings', label: 'Tiết kiệm', value: savings, set: setSavings },
+    { key: 'cash', label: 'Tiền mặt', value: cash, set: setCash },
+  ] as const;
+  const presets = [
+    { label: 'Bảo thủ', values: [15, 25, 45, 15] },
+    { label: 'Cân bằng', values: [35, 35, 20, 10] },
+    { label: 'Tăng trưởng', values: [60, 20, 15, 5] },
+  ];
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div 
-        className="bg-surface-container-lowest rounded-2xl shadow-2xl border border-border-subtle w-full max-w-xl overflow-hidden animate-in zoom-in-95 duration-200"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="px-6 py-5 border-b border-border-subtle flex items-center justify-between bg-surface-container-low">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-accent-emerald flex items-center justify-center text-white shadow-xs">
-              <Sliders className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-extrabold text-text-primary tracking-tight">
-                Tùy Chỉnh Tỷ Trọng Mục Tiêu SAA
-              </h3>
-              <p className="text-xs text-text-secondary font-medium">
-                Mốc neo cân bằng 4 lớp tài sản: Cổ phiếu · Vàng · Tiết kiệm · Tiền mặt
-              </p>
-            </div>
+    <div className="!m-0 fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-3 sm:p-6">
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="targets-title" aria-describedby="targets-description"
+        tabIndex={-1} className="w-full max-w-lg max-h-[90dvh] overflow-y-auto rounded-xl bg-surface-container-lowest text-text-primary shadow-xl outline-none"
+        onKeyDown={event => {
+          if (event.key === 'Escape' && !submitting) onClose();
+          if (event.key === 'Tab') {
+            const controls = dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled)');
+            if (!controls?.length) return;
+            const first = controls[0], last = controls[controls.length - 1];
+            if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) {
+              event.preventDefault(); last.focus();
+            } else if (!event.shiftKey && (document.activeElement === last || document.activeElement === dialogRef.current)) {
+              event.preventDefault(); first.focus();
+            }
+          }
+        }}>
+        <div className="flex items-start justify-between gap-4 px-5 pt-5 sm:px-6">
+          <div>
+            <h3 id="targets-title" className="text-lg font-semibold">Phân bổ mục tiêu</h3>
+            <p id="targets-description" className="mt-1 text-sm text-text-secondary">Thiết lập tỷ trọng dài hạn cho danh mục.</p>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-xl text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <button type="button" onClick={onClose} disabled={submitting} aria-label="Đóng" className="rounded-md p-2 text-text-secondary hover:bg-surface-container disabled:opacity-50"><X className="h-4 w-4" /></button>
         </div>
-
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Quick Presets */}
-          <div>
-            <label className="block text-xs font-bold text-text-muted mb-2 uppercase tracking-wider">
-              Khuyến Nghị Theo Khẩu Vị Rủi Ro (Presets)
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => applyPreset(15, 25, 45, 15)}
-                className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl border border-border-subtle bg-surface-container-low hover:bg-surface-container text-text-primary text-xs font-bold transition-all cursor-pointer shadow-2xs"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Bảo thủ</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => applyPreset(35, 35, 20, 10)}
-                className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl border border-accent-emerald/40 bg-accent-emerald-light hover:bg-accent-emerald/20 text-accent-emerald text-xs font-bold transition-all cursor-pointer shadow-2xs"
-              >
-                <Scale className="w-3.5 h-3.5 text-accent-emerald shrink-0" />
-                <span>Cân bằng</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => applyPreset(60, 20, 15, 5)}
-                className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl border border-border-subtle bg-surface-container-low hover:bg-surface-container text-text-primary text-xs font-bold transition-all cursor-pointer shadow-2xs"
-              >
-                <TrendingUp className="w-3.5 h-3.5 text-accent-gold shrink-0" />
-                <span>Tăng trưởng</span>
-              </button>
+        <form onSubmit={handleSubmit} className="px-5 pb-5 sm:px-6 sm:pb-6">
+          <fieldset disabled={submitting} className="mt-6">
+            <legend className="mb-2 text-xs text-text-secondary">Mẫu phân bổ</legend>
+            <div className="flex flex-wrap gap-2">
+              {presets.map(preset => {
+                const selected = [stock, gold, savings, cash].every((value, index) => value === preset.values[index]);
+                return <button key={preset.label} type="button" aria-pressed={selected}
+                  onClick={() => applyPreset(preset.values[0], preset.values[1], preset.values[2], preset.values[3])}
+                  className={`rounded-md px-3 py-2 text-sm transition-colors ${selected ? 'bg-accent-emerald-light text-accent-emerald font-semibold' : 'bg-surface-container-low text-text-secondary hover:bg-surface-container-high'}`}>{preset.label}</button>;
+              })}
             </div>
-          </div>
-
-          {/* Allocation Preview Bar */}
-          <div>
-            <div className="flex items-center justify-between text-xs mb-2">
-              <span className="font-bold text-text-primary">Trực quan hóa tỷ trọng:</span>
-              <span className={`px-2 py-0.5 rounded-full font-bold text-[11px] font-mono-num flex items-center gap-1 ${
-                isValid ? 'bg-accent-emerald-light text-accent-emerald border border-accent-emerald/30' : 'bg-accent-gold-light text-accent-gold border border-accent-gold/30'
-              }`}>
-                {isValid ? (
-                  <>
-                    <CheckCircle className="w-3.5 h-3.5 text-accent-emerald" />
-                    Tổng: 100% (Hợp lệ)
-                  </>
-                ) : (
-                  <>
-                    <AlertTriangle className="w-3.5 h-3.5 text-accent-gold" />
-                    Tổng: {total}% ({total > 100 ? `Thừa +${total - 100}%` : `Thiếu -${100 - total}%`})
-                  </>
-                )}
-              </span>
-            </div>
-            <div className="h-4 w-full rounded-full bg-surface-container overflow-hidden flex border border-border-subtle">
-              <div 
-                style={{ width: `${Math.max(0, Math.min(100, stock))}%` }} 
-                className="bg-accent-emerald transition-all duration-150" 
-                title={`Cổ phiếu: ${stock}%`} 
-              />
-              <div 
-                style={{ width: `${Math.max(0, Math.min(100, gold))}%` }} 
-                className="bg-accent-gold transition-all duration-150" 
-                title={`Vàng: ${gold}%`} 
-              />
-              <div 
-                style={{ width: `${Math.max(0, Math.min(100, savings))}%` }} 
-                className="bg-indigo-500 transition-all duration-150" 
-                title={`Tiết kiệm: ${savings}%`} 
-              />
-              <div 
-                style={{ width: `${Math.max(0, Math.min(100, cash))}%` }} 
-                className="bg-sky-500 transition-all duration-150" 
-                title={`Tiền mặt: ${cash}%`} 
-              />
-            </div>
-          </div>
-
-          {/* Sliders Grid */}
-          <div className="space-y-4 pt-1">
-            {/* 1. Cổ phiếu VN30 */}
-            <div className="p-3.5 rounded-xl border border-accent-emerald/30 bg-surface-container-low space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-accent-emerald"></span>
-                  <span className="text-xs font-bold text-text-primary">Cổ phiếu VN30 (Tăng trưởng)</span>
-                </div>
-                <div className="flex items-center gap-1 font-mono-num">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={stock}
-                    onChange={(e) => setStock(Math.max(0, Math.min(100, Number(e.target.value) || 0)))}
-                    className="w-14 px-2 py-0.5 rounded-lg border border-border-subtle text-right font-bold text-xs bg-surface-container text-text-primary focus:outline-accent-emerald"
-                  />
-                  <span className="text-xs text-text-muted font-bold">%</span>
-                </div>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={stock}
-                onChange={(e) => setStock(Number(e.target.value))}
-                className="w-full accent-accent-emerald cursor-pointer"
-              />
-            </div>
-
-            {/* 2. Vàng SJC */}
-            <div className="p-3.5 rounded-xl border border-accent-gold/30 bg-surface-container-low space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-accent-gold"></span>
-                  <span className="text-xs font-bold text-text-primary">Vàng SJC 999.9 (Phòng vệ vĩ mô)</span>
-                </div>
-                <div className="flex items-center gap-1 font-mono-num">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={gold}
-                    onChange={(e) => setGold(Math.max(0, Math.min(100, Number(e.target.value) || 0)))}
-                    className="w-14 px-2 py-0.5 rounded-lg border border-border-subtle text-right font-bold text-xs bg-surface-container text-text-primary focus:outline-accent-gold"
-                  />
-                  <span className="text-xs text-text-muted font-bold">%</span>
-                </div>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={gold}
-                onChange={(e) => setGold(Number(e.target.value))}
-                className="w-full accent-accent-gold cursor-pointer"
-              />
-            </div>
-
-            {/* 3. Tiền gửi tiết kiệm */}
-            <div className="p-3.5 rounded-xl border border-indigo-500/30 bg-surface-container-low space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-indigo-500"></span>
-                  <div>
-                    <span className="text-xs font-bold text-text-primary">Tiền gửi tiết kiệm (Lãi suất Rf)</span>
-                    <span className="text-[10px] text-text-muted block">Sinh lời cố định 5.0% - 7.0%/năm</span>
+          </fieldset>
+          <table className="mt-6 w-full text-sm">
+            <thead><tr className="border-b border-border-subtle text-xs text-text-secondary">
+              <th scope="col" className="pb-3 text-left font-normal">Loại tài sản</th>
+              <th scope="col" className="pb-3 text-right font-normal">Đang áp dụng</th>
+              <th scope="col" className="pb-3 text-right font-normal">Mục tiêu</th>
+            </tr></thead>
+            <tbody className="divide-y divide-border-subtle">
+              {rows.map(row => <tr key={row.key}>
+                <th scope="row" className="py-3 pr-4 text-left font-medium">
+                  <label htmlFor={`target-${row.key}`}>{row.label}</label>
+                  <input type="range" min="0" max="100" step="1" value={row.value} disabled={submitting}
+                    aria-label={`Tỷ trọng ${row.label}`} aria-valuetext={`${row.value}%`}
+                    onChange={event => row.set(Number(event.target.value))}
+                    className="mt-2 block h-6 w-full min-w-20 max-w-48 cursor-pointer accent-accent-emerald disabled:cursor-not-allowed disabled:opacity-50" />
+                </th>
+                <td className="py-3 text-right tabular-nums text-text-secondary">{Math.round(currentTargets[row.key] * 100)}%</td>
+                <td className="py-3 pl-3 text-right">
+                  <div className="inline-flex items-center gap-1.5">
+                    <input id={`target-${row.key}`} type="number" min="0" max="100" step="1" required disabled={submitting}
+                      value={row.value} onChange={event => row.set(Math.max(0, Math.min(100, Number(event.target.value) || 0)))}
+                      className="w-16 rounded-md border border-border-subtle bg-surface px-2 py-2 text-right tabular-nums focus:outline-accent-emerald disabled:opacity-50" />
+                    <span className="text-text-secondary">%</span>
                   </div>
-                </div>
-                <div className="flex items-center gap-1 font-mono-num">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={savings}
-                    onChange={(e) => setSavings(Math.max(0, Math.min(100, Number(e.target.value) || 0)))}
-                    className="w-14 px-2 py-0.5 rounded-lg border border-border-subtle text-right font-bold text-xs bg-surface-container text-text-primary focus:outline-indigo-500"
-                  />
-                  <span className="text-xs text-text-muted font-bold">%</span>
-                </div>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={savings}
-                onChange={(e) => setSavings(Number(e.target.value))}
-                className="w-full accent-indigo-500 cursor-pointer"
-              />
-            </div>
-
-            {/* 4. Tiền mặt khả dụng */}
-            <div className="p-3.5 rounded-xl border border-sky-500/30 bg-surface-container-low space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-sky-500"></span>
-                  <div>
-                    <span className="text-xs font-bold text-text-primary">Tiền mặt khả dụng (T+0)</span>
-                    <span className="text-[10px] text-text-muted block">Thanh khoản tức thì, vốn chờ giải ngân</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 font-mono-num">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={cash}
-                    onChange={(e) => setCash(Math.max(0, Math.min(100, Number(e.target.value) || 0)))}
-                    className="w-14 px-2 py-0.5 rounded-lg border border-border-subtle text-right font-bold text-xs bg-surface-container text-text-primary focus:outline-sky-500"
-                  />
-                  <span className="text-xs text-text-muted font-bold">%</span>
-                </div>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={cash}
-                onChange={(e) => setCash(Number(e.target.value))}
-                className="w-full accent-sky-500 cursor-pointer"
-              />
-            </div>
-          </div>
-
-          {errorMsg && (
-            <div className="p-3 rounded-xl bg-accent-rose-light border border-accent-rose/30 text-accent-rose text-xs font-medium flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 shrink-0 text-accent-rose" />
-              <span>{errorMsg}</span>
-            </div>
-          )}
-
-          {/* Footer Buttons */}
-          <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-border-subtle">
-            <button
-              type="button"
-              onClick={onClose}
-              disabled={submitting}
-              className="px-4 py-2.5 rounded-xl border border-border-subtle text-text-secondary font-bold text-xs hover:bg-surface-container transition-colors cursor-pointer"
-            >
-              Hủy bỏ
-            </button>
-            <button
-              type="submit"
-              disabled={!isValid || submitting}
-              className="px-5 py-2.5 rounded-xl bg-accent-emerald hover:opacity-90 text-white font-bold text-xs transition-all shadow-xs disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 cursor-pointer"
-            >
-              {submitting ? (
-                <>
-                  <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Đang lưu...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Lưu Tỷ Trọng Mục Tiêu SAA
-                </>
-              )}
-            </button>
+                </td>
+              </tr>)}
+            </tbody>
+            <tfoot><tr className="border-t border-border-subtle font-semibold">
+              <th scope="row" colSpan={2} className="pt-3 text-left">Tổng</th>
+              <td className={`pt-3 text-right tabular-nums ${isValid ? 'text-text-primary' : 'text-accent-rose'}`}>{total}%</td>
+            </tr></tfoot>
+          </table>
+          <p aria-live="polite" className="mt-2 min-h-5 text-xs text-accent-rose">{total < 100 ? `Cần phân bổ thêm ${100 - total}%` : total > 100 ? `Vượt ${total - 100}%` : !isValid ? 'Nhập tỷ trọng là số nguyên từ 0 đến 100.' : ''}</p>
+          {errorMsg && <p role="alert" className="mt-2 text-sm text-accent-rose">{errorMsg}</p>}
+          <div className="mt-4 flex justify-end gap-2 border-t border-border-subtle pt-4">
+            <button type="button" onClick={onClose} disabled={submitting} className="rounded-md px-4 py-2 text-sm text-text-secondary hover:bg-surface-container disabled:opacity-50">Hủy</button>
+            <button type="submit" disabled={!isValid || submitting} className="rounded-md bg-accent-emerald px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">{submitting ? 'Đang lưu…' : 'Lưu mục tiêu'}</button>
           </div>
         </form>
       </div>

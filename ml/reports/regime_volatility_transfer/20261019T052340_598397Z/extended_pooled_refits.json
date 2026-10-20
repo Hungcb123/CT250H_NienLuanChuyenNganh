@@ -1,0 +1,646 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "boundary": "2020-03-27",
+    "n_target": 2469,
+    "n_auxiliary": 1018,
+    "unique_dates": 2469,
+    "by_symbol": {
+      "VNINDEX": 2469,
+      "E1VFVN30": 792,
+      "VN30": 120,
+      "VNMID": 53,
+      "VNSML": 53
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2020-03-26",
+    "target_class_prior": [
+      0.18995544754961524,
+      0.585257189145403,
+      0.22478736330498178
+    ],
+    "total_date_mass": 2469.0
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "boundary": "2020-06-29",
+    "n_target": 2532,
+    "n_auxiliary": 1162,
+    "unique_dates": 2532,
+    "by_symbol": {
+      "VNINDEX": 2532,
+      "E1VFVN30": 855,
+      "VN30": 147,
+      "VNMID": 80,
+      "VNSML": 80
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2020-06-26",
+    "target_class_prior": [
+      0.18838862559241706,
+      0.584518167456556,
+      0.22709320695102686
+    ],
+    "total_date_mass": 2532.0
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "boundary": "2020-09-25",
+    "n_target": 2595,
+    "n_auxiliary": 1225,
+    "unique_dates": 2595,
+    "by_symbol": {
+      "VNINDEX": 2595,
+      "E1VFVN30": 918,
+      "VN30": 147,
+      "VNMID": 80,
+      "VNSML": 80
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2020-09-24",
+    "target_class_prior": [
+      0.18651252408477842,
+      0.589980732177264,
+      0.22350674373795762
+    ],
+    "total_date_mass": 2595.0
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "boundary": "2020-12-23",
+    "n_target": 2658,
+    "n_auxiliary": 1288,
+    "unique_dates": 2658,
+    "by_symbol": {
+      "VNINDEX": 2658,
+      "E1VFVN30": 981,
+      "VN30": 147,
+      "VNMID": 80,
+      "VNSML": 80
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2020-12-22",
+    "target_class_prior": [
+      0.18209179834462003,
+      0.582392776523702,
+      0.23551542513167795
+    ],
+    "total_date_mass": 2658.0
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "boundary": "2021-03-30",
+    "n_target": 2721,
+    "n_auxiliary": 1351,
+    "unique_dates": 2721,
+    "by_symbol": {
+      "VNINDEX": 2721,
+      "E1VFVN30": 1044,
+      "VN30": 147,
+      "VNMID": 80,
+      "VNSML": 80
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2021-03-29",
+    "target_class_prior": [
+      0.1800808526277104,
+      0.5806688717383315,
+      0.2392502756339581
+    ],
+    "total_date_mass": 2721.0
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "boundary": "2021-06-30",
+    "n_target": 2784,
+    "n_auxiliary": 1414,
+    "unique_dates": 2784,
+    "by_symbol": {
+      "VNINDEX": 2784,
+      "E1VFVN30": 1107,
+      "VN30": 147,
+      "VNMID": 80,
+      "VNSML": 80
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2021-06-29",
+    "target_class_prior": [
+      0.17600574712643677,
+      0.5775862068965517,
+      0.2464080459770115
+    ],
+    "total_date_mass": 2784.0
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "boundary": "2021-09-29",
+    "n_target": 2847,
+    "n_auxiliary": 1477,
+    "unique_dates": 2847,
+    "by_symbol": {
+      "VNINDEX": 2847,
+      "E1VFVN30": 1170,
+      "VN30": 147,
+      "VNMID": 80,
+      "VNSML": 80
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2021-09-28",
+    "target_class_prior": [
+      0.17702845100105374,
+      0.5806111696522656,
+      0.24236037934668073
+    ],
+    "total_date_mass": 2847.0
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "boundary": "2021-10-15",
+    "n_target": 2859,
+    "n_auxiliary": 1495,
+    "unique_dates": 2859,
+    "by_symbol": {
+      "VNINDEX": 2859,
+      "E1VFVN30": 1182,
+      "VN30": 149,
+      "VNMID": 82,
+      "VNSML": 82
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2021-10-14",
+    "target_class_prior": [
+      0.17628541448058763,
+      0.5823714585519413,
+      0.24134312696747115
+    ],
+    "total_date_mass": 2859.0
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "boundary": "2022-01-13",
+    "n_target": 2922,
+    "n_auxiliary": 1747,
+    "unique_dates": 2922,
+    "by_symbol": {
+      "VNINDEX": 2922,
+      "E1VFVN30": 1245,
+      "VN30": 212,
+      "VNMID": 145,
+      "VNSML": 145
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2022-01-12",
+    "target_class_prior": [
+      0.1728268309377139,
+      0.580766598220397,
+      0.2464065708418891
+    ],
+    "total_date_mass": 2922.0
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "boundary": "2022-04-20",
+    "n_target": 2985,
+    "n_auxiliary": 1917,
+    "unique_dates": 2985,
+    "by_symbol": {
+      "VNINDEX": 2985,
+      "E1VFVN30": 1308,
+      "VN30": 275,
+      "VNMID": 167,
+      "VNSML": 167
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2022-04-19",
+    "target_class_prior": [
+      0.1695142378559464,
+      0.5892797319932999,
+      0.24120603015075376
+    ],
+    "total_date_mass": 2985.0
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "boundary": "2022-07-20",
+    "n_target": 3048,
+    "n_auxiliary": 2001,
+    "unique_dates": 3048,
+    "by_symbol": {
+      "VNINDEX": 3048,
+      "E1VFVN30": 1329,
+      "VN30": 338,
+      "VNMID": 167,
+      "VNSML": 167
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2022-07-19",
+    "target_class_prior": [
+      0.17454068241469817,
+      0.589238845144357,
+      0.23622047244094488
+    ],
+    "total_date_mass": 3048.0
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "boundary": "2022-10-19",
+    "n_target": 3111,
+    "n_auxiliary": 2156,
+    "unique_dates": 3111,
+    "by_symbol": {
+      "VNINDEX": 3111,
+      "E1VFVN30": 1329,
+      "VN30": 401,
+      "VNMID": 213,
+      "VNSML": 213
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2022-10-18",
+    "target_class_prior": [
+      0.17839922854387658,
+      0.5853423336547734,
+      0.23625843780135006
+    ],
+    "total_date_mass": 3111.0
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "boundary": "2023-01-17",
+    "n_target": 3174,
+    "n_auxiliary": 2374,
+    "unique_dates": 3174,
+    "by_symbol": {
+      "VNINDEX": 3174,
+      "E1VFVN30": 1358,
+      "VN30": 464,
+      "VNMID": 276,
+      "VNSML": 276
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2023-01-16",
+    "target_class_prior": [
+      0.17926906112161312,
+      0.5872715816005041,
+      0.2334593572778828
+    ],
+    "total_date_mass": 3174.0
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "boundary": "2023-04-21",
+    "n_target": 3237,
+    "n_auxiliary": 2626,
+    "unique_dates": 3237,
+    "by_symbol": {
+      "VNINDEX": 3237,
+      "E1VFVN30": 1421,
+      "VN30": 527,
+      "VNMID": 339,
+      "VNSML": 339
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2023-04-20",
+    "target_class_prior": [
+      0.17701575532900835,
+      0.593141797961075,
+      0.22984244670991658
+    ],
+    "total_date_mass": 3237.0
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "boundary": "2023-07-17",
+    "n_target": 3295,
+    "n_auxiliary": 2858,
+    "unique_dates": 3295,
+    "by_symbol": {
+      "VNINDEX": 3295,
+      "E1VFVN30": 1479,
+      "VN30": 585,
+      "VNMID": 397,
+      "VNSML": 397
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2023-07-14",
+    "target_class_prior": [
+      0.1738998482549317,
+      0.5905918057663126,
+      0.2355083459787557
+    ],
+    "total_date_mass": 3295.0
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "boundary": "2023-10-16",
+    "n_target": 3358,
+    "n_auxiliary": 3110,
+    "unique_dates": 3358,
+    "by_symbol": {
+      "VNINDEX": 3358,
+      "E1VFVN30": 1542,
+      "VN30": 648,
+      "VNMID": 460,
+      "VNSML": 460
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2023-10-13",
+    "target_class_prior": [
+      0.17272185824895772,
+      0.589041095890411,
+      0.23823704586063132
+    ],
+    "total_date_mass": 3358.0
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "boundary": "2024-01-12",
+    "n_target": 3421,
+    "n_auxiliary": 3362,
+    "unique_dates": 3421,
+    "by_symbol": {
+      "VNINDEX": 3421,
+      "E1VFVN30": 1605,
+      "VN30": 711,
+      "VNMID": 523,
+      "VNSML": 523
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2024-01-11",
+    "target_class_prior": [
+      0.17217187956737795,
+      0.5939783688979831,
+      0.233849751534639
+    ],
+    "total_date_mass": 3421.0
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "boundary": "2024-04-17",
+    "n_target": 3484,
+    "n_auxiliary": 3614,
+    "unique_dates": 3484,
+    "by_symbol": {
+      "VNINDEX": 3484,
+      "E1VFVN30": 1668,
+      "VN30": 774,
+      "VNMID": 586,
+      "VNSML": 586
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2024-04-16",
+    "target_class_prior": [
+      0.1690585533869116,
+      0.5901262916188289,
+      0.24081515499425948
+    ],
+    "total_date_mass": 3484.0
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "boundary": "2024-07-19",
+    "n_target": 3547,
+    "n_auxiliary": 3866,
+    "unique_dates": 3547,
+    "by_symbol": {
+      "VNINDEX": 3547,
+      "E1VFVN30": 1731,
+      "VN30": 837,
+      "VNMID": 649,
+      "VNSML": 649
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2024-07-18",
+    "target_class_prior": [
+      0.16859317733295742,
+      0.5937411897378067,
+      0.23766563292923598
+    ],
+    "total_date_mass": 3547.0
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "boundary": "2024-10-18",
+    "n_target": 3610,
+    "n_auxiliary": 4118,
+    "unique_dates": 3610,
+    "by_symbol": {
+      "VNINDEX": 3610,
+      "E1VFVN30": 1794,
+      "VN30": 900,
+      "VNMID": 712,
+      "VNSML": 712
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2024-10-17",
+    "target_class_prior": [
+      0.16814404432132965,
+      0.596398891966759,
+      0.23545706371191136
+    ],
+    "total_date_mass": 3610.0
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "boundary": "2025-01-16",
+    "n_target": 3673,
+    "n_auxiliary": 4370,
+    "unique_dates": 3673,
+    "by_symbol": {
+      "VNINDEX": 3673,
+      "E1VFVN30": 1857,
+      "VN30": 963,
+      "VNMID": 775,
+      "VNSML": 775
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2025-01-15",
+    "target_class_prior": [
+      0.16825483256193846,
+      0.5989654233596515,
+      0.23277974407841
+    ],
+    "total_date_mass": 3673.0
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "boundary": "2025-02-10",
+    "n_target": 3685,
+    "n_auxiliary": 4418,
+    "unique_dates": 3685,
+    "by_symbol": {
+      "VNINDEX": 3685,
+      "E1VFVN30": 1869,
+      "VN30": 975,
+      "VNMID": 787,
+      "VNSML": 787
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2025-02-07",
+    "target_class_prior": [
+      0.16770691994572592,
+      0.6002713704206242,
+      0.23202170963364993
+    ],
+    "total_date_mass": 3685.0
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "boundary": "2025-05-14",
+    "n_target": 3748,
+    "n_auxiliary": 4670,
+    "unique_dates": 3748,
+    "by_symbol": {
+      "VNINDEX": 3748,
+      "E1VFVN30": 1932,
+      "VN30": 1038,
+      "VNMID": 850,
+      "VNSML": 850
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2025-05-13",
+    "target_class_prior": [
+      0.17022411953041622,
+      0.5949839914621131,
+      0.23479188900747064
+    ],
+    "total_date_mass": 3748.0
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "boundary": "2025-08-11",
+    "n_target": 3811,
+    "n_auxiliary": 4922,
+    "unique_dates": 3811,
+    "by_symbol": {
+      "VNINDEX": 3811,
+      "E1VFVN30": 1995,
+      "VN30": 1101,
+      "VNMID": 913,
+      "VNSML": 913
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2025-08-08",
+    "target_class_prior": [
+      0.16741012857517712,
+      0.5948569929152453,
+      0.23773287850957753
+    ],
+    "total_date_mass": 3811.0
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "boundary": "2025-11-10",
+    "n_target": 3874,
+    "n_auxiliary": 5174,
+    "unique_dates": 3874,
+    "by_symbol": {
+      "VNINDEX": 3874,
+      "E1VFVN30": 2058,
+      "VN30": 1164,
+      "VNMID": 976,
+      "VNSML": 976
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2025-11-07",
+    "target_class_prior": [
+      0.16546205472379968,
+      0.5962829117191534,
+      0.23825503355704697
+    ],
+    "total_date_mass": 3874.0
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "boundary": "2026-02-09",
+    "n_target": 3937,
+    "n_auxiliary": 5426,
+    "unique_dates": 3937,
+    "by_symbol": {
+      "VNINDEX": 3937,
+      "E1VFVN30": 2121,
+      "VN30": 1227,
+      "VNMID": 1039,
+      "VNSML": 1039
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2026-02-06",
+    "target_class_prior": [
+      0.16408432816865634,
+      0.5969011938023876,
+      0.23901447802895606
+    ],
+    "total_date_mass": 3937.0
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "boundary": "2026-05-19",
+    "n_target": 4000,
+    "n_auxiliary": 5678,
+    "unique_dates": 4000,
+    "by_symbol": {
+      "VNINDEX": 4000,
+      "E1VFVN30": 2184,
+      "VN30": 1290,
+      "VNMID": 1102,
+      "VNSML": 1102
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2026-05-18",
+    "target_class_prior": [
+      0.166,
+      0.59575,
+      0.23825
+    ],
+    "total_date_mass": 4000.0
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "boundary": "2026-08-14",
+    "n_target": 4063,
+    "n_auxiliary": 5930,
+    "unique_dates": 4063,
+    "by_symbol": {
+      "VNINDEX": 4063,
+      "E1VFVN30": 2247,
+      "VN30": 1353,
+      "VNMID": 1165,
+      "VNSML": 1165
+    },
+    "target_start": "2010-04-02",
+    "latest_label_end": "2026-08-13",
+    "target_class_prior": [
+      0.16908688161457053,
+      0.596357371400443,
+      0.23455574698498646
+    ],
+    "total_date_mass": 4063.0
+  }
+]

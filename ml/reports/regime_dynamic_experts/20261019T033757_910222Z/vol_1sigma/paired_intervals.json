@@ -1,0 +1,34 @@
+[
+  {
+    "candidate": "delayed_selector",
+    "reference": "legacy_equal",
+    "block_sessions": 20,
+    "point_delta": 0.030119773095932,
+    "low": -0.017556416591519422,
+    "high": 0.07504260456881767
+  },
+  {
+    "candidate": "delayed_selector",
+    "reference": "legacy_equal",
+    "block_sessions": 60,
+    "point_delta": 0.030119773095932,
+    "low": -0.010637947100940466,
+    "high": 0.07462476713695539
+  },
+  {
+    "candidate": "blend_expanding",
+    "reference": "legacy_equal",
+    "block_sessions": 20,
+    "point_delta": 0.04053252051244399,
+    "low": 0.0002547877976856522,
+    "high": 0.07276165034762754
+  },
+  {
+    "candidate": "blend_expanding",
+    "reference": "legacy_equal",
+    "block_sessions": 60,
+    "point_delta": 0.04053252051244399,
+    "low": -0.00030514994157352184,
+    "high": 0.07031419556329992
+  }
+]

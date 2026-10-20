@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-19T09:22:10.367296+00:00",
+  "highest_observed_f1": 0.5144884151429698,
+  "balanced_candidate": {
+    "name": "shock_shrink",
+    "mean_f1": 0.5137451636929175,
+    "worst_f1": 0.403056383096105,
+    "folds": [
+      0.5642611356897071,
+      0.6543737157843653,
+      0.403056383096105,
+      0.43328942020149236
+    ]
+  },
+  "native_model_export_complete": true,
+  "native_replay_complete": true,
+  "native_rows": 1560,
+  "native_refit_bundles": 28,
+  "native_score_max_error": 3.3306690738754696e-16,
+  "native_payloads_verified": 2828,
+  "native_training_cohort_receipts_verified": 84,
+  "artifact": "ml/artifacts/regime_shock_candidate_20261019T090555_259289Z",
+  "model_improvement_studies": 2,
+  "primary_variants": 3,
+  "probability_diagnostic_studies": 1,
+  "new_high_found": false,
+  "new_unit_tests_passed": 5,
+  "independent_test": false,
+  "accepted": false,
+  "goal_achieved": false,
+  "goal_status_from_tool": "usageLimited",
+  "deployment_changed": false,
+  "data_as_of": "2026-10-01",
+  "serving_refit_protocol_frozen": false
+}

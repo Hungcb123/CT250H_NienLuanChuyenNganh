@@ -1,0 +1,89 @@
+{
+  "role": "Predeclared next study: same-data THREE-CLASS model-family comparison, not yet fitted",
+  "created_at": "2026-10-18T15:37:11.261173+00:00",
+  "target": "Unchanged VNINDEX T+20 simple return +/-5%; same frozen1560 dates",
+  "features": "19 close/ETF/trend features from original control; no new sources or label change",
+  "train_window": "3y",
+  "refit_market_sessions": 63,
+  "inner_splits": 2,
+  "trials_per_family_per_outer_fold": 15,
+  "seed": 42,
+  "families": {
+    "SVC": {
+      "pipeline": "StandardScaler fit only on each inner/core train",
+      "kernel": [
+        "linear",
+        "rbf"
+      ],
+      "C_log_range": [
+        0.01,
+        30.0
+      ],
+      "gamma_for_rbf": "scale or train-selected within [.001,1]",
+      "class_weight": [
+        null,
+        "balanced"
+      ],
+      "probability": false,
+      "caveat": "SVC is the model with kernels; no claim that boosting has kernels. Native probabilities require a separate causal calibration before deployment."
+    },
+    "CatBoost": {
+      "loss_function": [
+        "MultiClass",
+        "MultiClassOneVsAll"
+      ],
+      "iterations_range": [
+        200,
+        500
+      ],
+      "depth_range": [
+        3,
+        5
+      ],
+      "learning_rate_log_range": [
+        0.02,
+        0.1
+      ],
+      "l2_leaf_reg_log_range": [
+        1,
+        30
+      ],
+      "auto_class_weights": [
+        null,
+        "Balanced"
+      ],
+      "allow_writing_files": false,
+      "thread_count": 2
+    },
+    "ExtraTrees": {
+      "n_estimators": 400,
+      "max_depth": [
+        4,
+        8,
+        null
+      ],
+      "min_samples_leaf": [
+        10,
+        30,
+        60
+      ],
+      "max_features": [
+        0.5,
+        0.7,
+        1.0
+      ],
+      "class_weight": [
+        null,
+        "balanced"
+      ],
+      "n_jobs": 2
+    }
+  },
+  "control": "Original per-fold purged-inner-tuned LightGBM trend3y refit63, already replicated exactly; also compare original risk and equal-view ensemble",
+  "acceptance": "Historical development screen requires +.02 mean fold F1 vs both original controls, no worse worst F1, MCC gain, >=3 improved folds. No independent acceptance from reused history.",
+  "dependencies": {
+    "scikit-learn": "1.7.2",
+    "catboost": "1.2.10",
+    "lightgbm": "4.7.0"
+  }
+}

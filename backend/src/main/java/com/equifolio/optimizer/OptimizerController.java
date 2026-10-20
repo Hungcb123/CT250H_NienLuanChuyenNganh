@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/v1/optimizer")
@@ -26,9 +27,9 @@ public class OptimizerController {
     }
 
     @PostMapping("/rebalance/execute")
-    public ResponseEntity<ApiResponse<RebalanceExecutionResultDTO>> executeRebalance() {
+    public ResponseEntity<ApiResponse<RebalanceExecutionResultDTO>> executeRebalance(@RequestParam(value = "planToken", required = false) String planToken) {
         Long userId = SecurityUtils.getCurrentUserIdOrDefault(1L);
-        RebalanceExecutionResultDTO result = optimizerService.executeRebalancePlan(userId);
+        RebalanceExecutionResultDTO result = optimizerService.executeRebalancePlan(userId, planToken);
         return ResponseEntity.ok(ApiResponse.success("Thực thi tái cơ cấu danh mục thành công", result));
     }
 }

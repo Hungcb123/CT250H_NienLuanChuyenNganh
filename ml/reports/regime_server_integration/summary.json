@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-19T10:36:53.376151+00:00",
+  "server_code_integrated": true,
+  "production_deployed": false,
+  "model": "shock_shrink_native_snapshot_v1",
+  "model_refit_changed": false,
+  "mean_development_f1": 0.5137451636929175,
+  "postgres_ledger_tests_passed": 6,
+  "real_native_worker_postgres_tests_passed": 1,
+  "net_policy_tests_passed": 2,
+  "frozen_native_regression_tests_passed": 4,
+  "backend_tests": {
+    "tests": 23,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "frontend_build_passed": true,
+  "ui_checks": [
+    {
+      "device": "desktop",
+      "state": "ready",
+      "errors": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "device": "desktop",
+      "state": "unavailable",
+      "errors": [],
+      "scrollWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "device": "mobile",
+      "state": "ready",
+      "errors": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    },
+    {
+      "device": "mobile",
+      "state": "unavailable",
+      "errors": [],
+      "scrollWidth": 390,
+      "viewportWidth": 390
+    }
+  ],
+  "worker_health": "MODEL_LOADED",
+  "current_live_inference": "STALE_OR_INCOMPLETE_SESSION",
+  "taa_enabled_by_default": false,
+  "policy_comparison": "ml/reports/regime_net_taa/20261019T103518_043509Z",
+  "independent_test": false,
+  "taa_policy_accepted": false,
+  "postgres_ledger_encodings_tested": [
+    "UTF8",
+    "SQL_ASCII_with_UTF8_client"
+  ]
+}

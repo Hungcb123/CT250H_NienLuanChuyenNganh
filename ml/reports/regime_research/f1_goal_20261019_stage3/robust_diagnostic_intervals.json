@@ -1,0 +1,19 @@
+{
+  "role": "Post-inspection descriptive diagnostic, no multiple-testing correction or independent confirmation",
+  "intervals": [
+    {
+      "control": "previous_stage2",
+      "block": 20,
+      "delta": 0.011182569048794555,
+      "low": -0.006413836816688129,
+      "high": 0.028963454893145293
+    },
+    {
+      "control": "previous_stage2",
+      "block": 60,
+      "delta": 0.011182569048794555,
+      "low": -0.00469754672829639,
+      "high": 0.0289080509893408
+    }
+  ]
+}

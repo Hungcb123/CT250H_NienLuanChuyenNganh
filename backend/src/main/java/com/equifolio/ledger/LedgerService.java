@@ -21,6 +21,12 @@ import java.util.*;
 @Service
 public class LedgerService {
 
+    @org.springframework.beans.factory.annotation.Autowired
+    private PerformanceService performanceService;
+
+    @Autowired
+    private PreparedPerformanceReader preparedPerformanceReader;
+
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
     private final EntryRepository entryRepository;
@@ -82,13 +88,12 @@ public class LedgerService {
                 String accCode = (acc != null) ? acc.getAccountCode() : "N/A";
                 String ticker = (acc != null && acc.getAsset() != null) ? acc.getAsset().getTicker() : "";
                 String name = (acc != null && acc.getAsset() != null) ? acc.getAsset().getName() : "";
-                BigDecimal unitPrice = ("VND".equalsIgnoreCase(ticker) || ticker.isEmpty()) ? BigDecimal.ONE : marketService.getLatestPrice(ticker);
-                if (unitPrice.compareTo(BigDecimal.ZERO) <= 0) {
-                    unitPrice = BigDecimal.ONE;
-                }
-                BigDecimal monetaryVal = e.getAmount().multiply(unitPrice);
+                // Quantities of different assets cannot be audited at today's market price.
+                BigDecimal monetaryVal = e.getMonetaryValue() != null ? e.getMonetaryValue() : BigDecimal.ZERO;
 
-                entryDTOs.add(new EntryDTO(e.getId(), acc != null ? acc.getId() : null, accCode, ticker, name, e.getAmount()));
+                EntryDTO entryDTO = new EntryDTO(e.getId(), acc != null ? acc.getId() : null, accCode, ticker, name, e.getAmount());
+                entryDTO.setMonetaryValue(e.getMonetaryValue());
+                entryDTOs.add(entryDTO);
                 if (monetaryVal.compareTo(BigDecimal.ZERO) > 0) {
                     totalDebit = totalDebit.add(monetaryVal);
                 }
@@ -97,7 +102,10 @@ public class LedgerService {
 
             dto.setEntries(entryDTOs);
             dto.setTotalAmount(totalDebit.setScale(0, RoundingMode.HALF_EVEN));
-            dto.setAcidBalanced(monetarySum.abs().compareTo(new BigDecimal("100.0")) < 0);
+            boolean verifiable = !entries.isEmpty() && entries.stream().allMatch(e ->
+                    e.getMonetaryValue() != null);
+            dto.setAuditVerifiable(verifiable);
+            dto.setAcidBalanced(verifiable && monetarySum.signum() == 0);
             dtos.add(dto);
         }
         return dtos;
@@ -240,6 +248,13 @@ public class LedgerService {
         return dto;
     }
 
+    @org.springframework.beans.factory.annotation.Value("${savings.early-withdrawal-rate:0.1}")
+    private BigDecimal earlyWithdrawalRate = new BigDecimal("0.1");
+
+    public BigDecimal estimateSavingsPayout(SavingsDeposit deposit) {
+        return deposit.getPrincipalAmount().add(SavingsInterest.accrued(deposit, LocalDate.now(), earlyWithdrawalRate));
+    }
+
     @Transactional
     public TransactionDTO settleSavingsDeposit(Long depositId) {
         SavingsDeposit deposit = savingsDepositRepository.findById(depositId)
@@ -249,14 +264,7 @@ public class LedgerService {
             throw new IllegalStateException("Sổ tiết kiệm này đã được tất toán hoặc không còn hoạt động.");
         }
 
-        LocalDate today = LocalDate.now();
-        long daysElapsed = Math.max(0, ChronoUnit.DAYS.between(deposit.getStartDate(), today));
-        BigDecimal rateFraction = deposit.getInterestRate().divide(new BigDecimal("100"), 6, RoundingMode.HALF_EVEN);
-        BigDecimal daysBD = BigDecimal.valueOf(daysElapsed);
-        BigDecimal accrued = deposit.getPrincipalAmount()
-                .multiply(rateFraction)
-                .multiply(daysBD)
-                .divide(new BigDecimal("365"), 0, RoundingMode.HALF_EVEN);
+        BigDecimal accrued = SavingsInterest.accrued(deposit, LocalDate.now(), earlyWithdrawalRate);
 
         BigDecimal totalPayout = deposit.getPrincipalAmount().add(accrued);
         User user = deposit.getUser();
@@ -273,7 +281,7 @@ public class LedgerService {
 
         savingsAccount.setBalance(BigDecimal.ZERO);
         vndWallet.setBalance(vndWallet.getBalance().add(totalPayout));
-        interestIncomeAccount.setBalance(interestIncomeAccount.getBalance().add(accrued));
+        interestIncomeAccount.setBalance(interestIncomeAccount.getBalance().subtract(accrued));
 
         savingsAccount = accountRepository.save(savingsAccount);
         vndWallet = accountRepository.save(vndWallet);
@@ -348,7 +356,7 @@ public class LedgerService {
         targetAccount.setBalance(targetAccount.getBalance().add(request.getAmount()));
         targetAccount = accountRepository.save(targetAccount);
 
-        equityAccount.setBalance(equityAccount.getBalance().add(monetaryValue));
+        equityAccount.setBalance(equityAccount.getBalance().subtract(monetaryValue));
         equityAccount = accountRepository.save(equityAccount);
 
         // 5. Khởi tạo Giao dịch
@@ -359,6 +367,7 @@ public class LedgerService {
         // 6. Tạo bút toán kép:
         // Ghi Nợ (Debit) tài khoản tài sản (tăng số lượng)
         Entry debitEntry = new Entry(transaction, targetAccount, request.getAmount());
+        debitEntry.setMonetaryValue(monetaryValue);
         // Ghi Có (Credit) tài khoản vốn chủ sở hữu (tăng nguồn vốn tương ứng tiền VND quy đổi)
         Entry creditEntry = new Entry(transaction, equityAccount, monetaryValue.negate());
 
@@ -427,6 +436,8 @@ public class LedgerService {
 
             Transaction tx = new Transaction(txCode, user, "TRADE_BUY", desc);
             Entry debitAsset = new Entry(tx, assetAccount, qty);
+            debitAsset.setMonetaryValue(grossMoney);
+            recordTradingCosts(user, tx, fee);
             Entry creditVnd = new Entry(tx, vndWallet, totalRequired.negate());
             tx.addEntry(debitAsset);
             tx.addEntry(creditVnd);
@@ -440,6 +451,7 @@ public class LedgerService {
             dto.setDescription(desc);
             dto.setTotalAmount(totalRequired);
             dto.setAcidBalanced(true);
+            dto.setAuditVerifiable(true);
             return dto;
         } else {
             if (assetAccount.getBalance().compareTo(qty) < 0) {
@@ -463,6 +475,8 @@ public class LedgerService {
 
             Transaction tx = new Transaction(txCode, user, "TRADE_SELL", desc);
             Entry creditAsset = new Entry(tx, assetAccount, qty.negate());
+            creditAsset.setMonetaryValue(grossMoney.negate());
+            recordTradingCosts(user, tx, fee.add(tax));
             Entry debitVnd = new Entry(tx, vndWallet, netProceeds);
             tx.addEntry(creditAsset);
             tx.addEntry(debitVnd);
@@ -476,8 +490,19 @@ public class LedgerService {
             dto.setDescription(desc);
             dto.setTotalAmount(netProceeds);
             dto.setAcidBalanced(true);
+            dto.setAuditVerifiable(true);
             return dto;
         }
+    }
+
+    public void recordTradingCosts(User user, Transaction transaction, BigDecimal costs) {
+        if (costs.signum() == 0) return;
+        Asset vnd = assetRepository.findById("VND").orElseThrow();
+        Account expense = accountRepository.findByUserIdAndAccountCode(user.getId(), "TRADING_COSTS")
+                .orElseGet(() -> accountRepository.save(new Account(user, "TRADING_COSTS", vnd, BigDecimal.ZERO)));
+        expense.setBalance(expense.getBalance().add(costs));
+        expense = accountRepository.save(expense);
+        transaction.addEntry(new Entry(transaction, expense, costs));
     }
 
     public PortfolioValuationDTO calculatePortfolioValuation(Long userId) {
@@ -493,7 +518,7 @@ public class LedgerService {
         List<PortfolioValuationDTO.HoldingItem> holdingItems = new ArrayList<>();
 
         for (Account acc : accounts) {
-            if ("EQUITY_CAPITAL".equalsIgnoreCase(acc.getAccountCode()) || "INTEREST_INCOME".equalsIgnoreCase(acc.getAccountCode())) {
+            if ("TRADING_COSTS".equalsIgnoreCase(acc.getAccountCode()) || "EQUITY_CAPITAL".equalsIgnoreCase(acc.getAccountCode()) || "INTEREST_INCOME".equalsIgnoreCase(acc.getAccountCode())) {
                 continue; // Bỏ qua tài khoản đối ứng kế toán khi định giá tài sản thực tế
             }
 
@@ -778,6 +803,7 @@ public class LedgerService {
 
         int balancedCount = 0;
         int unbalancedCount = 0;
+        int unverifiedCount = 0;
 
         for (Transaction tx : transactions) {
             List<Entry> entries = entryRepository.findByTransactionId(tx.getId());
@@ -785,9 +811,13 @@ public class LedgerService {
             BigDecimal totalDebit = BigDecimal.ZERO;
             BigDecimal totalCredit = BigDecimal.ZERO;
 
+            boolean verifiable = entries.stream().allMatch(e -> e.getMonetaryValue() != null);
+            if (!verifiable) {
+                unverifiedCount++;
+                continue;
+            }
             for (Entry entry : entries) {
-                BigDecimal price = marketService.getLatestPrice(entry.getAccount().getAsset().getTicker());
-                BigDecimal value = entry.getAmount().multiply(price);
+                BigDecimal value = entry.getMonetaryValue();
                 txMonetarySum = txMonetarySum.add(value);
                 if (entry.getAmount().compareTo(BigDecimal.ZERO) > 0) {
                     totalDebit = totalDebit.add(value);
@@ -796,23 +826,24 @@ public class LedgerService {
                 }
             }
 
-            if (txMonetarySum.abs().compareTo(new BigDecimal("0.001")) <= 0) {
+            if (!entries.isEmpty() && txMonetarySum.signum() == 0) {
                 balancedCount++;
             } else {
                 unbalancedCount++;
                 report.getUnbalancedTxList().add(new LedgerAuditReportDTO.UnbalancedTxItem(
                         tx.getTransactionCode(),
                         tx.getDescription(),
-                        totalDebit.setScale(2, RoundingMode.HALF_EVEN),
-                        totalCredit.setScale(2, RoundingMode.HALF_EVEN),
-                        txMonetarySum.setScale(2, RoundingMode.HALF_EVEN)
+                        totalDebit.setScale(4, RoundingMode.HALF_EVEN),
+                        totalCredit.setScale(4, RoundingMode.HALF_EVEN),
+                        txMonetarySum.setScale(4, RoundingMode.HALF_EVEN)
                 ));
             }
         }
 
         report.setBalancedTransactions(balancedCount);
         report.setUnbalancedTransactions(unbalancedCount);
-        report.setAllTransactionsBalanced(unbalancedCount == 0);
+        report.setUnverifiedTransactions(unverifiedCount);
+        report.setAllTransactionsBalanced(unbalancedCount == 0 && unverifiedCount == 0);
 
         // 2. Kiểm tra Bất biến 2: Đối chiếu số dư Snapshot trong bảng accounts với tổng lịch sử entries
         List<Account> accounts = accountRepository.findByUserId(userId);
@@ -826,7 +857,7 @@ public class LedgerService {
             }
 
             BigDecimal discrepancy = snapshotBalance.subtract(calculatedBalance).abs();
-            boolean consistent = discrepancy.compareTo(new BigDecimal("0.0001")) <= 0;
+            boolean consistent = discrepancy.signum() == 0;
 
             if (!consistent) {
                 allAccountsConsistent = false;
@@ -845,10 +876,13 @@ public class LedgerService {
         report.setAllAccountsConsistent(allAccountsConsistent);
 
         boolean passed = report.isAllTransactionsBalanced() && allAccountsConsistent;
-        report.setAuditStatus(passed ? "ALL_ACID_INVARIANTS_PASSED" : "DISCREPANCY_DETECTED");
+        report.setAuditStatus(unbalancedCount > 0 || !allAccountsConsistent ? "DISCREPANCY_DETECTED"
+                : unverifiedCount > 0 ? "INSUFFICIENT_HISTORICAL_DATA" : "ALL_ACID_INVARIANTS_PASSED");
         report.setSystemSummary(passed
-                ? "Toàn bộ hệ thống sổ cái kép đạt chuẩn bảo toàn ACID 100%. Mọi bút toán cân bằng tuyệt đối (Σ Debit = Σ Credit) và số dư đối soát khớp hoàn toàn với lịch sử dòng tiền."
-                : "Cảnh báo kiểm toán: Phát hiện sai lệch số học trong giao dịch hoặc số dư tài khoản.");
+                ? "Các giao dịch cân bằng theo giá trị VND lúc ghi sổ và số dư tài khoản khớp lịch sử bút toán. Kết quả này không chứng nhận toàn bộ thuộc tính ACID."
+                : "Có " + unbalancedCount + " giao dịch lệch, " + unverifiedCount
+                    + " giao dịch thiếu giá trị quy đổi lúc ghi sổ. Đối soát số dư: "
+                    + (allAccountsConsistent ? "khớp." : "có sai lệch."));
 
         return report;
     }
@@ -918,7 +952,9 @@ public class LedgerService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng ID: " + userId));
 
         PortfolioValuationDTO valuation = calculatePortfolioValuation(userId);
-        BigDecimal currentVni = new BigDecimal("1286.40");
+        if (!date.equals(LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh"))))
+            throw new IllegalArgumentException("Chỉ ghi snapshot giá trị quan sát hôm nay");
+        BigDecimal currentVni = marketService.getLatestPrice("VNINDEX");
 
         Optional<PortfolioSnapshot> existing = portfolioSnapshotRepository.findByUserIdAndSnapshotDate(userId, date);
         PortfolioSnapshot snapshot;
@@ -937,274 +973,25 @@ public class LedgerService {
                     valuation.getSavingsValue(), valuation.getCashBalance(), currentVni
             );
         }
+        snapshot.setSnapshotSource(com.equifolio.common.DemoData.isDemoAccount(user) ? "DEMO" : "OBSERVED");
         return portfolioSnapshotRepository.save(snapshot);
     }
 
     @Transactional
     public void backfillSnapshotsForUser(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng ID: " + userId));
-
-        List<PortfolioSnapshot> existing = portfolioSnapshotRepository.findByUserIdOrderBySnapshotDateAsc(userId);
-        if (!existing.isEmpty()) {
-            return;
-        }
-
-        PortfolioValuationDTO currentVal = calculatePortfolioValuation(userId);
-        BigDecimal currentNav = currentVal.getTotalNetWorth();
-        if (currentNav.compareTo(BigDecimal.ZERO) <= 0) {
-            recordDailySnapshot(userId, LocalDate.now());
-            return;
-        }
-
-        LocalDate today = LocalDate.now();
-        LocalDate startDate = today.minusDays(30);
-
-        Optional<Transaction> firstTx = transactionRepository.findByUserIdOrderByCreatedAtAsc(userId).stream().findFirst();
-        if (firstTx.isPresent() && firstTx.get().getCreatedAt() != null) {
-            LocalDate txDate = firstTx.get().getCreatedAt().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).toLocalDate();
-            if (txDate.isBefore(startDate)) {
-                startDate = txDate;
-            }
-        }
-
-        long totalDays = Math.max(1, ChronoUnit.DAYS.between(startDate, today));
-        List<PortfolioSnapshot> backfilled = new ArrayList<>();
-
-        double baseVni = 1252.0;
-        double targetVni = 1286.4;
-
-        BigDecimal initialCost = currentVal.getTotalCostBasis();
-        double startNavFactor = 1.0;
-        if (initialCost != null && initialCost.compareTo(BigDecimal.ZERO) > 0 && currentNav.compareTo(BigDecimal.ZERO) > 0) {
-            startNavFactor = initialCost.divide(currentNav, 4, RoundingMode.HALF_EVEN).doubleValue();
-        }
-
-        for (int i = 0; i <= totalDays; i++) {
-            LocalDate date = startDate.plusDays(i);
-            double progress = (double) i / totalDays;
-
-            double noise = Math.sin(i * 0.7) * 0.008 + Math.cos(i * 0.4) * 0.005;
-            double baseFactor = startNavFactor + (1.0 - startNavFactor) * progress;
-            double navFactor = baseFactor + noise;
-            if (i == totalDays) {
-                navFactor = 1.0;
-            }
-
-            BigDecimal dayNav = currentNav.multiply(BigDecimal.valueOf(navFactor)).setScale(2, RoundingMode.HALF_EVEN);
-            BigDecimal dayStock = currentVal.getStockValue().multiply(BigDecimal.valueOf(navFactor)).setScale(2, RoundingMode.HALF_EVEN);
-            BigDecimal dayGold = currentVal.getGoldValue().multiply(BigDecimal.valueOf(navFactor)).setScale(2, RoundingMode.HALF_EVEN);
-            BigDecimal daySavings = currentVal.getSavingsValue();
-            BigDecimal dayCash = dayNav.subtract(dayStock).subtract(dayGold).subtract(daySavings).max(BigDecimal.ZERO);
-
-            double vniNoise = Math.sin(i * 0.5) * 4.0;
-            double vniVal = baseVni + (targetVni - baseVni) * progress + vniNoise;
-            if (i == totalDays) {
-                vniVal = targetVni;
-            }
-            BigDecimal dayVni = BigDecimal.valueOf(vniVal).setScale(2, RoundingMode.HALF_EVEN);
-
-            PortfolioSnapshot snap = new PortfolioSnapshot(
-                    user, date, dayNav, dayStock, dayGold, daySavings, dayCash, dayVni
-            );
-            backfilled.add(snap);
-        }
-
-        portfolioSnapshotRepository.saveAll(backfilled);
+        // Historical valuations cannot be reconstructed from today's holdings.
+        // Capture only today's observed balance; never fabricate a price/NAV path.
+        recordDailySnapshot(userId, LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")));
     }
 
-    @Transactional
+    @Transactional(readOnly = true, isolation = org.springframework.transaction.annotation.Isolation.REPEATABLE_READ)
     public PortfolioHistoryDTO getPortfolioHistory(Long userId, String timeframe) {
-        List<PortfolioSnapshot> allSnaps = portfolioSnapshotRepository.findByUserIdOrderBySnapshotDateAsc(userId);
-        if (allSnaps.isEmpty()) {
-            backfillSnapshotsForUser(userId);
-            allSnaps = portfolioSnapshotRepository.findByUserIdOrderBySnapshotDateAsc(userId);
-        }
-
-        // Luôn đảm bảo ngày hôm nay có snapshot mới nhất
-        recordDailySnapshot(userId, LocalDate.now());
-        allSnaps = portfolioSnapshotRepository.findByUserIdOrderBySnapshotDateAsc(userId);
-
-        LocalDate today = LocalDate.now();
-        LocalDate cutoffDate;
-        String tf = (timeframe != null) ? timeframe.trim().toUpperCase() : "1M";
-
-        switch (tf) {
-            case "1W":
-                cutoffDate = today.minusDays(7);
-                break;
-            case "1M":
-                cutoffDate = today.minusMonths(1);
-                break;
-            case "3M":
-                cutoffDate = today.minusMonths(3);
-                break;
-            case "6M":
-                cutoffDate = today.minusMonths(6);
-                break;
-            case "YTD":
-                cutoffDate = LocalDate.of(today.getYear(), 1, 1);
-                break;
-            case "1Y":
-                cutoffDate = today.minusYears(1);
-                break;
-            case "ALL":
-                cutoffDate = LocalDate.MIN;
-                break;
-            default:
-                cutoffDate = today.minusMonths(1);
-                tf = "1M";
-                break;
-        }
-
-        List<PortfolioSnapshot> filtered = new ArrayList<>();
-        for (PortfolioSnapshot s : allSnaps) {
-            if (!s.getSnapshotDate().isBefore(cutoffDate)) {
-                filtered.add(s);
-            }
-        }
-        if (filtered.isEmpty() && !allSnaps.isEmpty()) {
-            filtered = allSnaps;
-        }
-
-        PortfolioHistoryDTO dto = new PortfolioHistoryDTO();
-        dto.setTimeframe(tf);
-
-        if (filtered.isEmpty()) {
-            return dto;
-        }
-
-        BigDecimal baseNav = filtered.get(0).getTotalNav();
-        BigDecimal baseVni = filtered.get(0).getVnindexValue();
-        if (baseNav.compareTo(BigDecimal.ZERO) <= 0) {
-            baseNav = BigDecimal.ONE;
-        }
-        if (baseVni.compareTo(BigDecimal.ZERO) <= 0) {
-            baseVni = new BigDecimal("1250.0");
-        }
-
-        List<PortfolioHistoryDTO.SnapshotPoint> points = new ArrayList<>();
-        for (PortfolioSnapshot s : filtered) {
-            BigDecimal navRet = s.getTotalNav().subtract(baseNav)
-                    .divide(baseNav, 6, RoundingMode.HALF_EVEN)
-                    .multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_EVEN);
-
-            BigDecimal vniRet = s.getVnindexValue().subtract(baseVni)
-                    .divide(baseVni, 6, RoundingMode.HALF_EVEN)
-                    .multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_EVEN);
-
-            points.add(new PortfolioHistoryDTO.SnapshotPoint(
-                    s.getSnapshotDate().toString(),
-                    s.getTotalNav(),
-                    s.getStockValue(),
-                    s.getGoldValue(),
-                    s.getSavingsValue(),
-                    s.getCashValue(),
-                    navRet,
-                    vniRet,
-                    s.getVnindexValue()
-            ));
-        }
-
-        PortfolioHistoryDTO.SnapshotPoint latest = points.get(points.size() - 1);
-        dto.setCurrentNav(latest.getNav());
-        dto.setPortfolioReturnPercent(latest.getNavReturn());
-        dto.setVniReturnPercent(latest.getVniReturn());
-        dto.setAlphaPercent(latest.getNavReturn().subtract(latest.getVniReturn()).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setPoints(points);
-
-        return dto;
+        return preparedPerformanceReader.history(userId, timeframe);
     }
 
     @Transactional(readOnly = true)
     public RiskMetricsDTO calculateRiskMetrics(Long userId) {
-        List<PortfolioSnapshot> snaps = portfolioSnapshotRepository.findByUserIdOrderBySnapshotDateAsc(userId);
-        if (snaps.isEmpty() || snaps.size() < 3) {
-            backfillSnapshotsForUser(userId);
-            snaps = portfolioSnapshotRepository.findByUserIdOrderBySnapshotDateAsc(userId);
-        }
-
-        RiskMetricsDTO dto = new RiskMetricsDTO();
-        if (snaps == null || snaps.size() < 2) {
-            dto.setInterpretation("Chưa đủ dữ liệu lịch sử để tính chỉ số rủi ro.");
-            return dto;
-        }
-
-        List<Double> returns = new ArrayList<>();
-        double peak = snaps.get(0).getTotalNav().doubleValue();
-        double maxDd = 0.0;
-
-        for (int i = 1; i < snaps.size(); i++) {
-            double prevNav = snaps.get(i - 1).getTotalNav().doubleValue();
-            double curNav = snaps.get(i).getTotalNav().doubleValue();
-            if (prevNav > 0) {
-                double r = (curNav - prevNav) / prevNav;
-                returns.add(r);
-            }
-
-            if (curNav > peak) {
-                peak = curNav;
-            } else if (peak > 0) {
-                double dd = (peak - curNav) / peak;
-                if (dd > maxDd) {
-                    maxDd = dd;
-                }
-            }
-        }
-
-        if (returns.isEmpty()) {
-            return dto;
-        }
-
-        PortfolioValuationDTO currentVal = calculatePortfolioValuation(userId);
-        Map<String, BigDecimal> alloc = currentVal.getCurrentAllocations();
-        double wStock = alloc.getOrDefault("STOCK", BigDecimal.ZERO).doubleValue();
-        double wGold = alloc.getOrDefault("GOLD", BigDecimal.ZERO).doubleValue();
-        double wSavings = alloc.getOrDefault("SAVINGS", BigDecimal.ZERO).doubleValue();
-        double wCash = alloc.getOrDefault("CASH", BigDecimal.ZERO).doubleValue();
-
-        // Chuẩn hóa Markowitz parameters (khớp với MarkowitzTab)
-        double muStock = 18.5, sigmaStock = 22.0;
-        double muGold = 12.0, sigmaGold = 14.5;
-        double muSavings = 5.5, sigmaSavings = 1.0;
-        double muCash = 5.0, sigmaCash = 0.5;
-        double rf = (externalMarketSyncService != null)
-                ? externalMarketSyncService.getRiskFreeRate().doubleValue()
-                : 4.5; // Lãi suất phi rủi ro SBV Interbank
-
-        double expReturn = wStock * muStock + wGold * muGold + wSavings * muSavings + wCash * muCash;
-        double var = Math.pow(wStock * sigmaStock, 2)
-                + Math.pow(wGold * sigmaGold, 2)
-                + Math.pow(wSavings * sigmaSavings, 2)
-                + Math.pow(wCash * sigmaCash, 2)
-                + 2 * wStock * wGold * (-0.15) * sigmaStock * sigmaGold
-                + 2 * wStock * (wSavings + wCash) * (0.02) * sigmaStock * sigmaSavings;
-        double expVol = Math.sqrt(Math.max(0.01, var));
-        double sharpe = (expVol > 0.01) ? ((expReturn - rf) / expVol) : 0.0;
-
-        double pReturn = (currentVal.getTotalPnLPercent() != null) ? currentVal.getTotalPnLPercent().doubleValue() : 0.0;
-        double vniReturn = (snaps.get(snaps.size() - 1).getVnindexValue().doubleValue() - snaps.get(0).getVnindexValue().doubleValue()) / snaps.get(0).getVnindexValue().doubleValue() * 100.0;
-        double alpha = pReturn - vniReturn;
-
-        dto.setSharpeRatio(BigDecimal.valueOf(sharpe).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setMaxDrawdownPercent(BigDecimal.valueOf(maxDd * 100.0).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setAnnualizedVolatilityPercent(BigDecimal.valueOf(expVol).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setAnnualizedReturnPercent(BigDecimal.valueOf(expReturn).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setRiskFreeRatePercent(BigDecimal.valueOf(rf));
-        dto.setAlphaPercent(BigDecimal.valueOf(alpha).setScale(2, RoundingMode.HALF_EVEN));
-
-        if (sharpe >= 1.0) {
-            dto.setRiskRating("EXCELLENT");
-            dto.setInterpretation("Tỷ suất sinh lời vượt trội trên mỗi đơn vị rủi ro (Sharpe > 1.0). Danh mục vận hành tối ưu.");
-        } else if (sharpe >= 0.5) {
-            dto.setRiskRating("GOOD");
-            dto.setInterpretation("Mức bù rủi ro hợp lý. Danh mục duy trì sự cân bằng tốt giữa phòng thủ và tăng trưởng.");
-        } else {
-            dto.setRiskRating("MODERATE");
-            dto.setInterpretation("Danh mục đang có độ biến động tương đối, khuyến nghị cân nhắc tái cơ cấu để gia tăng tỷ trọng tài sản an toàn.");
-        }
-
-        return dto;
+        return preparedPerformanceReader.risk(userId);
     }
 
     @Transactional
@@ -1244,7 +1031,7 @@ public class LedgerService {
             BigDecimal net = gross.subtract(tax);
 
             vndWallet.setBalance(vndWallet.getBalance().add(net));
-            equityAccount.setBalance(equityAccount.getBalance().add(net));
+            equityAccount.setBalance(equityAccount.getBalance().subtract(net));
             accountRepository.save(vndWallet);
             accountRepository.save(equityAccount);
 
@@ -1268,6 +1055,7 @@ public class LedgerService {
             dto.setDescription(desc);
             dto.setTotalAmount(net);
             dto.setAcidBalanced(true);
+            dto.setAuditVerifiable(true);
             return dto;
         } else {
             BigDecimal bonusQty = req.getTotalAmount();
@@ -1285,6 +1073,7 @@ public class LedgerService {
 
             Transaction tx = new Transaction(txCode, user, "DIVIDEND_STOCK", desc);
             Entry debitAsset = new Entry(tx, assetAccount, bonusQty);
+            debitAsset.setMonetaryValue(BigDecimal.ZERO);
             Entry creditEquity = new Entry(tx, equityAccount, BigDecimal.ZERO);
             tx.addEntry(debitAsset);
             tx.addEntry(creditEquity);
@@ -1298,20 +1087,10 @@ public class LedgerService {
             dto.setDescription(desc);
             dto.setTotalAmount(bonusQty);
             dto.setAcidBalanced(true);
+            dto.setAuditVerifiable(true);
             return dto;
         }
     }
 
-    @Scheduled(cron = "0 5 15 * * MON-FRI", zone = "Asia/Ho_Chi_Minh")
-    public void captureDailySnapshotsScheduled() {
-        List<User> users = userRepository.findAll();
-        LocalDate today = LocalDate.now();
-        for (User u : users) {
-            try {
-                recordDailySnapshot(u.getId(), today);
-            } catch (Exception e) {
-                // Ignore individual snapshot failure in background schedule
-            }
-        }
-    }
+
 }

@@ -1,0 +1,40 @@
+{
+  "mode": "causal_dynamic_target_decision_adaptation_DEVELOPMENT",
+  "created_at": "2026-10-19T04:59:44.083058+00:00",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_adaptive_decisions.py": "220870d55116ff70c73a95c48480c27dce2b78d79fd86ae185eab7e366bdf886",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/plan.json": "70cab9f02820d44764f297521f18f1f810f29f8b62d2072504ea9cf6d3cfe660",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_dynamic_tuning.py": "2e1de2a0f89db660abb7c4f75449e0eb24e688482e7a4f7d5a247a41d27edf89",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/trend_predictions.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/risk_predictions.csv": "9673be6656785f2d1e9aaf4bfb85ad1167cd1ed575ef3317c602612ba1ae0a80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_raw_mapped_predictions.csv": "02a35e6b7ccc26877666aab9ccd0562781c11509277f16075bdb883457bc06df",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_normalized_mapped_predictions.csv": "f048d7e4a9107820c58b306315133b0b847c4a2e5509d7f6544e49205732e466",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/blend_expanding_predictions.csv": "28f2d07cdb455bb60bfebe1f968b77bb97df8fe6cd50e2619af22e5efda21501"
+  },
+  "windows": [
+    252,
+    504
+  ],
+  "min_history": 126,
+  "min_each_class": 5,
+  "refit_raw_market_sessions": 20,
+  "weight_grid": [
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "weight_penalty": 0.005,
+  "logistic": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "scaler": "training-only StandardScaler",
+    "inputs": "CLR log incumbent scores, log known horizon sigma, normalized past20 return"
+  },
+  "primary": "pooled_adapter = .5 incumbent + .5 equal four adapters; standalone adapters diagnostic only",
+  "timing": "Use ONLY archived OOF outcomes with label_end_date strictly before refresh; hold adapter until next20-session bucket; insufficient history -> incumbent.",
+  "score_semantics": "Decision scores, NOT calibrated probabilities",
+  "acceptance": "Mean F1 +.01, no decline worst fold or mean bear/bull F1, higher MCC, >=3 wins vs incumbent; both paired20/60 lower bounds >0 for provisional robust evidence.",
+  "caveat": "Repeatedly inspected historical development; no independent acceptance or deployment."
+}

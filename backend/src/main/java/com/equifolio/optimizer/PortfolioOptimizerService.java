@@ -28,6 +28,24 @@ public class PortfolioOptimizerService {
     private final OnnxRegimeService onnxRegimeService;
     private final SavingsDepositRepository savingsDepositRepository;
 
+    @org.springframework.beans.factory.annotation.Autowired
+    private NativeRegimeService nativeRegimeService;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    private AllocationPreferenceService allocationPreferences;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    private EquityPreferenceService equityPreferences;
+
+    @org.springframework.beans.factory.annotation.Value("${ml.stock-model:native}")
+    private String stockModel;
+
+    @jakarta.annotation.PostConstruct
+    void validateStockModelConfiguration() {
+        if (!"native".equals(stockModel) && !"onnx".equals(stockModel))
+            throw new IllegalStateException("ml.stock-model must be native or onnx");
+    }
+
     public PortfolioOptimizerService(LedgerService ledgerService,
                                      PortfolioTargetRepository portfolioTargetRepository,
                                      MarketService marketService,
@@ -49,6 +67,9 @@ public class PortfolioOptimizerService {
     }
 
     /** Biên độ dịch chuyển tối đa TAA: ±15% quanh SAA */
+    @org.springframework.beans.factory.annotation.Value("${ml.taa-enabled:false}")
+    private boolean taaEnabled;
+
     private static final BigDecimal DELTA_W_MAX = new BigDecimal("0.15");
 
     /** Biên độ dịch chuyển tối đa cho Vàng: ±10% (thận trọng hơn cổ phiếu) */
@@ -60,6 +81,7 @@ public class PortfolioOptimizerService {
      * Trong đó: Δw = signal × confidence × deltaMax
      */
     private BigDecimal calculateTaaWeight(BigDecimal saaw, RegimePrediction prediction, BigDecimal deltaMax) {
+        if (!taaEnabled) return saaw;
         BigDecimal delta = deltaMax
                 .multiply(BigDecimal.valueOf(prediction.signal()))
                 .multiply(BigDecimal.valueOf(prediction.confidence()))
@@ -77,6 +99,13 @@ public class PortfolioOptimizerService {
         List<PortfolioTarget> targets = portfolioTargetRepository.findByUserId(userId);
 
         RebalancePlanDTO plan = new RebalancePlanDTO();
+        var preference = allocationPreferences == null ? null : allocationPreferences.get(userId);
+        boolean selectedTaa = preference == null ? taaEnabled : "TAA".equals(preference.mode());
+        int horizon = preference == null ? 20 : preference.horizonSessions();
+        plan.setTaaEnabled(selectedTaa);
+        plan.setHorizonSessions(horizon);
+        var equityPreference=equityPreferences==null?null:equityPreferences.get(userId);
+        plan.setEquityPreference(equityPreference);
         plan.setCurrentAllocations(valuation.getCurrentAllocations());
 
         // ═══ SAA: Đọc tỷ trọng mỏ neo (cố định từ khảo sát) ═══
@@ -87,15 +116,29 @@ public class PortfolioOptimizerService {
         plan.setSaaTargets(new HashMap<>(saaMap));
 
         // ═══ ML: Gọi ONNX dự báo regime T+20 ═══
-        RegimePrediction stockPrediction = onnxRegimeService.predictStockRegime();
+        boolean useNative = "native".equals(stockModel) || horizon != 20;
+        NativeRegimeForecast nativeStock = useNative
+                ? (nativeRegimeService == null ? NativeRegimeForecast.unavailable("WORKER_UNAVAILABLE") : (horizon == 20 ? nativeRegimeService.predict() : nativeRegimeService.predict(horizon)))
+                : null;
+        RegimePrediction stockPrediction = useNative
+                ? new RegimePrediction(nativeStock.signal(), 0, nativeStock.regimeName())
+                : onnxRegimeService.predictStockRegime();
         RegimePrediction goldPrediction = onnxRegimeService.predictGoldRegime();
 
         // ═══ TAA: Dịch chuyển tỷ trọng theo ML ═══
         BigDecimal saawStock = saaMap.getOrDefault("STOCK", new BigDecimal("0.35"));
         BigDecimal saawGold = saaMap.getOrDefault("GOLD", new BigDecimal("0.35"));
 
-        BigDecimal taawStock = calculateTaaWeight(saawStock, stockPrediction, DELTA_W_MAX);
-        BigDecimal taawGold = calculateTaaWeight(saawGold, goldPrediction, DELTA_W_MAX_GOLD);
+        BigDecimal taawStock = preference != null
+                ? (useNative ? DirectionalTaaPolicy.weight(saawStock, nativeStock, selectedTaa)
+                    : DirectionalTaaPolicy.weight(saawStock, stockPrediction.signal(), selectedTaa && !stockPrediction.regimeName().startsWith("UNAVAILABLE")))
+                : useNative
+                ? NetTaaPolicy.weight(saawStock, nativeStock, DELTA_W_MAX, taaEnabled)
+                : calculateTaaWeight(saawStock, stockPrediction, DELTA_W_MAX);
+        BigDecimal taawGold = preference != null ? saawGold : calculateTaaWeight(saawGold, goldPrediction, DELTA_W_MAX_GOLD);
+
+        // Never create more than 100% allocation when the strategic anchor is already fully invested.
+        taawStock = taawStock.min(BigDecimal.ONE.subtract(taawGold).max(BigDecimal.ZERO));
 
         // Phần còn lại (CASH_SAVINGS) = 1.0 - STOCK - GOLD
         BigDecimal taawCashSavings = BigDecimal.ONE.subtract(taawStock).subtract(taawGold)
@@ -110,9 +153,14 @@ public class PortfolioOptimizerService {
                 : new BigDecimal("0.6667");
         BigDecimal taawSavings = taawCashSavings.multiply(savingsRatio).setScale(4, RoundingMode.HALF_EVEN);
         BigDecimal taawCash = taawCashSavings.subtract(taawSavings);
+        if (taawStock.compareTo(saawStock) == 0 && taawGold.compareTo(saawGold) == 0
+                && saawStock.add(saawGold).add(saawSavings).add(saawCash).compareTo(BigDecimal.ONE) == 0) {
+            taawSavings = saawSavings;
+            taawCash = saawCash;
+        }
 
         // Build TAA target map
-        Map<String, BigDecimal> taaMap = new HashMap<>();
+        Map<String, BigDecimal> taaMap = new LinkedHashMap<>();
         taaMap.put("STOCK", taawStock);
         taaMap.put("GOLD", taawGold);
         taaMap.put("SAVINGS", taawSavings);
@@ -129,10 +177,13 @@ public class PortfolioOptimizerService {
         BigDecimal goldDelta = taawGold.subtract(saawGold);
 
         List<RebalancePlanDTO.MlPredictionInfo> mlInfoList = new ArrayList<>();
-        mlInfoList.add(new RebalancePlanDTO.MlPredictionInfo(
-                "STOCK", "stock_regime.onnx",
+        var stockInfo = new RebalancePlanDTO.MlPredictionInfo(
+                "STOCK", useNative ? nativeStock.modelId() : "stock_regime.onnx",
                 stockPrediction.signal(), stockPrediction.confidence(),
-                stockPrediction.regimeName(), stockDelta));
+                stockPrediction.regimeName(), stockDelta);
+        stockInfo.setHorizonSessions(horizon);
+        if (useNative) stockInfo.setNativeForecast(nativeStock);
+        mlInfoList.add(stockInfo);
         mlInfoList.add(new RebalancePlanDTO.MlPredictionInfo(
                 "GOLD", "gold_trend.onnx",
                 goldPrediction.signal(), goldPrediction.confidence(),
@@ -146,12 +197,18 @@ public class PortfolioOptimizerService {
         if (totalNAV.compareTo(BigDecimal.ZERO) <= 0) {
             plan.setDriftDetected(false);
             plan.setExecutiveSummary("Danh mục chưa có tài sản nào được khai báo để thực hiện tái cơ cấu.");
+            plan.setPlanToken(RebalancePlanFingerprint.of(userId, valuation, plan));
             return plan;
         }
 
+        Map<String,BigDecimal> equityTargets=equityPreference==null?null:EquityInstrumentPlanner.targets(totalNAV.multiply(taawStock),equityPreference,valuation.getHoldings());
+        BigDecimal instrumentDrift=equityTargets==null?BigDecimal.ZERO:EquityInstrumentPlanner.drift(equityTargets,valuation.getHoldings(),totalNAV);
+        if(equityPreference!=null && !"ETF".equals(equityPreference.mode()) && valuation.getHoldings().stream().noneMatch(h->"STOCK".equals(h.getAssetClass()) && !EquityInstrumentPlanner.isEtf(h.getTicker())))
+            plan.setEquityNotice("Chưa có cổ phiếu riêng lẻ trong danh mục. Phần này giữ tiền mặt; chọn và mua mã tại tab Thị trường trước khi lập kế hoạch phân bổ theo các mã đang nắm giữ.");
+
         // 1. Kiểm tra độ lệch tỷ trọng (Drift Detection > 5%)
-        BigDecimal maxDrift = BigDecimal.ZERO;
-        boolean isDrift = false;
+        BigDecimal maxDrift = instrumentDrift;
+        boolean isDrift = instrumentDrift.compareTo(new BigDecimal(".05"))>0;
 
         for (Map.Entry<String, BigDecimal> entry : targetMap.entrySet()) {
             String assetClass = entry.getKey();
@@ -170,13 +227,27 @@ public class PortfolioOptimizerService {
         plan.setDriftDetected(isDrift);
         plan.setMaxDriftPercent(maxDrift.multiply(new BigDecimal("100")).setScale(2, RoundingMode.HALF_EVEN));
 
-        // 2. Tính toán các hành động tái cơ cấu cụ thể
+        // Nếu danh mục đang cân bằng trong ngưỡng an toàn 5%, không phát sinh bất kỳ lệnh tái cơ cấu nào
+        if (!isDrift) {
+            plan.setActions(Collections.emptyList());
+            plan.setExecutiveSummary("Danh mục hiện tại đang duy trì trạng thái cân bằng tốt (Độ lệch tối đa " + plan.getMaxDriftPercent() + "% < 5%). Khuyến nghị tiếp tục nắm giữ kỷ luật.");
+            plan.setPlanToken(RebalancePlanFingerprint.of(userId, valuation, plan));
+            return plan;
+        }
+
+        // 2. Tính toán các hành động tái cơ cấu cụ thể khi có Drift > 5%
         List<RebalancePlanDTO.RebalanceAction> actions = new ArrayList<>();
         BigDecimal totalSoldEst = BigDecimal.ZERO;
+        if(equityTargets!=null) {
+            var instrumentSells=EquityInstrumentPlanner.sells(equityTargets,valuation.getHoldings());
+            actions.addAll(instrumentSells);
+            totalSoldEst=instrumentSells.stream().map(RebalancePlanDTO.RebalanceAction::getNetMoney).reduce(BigDecimal.ZERO,BigDecimal::add);
+        }
 
         // A. Xét các nhóm tài sản VƯỢT tỷ trọng mục tiêu -> BÁN (SELL) theo tỷ lệ thành phần
         for (Map.Entry<String, BigDecimal> entry : targetMap.entrySet()) {
             String assetClass = entry.getKey();
+            if ("STOCK".equalsIgnoreCase(assetClass) && equityTargets!=null) continue;
             if ("CASH".equalsIgnoreCase(assetClass) || "CASH_SAVINGS".equalsIgnoreCase(assetClass)) {
                 continue;
             }
@@ -201,7 +272,8 @@ public class PortfolioOptimizerService {
                             }
                             BigDecimal principal = dep.getPrincipalAmount();
                             accumulatedSettle = accumulatedSettle.add(principal);
-                            totalSoldEst = totalSoldEst.add(principal);
+                            BigDecimal payout = ledgerService.estimateSavingsPayout(dep);
+                            totalSoldEst = totalSoldEst.add(payout);
 
                             RebalancePlanDTO.RebalanceAction action = new RebalancePlanDTO.RebalanceAction(
                                     "SETTLE_SAVINGS",
@@ -219,7 +291,9 @@ public class PortfolioOptimizerService {
                             );
                             action.setEstimatedFee(BigDecimal.ZERO);
                             action.setEstimatedTax(BigDecimal.ZERO);
-                            action.setNetMoney(principal);
+                            action.setEarlySettlement(java.time.LocalDate.now().isBefore(dep.getMaturityDate()));
+                            action.setEstimatedTotalMoney(payout);
+                            action.setNetMoney(payout);
                             actions.add(action);
                         }
                     }
@@ -249,12 +323,12 @@ public class PortfolioOptimizerService {
                                     }
 
                                     if (roundedQty.compareTo(BigDecimal.ZERO) > 0) {
-                                        BigDecimal totalEst = roundedQty.multiply(price).setScale(0, RoundingMode.HALF_EVEN);
+                                        BigDecimal totalEst = roundedQty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
                                         BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
                                         BigDecimal tax = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
                                         BigDecimal net = totalEst.subtract(fee).subtract(tax);
 
-                                        totalSoldEst = totalSoldEst.add(totalEst);
+                                        totalSoldEst = totalSoldEst.add(net);
                                         RebalancePlanDTO.RebalanceAction action = new RebalancePlanDTO.RebalanceAction(
                                                 "SELL",
                                                 item.getTicker(),
@@ -282,14 +356,16 @@ public class PortfolioOptimizerService {
         }
 
         // B. Xét các tài sản DƯỚI tỷ trọng mục tiêu -> MUA (BUY)
-        BigDecimal availableCashForBuying = valuation.getCashBalance().add(totalSoldEst);
+        BigDecimal cashReserve = totalNAV.multiply(targetMap.getOrDefault("CASH", BigDecimal.ZERO));
+        BigDecimal availableCashForBuying = valuation.getCashBalance().add(totalSoldEst).subtract(cashReserve).max(BigDecimal.ZERO);
 
         for (Map.Entry<String, BigDecimal> entry : targetMap.entrySet()) {
             String assetClass = entry.getKey();
             BigDecimal targetW = entry.getValue();
             BigDecimal currentClassW = valuation.getCurrentAllocations().getOrDefault(assetClass, BigDecimal.ZERO);
 
-            if (targetW.compareTo(currentClassW.add(new BigDecimal("0.0200"))) > 0) {
+            if (targetW.compareTo(currentClassW.add(new BigDecimal("0.0200"))) > 0
+                    || ("STOCK".equals(assetClass) && equityTargets!=null && instrumentDrift.compareTo(new BigDecimal(".05"))>0)) {
                 BigDecimal deficitWeight = targetW.subtract(currentClassW);
                 BigDecimal deficitMoney = totalNAV.multiply(deficitWeight).setScale(4, RoundingMode.HALF_EVEN);
 
@@ -298,10 +374,10 @@ public class PortfolioOptimizerService {
                     if (goldPrice.compareTo(BigDecimal.ZERO) > 0) {
                         BigDecimal availableForGold = availableCashForBuying.min(deficitMoney);
                         if (availableForGold.compareTo(goldPrice) >= 0) {
-                            long affordableGoldQty = availableForGold.divide(goldPrice, 0, RoundingMode.FLOOR).longValue();
+                            long affordableGoldQty = RebalanceBudget.quantity(availableForGold, goldPrice, 1).longValue();
                             BigDecimal roundedGoldQty = BigDecimal.valueOf(affordableGoldQty);
                             if (roundedGoldQty.compareTo(BigDecimal.ZERO) > 0) {
-                                BigDecimal totalEst = roundedGoldQty.multiply(goldPrice).setScale(0, RoundingMode.HALF_EVEN);
+                                BigDecimal totalEst = roundedGoldQty.multiply(goldPrice).setScale(4, RoundingMode.HALF_EVEN);
                                 BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
                                 BigDecimal net = totalEst.add(fee);
                                 availableCashForBuying = availableCashForBuying.subtract(net);
@@ -326,7 +402,14 @@ public class PortfolioOptimizerService {
                             }
                         }
                     }
+                } else if ("STOCK".equalsIgnoreCase(assetClass) && equityTargets!=null) {
+                    var purchases=EquityInstrumentPlanner.buys(equityTargets,valuation.getHoldings(),availableCashForBuying,marketService::getLatestPrice);
+                    actions.addAll(purchases.actions());
+                    availableCashForBuying=purchases.remainingCash();
+                    if(equityPreference.etfWeight().signum()>0 && marketService.getLatestPrice("E1VFVN30").signum()<=0)
+                        plan.setEquityNotice("Chưa có giá ETF E1VFVN30 hợp lệ. Hệ thống chưa đề xuất mua ETF; chờ dữ liệu thị trường cập nhật.");
                 } else if ("STOCK".equalsIgnoreCase(assetClass)) {
+                    int stockActionStart = actions.size();
                     // Mua cổ phiếu theo tỷ lệ các mã hiện có trong danh mục (hoặc ETF VN30 nếu chưa có mã nào)
                     BigDecimal availableForStock = availableCashForBuying.min(deficitMoney);
                     BigDecimal totalStockValue = valuation.getStockValue();
@@ -344,12 +427,12 @@ public class PortfolioOptimizerService {
 
                                 if (price.compareTo(BigDecimal.ZERO) > 0) {
                                     BigDecimal unitCost = price.multiply(new BigDecimal("1.001"));
-                                    long affordableLots = itemBuyBudget.divide(unitCost, 0, RoundingMode.FLOOR).longValue() / 100;
+                                    long affordableLots = RebalanceBudget.quantity(itemBuyBudget, price, 100).longValue() / 100;
                                     BigDecimal roundedQty = BigDecimal.valueOf(affordableLots * 100);
 
                                     if (roundedQty.compareTo(BigDecimal.ZERO) > 0) {
                                         BigDecimal exactQty = itemBuyBudget.divide(price, 4, RoundingMode.HALF_EVEN);
-                                        BigDecimal totalEst = roundedQty.multiply(price).setScale(0, RoundingMode.HALF_EVEN);
+                                        BigDecimal totalEst = roundedQty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
                                         BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
                                         BigDecimal net = totalEst.add(fee);
 
@@ -385,11 +468,11 @@ public class PortfolioOptimizerService {
                                 if (largestHolding != null && largestHolding.getCurrentPrice().compareTo(BigDecimal.ZERO) > 0) {
                                     BigDecimal price = largestHolding.getCurrentPrice();
                                     BigDecimal unitCost = price.multiply(new BigDecimal("1.001"));
-                                    long affordableLots = availableForStock.divide(unitCost, 0, RoundingMode.FLOOR).longValue() / 100;
+                                    long affordableLots = RebalanceBudget.quantity(availableForStock, price, 100).longValue() / 100;
                                     BigDecimal roundedQty = BigDecimal.valueOf(affordableLots * 100);
                                     if (roundedQty.compareTo(BigDecimal.ZERO) > 0) {
                                         BigDecimal exactQty = availableForStock.divide(price, 4, RoundingMode.HALF_EVEN);
-                                        BigDecimal totalEst = roundedQty.multiply(price).setScale(0, RoundingMode.HALF_EVEN);
+                                        BigDecimal totalEst = roundedQty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
                                         BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
                                         BigDecimal net = totalEst.add(fee);
 
@@ -420,12 +503,12 @@ public class PortfolioOptimizerService {
                                 etfPrice = new BigDecimal("22500");
                             }
                             BigDecimal unitCost = etfPrice.multiply(new BigDecimal("1.001"));
-                            long affordableLots = availableForStock.divide(unitCost, 0, RoundingMode.FLOOR).longValue() / 100;
+                            long affordableLots = RebalanceBudget.quantity(availableForStock, etfPrice, 100).longValue() / 100;
                             BigDecimal roundedQty = BigDecimal.valueOf(affordableLots * 100);
 
                             if (roundedQty.compareTo(BigDecimal.ZERO) > 0) {
                                 BigDecimal exactQty = availableForStock.divide(etfPrice, 4, RoundingMode.HALF_EVEN);
-                                BigDecimal totalEst = roundedQty.multiply(etfPrice).setScale(0, RoundingMode.HALF_EVEN);
+                                BigDecimal totalEst = roundedQty.multiply(etfPrice).setScale(4, RoundingMode.HALF_EVEN);
                                 BigDecimal fee = totalEst.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
                                 BigDecimal net = totalEst.add(fee);
 
@@ -449,13 +532,16 @@ public class PortfolioOptimizerService {
                             }
                         }
                     }
+                    for (int i = stockActionStart; i < actions.size(); i++) {
+                        availableCashForBuying = availableCashForBuying.subtract(actions.get(i).getNetMoney());
+                    }
                 } else if ("SAVINGS".equalsIgnoreCase(assetClass)) {
                     BigDecimal cashTargetW = targetMap.getOrDefault("CASH", new BigDecimal("0.1000"));
                     BigDecimal cashCurrentW = valuation.getCurrentAllocations().getOrDefault("CASH", BigDecimal.ZERO);
                     // Nếu tiền mặt đang dư thừa so với tỷ trọng mục tiêu tiền mặt
                     if (cashCurrentW.compareTo(cashTargetW) > 0) {
                         BigDecimal cashSurplusMoney = totalNAV.multiply(cashCurrentW.subtract(cashTargetW)).setScale(0, RoundingMode.FLOOR);
-                        BigDecimal transferMoney = deficitMoney.min(cashSurplusMoney).setScale(0, RoundingMode.FLOOR);
+                        BigDecimal transferMoney = deficitMoney.min(cashSurplusMoney).min(availableCashForBuying).setScale(0, RoundingMode.FLOOR);
                         long roundedMillion = (transferMoney.longValue() / 1_000_000) * 1_000_000;
                         if (roundedMillion >= 1_000_000) {
                             BigDecimal depAmount = BigDecimal.valueOf(roundedMillion);
@@ -476,6 +562,7 @@ public class PortfolioOptimizerService {
                             action.setEstimatedTax(BigDecimal.ZERO);
                             action.setNetMoney(depAmount);
                             actions.add(action);
+                            availableCashForBuying = availableCashForBuying.subtract(depAmount);
                         }
                     }
                 }
@@ -496,6 +583,8 @@ public class PortfolioOptimizerService {
             } else if ("BUY".equalsIgnoreCase(act.getActionType())) {
                 planTotalBuy = planTotalBuy.add(act.getEstimatedTotalMoney());
                 planTotalFees = planTotalFees.add(act.getEstimatedFee());
+            } else if ("SETTLE_SAVINGS".equalsIgnoreCase(act.getActionType())) {
+                planTotalSell = planTotalSell.add(act.getNetMoney());
             } else if ("OPEN_SAVINGS".equalsIgnoreCase(act.getActionType())) {
                 planTotalBuy = planTotalBuy.add(act.getEstimatedTotalMoney());
             }
@@ -519,15 +608,23 @@ public class PortfolioOptimizerService {
         }
 
         plan.setActions(actions);
+        plan.setPlanToken(RebalancePlanFingerprint.of(userId, valuation, plan));
         return plan;
     }
 
-    @Transactional
     public RebalanceExecutionResultDTO executeRebalancePlan(Long userId) {
+        throw new IllegalStateException("Cần tải và xác nhận kế hoạch tái cơ cấu trước khi thực hiện");
+    }
+
+    @Transactional
+    public RebalanceExecutionResultDTO executeRebalancePlan(Long userId, String expectedPlanToken) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng ID: " + userId));
 
         RebalancePlanDTO plan = generateRebalancePlan(userId);
+        if (expectedPlanToken == null || !expectedPlanToken.equals(plan.getPlanToken()))
+            throw new IllegalStateException("Kế hoạch đã thay đổi hoặc chưa được xác nhận. Vui lòng tải lại và xem kế hoạch mới.");
+        BigDecimal initialCash = ledgerService.calculatePortfolioValuation(userId).getCashBalance();
         if (plan.getActions() == null || plan.getActions().isEmpty()) {
             if (plan.isDriftDetected()) {
                 throw new IllegalStateException("Độ lệch tỷ trọng chưa đủ để cấu thành lô giao dịch tối thiểu (100 cổ phiếu hoặc 1 chỉ vàng), hoặc số dư tiền mặt không đủ để thực hiện lệnh mua.");
@@ -574,8 +671,7 @@ public class PortfolioOptimizerService {
                 BigDecimal money = qty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
 
                 if (assetAccount.getBalance().compareTo(qty) < 0) {
-                    qty = assetAccount.getBalance();
-                    money = qty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
+                    throw new IllegalStateException("Số dư tài sản đã thay đổi. Vui lòng tải lại kế hoạch.");
                 }
 
                 if (qty.compareTo(BigDecimal.ZERO) > 0) {
@@ -591,6 +687,8 @@ public class PortfolioOptimizerService {
 
                     Entry debitEntry = new Entry(transaction, vndWallet, netProceeds);
                     Entry creditEntry = new Entry(transaction, assetAccount, qty.negate());
+                    creditEntry.setMonetaryValue(money.negate());
+                    ledgerService.recordTradingCosts(user, transaction, fee.add(tax));
 
                     transaction.addEntry(debitEntry);
                     transaction.addEntry(creditEntry);
@@ -606,13 +704,9 @@ public class PortfolioOptimizerService {
         // 2. Pha 2: Thực thi các lệnh TẤT TOÁN SỔ TIẾT KIỆM (SETTLE_SAVINGS) -> tiền về thẳng ví tiền mặt
         for (RebalancePlanDTO.RebalanceAction action : plan.getActions()) {
             if ("SETTLE_SAVINGS".equalsIgnoreCase(action.getActionType())) {
-                try {
-                    Long depositId = Long.parseLong(action.getTicker());
-                    ledgerService.settleSavingsDeposit(depositId);
-                    totalSold = totalSold.add(action.getEstimatedTotalMoney());
-                } catch (Exception e) {
-                    // Sổ có thể đã được tất toán hoặc có lỗi ngoại lệ
-                }
+                Long depositId = Long.parseLong(action.getTicker());
+                ledgerService.settleSavingsDeposit(depositId);
+                totalSold = totalSold.add(action.getNetMoney());
             }
         }
         vndWallet = accountRepository.findByUserIdAndAccountCode(userId, "VND_WALLET").orElse(vndWallet);
@@ -643,19 +737,7 @@ public class PortfolioOptimizerService {
                 BigDecimal totalRequired = money.add(fee);
 
                 if (vndWallet.getBalance().compareTo(totalRequired) < 0) {
-                    BigDecimal unitCost = price.multiply(new BigDecimal("1.001"));
-                    if (vndWallet.getBalance().compareTo(unitCost) >= 0) {
-                        long affordableQty = vndWallet.getBalance().divide(unitCost, 0, RoundingMode.FLOOR).longValue();
-                        if ("STOCK".equalsIgnoreCase(action.getAssetClass())) {
-                            affordableQty = (affordableQty / 100) * 100;
-                        }
-                        qty = BigDecimal.valueOf(affordableQty);
-                        money = qty.multiply(price).setScale(4, RoundingMode.HALF_EVEN);
-                        fee = money.multiply(new BigDecimal("0.001")).setScale(0, RoundingMode.HALF_EVEN);
-                        totalRequired = money.add(fee);
-                    } else {
-                        continue;
-                    }
+                    throw new IllegalStateException("Tiền khả dụng đã thay đổi. Vui lòng tải lại kế hoạch.");
                 }
 
                 if (qty.compareTo(BigDecimal.ZERO) > 0) {
@@ -666,6 +748,8 @@ public class PortfolioOptimizerService {
                     assetAccount = accountRepository.save(assetAccount);
 
                     Entry debitEntry = new Entry(transaction, assetAccount, qty);
+                    debitEntry.setMonetaryValue(money);
+                    ledgerService.recordTradingCosts(user, transaction, fee);
                     Entry creditEntry = new Entry(transaction, vndWallet, totalRequired.negate());
 
                     transaction.addEntry(debitEntry);
@@ -682,7 +766,9 @@ public class PortfolioOptimizerService {
         for (RebalancePlanDTO.RebalanceAction action : plan.getActions()) {
             if ("OPEN_SAVINGS".equalsIgnoreCase(action.getActionType())) {
                 BigDecimal depMoney = action.getRoundedQuantity();
-                if (vndWallet.getBalance().compareTo(depMoney) >= 0 && depMoney.compareTo(BigDecimal.ZERO) > 0) {
+                if (vndWallet.getBalance().compareTo(depMoney) < 0 || depMoney.signum() <= 0)
+                    throw new IllegalStateException("Không đủ tiền mở sổ theo kế hoạch đã xác nhận");
+                {
                     OpenSavingsRequest savReq = new OpenSavingsRequest();
                     savReq.setBankName("Vietcombank");
                     savReq.setPrincipalAmount(depMoney);
@@ -715,10 +801,10 @@ public class PortfolioOptimizerService {
         result.setTotalBoughtMoney(totalBought);
         result.setTotalFees(totalFees);
         result.setTotalTax(totalTax);
-        result.setNetCashChange(totalSold.subtract(totalBought).subtract(totalFees).subtract(totalTax));
+        result.setNetCashChange(newValuation.getCashBalance().subtract(initialCash));
         result.setUpdatedValuation(newValuation);
         result.setUpdatedPlan(newPlan);
-        result.setMessage("Đã thực thi tái cơ cấu thành công với mã giao dịch " + txCode + ". Tổng phí môi giới & thuế khấu trừ: " + totalFees.add(totalTax).setScale(0, RoundingMode.HALF_EVEN) + " ₫. Danh mục đã về vùng cân bằng tối ưu.");
+        result.setMessage("Đã thực thi tái cơ cấu thành công với mã giao dịch " + txCode + ". Tổng phí môi giới & thuế khấu trừ: " + totalFees.add(totalTax).setScale(0, RoundingMode.HALF_EVEN) + " ₫. " + (newPlan.isDriftDetected() ? "Danh mục vẫn còn lệch mục tiêu; xem kế hoạch cập nhật." : "Danh mục nằm trong ngưỡng tái cân bằng."));
 
         return result;
     }

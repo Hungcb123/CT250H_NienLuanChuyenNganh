@@ -1,0 +1,137 @@
+{
+  "complete": true,
+  "forecast_files": [
+    {
+      "path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_analog_density/20261019T071721_721598Z/analog_shrink_predictions.csv",
+      "sha256": "a5adddd723d31bdda35f4a0b70d9c37bebce8008cb12373be6da048a76292b6c"
+    },
+    {
+      "path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_forest/20261019T072038_455776Z/shock_shrink_predictions.csv",
+      "sha256": "4655744f3b338351570247730b736275c298f857885b3a1ce333bbb3315b4e80"
+    },
+    {
+      "path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_close_history_analog/20261019T090704_554220Z/matched_half_predictions.csv",
+      "sha256": "1289d834c519abc33d74eeea214a2742c37a18b3c9d1367ea71f3eec7d8a0d10"
+    },
+    {
+      "path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_close_history_analog/20261019T090704_554220Z/extended_half_predictions.csv",
+      "sha256": "9ab7c2fd4c0c6c3df50edf61bb6f3a87bf21fb1d2070b8ebd8ede5edc9f17013"
+    },
+    {
+      "path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_path_forest/20261019T091101_051315Z/path_shrink_predictions.csv",
+      "sha256": "e5ddfb9f2f26e119d586f3c0ad475e7428cd1752aecf6927a8b6ec6080d2d46f"
+    },
+    {
+      "path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_native/20261019T090304_754869Z/native_predictions.csv",
+      "sha256": "bdebe60356eb0bf7dca6332b2ec29b28740ba6f7051049ca6484a80c8856c5a2"
+    }
+  ],
+  "metrics": {
+    "analog_shrink": {
+      "mean_f1": 0.5144884151429698,
+      "worst_f1": 0.3936614920855182,
+      "folds": [
+        0.5636926364563347,
+        0.667310111828534,
+        0.3936614920855182,
+        0.43328942020149236
+      ]
+    },
+    "shock_shrink": {
+      "mean_f1": 0.5137451636929175,
+      "worst_f1": 0.403056383096105,
+      "folds": [
+        0.5642611356897071,
+        0.6543737157843653,
+        0.403056383096105,
+        0.43328942020149236
+      ]
+    },
+    "matched_close_analog": {
+      "mean_f1": 0.511427529955663,
+      "worst_f1": 0.3905528906869251,
+      "folds": [
+        0.5602785372522215,
+        0.6602118137962057,
+        0.3905528906869251,
+        0.43466687808729937
+      ]
+    },
+    "extended_close_analog": {
+      "mean_f1": 0.5143056216658527,
+      "worst_f1": 0.3935110846796841,
+      "folds": [
+        0.5659242628349049,
+        0.6631202610615222,
+        0.3935110846796841,
+        0.43466687808729937
+      ]
+    },
+    "path_shrink": {
+      "mean_f1": 0.511190724160652,
+      "worst_f1": 0.403056383096105,
+      "folds": [
+        0.5556100768431468,
+        0.6541798941798942,
+        0.403056383096105,
+        0.4319165425234625
+      ]
+    },
+    "native_shock": {
+      "mean_f1": 0.5137451636929175,
+      "worst_f1": 0.403056383096105,
+      "folds": [
+        0.5642611356897071,
+        0.6543737157843653,
+        0.403056383096105,
+        0.43328942020149236
+      ]
+    }
+  },
+  "causal_baselines": {
+    "momentum20_current_sigma": {
+      "mean_f1": 0.3760586865824453,
+      "worst_f1": 0.30155424211151766,
+      "folds": [
+        0.3861604826635438,
+        0.4482957715815237,
+        0.368224249973196,
+        0.30155424211151766
+      ]
+    },
+    "latest_completed_regime": {
+      "mean_f1": 0.3793431999176275,
+      "worst_f1": 0.3003351235476082,
+      "folds": [
+        0.3637524069146059,
+        0.5048571828899697,
+        0.3484280863183262,
+        0.3003351235476082
+      ]
+    }
+  },
+  "native_payloads_verified": 2828,
+  "native_fit_receipts_verified": 84,
+  "candidate_snapshot_payloads_verified": true,
+  "native_score_max_error": 3.3306690738754696e-16,
+  "probability_metrics": {
+    "raw_score": {
+      "rows": 1340,
+      "brier": 0.5276522532061791,
+      "log_loss": 0.9039373122262998
+    },
+    "prior": {
+      "rows": 1340,
+      "brier": 0.5597175216133994,
+      "log_loss": 0.9695532034326971
+    },
+    "logistic": {
+      "rows": 1340,
+      "brier": 0.5336914025096905,
+      "log_loss": 0.9378768386492596
+    }
+  },
+  "independent_test": false,
+  "accepted": false,
+  "deployed": false
+}

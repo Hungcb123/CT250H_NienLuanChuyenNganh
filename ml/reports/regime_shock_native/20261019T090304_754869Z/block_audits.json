@@ -1,0 +1,1066 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block1_2020-03-27",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 761,
+        "start": "2016-02-25",
+        "latest_label_end": "2020-03-26",
+        "cohort_sha256": "35c4da4fd6bd4dd1a563b05b11f90ad79f47ca68e56cfda94485d64ea46a4374"
+      },
+      {
+        "name": "trend",
+        "rows": 687,
+        "start": "2017-04-13",
+        "latest_label_end": "2020-03-26",
+        "cohort_sha256": "e043e087566b6c0947196527fbb5566c967b38f9b11d980d9eb3c2acc7ccafe1"
+      },
+      {
+        "name": "risk",
+        "rows": 687,
+        "start": "2017-04-13",
+        "latest_label_end": "2020-03-26",
+        "cohort_sha256": "e043e087566b6c0947196527fbb5566c967b38f9b11d980d9eb3c2acc7ccafe1"
+      }
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block2_2020-06-29",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.6653345369377348e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 824,
+        "start": "2016-02-25",
+        "latest_label_end": "2020-06-26",
+        "cohort_sha256": "859557bf596715a00ba9c6328ba76fd004406cbe04ad5baf7f7c6896d5a7f6c5"
+      },
+      {
+        "name": "trend",
+        "rows": 697,
+        "start": "2017-06-29",
+        "latest_label_end": "2020-06-26",
+        "cohort_sha256": "ad18d36af5dd0c2cf7edc3681a60171570e4c680be880ff8528ed718bf108822"
+      },
+      {
+        "name": "risk",
+        "rows": 697,
+        "start": "2017-06-29",
+        "latest_label_end": "2020-06-26",
+        "cohort_sha256": "ad18d36af5dd0c2cf7edc3681a60171570e4c680be880ff8528ed718bf108822"
+      }
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block3_2020-09-25",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.6653345369377348e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 887,
+        "start": "2016-02-25",
+        "latest_label_end": "2020-09-24",
+        "cohort_sha256": "9ee7ae637ebeb1bc116fc0289000e8ada15c83f23de0c9fb2c485870767f1cc4"
+      },
+      {
+        "name": "trend",
+        "rows": 699,
+        "start": "2017-09-25",
+        "latest_label_end": "2020-09-24",
+        "cohort_sha256": "889ac731b71e7528bb11a9e7f4ddc84aa096cc1699236be2ee282ca70f7a41fc"
+      },
+      {
+        "name": "risk",
+        "rows": 699,
+        "start": "2017-09-25",
+        "latest_label_end": "2020-09-24",
+        "cohort_sha256": "889ac731b71e7528bb11a9e7f4ddc84aa096cc1699236be2ee282ca70f7a41fc"
+      }
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block4_2020-12-23",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 950,
+        "start": "2016-02-25",
+        "latest_label_end": "2020-12-22",
+        "cohort_sha256": "4e85a64974a93ba898f83804522b1ca65aed6fa40eb2b648718fec17ede3077b"
+      },
+      {
+        "name": "trend",
+        "rows": 697,
+        "start": "2017-12-25",
+        "latest_label_end": "2020-12-22",
+        "cohort_sha256": "d648f9be618baeab248210a0381b1c2856d6b1eeccd0a83af463b9787742e0f6"
+      },
+      {
+        "name": "risk",
+        "rows": 697,
+        "start": "2017-12-25",
+        "latest_label_end": "2020-12-22",
+        "cohort_sha256": "d648f9be618baeab248210a0381b1c2856d6b1eeccd0a83af463b9787742e0f6"
+      }
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block5_2021-03-30",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1013,
+        "start": "2016-02-25",
+        "latest_label_end": "2021-03-29",
+        "cohort_sha256": "7c94d1513443ae90f3ee8172fd5891355828a745d5eb2f7d1a99b3fd8652a312"
+      },
+      {
+        "name": "trend",
+        "rows": 699,
+        "start": "2018-03-30",
+        "latest_label_end": "2021-03-29",
+        "cohort_sha256": "5d02c16f5625670dbd4387263c388c6694c8f4a388681c7eee520846af5ab80f"
+      },
+      {
+        "name": "risk",
+        "rows": 699,
+        "start": "2018-03-30",
+        "latest_label_end": "2021-03-29",
+        "cohort_sha256": "5d02c16f5625670dbd4387263c388c6694c8f4a388681c7eee520846af5ab80f"
+      }
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block6_2021-06-30",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1076,
+        "start": "2016-02-25",
+        "latest_label_end": "2021-06-29",
+        "cohort_sha256": "49ef743b07e269b022f73ca69146c64a8eb7d8ccc0920eaabcdd11a9bd1b673a"
+      },
+      {
+        "name": "trend",
+        "rows": 699,
+        "start": "2018-07-02",
+        "latest_label_end": "2021-06-29",
+        "cohort_sha256": "852bd28a7ef5ca36bdebe407d11a8e9c8843e5f0e3eb19b970d9f7e81e160510"
+      },
+      {
+        "name": "risk",
+        "rows": 699,
+        "start": "2018-07-02",
+        "latest_label_end": "2021-06-29",
+        "cohort_sha256": "852bd28a7ef5ca36bdebe407d11a8e9c8843e5f0e3eb19b970d9f7e81e160510"
+      }
+    ]
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "rows": 12,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold1_block7_2021-09-29",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.6653345369377348e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1139,
+        "start": "2016-02-25",
+        "latest_label_end": "2021-09-28",
+        "cohort_sha256": "e384bec3ae85fceb25809e27a795b0616e3e31bf3e4c784bd9dec46e10ae9162"
+      },
+      {
+        "name": "trend",
+        "rows": 698,
+        "start": "2018-10-01",
+        "latest_label_end": "2021-09-28",
+        "cohort_sha256": "f14d27be1deabc9ac79ad3aea914f2f7376f94f16d2a6d82d4fb7748ccbeb7ce"
+      },
+      {
+        "name": "risk",
+        "rows": 698,
+        "start": "2018-10-01",
+        "latest_label_end": "2021-09-28",
+        "cohort_sha256": "f14d27be1deabc9ac79ad3aea914f2f7376f94f16d2a6d82d4fb7748ccbeb7ce"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block1_2021-10-15",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1151,
+        "start": "2016-02-25",
+        "latest_label_end": "2021-10-14",
+        "cohort_sha256": "d5218f725e96bd6870c5f2643574f91c62becf990504dd9dfadc5cb155636fa8"
+      },
+      {
+        "name": "trend",
+        "rows": 700,
+        "start": "2018-10-15",
+        "latest_label_end": "2021-10-14",
+        "cohort_sha256": "6683c249a54add3fb586125f8931d86703063f39f9d107ee6c3f9c04586a885a"
+      },
+      {
+        "name": "risk",
+        "rows": 700,
+        "start": "2018-10-15",
+        "latest_label_end": "2021-10-14",
+        "cohort_sha256": "6683c249a54add3fb586125f8931d86703063f39f9d107ee6c3f9c04586a885a"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block2_2022-01-13",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1214,
+        "start": "2016-02-25",
+        "latest_label_end": "2022-01-12",
+        "cohort_sha256": "e1820d4bd1bd1a1ca3f2e63338267a0ef6be97d240e573e164559fbdc9781a64"
+      },
+      {
+        "name": "trend",
+        "rows": 700,
+        "start": "2019-01-14",
+        "latest_label_end": "2022-01-12",
+        "cohort_sha256": "dbe4b88e512f8b2e5b0caa6e016fd4d0728a25d7f8b9a2da2009bc2334671168"
+      },
+      {
+        "name": "risk",
+        "rows": 700,
+        "start": "2019-01-14",
+        "latest_label_end": "2022-01-12",
+        "cohort_sha256": "dbe4b88e512f8b2e5b0caa6e016fd4d0728a25d7f8b9a2da2009bc2334671168"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "rows": 17,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block3_2022-04-20",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1277,
+        "start": "2016-02-25",
+        "latest_label_end": "2022-04-19",
+        "cohort_sha256": "38918c3514b6702571ab22c02a45de231c65b073d0259cfce3ff90b9038e18e1"
+      },
+      {
+        "name": "trend",
+        "rows": 725,
+        "start": "2019-05-02",
+        "latest_label_end": "2022-04-19",
+        "cohort_sha256": "7361778500548573018b7e16383b7b87cd9a37ca2acad3ef08235248571b09e6"
+      },
+      {
+        "name": "risk",
+        "rows": 725,
+        "start": "2019-05-02",
+        "latest_label_end": "2022-04-19",
+        "cohort_sha256": "7361778500548573018b7e16383b7b87cd9a37ca2acad3ef08235248571b09e6"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block4_2022-07-20",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1302,
+        "start": "2016-02-25",
+        "latest_label_end": "2022-05-26",
+        "cohort_sha256": "79d74c729264436551024f46e4f50a56c9fde6e5f239683e04b7cb4b904d2def"
+      },
+      {
+        "name": "trend",
+        "rows": 693,
+        "start": "2019-07-22",
+        "latest_label_end": "2022-05-26",
+        "cohort_sha256": "87d70bb919d4fc579a4ab5d30181ae297bb154d11a380768ed8d868460781ef4"
+      },
+      {
+        "name": "risk",
+        "rows": 693,
+        "start": "2019-07-22",
+        "latest_label_end": "2022-05-26",
+        "cohort_sha256": "87d70bb919d4fc579a4ab5d30181ae297bb154d11a380768ed8d868460781ef4"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block5_2022-10-19",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1357,
+        "start": "2016-02-25",
+        "latest_label_end": "2022-10-18",
+        "cohort_sha256": "acf09d56afafa4ac9373b67e4fe92cbe8f2498b560b94b9f2459911f0d947bfb"
+      },
+      {
+        "name": "trend",
+        "rows": 684,
+        "start": "2019-10-21",
+        "latest_label_end": "2022-10-18",
+        "cohort_sha256": "bbfa31fa1c84e4a12d9b31a5cd1b26d018caec2171c042027c3d1a6518dbd4e6"
+      },
+      {
+        "name": "risk",
+        "rows": 684,
+        "start": "2019-10-21",
+        "latest_label_end": "2022-10-18",
+        "cohort_sha256": "bbfa31fa1c84e4a12d9b31a5cd1b26d018caec2171c042027c3d1a6518dbd4e6"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block6_2023-01-17",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1420,
+        "start": "2016-02-25",
+        "latest_label_end": "2023-01-16",
+        "cohort_sha256": "681b5e4a739006b87c3e1a2acf05df9a7f71e0ff425969aa9f301c69fdea583e"
+      },
+      {
+        "name": "trend",
+        "rows": 684,
+        "start": "2020-01-17",
+        "latest_label_end": "2023-01-16",
+        "cohort_sha256": "b0be96db5912627148715e751ad049d8b7363fd4284a5baa7504e5e5ea754cee"
+      },
+      {
+        "name": "risk",
+        "rows": 684,
+        "start": "2020-01-17",
+        "latest_label_end": "2023-01-16",
+        "cohort_sha256": "b0be96db5912627148715e751ad049d8b7363fd4284a5baa7504e5e5ea754cee"
+      }
+    ]
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "rows": 58,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold2_block7_2023-04-21",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.6653345369377348e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.6653345369377348e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1483,
+        "start": "2016-02-25",
+        "latest_label_end": "2023-04-20",
+        "cohort_sha256": "b3dc2b3a4753dc286f4db314772e2ff0153414cce94636f7f01df524dffb80b9"
+      },
+      {
+        "name": "trend",
+        "rows": 686,
+        "start": "2020-04-21",
+        "latest_label_end": "2023-04-20",
+        "cohort_sha256": "fa66214907d2faba011259c0f97adff48db400913e5ead2fde6c6a8e13ffae96"
+      },
+      {
+        "name": "risk",
+        "rows": 686,
+        "start": "2020-04-21",
+        "latest_label_end": "2023-04-20",
+        "cohort_sha256": "fa66214907d2faba011259c0f97adff48db400913e5ead2fde6c6a8e13ffae96"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block1_2023-07-17",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 2.220446049250313e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1541,
+        "start": "2016-02-25",
+        "latest_label_end": "2023-07-14",
+        "cohort_sha256": "7c4b78468a15c0dce7708f457c918ef66364463192086642cf68bfdba376aa99"
+      },
+      {
+        "name": "trend",
+        "rows": 683,
+        "start": "2020-07-17",
+        "latest_label_end": "2023-07-14",
+        "cohort_sha256": "31514fef752afbbc2bb7105f8e368b06781668c297fbc3ea94556f55b7e3673d"
+      },
+      {
+        "name": "risk",
+        "rows": 683,
+        "start": "2020-07-17",
+        "latest_label_end": "2023-07-14",
+        "cohort_sha256": "31514fef752afbbc2bb7105f8e368b06781668c297fbc3ea94556f55b7e3673d"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block2_2023-10-16",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.6653345369377348e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1604,
+        "start": "2016-02-25",
+        "latest_label_end": "2023-10-13",
+        "cohort_sha256": "8265e978dd7b59434f0b1ea1ac46bba122445b53ec1658f78e15bd0d2a69a10b"
+      },
+      {
+        "name": "trend",
+        "rows": 682,
+        "start": "2020-10-16",
+        "latest_label_end": "2023-10-13",
+        "cohort_sha256": "bd7d6a07efb86bcd35e2157c43fcf4f126f856ee927424ea84ff3d0c174beee6"
+      },
+      {
+        "name": "risk",
+        "rows": 682,
+        "start": "2020-10-16",
+        "latest_label_end": "2023-10-13",
+        "cohort_sha256": "bd7d6a07efb86bcd35e2157c43fcf4f126f856ee927424ea84ff3d0c174beee6"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block3_2024-01-12",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 2.220446049250313e-16,
+      "quantile": 2.7755575615628914e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1667,
+        "start": "2016-02-25",
+        "latest_label_end": "2024-01-11",
+        "cohort_sha256": "b732569dcf3baa79ba82f26e0aa87241fc4b2c5185579973152df825257f53e2"
+      },
+      {
+        "name": "trend",
+        "rows": 684,
+        "start": "2021-01-12",
+        "latest_label_end": "2024-01-11",
+        "cohort_sha256": "0c3f6e8c160c2f2dc8f6b0a7bc822d373317e8c4da796d468e9eaf4ea82bb5cc"
+      },
+      {
+        "name": "risk",
+        "rows": 684,
+        "start": "2021-01-12",
+        "latest_label_end": "2024-01-11",
+        "cohort_sha256": "0c3f6e8c160c2f2dc8f6b0a7bc822d373317e8c4da796d468e9eaf4ea82bb5cc"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block4_2024-04-17",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 2.220446049250313e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1730,
+        "start": "2016-02-25",
+        "latest_label_end": "2024-04-16",
+        "cohort_sha256": "d60e72d7282c1b168acf8f3ed1407b73bb2fd8cadfdb2f657e686b0fc9e49696"
+      },
+      {
+        "name": "trend",
+        "rows": 683,
+        "start": "2021-04-19",
+        "latest_label_end": "2024-04-16",
+        "cohort_sha256": "743392b5a9a2cba0c82ba8ae96c6d5dce7ee67f558fc35bbe9bfba54d1d02837"
+      },
+      {
+        "name": "risk",
+        "rows": 683,
+        "start": "2021-04-19",
+        "latest_label_end": "2024-04-16",
+        "cohort_sha256": "743392b5a9a2cba0c82ba8ae96c6d5dce7ee67f558fc35bbe9bfba54d1d02837"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block5_2024-07-19",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1793,
+        "start": "2016-02-25",
+        "latest_label_end": "2024-07-18",
+        "cohort_sha256": "dd12872b5a6638081ce6c39dd89f375552c80893fb0778d5d1153d6ba6777d31"
+      },
+      {
+        "name": "trend",
+        "rows": 684,
+        "start": "2021-07-19",
+        "latest_label_end": "2024-07-18",
+        "cohort_sha256": "1b407a717fca2fcee2814ff44a0bf5468884deb85698630d804f71a8eda10e2e"
+      },
+      {
+        "name": "risk",
+        "rows": 684,
+        "start": "2021-07-19",
+        "latest_label_end": "2024-07-18",
+        "cohort_sha256": "1b407a717fca2fcee2814ff44a0bf5468884deb85698630d804f71a8eda10e2e"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block6_2024-10-18",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 2.220446049250313e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1856,
+        "start": "2016-02-25",
+        "latest_label_end": "2024-10-17",
+        "cohort_sha256": "9a6f1c1eff9078d85f72bf619026d77ee3276362bd8bc7bee77aab1b23bab6ad"
+      },
+      {
+        "name": "trend",
+        "rows": 684,
+        "start": "2021-10-18",
+        "latest_label_end": "2024-10-17",
+        "cohort_sha256": "c8a5b309d17746c690a84909bd245f26a1a7e6c66e2eed80b34eda193e3ff36f"
+      },
+      {
+        "name": "risk",
+        "rows": 684,
+        "start": "2021-10-18",
+        "latest_label_end": "2024-10-17",
+        "cohort_sha256": "c8a5b309d17746c690a84909bd245f26a1a7e6c66e2eed80b34eda193e3ff36f"
+      }
+    ]
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "rows": 12,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold3_block7_2025-01-16",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 5.551115123125783e-17,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 5.551115123125783e-17,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1919,
+        "start": "2016-02-25",
+        "latest_label_end": "2025-01-15",
+        "cohort_sha256": "dd64a81770af43b4ee257f667964bacfd4c280c9de9b13d6ea0219d6e5b3ffaa"
+      },
+      {
+        "name": "trend",
+        "rows": 683,
+        "start": "2022-01-17",
+        "latest_label_end": "2025-01-15",
+        "cohort_sha256": "8daf42573b4bd821d3b10194c6c62a6a68d54bd9a667a47528951e0cf880f261"
+      },
+      {
+        "name": "risk",
+        "rows": 683,
+        "start": "2022-01-17",
+        "latest_label_end": "2025-01-15",
+        "cohort_sha256": "8daf42573b4bd821d3b10194c6c62a6a68d54bd9a667a47528951e0cf880f261"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block1_2025-02-10",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.6653345369377348e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1931,
+        "start": "2016-02-25",
+        "latest_label_end": "2025-02-07",
+        "cohort_sha256": "94dd6023c7604ced3b431ac1953b8ac2653d0497f9d2cb3aaa6ad5d205ae6edb"
+      },
+      {
+        "name": "trend",
+        "rows": 682,
+        "start": "2022-02-10",
+        "latest_label_end": "2025-02-07",
+        "cohort_sha256": "e0ced28256c78829a2c55892c4220b69ba6d03325671c42e5274ae4cd12f8337"
+      },
+      {
+        "name": "risk",
+        "rows": 682,
+        "start": "2022-02-10",
+        "latest_label_end": "2025-02-07",
+        "cohort_sha256": "e0ced28256c78829a2c55892c4220b69ba6d03325671c42e5274ae4cd12f8337"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block2_2025-05-14",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 1994,
+        "start": "2016-02-25",
+        "latest_label_end": "2025-05-13",
+        "cohort_sha256": "70789ad346628b39a18f1171ce61eb0d2cb63539bdbf4cbbc7caffb0f616e1f5"
+      },
+      {
+        "name": "trend",
+        "rows": 692,
+        "start": "2022-07-04",
+        "latest_label_end": "2025-05-13",
+        "cohort_sha256": "ec6844615452147e73cd4441f81f127192961a131bcbaf380ae5224f0f443605"
+      },
+      {
+        "name": "risk",
+        "rows": 692,
+        "start": "2022-07-04",
+        "latest_label_end": "2025-05-13",
+        "cohort_sha256": "ec6844615452147e73cd4441f81f127192961a131bcbaf380ae5224f0f443605"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block3_2025-08-11",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.6653345369377348e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 2057,
+        "start": "2016-02-25",
+        "latest_label_end": "2025-08-08",
+        "cohort_sha256": "25ad0db0ab50b05866f264a595021408c3530021a82887f7059162b4161209ca"
+      },
+      {
+        "name": "trend",
+        "rows": 727,
+        "start": "2022-08-11",
+        "latest_label_end": "2025-08-08",
+        "cohort_sha256": "83997ef648cee24da47e335c8231929aeaa4c007af08fb35733d2d0ceb15958d"
+      },
+      {
+        "name": "risk",
+        "rows": 727,
+        "start": "2022-08-11",
+        "latest_label_end": "2025-08-08",
+        "cohort_sha256": "83997ef648cee24da47e335c8231929aeaa4c007af08fb35733d2d0ceb15958d"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block4_2025-11-10",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 2.220446049250313e-16,
+      "quantile": 2.220446049250313e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.6653345369377348e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 2120,
+        "start": "2016-02-25",
+        "latest_label_end": "2025-11-07",
+        "cohort_sha256": "791671f494efd394c2032773ae0442ece1e704db7d8a9877c764b25a8fa56e96"
+      },
+      {
+        "name": "trend",
+        "rows": 727,
+        "start": "2022-11-10",
+        "latest_label_end": "2025-11-07",
+        "cohort_sha256": "ce8e3ed7715a73afdf756edfc8b2473d7923feaddbfc7bf194f7d7fe43f7923a"
+      },
+      {
+        "name": "risk",
+        "rows": 727,
+        "start": "2022-11-10",
+        "latest_label_end": "2025-11-07",
+        "cohort_sha256": "ce8e3ed7715a73afdf756edfc8b2473d7923feaddbfc7bf194f7d7fe43f7923a"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block5_2026-02-09",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 2183,
+        "start": "2016-02-25",
+        "latest_label_end": "2026-02-06",
+        "cohort_sha256": "bf70130ce7593029629e52ef07a798e0b9e669084bb374f74413820a15d1fb44"
+      },
+      {
+        "name": "trend",
+        "rows": 731,
+        "start": "2023-02-09",
+        "latest_label_end": "2026-02-06",
+        "cohort_sha256": "7d2d34d707d4d27a8c124d0665042ec4125145e86cd9c39c91d19e7a909ac4a9"
+      },
+      {
+        "name": "risk",
+        "rows": 731,
+        "start": "2023-02-09",
+        "latest_label_end": "2026-02-06",
+        "cohort_sha256": "7d2d34d707d4d27a8c124d0665042ec4125145e86cd9c39c91d19e7a909ac4a9"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "rows": 63,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block6_2026-05-19",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.6653345369377348e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 2246,
+        "start": "2016-02-25",
+        "latest_label_end": "2026-05-18",
+        "cohort_sha256": "ede3b8362fcccbc545a46f1fd004156bfe0121b33ef83bf731f662b1c2c0c785"
+      },
+      {
+        "name": "trend",
+        "rows": 726,
+        "start": "2023-05-19",
+        "latest_label_end": "2026-05-18",
+        "cohort_sha256": "75e2c7516501c5e4f0bd527581ecfa6ac48c8a2d04be0ce45cae8c8257a82ed4"
+      },
+      {
+        "name": "risk",
+        "rows": 726,
+        "start": "2023-05-19",
+        "latest_label_end": "2026-05-18",
+        "cohort_sha256": "75e2c7516501c5e4f0bd527581ecfa6ac48c8a2d04be0ce45cae8c8257a82ed4"
+      }
+    ]
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "rows": 12,
+    "bundle": "ml/reports/regime_shock_native/20261019T090304_754869Z/bundles/fold4_block7_2026-08-14",
+    "models": 100,
+    "max_component_errors": {
+      "classifier": 1.1102230246251565e-16,
+      "quantile": 1.1102230246251565e-16,
+      "forest": 1.1102230246251565e-16,
+      "magnitude": 1.1102230246251565e-16,
+      "shock": 1.1102230246251565e-16,
+      "analog": 1.1102230246251565e-16
+    },
+    "training_receipts": [
+      {
+        "name": "density",
+        "rows": 2309,
+        "start": "2016-02-25",
+        "latest_label_end": "2026-08-13",
+        "cohort_sha256": "c38e7f43990bf12bed50cfe7a6d723d0bf76dee07421a7bd01108db4a70c367b"
+      },
+      {
+        "name": "trend",
+        "rows": 728,
+        "start": "2023-08-14",
+        "latest_label_end": "2026-08-13",
+        "cohort_sha256": "f56606011efafe818596a505b78d4dc433c848115af8a6e8896d22763b566dc7"
+      },
+      {
+        "name": "risk",
+        "rows": 728,
+        "start": "2023-08-14",
+        "latest_label_end": "2026-08-13",
+        "cohort_sha256": "f56606011efafe818596a505b78d4dc433c848115af8a6e8896d22763b566dc7"
+      }
+    ]
+  }
+]

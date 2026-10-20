@@ -1,0 +1,27 @@
+{
+  "role": "Selected4 models complete; combined diagnostic still running; no training/plan change after viewing",
+  "results": [
+    {
+      "candidate": "context_shrink",
+      "mean_f1": 0.4899929957912299,
+      "worst_f1": 0.3819843165015196,
+      "fold_f1": [
+        0.5391357337292749,
+        0.6055625127326327,
+        0.3819843165015196,
+        0.43328942020149236
+      ]
+    },
+    {
+      "candidate": "context_forest_replace",
+      "mean_f1": 0.4868687728833797,
+      "worst_f1": 0.3924641426943876,
+      "fold_f1": [
+        0.5343115083659004,
+        0.5844953129762784,
+        0.3924641426943876,
+        0.4362041274969524
+      ]
+    }
+  ]
+}

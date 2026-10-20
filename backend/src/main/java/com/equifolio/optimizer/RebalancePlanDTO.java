@@ -7,8 +7,23 @@ import java.util.List;
 import java.util.Map;
 
 public class RebalancePlanDTO {
+    private int horizonSessions = 20;
+    public int getHorizonSessions() { return horizonSessions; }
+    public void setHorizonSessions(int value) { horizonSessions = value; }
+    private EquityPreferenceService.Preference equityPreference;
+    public EquityPreferenceService.Preference getEquityPreference() { return equityPreference; }
+    public void setEquityPreference(EquityPreferenceService.Preference value) { equityPreference=value; }
+    private String equityNotice;
+    public String getEquityNotice() { return equityNotice; }
+    public void setEquityNotice(String value) { equityNotice=value; }
+    private String planToken;
+    public String getPlanToken() { return planToken; }
+    public void setPlanToken(String value) { this.planToken = value; }
+    private boolean taaEnabled;
+    public boolean isTaaEnabled() { return taaEnabled; }
+    public void setTaaEnabled(boolean enabled) { this.taaEnabled = enabled; }
     private boolean driftDetected;
-    private BigDecimal maxDriftPercent;
+    private BigDecimal maxDriftPercent = BigDecimal.ZERO;
     private Map<String, BigDecimal> currentAllocations = new HashMap<>();
     private Map<String, BigDecimal> targetAllocations = new HashMap<>();
 
@@ -29,12 +44,24 @@ public class RebalancePlanDTO {
      * Thông tin dự báo ML cho một lớp tài sản.
      */
     public static class MlPredictionInfo {
+        private int horizonSessions = 20;
+        public int getHorizonSessions() { return horizonSessions; }
+        public void setHorizonSessions(int value) { horizonSessions = value; }
         private String assetClass;    // "STOCK" hoặc "GOLD"
         private String modelName;     // "stock_regime.onnx" hoặc "gold_trend.onnx"
         private int signal;           // -1, 0, +1
         private double confidence;    // 0.0 → 1.0
         private String regimeName;    // "BULLISH_UPTREND", etc.
         private BigDecimal deltaWeight; // Δw = Signal × P × 15%
+        private String scoreSemantics;
+        private NativeRegimeForecast nativeForecast;
+
+        public String getScoreSemantics() { return scoreSemantics; }
+        public NativeRegimeForecast getNativeForecast() { return nativeForecast; }
+        public void setNativeForecast(NativeRegimeForecast forecast) {
+            this.nativeForecast = forecast;
+            this.scoreSemantics = "class_balanced_decision_scores_not_probabilities";
+        }
 
         public MlPredictionInfo() {}
 
@@ -68,9 +95,15 @@ public class RebalancePlanDTO {
     }
 
     public static class RebalanceAction {
+        private boolean earlySettlement;
+        public boolean isEarlySettlement() { return earlySettlement; }
+        public void setEarlySettlement(boolean value) { this.earlySettlement = value; }
         private String actionType; // 'BUY', 'SELL', 'HOLD'
         private String ticker;
         private String assetName;
+        private int horizonSessions = 20;
+        public int getHorizonSessions() { return horizonSessions; }
+        public void setHorizonSessions(int value) { horizonSessions = value; }
         private String assetClass;
         private BigDecimal exactQuantity;
         private BigDecimal roundedQuantity; // Lô chẵn 100 cp hoặc số chỉ vàng nguyên

@@ -1,0 +1,38 @@
+{
+  "role": "Research prediction snapshot and reproduction recipe; no native inference bundle or deployment acceptance",
+  "created_at": "2026-10-19T07:06:19.213438+00:00",
+  "target": "T+20 forward log return vs +/- std20 daily log returns ddof1 * sqrt20; strict outside, equality neutral",
+  "model": "RandomForest_shrink",
+  "metric": {
+    "at": "2026-10-19T07:06:19.213438+00:00",
+    "highest_observed_f1": 0.5121492946584352,
+    "worst_f1": 0.3911202129927543,
+    "mean_mcc": 0.2958542895196485,
+    "bear_mean_f1": 0.3164668470428258,
+    "bull_mean_f1": 0.47842171229499403,
+    "fold_f1": [
+      0.5600762926756442,
+      0.6631035701661364,
+      0.3911202129927543,
+      0.43429710279920575
+    ],
+    "tests_passed": 234,
+    "independent_test": false,
+    "accepted": false,
+    "goal_achieved": false,
+    "goal_status": "active",
+    "deployment_changed": false
+  },
+  "files": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/plan.json": "47d264a875223319c0304679d4ba2a8253f6da3d24ee9b5175594ebda14d491a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/report.json": "a0a787399512f3585f3d6fe2cec4fca18b4370bebfc36892ccf06b2e86c4d54e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/comparison.csv": "5c9d76a146b6c489f3a6973063448530f9efee6838d9e412b4a16a22fa7e4acf",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/RandomForest_shrink_predictions.csv": "157b447bfd176d7a2655592b68bdbf067080e1f874c9dd8ef08680e4b1a7783e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/timing_audit.json": "064d196f88ac9af475cd5b56dbb8e4b64301050a10dafd6c96ca02ca095f328e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage3/independent_metric_audit.json": "a51a5711f0c8a1da69e5a478a259e5efa9b211835117f85d19122e00ef8dfb77",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage3/forest_followup_intervals.json": "94017dce46fa1d402d081344a43b3b5dcc01e1f2f1d9d93f7b41b151d213c739",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_empirical_forest.py": "9bcee200cab9ccd34a323c99949c6b50e6ad9c5ddb371952048d9ddb19bd0cb2",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/test_regime_empirical_forest.py": "c44ea8c4250ff04256ab61968bb00ffd76f0639f55ed785770f43b0f7a121706"
+  },
+  "rerun": "python3 ml/experiment_regime_empirical_forest.py"
+}

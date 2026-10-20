@@ -1,0 +1,18 @@
+{
+  "reason": "Report metadata boolean pooled overwrote metric dictionary pooled; all 8 prediction CSVs and refit audits completed before table error. No prediction/refit change needed.",
+  "original_source_sha256": "ae62c588bfdcce8ffa44220cf44146bad379a3cc78f5e037545e557ea7fec2fa",
+  "training_function_sha256": "1f9a1fd88ee726e79bbbe716ce540b164ff882d85a78b51f1e9a81fd19ceb3e9",
+  "recovered": true,
+  "new_reporting_source_sha256": "ff037152013b3622a533e0f32d2ce3c72ac46369f28b91109cfb7b2f2142999c",
+  "training_function_unchanged": true,
+  "prediction_hashes": {
+    "3y_shallow_target_only_predictions.csv": "71bddb9ed4f80dafec74246c4fe52319377021a456232fdc224641effdc17a27",
+    "3y_shallow_pooled_predictions.csv": "aa5886bb6a15b80874d4c07ebec8b274b5cb61600c0492eeea6a2886b5d04f68",
+    "3y_medium_target_only_predictions.csv": "93048471c803316f57ba24a3cb692982023ddc8bc2f9688b1085e368f48ac064",
+    "3y_medium_pooled_predictions.csv": "19a5754f48c5125ba14b2a88fb2f2e48a5ea306905880119f79cfde5b99583e1",
+    "expanding_shallow_target_only_predictions.csv": "607bd088404000d463106b20d2bfd03a027561879ad5ee8c976ce5455216d1dc",
+    "expanding_shallow_pooled_predictions.csv": "b322819b7ebd3e54aafbc92a46d5e97e5354a311a7b889bbb0741fe5496600ac",
+    "expanding_medium_target_only_predictions.csv": "67badf0c356a9cccb15d48a60191d09dfd1aca85427f52b1dc6bcc02791070dd",
+    "expanding_medium_pooled_predictions.csv": "c758fe48773f2023bb5f58e5bf737328dc5a38279e4571de2eecb0f89b701b78"
+  }
+}

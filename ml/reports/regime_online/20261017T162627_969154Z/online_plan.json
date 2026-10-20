@@ -1,0 +1,26 @@
+{
+  "mode": "archived_online_threshold_development",
+  "source": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_ensemble/20261017T162100_738897Z",
+  "source_hashes": {
+    "3y_standardized": "044abf7b99432ffe88730d677a6cbfc573bade2e352f3082c7ad1b627e452f84",
+    "expanding_standardized": "cb47526e6055bb40caa1bc35f072121c874acdd0b6dcfb58702f7f6145163768",
+    "equal_ensemble": "7ad691a8a07c95a73a10dc3d2bf29ef0597b609f425c1f001cae3fa5c5d80dd0",
+    "calibration_ap_ensemble": "07bc3d4e15058ddd7fa2ad254192f04375e0e509789e7c97887d2ccf722e7f97"
+  },
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "windows": [
+    60,
+    120
+  ],
+  "quantile": 0.9,
+  "warmup": "First W predictions retain original causal calibration threshold; no sample drop.",
+  "assumptions": [
+    "All rolling thresholds shift scores by one decision observation before quantile.",
+    "Score standardization was core-calibration only at the time of each refit; cross-refit scores may still drift.",
+    "Archives immutable; no rescoring past data with a future model.",
+    "No outcome labels used to set this threshold; historical development, not a fresh test."
+  ]
+}

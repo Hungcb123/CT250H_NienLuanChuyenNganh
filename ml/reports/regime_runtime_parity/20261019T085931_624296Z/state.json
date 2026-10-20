@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "recipe_id": "a01cb65ae2c96091eb876ba4d0613dee03583eb5f02444d584dc458c59e103b5",
+  "stream_id": "VNINDEX:shock_shrink:historical_replay:a01cb65ae2c96091eb876ba4d0613dee03583eb5f02444d584dc458c59e103b5",
+  "last_date": "2026-09-03",
+  "ema": [
+    0.3530109129440113,
+    0.4790987491111734,
+    0.16789033794481517
+  ]
+}

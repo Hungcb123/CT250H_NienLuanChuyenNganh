@@ -1,0 +1,9 @@
+{
+  "role": "Expected historical replay references; not independent quality test",
+  "created_at": "2026-10-18T16:22:34.934513+00:00",
+  "files": {
+    "ml/reports/regime_expert_selection/20261018T160007_360834Z/delayed_selector_predictions.csv": "f9b8bd98ea45090d9c5c9114774983e7b8ef56a098999bc01c2f1fdbdec32df8",
+    "ml/reports/regime_expert_selection/20261018T160007_360834Z/selector_history.json": "dba97d121d59f7a33f9be4530b833fab8ff0dcf8b2df865f722a36b600a9c4ce",
+    "ml/artifacts/regime_multiclass_candidate_20261018/historical_replay_manifest.json": "c0f80e4fe7e7702fe2f5083411faf036bf8748a289f3fe6b5e6b6016755b3512"
+  }
+}

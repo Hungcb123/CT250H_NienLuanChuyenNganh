@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-19T08:39:08.621975+00:00",
+  "highest_observed_f1": 0.5144884151429698,
+  "balanced_candidate": {
+    "name": "shock_shrink",
+    "mean_f1": 0.5137451636929175,
+    "worst_f1": 0.403056383096105
+  },
+  "new_studies": 3,
+  "new_high_found": false,
+  "forecast_files_audited": 13,
+  "source_hashes_verified": 47,
+  "focused_tests_passed": 8,
+  "independent_test": false,
+  "accepted": false,
+  "goal_achieved": false,
+  "goal_status": "active",
+  "deployment_changed": false
+}

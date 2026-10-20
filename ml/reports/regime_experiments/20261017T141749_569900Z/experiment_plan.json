@@ -1,0 +1,126 @@
+{
+  "mode": "historical_development_experiments_not_final_test",
+  "reference_report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "labels": {
+    "20": {
+      "name": "T+20",
+      "bull_threshold": 0.05,
+      "bear_threshold": -0.05
+    }
+  },
+  "base_feature_set": "close-etf",
+  "feature_groups": {
+    "baseline": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20"
+    ],
+    "long": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200",
+      "Drawdown120",
+      "Drawdown252",
+      "HV20_60_Ratio",
+      "DownsideHV60"
+    ]
+  },
+  "feature_version": "long-trend-risk-v1-research",
+  "train_windows": [
+    "expanding"
+  ],
+  "refit_market_sessions": 63,
+  "inner_splits": 2,
+  "models": [
+    "LightGBM"
+  ],
+  "optuna": {
+    "n_trials": 5,
+    "timeout_seconds": 30
+  },
+  "score_role": "Nested forward development comparison on already-inspected history; no fresh holdout claim.",
+  "assumptions": [
+    "All variants use identical dates and labels; adding a feature cannot remove a frozen validation date.",
+    "Parameters are selected once at each outer fold start using purged inner folds only.",
+    "The model is refitted periodically using labels known strictly before each prediction block.",
+    "Rolling windows are calendar years measured from the prediction block start.",
+    "Each refit uses the same fixed parameters until the next outer fold.",
+    "A drawdown feature measures current distance below the trailing peak.",
+    "No confidence threshold, new label definition, financial backtest, or ONNX deployment."
+  ],
+  "datasets": [
+    {
+      "horizon": 20,
+      "eligible_history_rows": 2341,
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2020-03-27",
+          "end": "2021-10-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+          "n_refits": 7
+        },
+        {
+          "fold": 2,
+          "start": "2021-10-15",
+          "end": "2023-07-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+          "n_refits": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-07-17",
+          "end": "2025-02-07",
+          "n_validation": 390,
+          "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+          "n_refits": 7
+        },
+        {
+          "fold": 4,
+          "start": "2025-02-10",
+          "end": "2026-09-03",
+          "n_validation": 390,
+          "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+          "n_refits": 7
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

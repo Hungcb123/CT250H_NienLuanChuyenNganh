@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "candidate_id": "equal_standardized_3y_expanding_online120_v1",
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "a90c5fa58d577aab07f5083e148028453bccdcab8d77f99cebe9708905f2fa3c",
+  "frozen_at": "2026-10-17T16:58:42.321813+00:00",
+  "reference": "3y",
+  "target": "simple T+20 return strictly below -5%",
+  "precision_min": 0.25,
+  "recall_min": 0.3,
+  "alarm_rate_max": 0.15,
+  "min_matured_sessions": 240,
+  "min_bear_samples": 20,
+  "min_nonoverlapping_positive_clusters": 3,
+  "bootstrap_repeats": 1000,
+  "bootstrap_block_sessions": [
+    20,
+    60
+  ],
+  "recall_noninferiority_margin": -0.05,
+  "rationale": "At least four maximum-length blocks before paired interval screening; require multiple disjoint positive label intervals. No fixed sample size alone guarantees independence or power.",
+  "acceptance": "Point gates plus precision-delta lower bound >0 and recall-delta lower bound >-.05 for both block lengths. Passing is eligible for review, never automatic deployment.",
+  "external_condition": "Only real same-session predictions after runtime freeze count. Future outcomes need 20 subsequent trading sessions; meaningful validation may need substantially longer."
+}

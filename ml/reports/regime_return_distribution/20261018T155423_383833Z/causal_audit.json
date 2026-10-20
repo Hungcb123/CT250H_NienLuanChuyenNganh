@@ -1,0 +1,16 @@
+{
+  "role": "Original three-class DEVELOPMENT only",
+  "forecasters": 4,
+  "decisions": 2,
+  "per_forecaster_rows": 1560,
+  "refits": 112,
+  "head_fits": 1008,
+  "raw_calendar_label_ends_verified": true,
+  "quantile_mass_decisions_reproduced": true,
+  "prediction_hashes": {
+    "3y_raw": "af5a6467cc18850128b7b6b8478c70ea92a689dbeca76f167c1765a52f14d516",
+    "3y_normalized": "bec9740cca6500e2ba23ef12cdd4afe9d15d93de323c56e2b924c30d63a78188",
+    "expanding_raw": "83af3dd9d1197722b2b7a25eb31adcbf22aa36c3982f5669d34f6e91e55f4444",
+    "expanding_normalized": "60b67a09af6db02ad10314ca69c5d37c68d13cb4eedbadb5319cf10dbe4e4568"
+  }
+}

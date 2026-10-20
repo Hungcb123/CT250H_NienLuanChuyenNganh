@@ -86,21 +86,7 @@ public class MarketService {
             return summary;
         }
 
-        // Fallback default
-        Map<String, Object> fallback = new java.util.HashMap<>();
-        fallback.put("latestDate", "2026-10-08");
-        fallback.put("currentPoints", 1738.97);
-        fallback.put("changePoints", -14.42);
-        fallback.put("changePercent", -0.82);
-        fallback.put("high52w", 1927.94);
-        fallback.put("low52w", 1580.54);
-        fallback.put("latestVolume", 634491648L);
-        fallback.put("avgVolume20", 507233239L);
-        fallback.put("ma20", 1782.01);
-        fallback.put("ma50", 1778.73);
-        fallback.put("regimeSignal", 1);
-        fallback.put("regimeStatus", "BULLISH_CONSOLIDATION");
-        return fallback;
+        throw new IllegalStateException("Chưa tải được dữ liệu VNINDEX từ DNSE. Vui lòng thử đồng bộ lại.");
     }
 
     public Map<String, Object> syncMarketData() {

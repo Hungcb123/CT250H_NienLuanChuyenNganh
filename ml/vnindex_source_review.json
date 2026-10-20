@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-17",
+  "policy": "Primary VCI dates and Close; resolve conflicts by agreement of at least two brokers, except explicitly cited reviewed closes. Never infer a missing price. A broker consensus can share an upstream feed and is not independent exchange certification.",
+  "nontrading_dates": {
+    "2018-01-23": {
+      "reason": "HOSE suspended trading following the 22 January system incident; repeated chart values are not sessions.",
+      "source": "https://baochinhphu.vn/hose-tiep-tuc-ngung-giao-dich-vao-ngay-24-1-102233813.htm"
+    },
+    "2018-01-24": {
+      "reason": "HOSE remained suspended for market-wide system testing; chart bars are not trading sessions.",
+      "source": "https://baochinhphu.vn/hose-tiep-tuc-ngung-giao-dich-vao-ngay-24-1-102233813.htm"
+    }
+  },
+  "reviewed_closes": {
+    "2015-06-19": {
+      "close": 584.70,
+      "source": "https://www.mbs.com.vn/media/dkrdomtr/t-e1-bb-95ngh-e1-bb-a3pth-e1-bb-9dng_19062015.pdf",
+      "reason": "MBS daily strategy, dated 19/06/2015, reports VN-index 584.70; VCI agrees and KBS differs."
+    },
+    "2015-10-02": {
+      "close": 562.31,
+      "source": "https://www.mbs.com.vn/media/kjqdggnz/t-e1-bb-95ngh-e1-bb-a3pth-e1-bb-9dng_02102015.pdf",
+      "reason": "MBS daily strategy, dated 02/10/2015, reports VN-index 562.31; KBS agrees and VCI differs."
+    }
+  }
+}

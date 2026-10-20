@@ -1,0 +1,56 @@
+{
+  "featureVersion": "close-v1",
+  "features": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20"
+  ],
+  "ticker": "GC",
+  "horizon": 20,
+  "folds": [
+    {
+      "trainEnd": "2022-11-07",
+      "testStart": "2022-12-07",
+      "purgeSessions": 20,
+      "f1Macro": 0.21202163209442046,
+      "mcc": -0.17435865813225027,
+      "majorityBaselineF1": 0.25329815303430075
+    },
+    {
+      "trainEnd": "2023-10-16",
+      "testStart": "2023-11-14",
+      "purgeSessions": 20,
+      "f1Macro": 0.23509452909716932,
+      "mcc": -0.05086817080370813,
+      "majorityBaselineF1": 0.23861566484517305
+    },
+    {
+      "trainEnd": "2024-09-20",
+      "testStart": "2024-10-21",
+      "purgeSessions": 20,
+      "f1Macro": 0.34299429942994303,
+      "mcc": 0.112088446559697,
+      "majorityBaselineF1": 0.19760479041916168
+    },
+    {
+      "trainEnd": "2025-08-27",
+      "testStart": "2025-09-26",
+      "purgeSessions": 20,
+      "f1Macro": 0.327829822881998,
+      "mcc": 0.17038657131822887,
+      "majorityBaselineF1": 0.15965480043149946
+    }
+  ],
+  "artifactTrainEnd": "2025-08-27",
+  "dataEnd": "2026-10-01",
+  "syntheticData": false
+}

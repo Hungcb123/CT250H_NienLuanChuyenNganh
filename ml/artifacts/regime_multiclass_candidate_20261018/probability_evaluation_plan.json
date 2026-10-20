@@ -1,0 +1,54 @@
+{
+  "role": "Predeclared causal probability audit, not fitted yet and not independent acceptance",
+  "created_at": "2026-10-18T16:31:23.318001+00:00",
+  "candidate_id": "multiclass_delayed_experts_v1",
+  "native_archive": "ml/reports/regime_native_scores/20261018T162849_386798Z/native_expert_scores.csv",
+  "archive_sha256": "b1ceec9d7b91a6b4c4685d650a78c1edbcc63fc18dc08a830de8e6575a04e370",
+  "archive_manifest_sha256": "af2d2d54123858d1f902a2583376bb18927ce4d049eb8e2b7ad073938b7edcf6",
+  "contract_sha256": "c69b2ea82110cfe65e37fa81f1b476e34b0acd51238455a54c14bacf530c7852",
+  "native_lock_sha256": "3a4c8038a53bbb019f60f4cf1405d47be9616890105215f9471b905e0e252419",
+  "target": "Same T+20 fixed +/-5% three-class outcome. Frozen point-decision policy remains unchanged; calibrated argmax F1 reported separately.",
+  "methods": [
+    "raw decision scores (uncalibrated reference)",
+    "component prior-adjusted/raw density masses (uncalibrated reference)",
+    "causal multinomial logistic calibration of decision scores",
+    "causal multinomial logistic calibration of component masses"
+  ],
+  "calibration": {
+    "history_rows": 504,
+    "min_rows": 252,
+    "min_class_count": 10,
+    "refit_market_sessions": 20,
+    "anchor": "2020-03-27",
+    "features": "Three centered log scores clipped at1e-6 plus fixed one-hot selected-expert categories from frozen pool; StandardScaler fitted only on allowed calibration rows.",
+    "C": 0.1,
+    "solver": "lbfgs",
+    "max_iter": 2000,
+    "class_weight": null,
+    "random_state": 42,
+    "hyperparameter_search": false,
+    "timing": "All fitting labels must have label_end_date strictly before block first eligible forecast. Last504 matured OOF forecast rows only. Never random CV or in-sample base-model outputs."
+  },
+  "baseline": {
+    "rule": "Class frequency from last504 FULL INDEX-calendar mature outcomes before same calibration refit boundary; Laplace1 smoothing.",
+    "rationale": "Use actual older known labels for a competent prior, not a uniform cold-start strawman.",
+    "fallback": "If fewer252 matured OOF rows or any class fewer10, output same causal prior for calibration method; keep all forecast dates."
+  },
+  "evaluation": {
+    "coverage": "Report all1560 days AND active-calibrator subset on identical dates across compared methods; disclose warmup/fallback.",
+    "metrics": [
+      "multiclass log loss",
+      "multiclass Brier",
+      "class reliability bins10",
+      "macro F1 from calibrated argmax, separate from unchanged frozen decision"
+    ],
+    "folds": "Original4 development folds; do not change boundaries",
+    "uncertainty": "Paired20/60-session block sensitivity; repeats1000,seed42; history reused, no multiple-testing-adjusted significance claim.",
+    "screening": "On active dates, both proper scores must improve vs causal prior and Brier improve in at least3/4 folds; paired improvement lower bounds >0 for both20/60 blocks. Passing still not independent acceptance."
+  },
+  "limitations": [
+    "Probability calibration cannot repair absent discrimination or certify economic utility.",
+    "Historical outcomes and earlier model variants repeatedly inspected.",
+    "Do not expose decision-score maximum as calibrated confidence or replace production automatically."
+  ]
+}

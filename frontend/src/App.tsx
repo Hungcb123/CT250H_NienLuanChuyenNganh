@@ -6,6 +6,7 @@ import { Header } from './components/layout/Header';
 import { OverviewTab } from './components/tabs/OverviewTab';
 import { MarketTab } from './components/tabs/MarketTab';
 import { LedgerTab } from './components/tabs/LedgerTab';
+import { ResearchWorkbench } from './components/tabs/ResearchWorkbench';
 import { MarkowitzTab } from './components/tabs/MarkowitzTab';
 import { TaaTab } from './components/tabs/TaaTab';
 import { SavingsTab } from './components/tabs/SavingsTab';
@@ -28,6 +29,25 @@ export default function App() {
   const [executingRebalance, setExecutingRebalance] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isRebalanceModalOpen, setIsRebalanceModalOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('sidebar_collapsed') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('sidebar_collapsed', String(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
 
   // Survey state (5 questions: 0, 7, 14, 20)
   const [surveyScores, setSurveyScores] = useState<number[]>([14, 14, 14, 14, 12]);
@@ -72,8 +92,9 @@ export default function App() {
   const handleExecuteActualRebalance = async () => {
     setExecutingRebalance(true);
     try {
-      const res = await executeRebalancePlan();
-      setConfirmedExecution(true);
+      if (!plan?.planToken) throw new Error('Vui lòng tải lại và xem kế hoạch trước khi xác nhận.');
+      const res = await executeRebalancePlan(plan.planToken);
+      setConfirmedExecution(res.updatedPlan?.driftDetected === false);
       setIsRebalanceModalOpen(false);
       await loadData();
       toast.success(
@@ -95,6 +116,8 @@ export default function App() {
         );
       } else {
         toast.error(errorMsg, "Lỗi thực thi tái cơ cấu");
+        setIsRebalanceModalOpen(false);
+        await loadData();
       }
     } finally {
       setExecutingRebalance(false);
@@ -106,19 +129,43 @@ export default function App() {
   return (
     <div className="min-h-screen bg-surface flex text-text-primary">
       {/* 1. Global Navigation Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={toggleSidebar}
+      />
 
       {/* 2. Main Content Wrapper */}
-      <div className="ml-72 flex-1 flex flex-col min-h-screen">
+      <div
+        className={`${
+          isSidebarCollapsed ? 'md:ml-20' : 'md:ml-56'
+        } transition-all duration-300 ease-in-out min-w-0 flex-1 flex flex-col min-h-screen`}
+      >
         <Header
-          valuation={valuation}
+          activeTab={activeTab}
           profile={activeUserProfile}
           loading={loading}
           onRefresh={loadData}
           onOpenAuth={() => setIsAuthModalOpen(true)}
         />
 
-        <main className="p-8 space-y-6 flex-1">
+        <main className={`vnx-workspace px-4 pb-4 sm:px-8 sm:pb-8 ${activeTab === 'overview' ? 'pt-4' : 'pt-4 sm:pt-8'} flex flex-col gap-6 flex-1 min-w-0`}>
+          <label className="block md:hidden text-sm text-text-primary space-y-2">
+            <span>Chuyển mục</span>
+            <select value={activeTab} onChange={event => setActiveTab(event.target.value as TabType)} className="w-full rounded-lg bg-surface-container-low border border-border-subtle px-3 py-2">
+              <option value="overview">Tổng quan tài sản</option><option value="market">Thị trường</option>
+              <option value="ledger">Sổ giao dịch</option><option value="markowitz">Tối ưu danh mục</option>
+              <option value="taa">Tín hiệu thị trường</option><option value="savings">Sổ tiết kiệm</option>
+              <option value="survey">Khảo sát</option><option value="copilot">Cố vấn</option>
+            </select>
+          </label>
+          {activeUserProfile?.email === `${activeUserProfile?.username}@demo.equifolio.test` &&
+            ['demo_balanced', 'demo_growth', 'demo_defensive'].includes(activeUserProfile?.username ?? '') && (
+              <p role="status" className="rounded-lg border border-border-subtle bg-surface-container-low px-4 py-3 text-sm text-text-primary">
+                <strong>Tài khoản demo.</strong> Lịch sử danh mục, giao dịch và chỉ số hiệu suất là dữ liệu mô phỏng để kiểm thử.
+              </p>
+          )}
           {activeTab === 'overview' && (
             <OverviewTab
               valuation={valuation}
@@ -134,6 +181,7 @@ export default function App() {
 
           {activeTab === 'market' && (
             <MarketTab
+              plan={plan}
               valuation={valuation}
               onTradeSuccess={loadData}
               onNavigateTab={(tab) => setActiveTab(tab as TabType)}
@@ -143,6 +191,8 @@ export default function App() {
           {activeTab === 'ledger' && <LedgerTab onRefresh={loadData} />}
 
           {activeTab === 'markowitz' && (
+            <div className="space-y-6"><ResearchWorkbench key={authUser?.id ?? 'guest'} />
+            <details><summary className="cursor-pointer text-sm text-text-secondary py-3">Minh họa lý thuyết — các tham số giả định, không dùng để đặt lệnh</summary>
             <MarkowitzTab
               plan={plan}
               profile={activeUserProfile}
@@ -151,7 +201,7 @@ export default function App() {
               confirmedExecution={confirmedExecution}
               executing={executingRebalance}
               onRefreshData={loadData}
-            />
+            /></details></div>
           )}
 
           {activeTab === 'taa' && (
@@ -159,7 +209,7 @@ export default function App() {
               plan={plan}
               profile={activeUserProfile}
               valuation={valuation}
-              onRefreshData={loadData}
+              onRefreshData={async () => { setConfirmedExecution(false); await loadData(); }}
               onConfirmRebalance={handleOpenRebalanceModal}
               executing={executingRebalance}
             />
@@ -171,6 +221,7 @@ export default function App() {
             <SurveyTab
               surveyScores={surveyScores}
               setSurveyScores={setSurveyScores}
+              onInvestmentSaved={async () => { setConfirmedExecution(false); await loadData(); }}
               onApplyProfile={async () => {
                 setConfirmedExecution(false);
                 await loadData();
@@ -185,6 +236,7 @@ export default function App() {
 
       {/* Rebalance Confirmation Modal with Early Withdrawal Warnings */}
       <RebalanceConfirmModal
+        key={plan?.planToken ?? 'no-plan'}
         isOpen={isRebalanceModalOpen}
         onClose={() => setIsRebalanceModalOpen(false)}
         onConfirm={handleExecuteActualRebalance}

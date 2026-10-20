@@ -1,0 +1,20 @@
+{
+  "role": "Native independent DEVELOPMENT replay; not independent forecast-quality test",
+  "passed": true,
+  "n_predictions": 1560,
+  "selector_matches": 1560,
+  "expert_matches": {
+    "legacy_equal": 1560,
+    "legacy_trend": 1560,
+    "legacy_risk": 1560,
+    "density_all": 1560,
+    "density_expanding": 1560
+  },
+  "max_score_error": 2.220446049250313e-16,
+  "bundles": 28,
+  "native_models": 1064,
+  "contract_sha256": "c69b2ea82110cfe65e37fa81f1b476e34b0acd51238455a54c14bacf530c7852",
+  "runtime_sha256": "35349f0fa425d972c6b02b7e4aa7eecd2ded5aca1cd1d46a3eae688b86a30df6",
+  "metadata_manifest_sha256": "c0f80e4fe7e7702fe2f5083411faf036bf8748a289f3fe6b5e6b6016755b3512",
+  "created_at": "2026-10-18T16:23:00.850933+00:00"
+}

@@ -1,0 +1,77 @@
+{
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "a90c5fa58d577aab07f5083e148028453bccdcab8d77f99cebe9708905f2fa3c",
+  "training_prefix_sha256": "7b59652e26dffd895407816ff11f71bbcdba8160ef71ebd4f44f4fcf0b54892f",
+  "refit_date": "2025-12-23",
+  "feature_schema": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200",
+    "Drawdown120",
+    "Drawdown252",
+    "HV20_60_Ratio",
+    "DownsideHV60",
+    "Stretch20",
+    "Shock5",
+    "VolRatio5_20",
+    "NegativeDays10",
+    "Drawdown20"
+  ],
+  "experts": [
+    {
+      "window": "3y",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_0.txt",
+      "model_sha256": "f4c917c48ba023cffa24303c4cff0e8b90a0cb1192bf59c27882e506ad8bdaf5",
+      "logit_center": -1.125278484584767,
+      "logit_scale": 0.9414581270730924,
+      "calibration_threshold": 1.0417027624029402,
+      "n_core": 667,
+      "n_calibration": 40,
+      "core_start": "2022-12-23",
+      "core_end": "2025-08-28",
+      "core_label_end": "2025-09-29",
+      "calibration_start": "2025-09-30",
+      "calibration_end": "2025-11-24",
+      "calibration_label_end": "2025-12-22"
+    },
+    {
+      "window": "expanding",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_1.txt",
+      "model_sha256": "09069cd7be6cee3b350eb3125f6005be539c0f98e7b7f375f15f999037392ef0",
+      "logit_center": -1.212918210400994,
+      "logit_scale": 1.3591802736355534,
+      "calibration_threshold": 1.5361664657554217,
+      "n_core": 3653,
+      "n_calibration": 40,
+      "core_start": "2011-01-05",
+      "core_end": "2025-08-28",
+      "core_label_end": "2025-09-29",
+      "calibration_start": "2025-09-30",
+      "calibration_end": "2025-11-24",
+      "calibration_label_end": "2025-12-22"
+    }
+  ],
+  "calibration_threshold": 1.2072433143545835
+}

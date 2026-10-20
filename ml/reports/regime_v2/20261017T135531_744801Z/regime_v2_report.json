@@ -1,0 +1,2802 @@
+{
+  "generated_at": "2026-10-17T13:55:31.759046+00:00",
+  "mode": "development_only",
+  "holdout_start": null,
+  "selection": "highest development CV macro F1 across requested models and feature sets; deterministic first candidate on ties",
+  "evaluation": "development selection scores only; no independent test claim",
+  "evaluation_protocol": {
+    "latest_observed_label_date": "2026-10-01",
+    "exposures": [
+      {
+        "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 20,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 60,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 120,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 20,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 60,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 120,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      }
+    ],
+    "rule": "A new final holdout must begin strictly after every previously observed label-end date."
+  },
+  "cv": {
+    "n_splits": 4,
+    "purge": "label_end_date < validation_start"
+  },
+  "optuna": {
+    "n_trials": 30,
+    "timeout_seconds": 120
+  },
+  "features": {
+    "close": {
+      "version": "close-v3-research",
+      "names": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20"
+      ]
+    },
+    "close-etf": {
+      "version": "close-etf-v3-research",
+      "names": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20"
+      ]
+    }
+  },
+  "results": [
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 125,
+        "learning_rate": 0.028568566857183494,
+        "max_depth": 6,
+        "num_leaves": 25,
+        "min_child_samples": 74,
+        "subsample": 0.6747024667625098,
+        "colsample_bytree": 0.8204949702843238,
+        "reg_alpha": 0.00018793250313548648,
+        "reg_lambda": 0.3669433757782622,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.3609332363512652,
+      "validation_mcc": 0.07957123530055979,
+      "validation_folds": [
+        {
+          "f1_macro": 0.2819429452556388,
+          "mcc": 0.0026063849884670025,
+          "accuracy": 0.3230769230769231,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              10,
+              6,
+              9
+            ],
+            [
+              77,
+              83,
+              51
+            ],
+            [
+              64,
+              57,
+              33
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.06622516556291391,
+              "recall": 0.4,
+              "f1": 0.11363636363636363,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5684931506849316,
+              "recall": 0.3933649289099526,
+              "f1": 0.4649859943977591,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.3548387096774194,
+              "recall": 0.21428571428571427,
+              "f1": 0.26720647773279355,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.4355079553497856,
+          "mcc": 0.17555438372487417,
+          "accuracy": 0.5102564102564102,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              22,
+              31,
+              17
+            ],
+            [
+              36,
+              142,
+              62
+            ],
+            [
+              20,
+              25,
+              35
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.28205128205128205,
+              "recall": 0.3142857142857143,
+              "f1": 0.2972972972972973,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.7171717171717171,
+              "recall": 0.5916666666666667,
+              "f1": 0.6484018264840182,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.30701754385964913,
+              "recall": 0.4375,
+              "f1": 0.36082474226804123,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.3094838545639461,
+          "mcc": 0.004953402382320592,
+          "accuracy": 0.5615384615384615,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              9,
+              22,
+              5
+            ],
+            [
+              58,
+              208,
+              52
+            ],
+            [
+              12,
+              22,
+              2
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.11392405063291139,
+              "recall": 0.25,
+              "f1": 0.1565217391304348,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8253968253968254,
+              "recall": 0.6540880503144654,
+              "f1": 0.7298245614035088,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.03389830508474576,
+              "recall": 0.05555555555555555,
+              "f1": 0.042105263157894736,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.41679819023569026,
+          "mcc": 0.13517077010657738,
+          "accuracy": 0.4717948717948718,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              16,
+              25,
+              19
+            ],
+            [
+              35,
+              113,
+              65
+            ],
+            [
+              17,
+              45,
+              55
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.23529411764705882,
+              "recall": 0.26666666666666666,
+              "f1": 0.25,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.6174863387978142,
+              "recall": 0.5305164319248826,
+              "f1": 0.5707070707070707,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.39568345323741005,
+              "recall": 0.4700854700854701,
+              "f1": 0.4296875,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 20
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 350,
+        "learning_rate": 0.14494986828966216,
+        "max_depth": 3,
+        "min_child_weight": 16,
+        "subsample": 0.7076815882263,
+        "colsample_bytree": 0.6071199272888598,
+        "reg_alpha": 0.0019194682077886046,
+        "reg_lambda": 8.770474989529738e-06,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.3394760594775281,
+      "validation_mcc": 0.02718298724312561,
+      "validation_folds": [
+        {
+          "f1_macro": 0.3098225344280452,
+          "mcc": 0.02201417995287501,
+          "accuracy": 0.44871794871794873,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              6,
+              13,
+              6
+            ],
+            [
+              24,
+              152,
+              35
+            ],
+            [
+              37,
+              100,
+              17
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.08955223880597014,
+              "recall": 0.24,
+              "f1": 0.13043478260869565,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5735849056603773,
+              "recall": 0.7203791469194313,
+              "f1": 0.6386554621848739,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.29310344827586204,
+              "recall": 0.11038961038961038,
+              "f1": 0.16037735849056603,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.4058215641674164,
+          "mcc": 0.11432764458767507,
+          "accuracy": 0.5692307692307692,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              13,
+              46,
+              11
+            ],
+            [
+              10,
+              192,
+              38
+            ],
+            [
+              3,
+              60,
+              17
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.5,
+              "recall": 0.18571428571428572,
+              "f1": 0.2708333333333333,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.6442953020134228,
+              "recall": 0.8,
+              "f1": 0.7137546468401487,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.25757575757575757,
+              "recall": 0.2125,
+              "f1": 0.2328767123287671,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.31653846153846155,
+          "mcc": -0.03591984745666777,
+          "accuracy": 0.6974358974358974,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              4,
+              30,
+              2
+            ],
+            [
+              22,
+              268,
+              28
+            ],
+            [
+              2,
+              34,
+              0
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.14285714285714285,
+              "recall": 0.1111111111111111,
+              "f1": 0.125,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8072289156626506,
+              "recall": 0.8427672955974843,
+              "f1": 0.8246153846153846,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.32572167777618943,
+          "mcc": 0.008309971888620114,
+          "accuracy": 0.48717948717948717,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              7,
+              47,
+              6
+            ],
+            [
+              16,
+              168,
+              29
+            ],
+            [
+              8,
+              94,
+              15
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.22580645161290322,
+              "recall": 0.11666666666666667,
+              "f1": 0.15384615384615385,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.5436893203883495,
+              "recall": 0.7887323943661971,
+              "f1": 0.6436781609195402,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.3,
+              "recall": 0.1282051282051282,
+              "f1": 0.17964071856287425,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 20
+    },
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 200,
+        "learning_rate": 0.04684389448898655,
+        "max_depth": 4,
+        "num_leaves": 38,
+        "min_child_samples": 28,
+        "subsample": 0.6446494190241308,
+        "colsample_bytree": 0.6384155371794185,
+        "reg_alpha": 9.851466201987055,
+        "reg_lambda": 0.9584150457118643,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.38545220282759,
+      "validation_mcc": 0.12148403844284818,
+      "validation_folds": [
+        {
+          "f1_macro": 0.301010101010101,
+          "mcc": 0.026496163832564548,
+          "accuracy": 0.3282051282051282,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              14,
+              3,
+              8
+            ],
+            [
+              70,
+              71,
+              70
+            ],
+            [
+              66,
+              45,
+              43
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.09333333333333334,
+              "recall": 0.56,
+              "f1": 0.16,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5966386554621849,
+              "recall": 0.33649289099526064,
+              "f1": 0.4303030303030303,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.35537190082644626,
+              "recall": 0.2792207792207792,
+              "f1": 0.31272727272727274,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.4563066563066563,
+          "mcc": 0.19357410136906228,
+          "accuracy": 0.5487179487179488,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              16,
+              36,
+              18
+            ],
+            [
+              42,
+              157,
+              41
+            ],
+            [
+              4,
+              35,
+              41
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.25806451612903225,
+              "recall": 0.22857142857142856,
+              "f1": 0.24242424242424243,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.6885964912280702,
+              "recall": 0.6541666666666667,
+              "f1": 0.6709401709401709,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.41,
+              "recall": 0.5125,
+              "f1": 0.45555555555555555,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.34916655671372654,
+          "mcc": 0.05466731938390888,
+          "accuracy": 0.6051282051282051,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              7,
+              27,
+              2
+            ],
+            [
+              50,
+              222,
+              46
+            ],
+            [
+              13,
+              16,
+              7
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.1,
+              "recall": 0.19444444444444445,
+              "f1": 0.1320754716981132,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8377358490566038,
+              "recall": 0.6981132075471698,
+              "f1": 0.7615780445969125,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.12727272727272726,
+              "recall": 0.19444444444444445,
+              "f1": 0.15384615384615385,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.4353254972798763,
+          "mcc": 0.211198569185857,
+          "accuracy": 0.5307692307692308,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              10,
+              32,
+              18
+            ],
+            [
+              35,
+              144,
+              34
+            ],
+            [
+              29,
+              35,
+              53
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.13513513513513514,
+              "recall": 0.16666666666666666,
+              "f1": 0.14925373134328357,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.6824644549763034,
+              "recall": 0.676056338028169,
+              "f1": 0.6792452830188679,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.5047619047619047,
+              "recall": 0.452991452991453,
+              "f1": 0.4774774774774775,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 20
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 275,
+        "learning_rate": 0.06803900745073706,
+        "max_depth": 3,
+        "min_child_weight": 20,
+        "subsample": 0.9329770563201687,
+        "colsample_bytree": 0.6849356442713105,
+        "reg_alpha": 4.329370014459266e-07,
+        "reg_lambda": 4.4734294104626844e-07,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.3568882296010853,
+      "validation_mcc": 0.07289614570680186,
+      "validation_folds": [
+        {
+          "f1_macro": 0.37056846954072425,
+          "mcc": 0.0356772585430063,
+          "accuracy": 0.5051282051282051,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              8,
+              12,
+              5
+            ],
+            [
+              7,
+              175,
+              29
+            ],
+            [
+              12,
+              128,
+              14
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.2962962962962963,
+              "recall": 0.32,
+              "f1": 0.3076923076923077,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5555555555555556,
+              "recall": 0.8293838862559242,
+              "f1": 0.6653992395437263,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.2916666666666667,
+              "recall": 0.09090909090909091,
+              "f1": 0.13861386138613863,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.4250116021801306,
+          "mcc": 0.216351467560737,
+          "accuracy": 0.6333333333333333,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              8,
+              52,
+              10
+            ],
+            [
+              6,
+              219,
+              15
+            ],
+            [
+              3,
+              57,
+              20
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.47058823529411764,
+              "recall": 0.11428571428571428,
+              "f1": 0.1839080459770115,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.6676829268292683,
+              "recall": 0.9125,
+              "f1": 0.7711267605633803,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.4444444444444444,
+              "recall": 0.25,
+              "f1": 0.32,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.29976801717250473,
+          "mcc": -0.0489014082353921,
+          "accuracy": 0.7512820512820513,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              0,
+              36,
+              0
+            ],
+            [
+              12,
+              292,
+              14
+            ],
+            [
+              2,
+              33,
+              1
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8088642659279779,
+              "recall": 0.9182389937106918,
+              "f1": 0.8600883652430045,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.06666666666666667,
+              "recall": 0.027777777777777776,
+              "f1": 0.0392156862745098,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.3322048295109817,
+          "mcc": 0.08845726495885621,
+          "accuracy": 0.5333333333333333,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              4,
+              41,
+              15
+            ],
+            [
+              9,
+              188,
+              16
+            ],
+            [
+              7,
+              94,
+              16
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.2,
+              "recall": 0.06666666666666667,
+              "f1": 0.1,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.5820433436532507,
+              "recall": 0.8826291079812206,
+              "f1": 0.7014925373134329,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.3404255319148936,
+              "recall": 0.13675213675213677,
+              "f1": 0.1951219512195122,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 20
+    },
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 125,
+        "learning_rate": 0.1309229983885534,
+        "max_depth": 4,
+        "num_leaves": 35,
+        "min_child_samples": 95,
+        "subsample": 0.9900690668294695,
+        "colsample_bytree": 0.7820785140215435,
+        "reg_alpha": 8.654495520575017e-07,
+        "reg_lambda": 0.0010389699918916186,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.3165346568572957,
+      "validation_mcc": 0.04762600514731839,
+      "validation_folds": [
+        {
+          "f1_macro": 0.26273883961663574,
+          "mcc": -0.03831684459349291,
+          "accuracy": 0.37597911227154046,
+          "baseline_f1": 0.21871345029239767,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              36,
+              106,
+              45
+            ],
+            [
+              40,
+              118,
+              38
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.4732142857142857,
+              "recall": 0.5668449197860963,
+              "f1": 0.5158150851581509,
+              "support": 187
+            },
+            "Bullish (+1)": {
+              "precision": 0.4578313253012048,
+              "recall": 0.19387755102040816,
+              "f1": 0.2724014336917563,
+              "support": 196
+            }
+          },
+          "n_train": 709,
+          "n_validation": 383,
+          "train_end": "2019-12-09",
+          "train_label_end": "2020-03-10",
+          "validation_start": "2020-03-11",
+          "validation_end": "2021-09-17"
+        },
+        {
+          "f1_macro": 0.2843883089607662,
+          "mcc": -0.016215986297591408,
+          "accuracy": 0.4621409921671018,
+          "baseline_f1": 0.24877250409165305,
+          "confusion_matrix": [
+            [
+              8,
+              71,
+              29
+            ],
+            [
+              5,
+              164,
+              59
+            ],
+            [
+              0,
+              42,
+              5
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.6153846153846154,
+              "recall": 0.07407407407407407,
+              "f1": 0.1322314049586777,
+              "support": 108
+            },
+            "Sideway (0)": {
+              "precision": 0.592057761732852,
+              "recall": 0.7192982456140351,
+              "f1": 0.6495049504950495,
+              "support": 228
+            },
+            "Bullish (+1)": {
+              "precision": 0.053763440860215055,
+              "recall": 0.10638297872340426,
+              "f1": 0.07142857142857142,
+              "support": 47
+            }
+          },
+          "n_train": 1092,
+          "n_validation": 383,
+          "train_end": "2021-06-23",
+          "train_label_end": "2021-09-17",
+          "validation_start": "2021-09-20",
+          "validation_end": "2023-06-08"
+        },
+        {
+          "f1_macro": 0.34198066652685083,
+          "mcc": 0.08908476543550188,
+          "accuracy": 0.5326370757180157,
+          "baseline_f1": 0.30346135609293506,
+          "confusion_matrix": [
+            [
+              8,
+              6,
+              3
+            ],
+            [
+              49,
+              185,
+              86
+            ],
+            [
+              17,
+              18,
+              11
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.10810810810810811,
+              "recall": 0.47058823529411764,
+              "f1": 0.17582417582417584,
+              "support": 17
+            },
+            "Sideway (0)": {
+              "precision": 0.8851674641148325,
+              "recall": 0.578125,
+              "f1": 0.6994328922495274,
+              "support": 320
+            },
+            "Bullish (+1)": {
+              "precision": 0.11,
+              "recall": 0.2391304347826087,
+              "f1": 0.1506849315068493,
+              "support": 46
+            }
+          },
+          "n_train": 1475,
+          "n_validation": 383,
+          "train_end": "2023-03-13",
+          "train_label_end": "2023-06-08",
+          "validation_start": "2023-06-09",
+          "validation_end": "2024-12-16"
+        },
+        {
+          "f1_macro": 0.37703081232492996,
+          "mcc": 0.15595208604485603,
+          "accuracy": 0.577023498694517,
+          "baseline_f1": 0.27505112474437626,
+          "confusion_matrix": [
+            [
+              0,
+              2,
+              0
+            ],
+            [
+              28,
+              168,
+              73
+            ],
+            [
+              8,
+              51,
+              53
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 2
+            },
+            "Sideway (0)": {
+              "precision": 0.7601809954751131,
+              "recall": 0.6245353159851301,
+              "f1": 0.6857142857142857,
+              "support": 269
+            },
+            "Bullish (+1)": {
+              "precision": 0.42063492063492064,
+              "recall": 0.4732142857142857,
+              "f1": 0.44537815126050423,
+              "support": 112
+            }
+          },
+          "n_train": 1858,
+          "n_validation": 383,
+          "train_end": "2024-09-23",
+          "train_label_end": "2024-12-16",
+          "validation_start": "2024-12-17",
+          "validation_end": "2026-07-06"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 60
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 50,
+        "learning_rate": 0.13060986669773664,
+        "max_depth": 8,
+        "min_child_weight": 17,
+        "subsample": 0.7218455076693483,
+        "colsample_bytree": 0.6390688456025535,
+        "reg_alpha": 0.014391207615728067,
+        "reg_lambda": 9.148975058772307e-05,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.31082048391897416,
+      "validation_mcc": 0.03436147190632306,
+      "validation_folds": [
+        {
+          "f1_macro": 0.22769007755309123,
+          "mcc": -0.10637262690099583,
+          "accuracy": 0.412532637075718,
+          "baseline_f1": 0.21871345029239767,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              26,
+              145,
+              16
+            ],
+            [
+              4,
+              179,
+              13
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.44753086419753085,
+              "recall": 0.7754010695187166,
+              "f1": 0.5675146771037182,
+              "support": 187
+            },
+            "Bullish (+1)": {
+              "precision": 0.4482758620689655,
+              "recall": 0.0663265306122449,
+              "f1": 0.11555555555555555,
+              "support": 196
+            }
+          },
+          "n_train": 709,
+          "n_validation": 383,
+          "train_end": "2019-12-09",
+          "train_label_end": "2020-03-10",
+          "validation_start": "2020-03-11",
+          "validation_end": "2021-09-17"
+        },
+        {
+          "f1_macro": 0.23982649726703886,
+          "mcc": -0.05000953216922992,
+          "accuracy": 0.4725848563968668,
+          "baseline_f1": 0.24877250409165305,
+          "confusion_matrix": [
+            [
+              0,
+              79,
+              29
+            ],
+            [
+              0,
+              178,
+              50
+            ],
+            [
+              0,
+              44,
+              3
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 108
+            },
+            "Sideway (0)": {
+              "precision": 0.5913621262458472,
+              "recall": 0.7807017543859649,
+              "f1": 0.6729678638941399,
+              "support": 228
+            },
+            "Bullish (+1)": {
+              "precision": 0.036585365853658534,
+              "recall": 0.06382978723404255,
+              "f1": 0.046511627906976744,
+              "support": 47
+            }
+          },
+          "n_train": 1092,
+          "n_validation": 383,
+          "train_end": "2021-06-23",
+          "train_label_end": "2021-09-17",
+          "validation_start": "2021-09-20",
+          "validation_end": "2023-06-08"
+        },
+        {
+          "f1_macro": 0.3933302311152474,
+          "mcc": 0.1146266457645668,
+          "accuracy": 0.7023498694516971,
+          "baseline_f1": 0.30346135609293506,
+          "confusion_matrix": [
+            [
+              4,
+              7,
+              6
+            ],
+            [
+              11,
+              257,
+              52
+            ],
+            [
+              8,
+              30,
+              8
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.17391304347826086,
+              "recall": 0.23529411764705882,
+              "f1": 0.2,
+              "support": 17
+            },
+            "Sideway (0)": {
+              "precision": 0.8741496598639455,
+              "recall": 0.803125,
+              "f1": 0.8371335504885994,
+              "support": 320
+            },
+            "Bullish (+1)": {
+              "precision": 0.12121212121212122,
+              "recall": 0.17391304347826086,
+              "f1": 0.14285714285714285,
+              "support": 46
+            }
+          },
+          "n_train": 1475,
+          "n_validation": 383,
+          "train_end": "2023-03-13",
+          "train_label_end": "2023-06-08",
+          "validation_start": "2023-06-09",
+          "validation_end": "2024-12-16"
+        },
+        {
+          "f1_macro": 0.382435129740519,
+          "mcc": 0.1792014009309512,
+          "accuracy": 0.6919060052219321,
+          "baseline_f1": 0.27505112474437626,
+          "confusion_matrix": [
+            [
+              0,
+              2,
+              0
+            ],
+            [
+              7,
+              236,
+              26
+            ],
+            [
+              0,
+              83,
+              29
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 2
+            },
+            "Sideway (0)": {
+              "precision": 0.735202492211838,
+              "recall": 0.8773234200743495,
+              "f1": 0.8,
+              "support": 269
+            },
+            "Bullish (+1)": {
+              "precision": 0.5272727272727272,
+              "recall": 0.25892857142857145,
+              "f1": 0.3473053892215569,
+              "support": 112
+            }
+          },
+          "n_train": 1858,
+          "n_validation": 383,
+          "train_end": "2024-09-23",
+          "train_label_end": "2024-12-16",
+          "validation_start": "2024-12-17",
+          "validation_end": "2026-07-06"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 60
+    },
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 125,
+        "learning_rate": 0.1148103435821601,
+        "max_depth": 4,
+        "num_leaves": 52,
+        "min_child_samples": 75,
+        "subsample": 0.9572223426960946,
+        "colsample_bytree": 0.7695933282353224,
+        "reg_alpha": 2.0582312221450519e-07,
+        "reg_lambda": 7.053526775858017,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.3263599745717905,
+      "validation_mcc": 0.07430571253561215,
+      "validation_folds": [
+        {
+          "f1_macro": 0.29245947850599013,
+          "mcc": 0.04991138072139939,
+          "accuracy": 0.45691906005221933,
+          "baseline_f1": 0.21871345029239767,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              20,
+              140,
+              27
+            ],
+            [
+              26,
+              135,
+              35
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.509090909090909,
+              "recall": 0.7486631016042781,
+              "f1": 0.6060606060606061,
+              "support": 187
+            },
+            "Bullish (+1)": {
+              "precision": 0.5645161290322581,
+              "recall": 0.17857142857142858,
+              "f1": 0.2713178294573643,
+              "support": 196
+            }
+          },
+          "n_train": 709,
+          "n_validation": 383,
+          "train_end": "2019-12-09",
+          "train_label_end": "2020-03-10",
+          "validation_start": "2020-03-11",
+          "validation_end": "2021-09-17"
+        },
+        {
+          "f1_macro": 0.32364107123360314,
+          "mcc": 0.030166008997539854,
+          "accuracy": 0.4830287206266319,
+          "baseline_f1": 0.24877250409165305,
+          "confusion_matrix": [
+            [
+              12,
+              67,
+              29
+            ],
+            [
+              20,
+              164,
+              44
+            ],
+            [
+              0,
+              38,
+              9
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.375,
+              "recall": 0.1111111111111111,
+              "f1": 0.17142857142857143,
+              "support": 108
+            },
+            "Sideway (0)": {
+              "precision": 0.6096654275092936,
+              "recall": 0.7192982456140351,
+              "f1": 0.6599597585513078,
+              "support": 228
+            },
+            "Bullish (+1)": {
+              "precision": 0.10975609756097561,
+              "recall": 0.19148936170212766,
+              "f1": 0.13953488372093023,
+              "support": 47
+            }
+          },
+          "n_train": 1092,
+          "n_validation": 383,
+          "train_end": "2021-06-23",
+          "train_label_end": "2021-09-17",
+          "validation_start": "2021-09-20",
+          "validation_end": "2023-06-08"
+        },
+        {
+          "f1_macro": 0.2607998142488721,
+          "mcc": -0.08229218868101888,
+          "accuracy": 0.4516971279373368,
+          "baseline_f1": 0.30346135609293506,
+          "confusion_matrix": [
+            [
+              2,
+              6,
+              9
+            ],
+            [
+              45,
+              162,
+              113
+            ],
+            [
+              4,
+              33,
+              9
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0392156862745098,
+              "recall": 0.11764705882352941,
+              "f1": 0.058823529411764705,
+              "support": 17
+            },
+            "Sideway (0)": {
+              "precision": 0.8059701492537313,
+              "recall": 0.50625,
+              "f1": 0.6218809980806143,
+              "support": 320
+            },
+            "Bullish (+1)": {
+              "precision": 0.06870229007633588,
+              "recall": 0.1956521739130435,
+              "f1": 0.1016949152542373,
+              "support": 46
+            }
+          },
+          "n_train": 1475,
+          "n_validation": 383,
+          "train_end": "2023-03-13",
+          "train_label_end": "2023-06-08",
+          "validation_start": "2023-06-09",
+          "validation_end": "2024-12-16"
+        },
+        {
+          "f1_macro": 0.4285395342986966,
+          "mcc": 0.29943764910452825,
+          "accuracy": 0.7075718015665796,
+          "baseline_f1": 0.27505112474437626,
+          "confusion_matrix": [
+            [
+              0,
+              2,
+              0
+            ],
+            [
+              9,
+              226,
+              34
+            ],
+            [
+              9,
+              58,
+              45
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 2
+            },
+            "Sideway (0)": {
+              "precision": 0.7902097902097902,
+              "recall": 0.8401486988847584,
+              "f1": 0.8144144144144144,
+              "support": 269
+            },
+            "Bullish (+1)": {
+              "precision": 0.569620253164557,
+              "recall": 0.4017857142857143,
+              "f1": 0.4712041884816754,
+              "support": 112
+            }
+          },
+          "n_train": 1858,
+          "n_validation": 383,
+          "train_end": "2024-09-23",
+          "train_label_end": "2024-12-16",
+          "validation_start": "2024-12-17",
+          "validation_end": "2026-07-06"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 60
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 150,
+        "learning_rate": 0.11153319093490299,
+        "max_depth": 5,
+        "min_child_weight": 4,
+        "subsample": 0.9092068386737798,
+        "colsample_bytree": 0.7915025725857678,
+        "reg_alpha": 2.3641688157263386e-06,
+        "reg_lambda": 6.301827587371456e-06,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.3240719284517395,
+      "validation_mcc": 0.10036805777528221,
+      "validation_folds": [
+        {
+          "f1_macro": 0.3052104899930987,
+          "mcc": 0.1538940915381138,
+          "accuracy": 0.5091383812010444,
+          "baseline_f1": 0.21871345029239767,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              18,
+              165,
+              4
+            ],
+            [
+              14,
+              152,
+              30
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.5205047318611987,
+              "recall": 0.8823529411764706,
+              "f1": 0.6547619047619048,
+              "support": 187
+            },
+            "Bullish (+1)": {
+              "precision": 0.8823529411764706,
+              "recall": 0.15306122448979592,
+              "f1": 0.2608695652173913,
+              "support": 196
+            }
+          },
+          "n_train": 709,
+          "n_validation": 383,
+          "train_end": "2019-12-09",
+          "train_label_end": "2020-03-10",
+          "validation_start": "2020-03-11",
+          "validation_end": "2021-09-17"
+        },
+        {
+          "f1_macro": 0.29460334419870976,
+          "mcc": 0.03233711644454198,
+          "accuracy": 0.5091383812010444,
+          "baseline_f1": 0.24877250409165305,
+          "confusion_matrix": [
+            [
+              6,
+              70,
+              32
+            ],
+            [
+              10,
+              184,
+              34
+            ],
+            [
+              0,
+              42,
+              5
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.375,
+              "recall": 0.05555555555555555,
+              "f1": 0.0967741935483871,
+              "support": 108
+            },
+            "Sideway (0)": {
+              "precision": 0.6216216216216216,
+              "recall": 0.8070175438596491,
+              "f1": 0.7022900763358778,
+              "support": 228
+            },
+            "Bullish (+1)": {
+              "precision": 0.07042253521126761,
+              "recall": 0.10638297872340426,
+              "f1": 0.0847457627118644,
+              "support": 47
+            }
+          },
+          "n_train": 1092,
+          "n_validation": 383,
+          "train_end": "2021-06-23",
+          "train_label_end": "2021-09-17",
+          "validation_start": "2021-09-20",
+          "validation_end": "2023-06-08"
+        },
+        {
+          "f1_macro": 0.2824426332730647,
+          "mcc": -0.06610579603516699,
+          "accuracy": 0.5456919060052219,
+          "baseline_f1": 0.30346135609293506,
+          "confusion_matrix": [
+            [
+              1,
+              6,
+              10
+            ],
+            [
+              23,
+              201,
+              96
+            ],
+            [
+              2,
+              37,
+              7
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.038461538461538464,
+              "recall": 0.058823529411764705,
+              "f1": 0.046511627906976744,
+              "support": 17
+            },
+            "Sideway (0)": {
+              "precision": 0.8237704918032787,
+              "recall": 0.628125,
+              "f1": 0.7127659574468085,
+              "support": 320
+            },
+            "Bullish (+1)": {
+              "precision": 0.061946902654867256,
+              "recall": 0.15217391304347827,
+              "f1": 0.0880503144654088,
+              "support": 46
+            }
+          },
+          "n_train": 1475,
+          "n_validation": 383,
+          "train_end": "2023-03-13",
+          "train_label_end": "2023-06-08",
+          "validation_start": "2023-06-09",
+          "validation_end": "2024-12-16"
+        },
+        {
+          "f1_macro": 0.41403124634208477,
+          "mcc": 0.28134681915364007,
+          "accuracy": 0.7284595300261096,
+          "baseline_f1": 0.27505112474437626,
+          "confusion_matrix": [
+            [
+              0,
+              2,
+              0
+            ],
+            [
+              7,
+              245,
+              17
+            ],
+            [
+              0,
+              78,
+              34
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 2
+            },
+            "Sideway (0)": {
+              "precision": 0.7538461538461538,
+              "recall": 0.9107806691449815,
+              "f1": 0.8249158249158249,
+              "support": 269
+            },
+            "Bullish (+1)": {
+              "precision": 0.6666666666666666,
+              "recall": 0.30357142857142855,
+              "f1": 0.4171779141104294,
+              "support": 112
+            }
+          },
+          "n_train": 1858,
+          "n_validation": 383,
+          "train_end": "2024-09-23",
+          "train_label_end": "2024-12-16",
+          "validation_start": "2024-12-17",
+          "validation_end": "2026-07-06"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 60
+    },
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 250,
+        "learning_rate": 0.12967966439470388,
+        "max_depth": 7,
+        "num_leaves": 36,
+        "min_child_samples": 37,
+        "subsample": 0.6669249324863064,
+        "colsample_bytree": 0.7169218499858411,
+        "reg_alpha": 0.00012028025602691131,
+        "reg_lambda": 0.0036402163899636065,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.30218431178210814,
+      "validation_mcc": 0.09407147182512728,
+      "validation_folds": [
+        {
+          "f1_macro": 0.2883229981770854,
+          "mcc": 0.1520248477525896,
+          "accuracy": 0.46648793565683644,
+          "baseline_f1": 0.19029374201787996,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              6,
+              136,
+              7
+            ],
+            [
+              4,
+              182,
+              38
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.4276729559748428,
+              "recall": 0.912751677852349,
+              "f1": 0.582441113490364,
+              "support": 149
+            },
+            "Bullish (+1)": {
+              "precision": 0.8444444444444444,
+              "recall": 0.16964285714285715,
+              "f1": 0.2825278810408922,
+              "support": 224
+            }
+          },
+          "n_train": 629,
+          "n_validation": 373,
+          "train_end": "2019-08-16",
+          "train_label_end": "2020-02-11",
+          "validation_start": "2020-02-12",
+          "validation_end": "2021-08-04"
+        },
+        {
+          "f1_macro": 0.24662852784134248,
+          "mcc": 0.050715968662125965,
+          "accuracy": 0.40482573726541554,
+          "baseline_f1": 0.2583470169677066,
+          "confusion_matrix": [
+            [
+              0,
+              38,
+              69
+            ],
+            [
+              2,
+              142,
+              92
+            ],
+            [
+              0,
+              21,
+              9
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 107
+            },
+            "Sideway (0)": {
+              "precision": 0.7064676616915423,
+              "recall": 0.6016949152542372,
+              "f1": 0.6498855835240275,
+              "support": 236
+            },
+            "Bullish (+1)": {
+              "precision": 0.052941176470588235,
+              "recall": 0.3,
+              "f1": 0.09,
+              "support": 30
+            }
+          },
+          "n_train": 1002,
+          "n_validation": 373,
+          "train_end": "2021-02-05",
+          "train_label_end": "2021-08-04",
+          "validation_start": "2021-08-05",
+          "validation_end": "2023-04-10"
+        },
+        {
+          "f1_macro": 0.25155742739317366,
+          "mcc": -0.1174825271960321,
+          "accuracy": 0.5683646112600537,
+          "baseline_f1": 0.322253000923361,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              34,
+              210,
+              105
+            ],
+            [
+              1,
+              21,
+              2
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.9090909090909091,
+              "recall": 0.6017191977077364,
+              "f1": 0.7241379310344828,
+              "support": 349
+            },
+            "Bullish (+1)": {
+              "precision": 0.018691588785046728,
+              "recall": 0.08333333333333333,
+              "f1": 0.030534351145038167,
+              "support": 24
+            }
+          },
+          "n_train": 1375,
+          "n_validation": 373,
+          "train_end": "2022-10-14",
+          "train_label_end": "2023-04-10",
+          "validation_start": "2023-04-11",
+          "validation_end": "2024-10-07"
+        },
+        {
+          "f1_macro": 0.42222829371683107,
+          "mcc": 0.29102759808182566,
+          "accuracy": 0.6621983914209115,
+          "baseline_f1": 0.2494407158836689,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              7,
+              183,
+              33
+            ],
+            [
+              3,
+              83,
+              64
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.6879699248120301,
+              "recall": 0.820627802690583,
+              "f1": 0.7484662576687117,
+              "support": 223
+            },
+            "Bullish (+1)": {
+              "precision": 0.6597938144329897,
+              "recall": 0.4266666666666667,
+              "f1": 0.5182186234817814,
+              "support": 150
+            }
+          },
+          "n_train": 1748,
+          "n_validation": 373,
+          "train_end": "2024-04-12",
+          "train_label_end": "2024-10-07",
+          "validation_start": "2024-10-08",
+          "validation_end": "2026-04-08"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 120
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 75,
+        "learning_rate": 0.03822726574649208,
+        "max_depth": 3,
+        "min_child_weight": 19,
+        "subsample": 0.7035119926400067,
+        "colsample_bytree": 0.8650089137415928,
+        "reg_alpha": 6.388511557344611e-06,
+        "reg_lambda": 0.0004793052550782129,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.29927895421989403,
+      "validation_mcc": 0.11272306336547824,
+      "validation_folds": [
+        {
+          "f1_macro": 0.2793818138253265,
+          "mcc": 0.22571943084102783,
+          "accuracy": 0.4772117962466488,
+          "baseline_f1": 0.19029374201787996,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              148,
+              1
+            ],
+            [
+              0,
+              194,
+              30
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.4327485380116959,
+              "recall": 0.9932885906040269,
+              "f1": 0.6028513238289206,
+              "support": 149
+            },
+            "Bullish (+1)": {
+              "precision": 0.967741935483871,
+              "recall": 0.13392857142857142,
+              "f1": 0.23529411764705882,
+              "support": 224
+            }
+          },
+          "n_train": 629,
+          "n_validation": 373,
+          "train_end": "2019-08-16",
+          "train_label_end": "2020-02-11",
+          "validation_start": "2020-02-12",
+          "validation_end": "2021-08-04"
+        },
+        {
+          "f1_macro": 0.22615296831973009,
+          "mcc": -0.02195067241716524,
+          "accuracy": 0.4101876675603217,
+          "baseline_f1": 0.2583470169677066,
+          "confusion_matrix": [
+            [
+              0,
+              53,
+              54
+            ],
+            [
+              0,
+              150,
+              86
+            ],
+            [
+              0,
+              27,
+              3
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 107
+            },
+            "Sideway (0)": {
+              "precision": 0.6521739130434783,
+              "recall": 0.635593220338983,
+              "f1": 0.6437768240343348,
+              "support": 236
+            },
+            "Bullish (+1)": {
+              "precision": 0.02097902097902098,
+              "recall": 0.1,
+              "f1": 0.03468208092485549,
+              "support": 30
+            }
+          },
+          "n_train": 1002,
+          "n_validation": 373,
+          "train_end": "2021-02-05",
+          "train_label_end": "2021-08-04",
+          "validation_start": "2021-08-05",
+          "validation_end": "2023-04-10"
+        },
+        {
+          "f1_macro": 0.28232869654817105,
+          "mcc": -0.12830776928813978,
+          "accuracy": 0.7345844504021448,
+          "baseline_f1": 0.322253000923361,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              274,
+              72
+            ],
+            [
+              0,
+              24,
+              0
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.9194630872483222,
+              "recall": 0.7851002865329513,
+              "f1": 0.8469860896445132,
+              "support": 349
+            },
+            "Bullish (+1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 24
+            }
+          },
+          "n_train": 1375,
+          "n_validation": 373,
+          "train_end": "2022-10-14",
+          "train_label_end": "2023-04-10",
+          "validation_start": "2023-04-11",
+          "validation_end": "2024-10-07"
+        },
+        {
+          "f1_macro": 0.4092523381863484,
+          "mcc": 0.3754312643261902,
+          "accuracy": 0.6943699731903485,
+          "baseline_f1": 0.2494407158836689,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              3,
+              216,
+              4
+            ],
+            [
+              0,
+              107,
+              43
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.6687306501547987,
+              "recall": 0.968609865470852,
+              "f1": 0.7912087912087912,
+              "support": 223
+            },
+            "Bullish (+1)": {
+              "precision": 0.9148936170212766,
+              "recall": 0.2866666666666667,
+              "f1": 0.4365482233502538,
+              "support": 150
+            }
+          },
+          "n_train": 1748,
+          "n_validation": 373,
+          "train_end": "2024-04-12",
+          "train_label_end": "2024-10-07",
+          "validation_start": "2024-10-08",
+          "validation_end": "2026-04-08"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 120
+    },
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 175,
+        "learning_rate": 0.017713792233487263,
+        "max_depth": 8,
+        "num_leaves": 44,
+        "min_child_samples": 48,
+        "subsample": 0.8999747882940454,
+        "colsample_bytree": 0.8264694115850812,
+        "reg_alpha": 0.2390066612660221,
+        "reg_lambda": 1.1705844252997715,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.2671583289896631,
+      "validation_mcc": 0.01844564885007042,
+      "validation_folds": [
+        {
+          "f1_macro": 0.2391327913279133,
+          "mcc": 0.07136692918304066,
+          "accuracy": 0.38605898123324395,
+          "baseline_f1": 0.19029374201787996,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              25,
+              123,
+              1
+            ],
+            [
+              25,
+              178,
+              21
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.40863787375415284,
+              "recall": 0.825503355704698,
+              "f1": 0.5466666666666666,
+              "support": 149
+            },
+            "Bullish (+1)": {
+              "precision": 0.9545454545454546,
+              "recall": 0.09375,
+              "f1": 0.17073170731707318,
+              "support": 224
+            }
+          },
+          "n_train": 629,
+          "n_validation": 373,
+          "train_end": "2019-08-16",
+          "train_label_end": "2020-02-11",
+          "validation_start": "2020-02-12",
+          "validation_end": "2021-08-04"
+        },
+        {
+          "f1_macro": 0.21699684692724133,
+          "mcc": -0.008996816124192923,
+          "accuracy": 0.3646112600536193,
+          "baseline_f1": 0.2583470169677066,
+          "confusion_matrix": [
+            [
+              0,
+              37,
+              70
+            ],
+            [
+              0,
+              132,
+              104
+            ],
+            [
+              0,
+              26,
+              4
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 107
+            },
+            "Sideway (0)": {
+              "precision": 0.676923076923077,
+              "recall": 0.559322033898305,
+              "f1": 0.6125290023201856,
+              "support": 236
+            },
+            "Bullish (+1)": {
+              "precision": 0.02247191011235955,
+              "recall": 0.13333333333333333,
+              "f1": 0.038461538461538464,
+              "support": 30
+            }
+          },
+          "n_train": 1002,
+          "n_validation": 373,
+          "train_end": "2021-02-05",
+          "train_label_end": "2021-08-04",
+          "validation_start": "2021-08-05",
+          "validation_end": "2023-04-10"
+        },
+        {
+          "f1_macro": 0.22887323943661972,
+          "mcc": -0.1979105369553141,
+          "accuracy": 0.5227882037533512,
+          "baseline_f1": 0.322253000923361,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              20,
+              195,
+              134
+            ],
+            [
+              0,
+              24,
+              0
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.8904109589041096,
+              "recall": 0.5587392550143266,
+              "f1": 0.6866197183098591,
+              "support": 349
+            },
+            "Bullish (+1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 24
+            }
+          },
+          "n_train": 1375,
+          "n_validation": 373,
+          "train_end": "2022-10-14",
+          "train_label_end": "2023-04-10",
+          "validation_start": "2023-04-11",
+          "validation_end": "2024-10-07"
+        },
+        {
+          "f1_macro": 0.383630438266878,
+          "mcc": 0.20932301929674804,
+          "accuracy": 0.6032171581769437,
+          "baseline_f1": 0.2494407158836689,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              13,
+              176,
+              34
+            ],
+            [
+              18,
+              83,
+              49
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.6795366795366795,
+              "recall": 0.7892376681614349,
+              "f1": 0.7302904564315352,
+              "support": 223
+            },
+            "Bullish (+1)": {
+              "precision": 0.5903614457831325,
+              "recall": 0.32666666666666666,
+              "f1": 0.4206008583690987,
+              "support": 150
+            }
+          },
+          "n_train": 1748,
+          "n_validation": 373,
+          "train_end": "2024-04-12",
+          "train_label_end": "2024-10-07",
+          "validation_start": "2024-10-08",
+          "validation_end": "2026-04-08"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 120
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 50,
+        "learning_rate": 0.017161972426578173,
+        "max_depth": 3,
+        "min_child_weight": 7,
+        "subsample": 0.7944487910999436,
+        "colsample_bytree": 0.7642846534940516,
+        "reg_alpha": 0.009796719308067706,
+        "reg_lambda": 1.4193821132054253e-07,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 30,
+      "validation_f1_macro": 0.27595112072913375,
+      "validation_mcc": 0.07770480900737334,
+      "validation_folds": [
+        {
+          "f1_macro": 0.24667672394945125,
+          "mcc": 0.1836501134906011,
+          "accuracy": 0.4477211796246649,
+          "baseline_f1": 0.19029374201787996,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              149,
+              0
+            ],
+            [
+              0,
+              206,
+              18
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.4197183098591549,
+              "recall": 1.0,
+              "f1": 0.5912698412698413,
+              "support": 149
+            },
+            "Bullish (+1)": {
+              "precision": 1.0,
+              "recall": 0.08035714285714286,
+              "f1": 0.1487603305785124,
+              "support": 224
+            }
+          },
+          "n_train": 629,
+          "n_validation": 373,
+          "train_end": "2019-08-16",
+          "train_label_end": "2020-02-11",
+          "validation_start": "2020-02-12",
+          "validation_end": "2021-08-04"
+        },
+        {
+          "f1_macro": 0.23396226415094337,
+          "mcc": -0.0413483609250802,
+          "accuracy": 0.49865951742627346,
+          "baseline_f1": 0.2583470169677066,
+          "confusion_matrix": [
+            [
+              0,
+              78,
+              29
+            ],
+            [
+              0,
+              186,
+              50
+            ],
+            [
+              0,
+              30,
+              0
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 107
+            },
+            "Sideway (0)": {
+              "precision": 0.6326530612244898,
+              "recall": 0.788135593220339,
+              "f1": 0.7018867924528301,
+              "support": 236
+            },
+            "Bullish (+1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 30
+            }
+          },
+          "n_train": 1002,
+          "n_validation": 373,
+          "train_end": "2021-02-05",
+          "train_label_end": "2021-08-04",
+          "validation_start": "2021-08-05",
+          "validation_end": "2023-04-10"
+        },
+        {
+          "f1_macro": 0.30258662762323085,
+          "mcc": -0.08960907153187503,
+          "accuracy": 0.8310991957104558,
+          "baseline_f1": 0.322253000923361,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              310,
+              39
+            ],
+            [
+              0,
+              24,
+              0
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.9281437125748503,
+              "recall": 0.8882521489971347,
+              "f1": 0.9077598828696926,
+              "support": 349
+            },
+            "Bullish (+1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 24
+            }
+          },
+          "n_train": 1375,
+          "n_validation": 373,
+          "train_end": "2022-10-14",
+          "train_label_end": "2023-04-10",
+          "validation_start": "2023-04-11",
+          "validation_end": "2024-10-07"
+        },
+        {
+          "f1_macro": 0.32057886719290957,
+          "mcc": 0.25812655499584747,
+          "accuracy": 0.6407506702412868,
+          "baseline_f1": 0.2494407158836689,
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              223,
+              0
+            ],
+            [
+              0,
+              134,
+              16
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "Sideway (0)": {
+              "precision": 0.6246498599439776,
+              "recall": 1.0,
+              "f1": 0.7689655172413793,
+              "support": 223
+            },
+            "Bullish (+1)": {
+              "precision": 1.0,
+              "recall": 0.10666666666666667,
+              "f1": 0.1927710843373494,
+              "support": 150
+            }
+          },
+          "n_train": 1748,
+          "n_validation": 373,
+          "train_end": "2024-04-12",
+          "train_label_end": "2024-10-07",
+          "validation_start": "2024-10-08",
+          "validation_end": "2026-04-08"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 120
+    }
+  ],
+  "best_per_horizon": {
+    "20": {
+      "model": "LightGBM",
+      "feature_set": "close-etf",
+      "validation_f1_macro": 0.38545220282759,
+      "holdout": "not_scored_in_development_mode"
+    },
+    "60": {
+      "model": "LightGBM",
+      "feature_set": "close-etf",
+      "validation_f1_macro": 0.3263599745717905,
+      "holdout": "not_scored_in_development_mode"
+    },
+    "120": {
+      "model": "LightGBM",
+      "feature_set": "close",
+      "validation_f1_macro": 0.30218431178210814,
+      "holdout": "not_scored_in_development_mode"
+    }
+  },
+  "data_audit": "data_audit.json"
+}

@@ -2,43 +2,46 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import {
   TrendingUp, TrendingDown, Search, Filter, ShieldAlert,
   Layers, Activity, Plus, ArrowUpRight,
-  Sparkles, RefreshCw, CheckCircle2, AlertCircle, Loader2
+  Sparkles, AlertCircle, Loader2
 } from 'lucide-react';
+import { RegimeIndicator } from '../market/RegimeIndicator';
+import { GoldMarket } from '../market/GoldMarket';
 import { VNIndexChart } from '../charts/VNIndexChart';
 import {
-  VNINDEX_SUMMARY,
   VN30_WATCHLIST,
   VN30StockItem
 } from '../../data/vnindexData';
 import { formatVND } from '../../utils/formatters';
-import { PortfolioValuation } from '../../types';
+import { PortfolioValuation, RebalancePlan } from '../../types';
 import { TradingDrawer } from '../trading/TradingDrawer';
 import {
   getMarketPrices,
-  triggerMarketSync,
   fetchStockQuote,
   registerTrackedStock,
   MarketPriceItem,
   StockLiveQuote
 } from '../../services/api';
+import { useVNIndex } from '../../services/vnindexStore';
 import { POPULAR_QUICK_STOCKS, getStockMetadata } from '../../data/stockMetadata';
 
 interface MarketTabProps {
+  plan?: RebalancePlan | null;
   valuation?: PortfolioValuation | null;
   onTradeSuccess?: () => Promise<void> | void;
   onNavigateTab?: (tab: string) => void;
 }
 
 export function MarketTab({
+  plan = null,
   valuation = null,
   onTradeSuccess = () => {},
   onNavigateTab
 }: MarketTabProps) {
+  const { summary: indexData, error: indexError } = useVNIndex();
+  const [market, setMarket] = useState<'stocks' | 'gold'>('stocks');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSector, setSelectedSector] = useState<string>('ALL');
   const [dbPrices, setDbPrices] = useState<MarketPriceItem[]>([]);
-  const [isSyncing, setIsSyncing] = useState<boolean>(false);
-  const [syncFeedback, setSyncFeedback] = useState<string | null>(null);
 
   // Load live prices from database (ingested by DNSE background worker)
   const fetchPrices = useCallback(async () => {
@@ -49,24 +52,10 @@ export function MarketTab({
   }, []);
 
   useEffect(() => {
-    fetchPrices();
+    void fetchPrices();
+    const timer = window.setInterval(() => { void fetchPrices(); }, 60_000);
+    return () => window.clearInterval(timer);
   }, [fetchPrices]);
-
-  const handleSyncDnse = async () => {
-    setIsSyncing(true);
-    setSyncFeedback(null);
-    try {
-      const res = await triggerMarketSync();
-      await fetchPrices();
-      setSyncFeedback(`Đã đồng bộ thành công ${res?.totalRecordsUpdated ?? 'mới'} bản ghi từ DNSE OpenAPI KRX!`);
-      setTimeout(() => setSyncFeedback(null), 4000);
-    } catch (err: any) {
-      setSyncFeedback(err.message || 'Lỗi khi đồng bộ DNSE');
-      setTimeout(() => setSyncFeedback(null), 4000);
-    } finally {
-      setIsSyncing(false);
-    }
-  };
 
   // Custom User Watchlist saved in LocalStorage
   const [customStocks, setCustomStocks] = useState<VN30StockItem[]>(() => {
@@ -243,41 +232,19 @@ export function MarketTab({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-0">
       {/* 1. Header Banner */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <section className="vnx-panel px-4 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <h2 className="text-xl font-bold text-text-primary tracking-tight">
-              Thị Trường Chứng Khoán & Rổ Chỉ Số VN30
-            </h2>
-            <span className="px-2.5 py-0.5 rounded-full bg-accent-emerald-light text-accent-emerald text-xs font-semibold border border-accent-emerald/20">
-              Rổ Chỉ Số VN30 Chuẩn (30 Mã Cổ Phiếu)
-            </span>
-            <span className="px-2.5 py-0.5 rounded-full bg-surface-container-high text-text-secondary text-xs font-medium font-mono-num">
-              {combinedWatchlist.length} Mã Cổ Phiếu Theo Dõi
-            </span>
-          </div>
-          <p className="text-xs text-text-secondary mt-1">
-            Dữ liệu nến ngày & giá khớp lệnh thời gian thực đồng bộ trực tiếp từ DNSE OpenAPI KRX
-          </p>
+          <h2 className="text-base font-bold text-text-primary">Thị trường</h2>
+          <p className="text-xs text-text-secondary mt-0.5">Giá và chỉ số được tự động cập nhật.</p>
         </div>
 
-        {/* Quick Action Button & Macro Indicator & DNSE Sync */}
+        {/* Quick Action Button & Macro Indicator */}
         <div className="flex flex-wrap items-center gap-3">
           <button
-            onClick={handleSyncDnse}
-            disabled={isSyncing}
-            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest border border-border-subtle text-text-primary text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer disabled:opacity-60"
-            title="Đồng bộ nến ngày và giá khớp lệnh mới nhất từ DNSE OpenAPI KRX"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 text-accent-emerald ${isSyncing ? 'animate-spin' : ''}`} />
-            <span>{isSyncing ? 'Đang đồng bộ DNSE...' : 'ĐỒNG BỘ DNSE'}</span>
-          </button>
-
-          <button
-            onClick={() => openTrade('HPG', 'BUY')}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent-emerald hover:bg-accent-emerald/90 text-white text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+            onClick={() => openTrade(market === 'gold' ? 'GOLD_SJC' : 'HPG', 'BUY')}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent-emerald hover:bg-accent-emerald/90 text-white text-xs font-bold transition-all  active:scale-95 cursor-pointer"
           >
             <ArrowUpRight className="w-4 h-4" />
             ĐẶT LỆNH PAPER TRADING
@@ -294,40 +261,41 @@ export function MarketTab({
         </div>
       </section>
 
-      {/* Sync feedback notification banner */}
-      {syncFeedback && (
-        <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent-emerald-light border border-accent-emerald/30 text-accent-emerald text-xs font-semibold animate-in fade-in">
-          <CheckCircle2 className="w-4 h-4 shrink-0" />
-          <span>{syncFeedback}</span>
-        </div>
-      )}
-
+      <nav aria-label="Chọn thị trường" className="flex gap-1 border-b border-border-subtle pb-3">
+        {([['stocks', 'Cổ phiếu'], ['gold', 'Vàng']] as const).map(([key, label]) => <button key={key} type="button" aria-pressed={market === key} onClick={() => setMarket(key)}
+          className={`rounded-md px-4 py-2 text-sm ${market === key ? 'bg-accent-emerald-light font-semibold text-accent-emerald' : 'text-text-secondary hover:bg-surface-container'}`}>{label}</button>)}
+      </nav>
+      {market === 'gold' ? <GoldMarket /> : <>
       {/* 2. Market Barometer Cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <section className="vnx-stat-strip grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-0">
         {/* Card 1: VN-Index */}
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-stat p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Chỉ số VN-Index</span>
+            <span className="text-xs font-medium">Chỉ số VN-Index</span>
             <Activity className="w-5 h-5 text-accent-emerald" />
           </div>
-          <div className="text-2xl font-black text-text-primary tracking-tight font-mono-num">
-            {VNINDEX_SUMMARY.currentPoints.toLocaleString('vi-VN', { minimumFractionDigits: 2 })}
+          <div className="text-2xl font-semibold text-text-primary tracking-tight font-mono-num">
+            {indexData ? indexData.currentPoints.toLocaleString('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'Chưa có dữ liệu'}
           </div>
-          <div className="mt-3 flex items-center justify-between text-xs">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent-rose-light text-accent-rose font-bold font-mono-num">
-              <TrendingDown className="w-3.5 h-3.5" /> {VNINDEX_SUMMARY.changePoints.toFixed(2)} ({VNINDEX_SUMMARY.changePercent.toFixed(2)}%)
+          {indexData && <div className="mt-3 flex items-center justify-between text-xs">
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold font-mono-num ${indexData.changePercent >= 0 ? 'bg-accent-emerald-light text-accent-emerald' : 'bg-accent-rose-light text-accent-rose'}`}>
+              {indexData.changePercent >= 0 ? <TrendingUp className="w-3.5 h-3.5" /> : <TrendingDown className="w-3.5 h-3.5" />}
+              {indexData.changePoints.toFixed(2)} ({indexData.changePercent.toFixed(2)}%)
             </span>
-            <span className="text-text-muted font-mono-num">{(VNINDEX_SUMMARY.latestVolume / 1e6).toFixed(1)}M CP</span>
-          </div>
+            <span className="text-text-muted font-mono-num">{(indexData.latestVolume / 1e6).toFixed(1)}M CP</span>
+          </div>}
+          <p className={`mt-2 text-xs ${indexError ? 'text-accent-rose' : 'text-text-muted'}`}>
+            {indexError ?? (indexData ? `Phiên ${indexData.latestDate} · DNSE` : 'Đang tải chỉ số từ DNSE…')}
+          </p>
         </div>
 
         {/* Card 2: Market Breadth */}
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-stat p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Độ Rộng Thị Trường (VN30)</span>
+            <span className="text-xs font-medium">Độ Rộng Thị Trường (VN30)</span>
             <Layers className="w-5 h-5 text-accent-blue" />
           </div>
-          <div className="text-2xl font-black text-text-primary tracking-tight flex items-center gap-3 font-mono-num">
+          <div className="text-2xl font-semibold text-text-primary tracking-tight flex items-center gap-3 font-mono-num">
             <span className="text-accent-emerald text-lg font-bold">{breadth.advances} Tăng</span>
             <span className="text-text-muted text-sm font-normal">•</span>
             <span className="text-accent-rose text-lg font-bold">{breadth.declines} Giảm</span>
@@ -335,17 +303,17 @@ export function MarketTab({
           <div className="mt-3 flex items-center gap-2 text-xs text-text-secondary font-mono-num">
             <span>{breadth.unchanged} Tham chiếu</span>
             <span className="w-1.5 h-1.5 rounded-full bg-border-subtle"></span>
-            <span>Khối ngoại: Mua ròng 142 tỷ ₫</span>
+            <span>VN30 theo danh sách theo dõi</span>
           </div>
         </div>
 
         {/* Card 3: Cash Power */}
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-stat p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Sức Mua Khả Dụng (Ví VND)</span>
+            <span className="text-xs font-medium">Sức Mua Khả Dụng (Ví VND)</span>
             <TrendingUp className="w-5 h-5 text-accent-emerald" />
           </div>
-          <div className="text-2xl font-black text-accent-emerald tracking-tight font-mono-num">
+          <div className="text-2xl font-semibold text-accent-emerald tracking-tight font-mono-num">
             {formatVND(valuation?.cashBalance ?? 0)}
           </div>
           <div className="mt-3 flex items-center justify-between text-xs text-text-secondary">
@@ -359,64 +327,29 @@ export function MarketTab({
           </div>
         </div>
 
-        {/* Card 4: LightGBM Regime Status & Tactical Asset Allocation */}
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between text-text-muted mb-2">
-              <span className="text-xs uppercase tracking-wider font-semibold">
-                Xu Hướng ONNX (Cổ Phiếu VN30)
-              </span>
-              <span className="p-1 rounded-md bg-accent-purple/10 text-accent-purple">
-                <Sparkles className="w-4 h-4" />
-              </span>
-            </div>
-
-            <div className="flex items-baseline justify-between gap-2">
-              <div className="text-base font-bold text-accent-emerald tracking-tight">
-                TÍCH LŨY TĂNG TRƯỞNG
-              </div>
-              <span className="font-mono-num font-bold text-accent-emerald text-xs px-2 py-0.5 rounded-md bg-accent-emerald/10 border border-accent-emerald/20">
-                78.4% Tăng
-              </span>
-            </div>
-
-            <div className="mt-2.5 pt-2 border-t border-border-subtle/50 space-y-1.5 text-[11px]">
-              <div className="flex items-center justify-between text-text-secondary">
-                <span>• Cổ phiếu VN30 (Risk-On):</span>
-                <span className="text-accent-emerald font-semibold">Kỳ vọng T+20 &gt; +5.0%</span>
-              </div>
-              <div className="flex items-center justify-between text-text-secondary">
-                <span>• Vàng SJC (Trú ẩn):</span>
-                <span className="text-accent-gold font-semibold">Phòng thủ ổn định (ρ = -0.15)</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-3 pt-2.5 border-t border-border-subtle flex items-center justify-between text-xs">
-            <span className="text-[11px] text-text-muted">
-              Khuyến nghị TAA: <strong className="text-text-primary">+10% Cổ phiếu</strong>
-            </span>
-            {onNavigateTab ? (
-              <button
-                onClick={() => onNavigateTab('markowitz')}
-                className="text-accent-blue hover:text-accent-blue/80 font-bold inline-flex items-center gap-1 text-xs cursor-pointer"
-              >
-                Tái cơ cấu TAA →
-              </button>
-            ) : (
-              <span className="text-accent-emerald font-semibold">Đón sóng chu kỳ</span>
-            )}
+        {/* Prediction is the same server plan used by the TAA tab. */}
+        <div className="vnx-stat p-5 flex flex-col justify-between gap-3">
+          <span className="text-xs font-medium text-text-muted">Dự báo VNINDEX · T+{plan?.horizonSessions ?? 20}</span>
+          <RegimeIndicator prediction={plan?.mlPredictions?.find(p => p.assetClass === 'STOCK')} />
+          <p className="text-[11px] text-text-secondary">
+            {plan?.mlPredictions?.find(p => p.assetClass === 'STOCK')?.nativeForecast?.session
+              ? `Dữ liệu phiên ${plan.mlPredictions.find(p => p.assetClass === 'STOCK')!.nativeForecast!.session}. Score chưa hiệu chỉnh thành xác suất.`
+              : 'Xem trạng thái dữ liệu và mô hình trong mục Tín hiệu thị trường.'}
+          </p>
+          <div className="border-t border-border-subtle pt-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span className="text-text-secondary">{!plan ? 'Chưa có kế hoạch TAA' : plan.taaEnabled === false ? 'TAA đang tắt · giữ tỷ trọng chiến lược' : `Điều chỉnh cổ phiếu: ${((plan.mlPredictions?.find(p => p.assetClass === 'STOCK')?.deltaWeight ?? 0) * 100).toFixed(1)} điểm %`}</span>
+            {onNavigateTab && <button onClick={() => onNavigateTab('taa')} className="text-accent-blue font-semibold hover:underline">Xem tín hiệu →</button>}
           </div>
         </div>
       </section>
 
       {/* 3. Technical Chart (VNIndexChart) */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm">
+      <section className="vnx-panel p-6">
         <VNIndexChart />
       </section>
 
       {/* 4. Watchlist & Trading Table */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-4">
+      <section className="vnx-panel p-6 space-y-4">
         {/* Table Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-border-subtle pb-4">
           <div>
@@ -428,16 +361,16 @@ export function MarketTab({
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {/* Search Input */}
-            <div className="relative">
+            <div className="relative flex-1 min-w-0 sm:flex-none">
               <Search className="w-4 h-4 text-text-muted absolute left-3 top-2.5" />
               <input
                 type="text"
                 placeholder="Tìm mã hoặc tên..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 pr-3 py-2 text-xs rounded-lg border border-border-subtle bg-surface-container-low text-text-primary focus:outline-hidden focus:border-accent-emerald w-56"
+                className="pl-9 pr-3 py-2 text-xs rounded-lg border border-border-subtle bg-surface-container-low text-text-primary focus:outline-hidden focus:border-accent-emerald w-full sm:w-56"
               />
             </div>
 
@@ -464,7 +397,7 @@ export function MarketTab({
               onClick={() => setSelectedSector(sec)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                 selectedSector === sec
-                  ? 'bg-accent-emerald text-white shadow-xs'
+                  ? 'bg-accent-emerald text-white '
                   : 'bg-surface-container-low text-text-secondary hover:text-text-primary hover:bg-surface-container-high'
               }`}
             >
@@ -475,7 +408,7 @@ export function MarketTab({
 
         {/* Stock Quotes Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full min-w-[900px] text-left text-xs">
             <thead>
               <tr className="border-b border-border-subtle text-text-muted uppercase text-[11px]">
                 <th className="pb-3 font-semibold">Mã CP</th>
@@ -557,6 +490,8 @@ export function MarketTab({
         </div>
       </section>
 
+      </>}
+
       {/* Modal: Smart Add Stock with Live Market Quote */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -604,7 +539,7 @@ export function MarketTab({
                         onClick={() => setSearchTicker(sym)}
                         className={`px-2.5 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-accent-blue text-white shadow-xs'
+                            ? 'bg-accent-blue text-white '
                             : isTracked
                             ? 'bg-surface-container-high text-text-muted border border-border-subtle opacity-70'
                             : 'bg-surface-container hover:bg-surface-container-high text-text-primary border border-border-subtle hover:border-accent-blue/30'
@@ -642,14 +577,14 @@ export function MarketTab({
 
               {/* Live Quote Result Card */}
               {isSearchingQuote && (
-                <div className="p-4 rounded-xl border border-border-subtle bg-surface-container/60 flex items-center justify-center gap-2.5 text-xs text-text-secondary animate-pulse">
+                <div className="vnx-detail p-4     flex items-center justify-center gap-2.5 text-xs text-text-secondary animate-pulse">
                   <Loader2 className="w-4 h-4 text-accent-blue animate-spin" />
                   <span>Đang truy vấn bảng giá trực tuyến DNSE OpenAPI KRX...</span>
                 </div>
               )}
 
               {quoteResult && !isSearchingQuote && (
-                <div className="p-4 rounded-xl border border-accent-blue/20 bg-accent-blue/5 space-y-3">
+                <div className="vnx-detail p-4     space-y-3">
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2">
@@ -707,7 +642,7 @@ export function MarketTab({
 
               {/* Already in Watchlist notice */}
               {isAlreadyInWatchlist && searchTicker.length >= 3 && (
-                <div className="p-3 rounded-xl border border-accent-gold/20 bg-accent-gold/10 flex items-center gap-2 text-xs text-accent-gold font-medium">
+                <div className="vnx-detail p-3     flex items-center gap-2 text-xs text-accent-gold font-medium">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>Mã {searchTicker} đã có sẵn trong bảng theo dõi của bạn.</span>
                 </div>
@@ -715,7 +650,7 @@ export function MarketTab({
 
               {/* Error message */}
               {quoteError && !isSearchingQuote && (
-                <div className="p-3 rounded-xl border border-accent-rose/20 bg-accent-rose/10 flex items-center gap-2 text-xs text-accent-rose font-medium">
+                <div className="vnx-detail p-3     flex items-center gap-2 text-xs text-accent-rose font-medium">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{quoteError}</span>
                 </div>
@@ -738,7 +673,7 @@ export function MarketTab({
                 <button
                   type="submit"
                   disabled={!quoteResult || isAlreadyInWatchlist || isSearchingQuote || isAddingStock}
-                  className="px-4 py-2 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm active:scale-95 cursor-pointer flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all  active:scale-95 cursor-pointer flex items-center gap-1.5"
                 >
                   {isAddingStock ? (
                     <>

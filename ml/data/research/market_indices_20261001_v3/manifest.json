@@ -1,0 +1,189 @@
+{
+  "requested_start": "2010-01-01",
+  "requested_end": "2026-10-01",
+  "sources": {
+    "vci_VN30": {
+      "provider": "vci",
+      "canonical_symbol": "VN30",
+      "provider_symbol": "VN30",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VN30"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "response": "sources/vci_VN30.json",
+      "response_sha256": "56d2d9ce9ddb646ba63ff4c50571b3b83ae1879fe4ca112e124319efc76e380f",
+      "downloaded_at": "2026-10-17T16:18:12.258080+00:00",
+      "rows": 3656,
+      "start": "2012-02-06",
+      "end": "2026-10-01",
+      "validation": "Close/date only; OHLC/volume fields excluded from all derived files/features",
+      "invalid_nonpositive_unused_fields": {
+        "o": 0,
+        "h": 0,
+        "l": 0
+      }
+    },
+    "vci_VNMID": {
+      "provider": "vci",
+      "canonical_symbol": "VNMID",
+      "provider_symbol": "VNMIDCAP",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VNMIDCAP"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "response": "sources/vci_VNMID.json",
+      "response_sha256": "8773bed8f443c80e41940623fab3b1742173fbc037fec77454bfbefd38d91ba5",
+      "downloaded_at": "2026-10-17T16:18:12.269853+00:00",
+      "rows": 2851,
+      "start": "2015-05-11",
+      "end": "2026-10-01",
+      "validation": "Close/date only; OHLC/volume fields excluded from all derived files/features",
+      "invalid_nonpositive_unused_fields": {
+        "o": 8,
+        "h": 8,
+        "l": 12
+      }
+    },
+    "vnd_VN30": {
+      "provider": "vnd",
+      "canonical_symbol": "VN30",
+      "provider_symbol": "VN30",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VN30",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "body": null,
+      "response": "sources/vnd_VN30.json",
+      "response_sha256": "cebb3f70ad316f44a58080e64e0c8e84374e7409a59655b84a113c580718c1ff",
+      "downloaded_at": "2026-10-17T16:18:12.336309+00:00",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "validation": "Close/date only; OHLC/volume fields excluded from all derived files/features",
+      "invalid_nonpositive_unused_fields": {
+        "o": 0,
+        "h": 0,
+        "l": 0
+      }
+    },
+    "vci_VNSML": {
+      "provider": "vci",
+      "canonical_symbol": "VNSML",
+      "provider_symbol": "VNSMALLCAP",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VNSMALLCAP"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "response": "sources/vci_VNSML.json",
+      "response_sha256": "b6ae25aef9888e200082f89ff36bafc10db1147ebea6cc4c8511c72bc541bcd1",
+      "downloaded_at": "2026-10-17T16:18:12.957498+00:00",
+      "rows": 2850,
+      "start": "2015-05-11",
+      "end": "2026-10-01",
+      "validation": "Close/date only; OHLC/volume fields excluded from all derived files/features",
+      "invalid_nonpositive_unused_fields": {
+        "o": 8,
+        "h": 8,
+        "l": 9
+      }
+    },
+    "vnd_VNMID": {
+      "provider": "vnd",
+      "canonical_symbol": "VNMID",
+      "provider_symbol": "VNMID",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNMID",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "body": null,
+      "response": "sources/vnd_VNMID.json",
+      "response_sha256": "19e6e30d41e6c4f236469912e5bd306b886fdf4ed40fc9fb102ac815e0c27b57",
+      "downloaded_at": "2026-10-17T16:18:13.158574+00:00",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "validation": "Close/date only; OHLC/volume fields excluded from all derived files/features",
+      "invalid_nonpositive_unused_fields": {
+        "o": 0,
+        "h": 0,
+        "l": 0
+      }
+    },
+    "vnd_VNSML": {
+      "provider": "vnd",
+      "canonical_symbol": "VNSML",
+      "provider_symbol": "VNSML",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNSML",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "body": null,
+      "response": "sources/vnd_VNSML.json",
+      "response_sha256": "18b94540f401a207dcba9d3357baf5a4418027bc6afc9c884f0a2e63194acd5e",
+      "downloaded_at": "2026-10-17T16:18:13.206024+00:00",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "validation": "Close/date only; OHLC/volume fields excluded from all derived files/features",
+      "invalid_nonpositive_unused_fields": {
+        "o": 0,
+        "h": 0,
+        "l": 0
+      }
+    }
+  },
+  "errors": {},
+  "canonical": {
+    "VN30": {
+      "sha256": "9cba88d5e4cc66f1a2b6fd99c8e89768be6b2969f4f465226917565afd15a5cc",
+      "rows": 2257,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 1399,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    },
+    "VNMID": {
+      "sha256": "82f30375d4df6312da7450fd7894b6e5094354e12bd4907c9ae2a8a5f93e2b6a",
+      "rows": 2252,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 599,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    },
+    "VNSML": {
+      "sha256": "a3cf39a72e4c82ca99d40d989ab1c3590207d087b90da302eff5dfaa2be4890a",
+      "rows": 2252,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 598,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    }
+  }
+}

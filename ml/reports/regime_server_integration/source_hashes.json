@@ -1,0 +1,17 @@
+{
+  "ml/regime_postgres_ledger.py": "c1b33db41d44395f9782ceeb586c898f7efb383003fd587abe2e26619c68a248",
+  "ml/serve_regime_shock.py": "a49d45d86f9b7105f4f4a830fed7b4d311b1bc5b21784417e8acfdbabf3354b8",
+  "ml/evaluate_regime_net_taa.py": "683ca1fbacd478810bfb99ca6bcdcf25d4f93f1eb49928123730445b0cbfb2e9",
+  "backend/src/main/resources/db/migration/V8__regime_prediction_ledger.sql": "003a99968bd01928aeefcd81ecac385e1ad66173ac83e5358f947050be01d918",
+  "backend/src/main/java/com/equifolio/optimizer/NativeRegimeService.java": "f44ca66be72666a0bdb7f058e39cc10752da997ee107f17ff5f33f8df319819c",
+  "backend/src/main/java/com/equifolio/optimizer/NativeRegimeForecast.java": "5f8a714b1248c27ac0a475514479bec6a080cba2088dd1f233b3dd7ce49060c3",
+  "backend/src/main/java/com/equifolio/optimizer/NetTaaPolicy.java": "7949ee8e2fba82a8ae5e5157c8eaadbbb6f132f2d70372bbf1c22a663a132639",
+  "backend/src/main/java/com/equifolio/optimizer/PortfolioOptimizerService.java": "c5677a6504798b10f07cad9ba845e0d774cf0296582a49a73761964df3158cd3",
+  "backend/src/main/java/com/equifolio/optimizer/RebalancePlanDTO.java": "d066d75eb7cb5bbd498b6c380d8fb9467b5b4769b19aab348b2b17b65ef2645c",
+  "backend/src/main/java/com/equifolio/optimizer/ResearchController.java": "21468d9632ba7e1b9e803d36af8eaca46e74bc75b19b152265e7b5bebc6b78c9",
+  "backend/src/main/java/com/equifolio/optimizer/NativeRegimeController.java": "77610594d7b1194cbddfaaf5654ac792ff76851aadd16af0c7813a445c508874",
+  "frontend/src/types/index.ts": "9fb8d461b25633c14b817c0feacf43adc4892162367767a2b4cbfd1444bbb499",
+  "frontend/src/components/tabs/TaaTab.tsx": "1d0fa20c04e4690eeed89f16d5b5b0e736b2f6e235814b049d31a3541868b77b",
+  "frontend/src/components/tabs/ResearchWorkbench.tsx": "e812edeffba86fbab05d0f2aca2f4ae06b643cfeaa39e7ef64fed398aa4776c0",
+  "frontend/src/utils/regimeDisplay.ts": "07dc4136ef7e85a19158cf38d836b042b75b821c8be780fd47e817852e457125"
+}

@@ -1,0 +1,27 @@
+{
+  "role": "Predeclared simple conditional-return distribution baseline, no metric computed yet",
+  "created_at": "2026-10-18T16:44:27.903885+00:00",
+  "target": "Same original VNINDEX T+20 simple-return classes +/-5%, identical1560 forecast dates",
+  "source_index": "ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv",
+  "probability_audit_reference": "ml/reports/regime_probability_audit/20261018T163919_646038Z",
+  "volatility_models": [
+    "trailing20 completed daily log-return sample std,ddof1",
+    "sqrt EWMA of squared daily log returns:alpha.06,adjustFalse,min_periods60"
+  ],
+  "drift_models": [
+    "zero daily log drift",
+    ".25 * mean of last252 completed daily log returns"
+  ],
+  "configs": 4,
+  "fit_or_tuning": false,
+  "distribution": "Conditional20-day log return Normal(mean=20*known daily drift,std=sqrt20*known daily sigma). Conditional constant variance/normality is a modeling assumption, not market truth.",
+  "probabilities": "Bear=Phi((log(.95)-20*mu)/sqrt20/sigma); Bull=1-Phi((log(1.05)-20*mu)/sqrt20/sigma); Side=1-Bear-Bull.",
+  "timing": "Compute daily return features on complete reviewed index calendar; use current completed-close and older prices only. No future realized volatility or future drift. No filling or label/date changes.",
+  "evaluation": "Proper logloss/Brier vs SAME causal full-index prior from probability audit, all1560 dates and same1280 active-calibration dates. Also raw argmax and inverse-causal-prior point-F1, explicitly separate from frozen point policy.",
+  "screening": "Both proper scores improve on active dates, Brier wins>=3/4 original folds, positive paired20/60-block lower bounds. Even passing is inspected development, not independent acceptance.",
+  "caveats": [
+    "Normal tails and constant conditional variance may be misspecified.",
+    "Four configurations all reported; no outer-label parameter choice or production replacement.",
+    "Frozen .420 point-policy remains unchanged."
+  ]
+}

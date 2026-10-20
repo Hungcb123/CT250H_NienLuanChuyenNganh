@@ -28,12 +28,28 @@ public class Entry {
     @Column(name = "created_at")
     private Instant createdAt = Instant.now();
 
+    @Column(name = "monetary_value", precision = 19, scale = 4)
+    private BigDecimal monetaryValue;
+
+    public BigDecimal getMonetaryValue() {
+        if (monetaryValue != null) return monetaryValue;
+        return account != null && account.getAsset() != null
+                && "VND".equalsIgnoreCase(account.getAsset().getTicker()) ? amount : null;
+    }
+
+    public void setMonetaryValue(BigDecimal value) {
+        this.monetaryValue = value == null ? null : value.setScale(4, java.math.RoundingMode.HALF_EVEN);
+    }
+
     public Entry() {}
 
     public Entry(Transaction transaction, Account account, BigDecimal amount) {
         this.transaction = transaction;
         this.account = account;
         this.amount = amount;
+        if (account != null && account.getAsset() != null && "VND".equalsIgnoreCase(account.getAsset().getTicker())) {
+            this.monetaryValue = amount;
+        }
         this.createdAt = Instant.now();
     }
 

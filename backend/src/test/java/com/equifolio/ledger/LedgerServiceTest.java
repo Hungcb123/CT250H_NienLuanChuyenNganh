@@ -95,20 +95,21 @@ class LedgerServiceTest {
     @Test
     @DisplayName("Kiểm toán Sổ cái (Mục 9 SRS): Xác nhận mọi bút toán cân bằng ACID và số dư đối soát khớp hoàn toàn")
     void testAuditLedger_AllInvariantsPassed() {
+        equityAccount.setBalance(new BigDecimal("-50000000"));
         Transaction tx1 = new Transaction("TX_INJECT_001", mockUser, "CAPITAL_INJECTION", "Khai báo ban đầu");
         tx1.setId(100L);
 
         Entry e1 = new Entry(tx1, vndAccount, new BigDecimal("50000000"));
         Entry e2 = new Entry(tx1, hpgAccount, new BigDecimal("1000"));
-        Entry e3 = new Entry(tx1, equityAccount, new BigDecimal("-75000000"));
+        Entry e3 = new Entry(tx1, equityAccount, new BigDecimal("-50000000"));
 
         when(transactionRepository.findByUserIdOrderByCreatedAtDesc(1L)).thenReturn(List.of(tx1));
-        when(entryRepository.findByTransactionId(100L)).thenReturn(List.of(e1, e2, e3));
+        when(entryRepository.findByTransactionId(100L)).thenReturn(List.of(e1, e3));
 
-        when(accountRepository.findByUserId(1L)).thenReturn(List.of(vndAccount, hpgAccount, equityAccount));
+        when(accountRepository.findByUserId(1L)).thenReturn(List.of(vndAccount, equityAccount));
         when(entryRepository.sumAmountByAccountId(10L)).thenReturn(new BigDecimal("50000000"));
         when(entryRepository.sumAmountByAccountId(11L)).thenReturn(new BigDecimal("1000"));
-        when(entryRepository.sumAmountByAccountId(12L)).thenReturn(new BigDecimal("75000000")); // đối ứng
+        when(entryRepository.sumAmountByAccountId(12L)).thenReturn(new BigDecimal("-50000000")); // đối ứng
 
         LedgerAuditReportDTO report = ledgerService.auditLedger(1L);
 

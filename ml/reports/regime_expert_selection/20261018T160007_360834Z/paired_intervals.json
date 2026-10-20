@@ -1,0 +1,53 @@
+{
+  "role": "Development paired sensitivity, not independent/multiple-testing-adjusted inference",
+  "results": [
+    {
+      "reference": "original_trend",
+      "block_sessions": 20,
+      "point_delta": 0.03442298433316793,
+      "delta_low": -0.007287046745504174,
+      "delta_high": 0.0740640209438256,
+      "repeats": 1000
+    },
+    {
+      "reference": "original_trend",
+      "block_sessions": 60,
+      "point_delta": 0.03442298433316793,
+      "delta_low": -0.008965905233051132,
+      "delta_high": 0.08061486842870338,
+      "repeats": 1000
+    },
+    {
+      "reference": "original_risk",
+      "block_sessions": 20,
+      "point_delta": 0.030658581903453774,
+      "delta_low": -0.012073467380215412,
+      "delta_high": 0.0679468614258641,
+      "repeats": 1000
+    },
+    {
+      "reference": "original_risk",
+      "block_sessions": 60,
+      "point_delta": 0.030658581903453774,
+      "delta_low": -0.004425449494720525,
+      "delta_high": 0.06298793011600572,
+      "repeats": 1000
+    },
+    {
+      "reference": "original_equal",
+      "block_sessions": 20,
+      "point_delta": 0.02478485596740715,
+      "delta_low": -0.008612075490505806,
+      "delta_high": 0.05820575550591426,
+      "repeats": 1000
+    },
+    {
+      "reference": "original_equal",
+      "block_sessions": 60,
+      "point_delta": 0.02478485596740715,
+      "delta_low": -0.010267660098297736,
+      "delta_high": 0.057414367131009454,
+      "repeats": 1000
+    }
+  ]
+}

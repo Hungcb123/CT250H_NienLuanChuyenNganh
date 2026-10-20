@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-19T06:50:24.496994+00:00",
+  "reason": "Clarified inherited reference-label description before any outer scoring. Actual code already relabels all training/validation cohorts to vol_1sigma; no numeric data, learner, grid, selection criterion or forecast changed.",
+  "old_reference_labels": {
+    "20": {
+      "name": "T+20",
+      "bull_threshold": 0.05,
+      "bear_threshold": -0.05
+    }
+  },
+  "plan_sha256_before": "b5442f97cebb91b58314a37aa45dda05dc4df73a8730a5de3bb69d6b0b2e6fd2",
+  "plan_sha256_after": "044b142b8bb1215dabc910192df87f50121f672b2324b6871ceb4ac300215e15",
+  "outer_report_existed_at_amendment": false,
+  "executed_source_unchanged": true
+}

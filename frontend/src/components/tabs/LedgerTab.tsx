@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { CheckCircle, PlusCircle, ArrowDownRight, ArrowUpRight, ShieldCheck, X, FileCheck2, Coins } from 'lucide-react';
-import { TransactionItem, EquityInjectionPayload, LedgerAuditReport, DividendPayload } from '../../types';
-import { getTransactions, recordEquityInjection, getLedgerAuditReport, recordDividend } from '../../services/api';
+import { useState, useEffect, useRef } from 'react';
+import { PlusCircle, ArrowUpRight, X, Coins } from 'lucide-react';
+import { TransactionItem, EquityInjectionPayload, DividendPayload } from '../../types';
+import { getTransactions, recordEquityInjection, recordDividend, getAvailableCashBalance, recordCashWithdrawal } from '../../services/api';
+import { transactionActivity } from '../../utils/transactionActivity';
 import { formatVND } from '../../utils/formatters';
 import { useToast } from '../../context/ToastContext';
 
@@ -22,6 +23,7 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
   const toast = useToast();
   const [transactions, setTransactions] = useState<TransactionItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -39,37 +41,66 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
   const [dividendTotalCash, setDividendTotalCash] = useState('10000000'); // VND
   const [dividendStockQty, setDividendStockQty] = useState('1000'); // Shares
 
-  const [auditReport, setAuditReport] = useState<LedgerAuditReport | null>(null);
-  const [auditing, setAuditing] = useState(false);
-  const [showAuditModal, setShowAuditModal] = useState(false);
+  const [withdrawOpen, setWithdrawOpen] = useState(false);
+  const withdrawRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!withdrawOpen) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = overflow; previous?.focus(); };
+  }, [withdrawOpen]);
+
+  const [withdrawAmount, setWithdrawAmount] = useState('');
+  const [withdrawNote, setWithdrawNote] = useState('');
+  const [withdrawError, setWithdrawError] = useState('');
+  const [withdrawing, setWithdrawing] = useState(false);
+  const [cashBalance, setCashBalance] = useState<number | null>(null);
+  const [filter, setFilter] = useState('all');
+  const [page, setPage] = useState(1);
+  const activities = transactions.flatMap(transactionActivity).filter(row => filter === 'all' || row.category === filter);
+  const pages = Math.max(1, Math.ceil(activities.length / 15));
+  const currentPage = Math.min(page, pages);
+  const visibleActivities = activities.slice((currentPage - 1) * 15, currentPage * 15);
+  const loadBalance = async () => {
+    try { setCashBalance(await getAvailableCashBalance()); }
+    catch { setCashBalance(null); }
+  };
+  const handleWithdraw = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const value = Number(withdrawAmount);
+    if (!Number.isSafeInteger(value) || value <= 0 || cashBalance == null || value > cashBalance) {
+      setWithdrawError('Nhập số tiền nguyên dương trong số dư khả dụng.');
+      return;
+    }
+    setWithdrawing(true); setWithdrawError('');
+    try {
+      await recordCashWithdrawal({ amount: value, description: withdrawNote.trim() || undefined });
+      setWithdrawOpen(false); setWithdrawAmount(''); setWithdrawNote('');
+      await Promise.all([fetchTransactions(), loadBalance()]);
+      onRefresh?.();
+      toast.success('Đã ghi nhận tiền rút khỏi danh mục.', 'Rút tiền');
+    } catch (error) {
+      setWithdrawError(error instanceof Error ? error.message : 'Không thể rút tiền. Vui lòng thử lại.');
+    } finally { setWithdrawing(false); }
+  };
 
   const fetchTransactions = async () => {
     setLoading(true);
+    setLoadError('');
     try {
       const data = await getTransactions();
       setTransactions(data);
     } catch (e) {
-      console.error("Failed to load transactions", e);
+      setLoadError('Không tải được lịch sử. Vui lòng thử lại.');
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchAudit = async () => {
-    setAuditing(true);
-    try {
-      const rep = await getLedgerAuditReport();
-      setAuditReport(rep);
-    } catch (e) {
-      console.error("Failed to run audit", e);
-    } finally {
-      setAuditing(false);
-    }
-  };
-
   useEffect(() => {
     fetchTransactions();
-    fetchAudit();
+    loadBalance();
   }, []);
 
   const handleTickerChange = (ticker: string) => {
@@ -102,10 +133,10 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
       await recordEquityInjection(payload);
       setShowModal(false);
       setDescription('');
-      await fetchTransactions();
+      await Promise.all([fetchTransactions(), loadBalance()]);
       onRefresh?.();
       toast.success(
-        "Khai báo tài sản ban đầu thành công! Đã ghi nhận bút toán kép ACID.",
+        "Đã thêm tài sản vào danh mục.",
         "Ghi sổ thành công"
       );
     } catch (err: any) {
@@ -133,7 +164,7 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
       };
       await recordDividend(payload);
       setShowDividendModal(false);
-      await fetchTransactions();
+      await Promise.all([fetchTransactions(), loadBalance()]);
       onRefresh?.();
       toast.success(
         dividendType === 'CASH'
@@ -153,210 +184,120 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
   return (
     <div className="space-y-6">
       {/* Header and Controls */}
-      <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="vnx-panel px-4 py-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-text-primary tracking-tight">
-              Nhật Ký Sổ Cái Kép (Double-Entry Journal)
-            </h2>
-            <span className="px-2 py-0.5 rounded bg-accent-emerald-light text-accent-emerald text-[10px] font-bold border border-accent-emerald/30">
-              ACID Verified
-            </span>
-          </div>
-          <p className="text-xs text-text-secondary mt-1">
-            Mọi biến động tài sản đều tuân thủ bất biến kế toán ngân hàng: <strong className="text-text-primary">Σ Debit + Σ Credit = 0</strong>
-          </p>
+          <h2 className="text-base font-bold text-text-primary">Sổ giao dịch</h2>
+          <p className="text-xs text-text-secondary mt-0.5">Theo dõi mua bán tài sản và tiền ra vào danh mục.</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
-          <button
-            onClick={fetchAudit}
-            disabled={auditing}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-primary text-xs font-semibold transition-all shadow-xs"
-            title="Chạy đối soát và kiểm toán tính bất biến ACID theo Mục 9 SRS"
-          >
-            <FileCheck2 className={`w-4 h-4 text-accent-emerald ${auditing ? 'animate-spin' : ''}`} />
-            <span>{auditing ? 'Đang đối soát...' : 'Kiểm toán Sổ cái (Mục 9 SRS)'}</span>
+          <button type="button" onClick={() => { setWithdrawError(''); setWithdrawOpen(true); void loadBalance(); }}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border-subtle px-3 py-2 text-xs font-medium text-text-primary hover:bg-surface-container">
+            <ArrowUpRight className="h-4 w-4" />Rút tiền
           </button>
 
           <button
             onClick={() => setShowDividendModal(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-primary text-xs font-semibold transition-all shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-primary text-xs font-semibold transition-all  cursor-pointer"
             title="Ghi nhận cổ tức tiền mặt (thuế TNCN 5%) hoặc cổ phiếu thưởng"
           >
             <Coins className="w-4 h-4 text-amber-500" />
-            <span>Ghi nhận Cổ tức</span>
+            <span>Ghi nhận cổ tức</span>
           </button>
 
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold shadow-xs cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold  cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
-            <span>Khai báo tài sản / Nạp vốn</span>
+            <span>Nạp tiền / Thêm tài sản</span>
           </button>
         </div>
       </div>
 
-      {/* ACID Audit & Reconciliation Card (Mục 9 SRS) */}
-      {auditReport && (
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-accent-emerald shrink-0" />
-              <span className="text-sm font-bold text-text-primary">
-                Đối Soát & Kiểm Toán Sổ Cái Chuẩn ACID (Mục 9 SRS)
-              </span>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
-                auditReport.allTransactionsBalanced && auditReport.allAccountsConsistent
-                  ? 'bg-accent-emerald-light text-accent-emerald border-accent-emerald/30'
-                  : 'bg-accent-rose-light text-accent-rose border-accent-rose/30'
-              }`}>
-                {auditReport.auditStatus}
-              </span>
-            </div>
-            <button
-              onClick={() => setShowAuditModal(true)}
-              className="text-xs font-bold text-accent-emerald hover:underline flex items-center gap-1 self-start sm:self-auto"
-            >
-              Xem bảng đối soát chi tiết ({auditReport.accountAuditList.length} tài khoản) →
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-            <div className="p-3 rounded-lg bg-surface-container border border-border-subtle">
-              <span className="text-[11px] text-text-muted block">Giao dịch cân bằng Σ Debit = Σ Credit:</span>
-              <span className="text-sm font-bold text-accent-emerald">
-                {auditReport.balancedTransactions} / {auditReport.totalTransactionsChecked} GD ({auditReport.allTransactionsBalanced ? '100% Khớp' : 'Lệch'})
-              </span>
-            </div>
-            <div className="p-3 rounded-lg bg-surface-container border border-border-subtle">
-              <span className="text-[11px] text-text-muted block">Bất biến Số dư Snapshot vs Entries:</span>
-              <span className="text-sm font-bold text-accent-emerald">
-                {auditReport.allAccountsConsistent ? '100% Khớp từng đồng' : 'Cảnh báo sai lệch'}
-              </span>
-            </div>
-            <div className="p-3 rounded-lg bg-surface-container border border-border-subtle">
-              <span className="text-[11px] text-text-muted block">Thời điểm đối soát:</span>
-              <span className="text-xs font-mono text-text-secondary">
-                {new Date(auditReport.verifiedAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} - {new Date(auditReport.verifiedAt).toLocaleDateString('vi-VN')}
-              </span>
-            </div>
-          </div>
-          <p className="text-[11px] text-text-muted italic">
-            ✓ {auditReport.systemSummary}
-          </p>
+      <section className="bg-surface-container-lowest p-4 sm:p-6" aria-label="Lịch sử giao dịch">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h3 className="text-sm font-semibold text-text-primary">Lịch sử giao dịch</h3>
+          <span className="text-xs text-text-secondary">{activities.length} hoạt động</span>
         </div>
-      )}
-
-      {/* Transactions List */}
-      <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-4">
-        <div className="flex items-center justify-between border-b border-border-subtle pb-3">
-          <h3 className="text-sm font-bold text-text-primary">Danh sách Bút toán Kép đã ghi sổ</h3>
-          <span className="text-xs text-text-muted">Tổng số: {transactions.length} giao dịch</span>
+        <div className="my-4 flex flex-wrap gap-1" aria-label="Lọc giao dịch">
+          {[['all', 'Tất cả'], ['trade', 'Mua / Bán'], ['cash', 'Nạp / Rút'], ['savings', 'Tiết kiệm'], ['dividend', 'Cổ tức'], ['other', 'Khác']].map(([key, label]) =>
+            <button key={key} type="button" aria-pressed={filter === key} onClick={() => { setFilter(key); setPage(1); }}
+              className={`rounded-md px-3 py-2 text-xs ${filter === key ? 'bg-accent-emerald-light font-semibold text-accent-emerald' : 'text-text-secondary hover:bg-surface-container'}`}>{label}</button>)}
         </div>
+        {loading ? <p role="status" className="py-8 text-center text-sm text-text-secondary">Đang tải lịch sử…</p>
+          : loadError ? <p role="alert" className="py-6 text-sm text-accent-rose">{loadError} <button onClick={fetchTransactions} className="underline">Thử lại</button></p>
+          : !visibleActivities.length ? <p className="py-8 text-center text-sm text-text-secondary">Chưa có giao dịch trong mục này.</p>
+          : <>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] text-left text-sm">
+                <thead className="border-b border-border-subtle text-xs text-text-secondary"><tr>
+                  <th className="py-3 pr-4 font-normal">Thời gian</th><th className="py-3 pr-4 font-normal">Giao dịch</th>
+                  <th className="py-3 pr-4 font-normal">Nội dung</th><th className="py-3 text-right font-normal">Số tiền / Giá trị</th>
+                </tr></thead>
+                <tbody className="divide-y divide-border-subtle">{visibleActivities.map(row => <tr key={row.id} className="align-top">
+                  <td className="py-3 pr-4 text-xs tabular-nums text-text-secondary whitespace-nowrap">
+                    <span className="block">{new Date(row.date).toLocaleDateString('vi-VN')}</span>
+                    <span>{new Date(row.date).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</span>
+                  </td>
+                  <td className="py-3 pr-4 font-medium text-text-primary">{row.action}
+                    {row.status !== 'POSTED' && <span className="mt-1 block text-xs text-text-secondary">{row.status === 'PENDING' ? 'Đang xử lý' : row.status === 'FAILED' ? 'Không thành công' : 'Chưa hoàn tất'}</span>}
+                  </td>
+                  <td className="max-w-sm py-3 pr-4 text-text-secondary">{row.detail}</td>
+                  <td className="py-3 text-right tabular-nums text-text-primary whitespace-nowrap">{row.value == null ? '—' : formatVND(row.value)}</td>
+                </tr>)}</tbody>
+              </table>
+            </div>
+            {pages > 1 && <div className="mt-4 flex items-center justify-end gap-3 text-xs text-text-secondary">
+              <button type="button" disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)} className="rounded px-2 py-2 hover:bg-surface-container disabled:opacity-40">Trước</button>
+              <span>Trang {currentPage} / {pages}</span>
+              <button type="button" disabled={currentPage === pages} onClick={() => setPage(currentPage + 1)} className="rounded px-2 py-2 hover:bg-surface-container disabled:opacity-40">Sau</button>
+            </div>}
+          </>}
+      </section>
 
-        {loading ? (
-          <div className="py-12 text-center text-xs text-text-muted">
-            <div className="w-6 h-6 border-2 border-accent-emerald border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-            Đang tải dữ liệu Sổ cái kép...
+      {withdrawOpen && <div className="!m-0 fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4" onKeyDown={event => { if (event.key === 'Escape' && !withdrawing) setWithdrawOpen(false); }}>
+        <div ref={withdrawRef} role="dialog" aria-modal="true" aria-labelledby="withdraw-title"
+          onKeyDown={event => {
+            if (event.key !== 'Tab') return;
+            const controls = withdrawRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled)');
+            if (!controls?.length) return;
+            if (event.shiftKey && document.activeElement === controls[0]) { event.preventDefault(); controls[controls.length - 1].focus(); }
+            else if (!event.shiftKey && document.activeElement === controls[controls.length - 1]) { event.preventDefault(); controls[0].focus(); }
+          }} className="w-full max-w-md rounded-xl bg-surface-container-lowest p-5 sm:p-6 shadow-xl">
+          <div className="flex items-center justify-between gap-4"><h3 id="withdraw-title" className="text-lg font-semibold text-text-primary">Rút tiền</h3>
+            <button type="button" aria-label="Đóng" disabled={withdrawing} onClick={() => setWithdrawOpen(false)} className="rounded-md p-2 text-text-secondary hover:bg-surface-container"><X className="h-4 w-4" /></button>
           </div>
-        ) : transactions.length === 0 ? (
-          <div className="py-12 text-center space-y-3">
-            <p className="text-xs text-text-muted">Chưa có giao dịch phát sinh nào trong sổ cái.</p>
-            <button
-              onClick={() => setShowModal(true)}
-              className="px-4 py-2 rounded-lg bg-accent-emerald text-white text-xs font-bold hover:bg-accent-emerald/90 transition-all inline-flex items-center gap-1.5"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Nạp vốn ban đầu ngay</span>
-            </button>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead>
-                <tr className="border-b border-border-subtle text-text-muted uppercase text-[11px]">
-                  <th className="pb-3 font-semibold">Mã GD & Thời gian</th>
-                  <th className="pb-3 font-semibold">Loại Nghiệp Vụ</th>
-                  <th className="pb-3 font-semibold">Diễn Giải Nghiệp Vụ</th>
-                  <th className="pb-3 font-semibold">Bút toán Kép (Entries)</th>
-                  <th className="pb-3 font-semibold text-center">Kiểm Định ACID</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border-subtle">
-                {transactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-surface-container-low transition-colors align-top">
-                    {/* Mã & Thời gian */}
-                    <td className="py-3 font-mono">
-                      <span className="font-bold text-text-primary block">{tx.transactionCode}</span>
-                      <span className="text-[10px] text-text-muted block">
-                        {new Date(tx.createdAt).toLocaleString('vi-VN')}
-                      </span>
-                    </td>
+          <p className="mt-2 text-sm text-text-secondary">Ghi nhận tiền rút khỏi danh mục. Ứng dụng không thực hiện chuyển khoản ngân hàng.</p>
+          <p className="mt-4 text-sm text-text-secondary">Tiền mặt khả dụng: <strong className="text-text-primary">{cashBalance == null ? 'Đang tải hoặc chưa tải được số dư' : formatVND(cashBalance)}</strong></p>
+          {cashBalance == null && <button type="button" onClick={loadBalance} className="mt-1 text-xs text-accent-emerald underline">Tải lại số dư</button>}
+          <form onSubmit={handleWithdraw} className="mt-4 space-y-4">
+            <div><label htmlFor="withdraw-amount" className="mb-1 block text-sm text-text-primary">Số tiền rút (₫)</label>
+              <input autoFocus id="withdraw-amount" type="number" min="1" step="1" max={cashBalance ?? 0} required disabled={withdrawing} value={withdrawAmount} onChange={event => setWithdrawAmount(event.target.value)}
+                className="w-full rounded-md border border-border-subtle bg-surface px-3 py-2 text-text-primary" />
+            </div>
+            <div><label htmlFor="withdraw-note" className="mb-1 block text-sm text-text-primary">Ghi chú (tùy chọn)</label>
+              <input id="withdraw-note" maxLength={255} disabled={withdrawing} value={withdrawNote} onChange={event => setWithdrawNote(event.target.value)}
+                className="w-full rounded-md border border-border-subtle bg-surface px-3 py-2 text-text-primary" />
+            </div>
+            {withdrawError && <p role="alert" className="text-sm text-accent-rose">{withdrawError}</p>}
+            <div className="flex justify-end gap-2 border-t border-border-subtle pt-4">
+              <button type="button" disabled={withdrawing} onClick={() => setWithdrawOpen(false)} className="rounded-md px-4 py-2 text-sm text-text-secondary hover:bg-surface-container">Hủy</button>
+              <button type="submit" disabled={withdrawing || cashBalance == null || Number(withdrawAmount) <= 0 || Number(withdrawAmount) > cashBalance}
+                className="rounded-md bg-accent-emerald px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">{withdrawing ? 'Đang ghi nhận…' : 'Xác nhận rút tiền'}</button>
+            </div>
+          </form>
+        </div>
+      </div>}
 
-                    {/* Loại nghiệp vụ */}
-                    <td className="py-3">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        tx.type === 'REBALANCE'
-                          ? 'bg-accent-blue-light text-accent-blue'
-                          : tx.type === 'CAPITAL_INJECTION'
-                          ? 'bg-accent-emerald-light text-accent-emerald'
-                          : tx.type === 'SAVINGS_DEPOSIT' || tx.type === 'SAVINGS_SETTLE'
-                          ? 'bg-accent-gold-light text-accent-gold'
-                          : 'bg-surface-container-high text-text-secondary'
-                      }`}>
-                        {tx.type}
-                      </span>
-                    </td>
-
-                    {/* Diễn giải */}
-                    <td className="py-3 text-text-secondary max-w-xs leading-relaxed">
-                      {tx.description}
-                    </td>
-
-                    {/* Chi tiết bút toán Nợ / Có */}
-                    <td className="py-3 space-y-1">
-                      {tx.entries && tx.entries.map((entry) => (
-                        <div key={entry.id} className="flex items-center gap-2 font-mono text-[11px]">
-                          {entry.amount >= 0 ? (
-                            <span className="inline-flex items-center gap-0.5 text-accent-emerald font-semibold">
-                              <ArrowUpRight className="w-3 h-3" />
-                              Nợ (Dr): {entry.accountCode} (+{entry.amount.toLocaleString()} {entry.assetTicker})
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-0.5 text-accent-rose font-semibold">
-                              <ArrowDownRight className="w-3 h-3" />
-                              Có (Cr): {entry.accountCode} ({entry.amount.toLocaleString()} {entry.assetTicker})
-                            </span>
-                          )}
-                        </div>
-                      ))}
-                    </td>
-
-                    {/* Trạng thái ACID */}
-                    <td className="py-3 text-center">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-accent-emerald-light text-accent-emerald text-[10px] font-bold">
-                        <CheckCircle className="w-3 h-3" />
-                        Balanced (Σ=0)
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
-      {/* Modal: Khai báo tài sản / Nạp vốn */}
+      {/* Modal: Nạp tiền / Thêm tài sản */}
       {showModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div className="!m-0 fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-surface-container-lowest border border-border-subtle rounded-xl max-w-md w-full p-6 shadow-xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between border-b border-border-subtle pb-3">
               <div>
                 <h3 className="text-base font-bold text-text-primary">Khai Báo Tài Sản / Nạp Vốn</h3>
-                <p className="text-xs text-text-secondary">Tạo bút toán tăng tài sản đối ứng Nguồn vốn (EQUITY_CAPITAL)</p>
+                <p className="text-xs text-text-secondary">Thêm tiền mặt hoặc tài sản đang sở hữu vào danh mục.</p>
               </div>
               <button
                 onClick={() => setShowModal(false)}
@@ -461,107 +402,9 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
         </div>
       )}
 
-      {/* Modal Chi tiết Kiểm toán & Đối soát Sổ cái (Mục 9 SRS) */}
-      {showAuditModal && auditReport && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-5 border-b border-border-subtle shrink-0">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-accent-emerald-light text-accent-emerald flex items-center justify-center">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-text-primary">
-                    Báo Cáo Đối Soát Chi Tiết Sổ Cái Kép (Mục 9 SRS)
-                  </h3>
-                  <p className="text-[11px] text-text-muted">
-                    Kiểm toán độc lập bất biến kế toán ngân hàng & đối chiếu số dư tức thời
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowAuditModal(false)}
-                className="text-text-muted hover:text-text-primary p-1.5 rounded-lg hover:bg-surface-container"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="p-5 overflow-y-auto space-y-4 text-xs">
-              <div className="p-3 rounded-xl bg-accent-emerald-light/50 border border-accent-emerald/30 text-text-primary flex items-start gap-2.5">
-                <CheckCircle className="w-4 h-4 text-accent-emerald shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-bold block text-accent-emerald">Trạng thái: {auditReport.auditStatus}</span>
-                  <p className="text-[11px] text-text-secondary mt-0.5">{auditReport.systemSummary}</p>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-text-primary mb-2 text-xs flex items-center justify-between">
-                  <span>Đối chiếu Snapshot Số dư với Tổng lịch sử Entries:</span>
-                  <span className="text-[11px] font-normal text-text-muted">Ràng buộc: Balance(account) = Σ Entries(amount)</span>
-                </h4>
-                <div className="overflow-x-auto border border-border-subtle rounded-lg">
-                  <table className="w-full text-left text-xs">
-                    <thead className="bg-surface-container text-text-muted text-[11px]">
-                      <tr>
-                        <th className="p-2.5 font-semibold">Tài khoản con</th>
-                        <th className="p-2.5 font-semibold">Tài sản</th>
-                        <th className="p-2.5 font-semibold text-right">Số dư Snapshot</th>
-                        <th className="p-2.5 font-semibold text-right">Tổng Entries (Ghi sổ)</th>
-                        <th className="p-2.5 font-semibold text-right">Chênh lệch</th>
-                        <th className="p-2.5 font-semibold text-center">Kết luận</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border-subtle">
-                      {auditReport.accountAuditList.map((acc, idx) => (
-                        <tr key={idx} className="hover:bg-surface-container-low transition-colors">
-                          <td className="p-2.5 font-mono font-semibold text-text-primary">{acc.accountCode}</td>
-                          <td className="p-2.5 text-text-secondary">{acc.assetTicker}</td>
-                          <td className="p-2.5 font-mono text-right text-text-primary">
-                            {acc.assetTicker === 'VND' ? formatVND(acc.snapshotBalance) : `${acc.snapshotBalance} ${acc.assetTicker}`}
-                          </td>
-                          <td className="p-2.5 font-mono text-right text-text-primary">
-                            {acc.assetTicker === 'VND' ? formatVND(acc.calculatedEntriesBalance) : `${acc.calculatedEntriesBalance} ${acc.assetTicker}`}
-                          </td>
-                          <td className="p-2.5 font-mono text-right text-accent-emerald font-semibold">
-                            {acc.discrepancy === 0 ? '0.0000' : acc.discrepancy}
-                          </td>
-                          <td className="p-2.5 text-center">
-                            {acc.consistent ? (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-accent-emerald">
-                                <CheckCircle className="w-3.5 h-3.5" /> Khớp 100%
-                              </span>
-                            ) : (
-                              <span className="text-[11px] font-bold text-accent-rose">Sai lệch</span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 border-t border-border-subtle bg-surface-container flex items-center justify-between shrink-0">
-              <span className="text-[11px] text-text-muted">
-                Chu kỳ kiểm toán tự động: 23:59:00 hàng ngày (Spring Batch Reconciliation)
-              </span>
-              <button
-                onClick={() => setShowAuditModal(false)}
-                className="px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-text-primary text-xs font-bold"
-              >
-                Đóng
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Corporate Action / Dividend Modal */}
       {showDividendModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
+        <div className="!m-0 fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
           <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-5 border-b border-border-subtle flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2.5">
@@ -573,7 +416,7 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
                     Ghi Nhận Cổ Tức & Quyền Tài Sản
                   </h3>
                   <p className="text-[11px] text-text-muted">
-                    Hạch toán cổ tức tiền mặt hoặc cổ phiếu thưởng theo luật định TTCK Việt Nam
+                    Cập nhật tiền mặt hoặc cổ phiếu bạn đã nhận.
                   </p>
                 </div>
               </div>
@@ -663,7 +506,7 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
                   </div>
 
                   {/* Tax calculation box */}
-                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle space-y-1.5 text-[11px]">
+                  <div className="vnx-detail p-3     space-y-1.5 text-[11px]">
                     <div className="flex justify-between text-text-muted">
                       <span>Cổ tức danh nghĩa:</span>
                       <span className="font-mono-num font-semibold text-text-primary">
@@ -702,7 +545,7 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
                     />
                   </div>
 
-                  <div className="p-3 rounded-xl bg-surface-container-low border border-border-subtle text-[11px] text-text-muted space-y-1">
+                  <div className="vnx-detail p-3     text-[11px] text-text-muted space-y-1">
                     <div className="font-semibold text-text-primary">Cơ chế pha loãng WAC chuẩn Việt Nam:</div>
                     <p>
                       Số lượng cổ phiếu trong danh mục tăng thêm <strong>{parseInt(dividendStockQty) || 0} CP</strong> mà không thay đổi tổng số vốn đã giải ngân.
@@ -726,9 +569,9 @@ export function LedgerTab({ onRefresh }: LedgerTabProps) {
                 <button
                   type="submit"
                   disabled={dividendSubmitting}
-                  className="px-5 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 text-xs font-bold transition-all  cursor-pointer disabled:opacity-50"
                 >
-                  {dividendSubmitting ? 'Đang hạch toán ACID...' : 'Xác Nhận Ghi Sổ Cổ Tức'}
+                  {dividendSubmitting ? 'Đang lưu…' : 'Ghi nhận cổ tức'}
                 </button>
               </div>
             </form>

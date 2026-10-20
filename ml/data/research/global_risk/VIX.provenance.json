@@ -1,0 +1,12 @@
+{
+  "symbol": "VIX",
+  "publisher": "Cboe",
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
+  "documentation": "https://www.cboe.com/tradable_products/vix/vix_historical_data",
+  "downloaded_at": "2026-10-17T16:00:49.894166+00:00",
+  "sha256": "a9742d4deab98f7644bda10df92db0b6afbca17ccc8b64139c52ad2ca0963d42",
+  "field": "CLOSE",
+  "observation_timezone": "US market session date",
+  "availability_policy": "Conservative observation date plus 2 calendar days, never same day",
+  "caveat": "Current historical snapshot, not original release vintages; not exchange-certified point-in-time archive"
+}

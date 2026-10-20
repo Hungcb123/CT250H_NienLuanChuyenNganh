@@ -1,0 +1,25 @@
+{
+  "role": "Historical inspected VNINDEX/cash policy PROXY only",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/evaluate_regime_net_taa.py": "683ca1fbacd478810bfb99ca6bcdcf25d4f93f1eb49928123730445b0cbfb2e9",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_native/20261019T090304_754869Z/native_predictions.csv": "bdebe60356eb0bf7dca6332b2ec29b28740ba6f7051049ca6484a80c8856c5a2",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6"
+  },
+  "constants": {
+    "anchor": 0.35,
+    "delta_max": 0.15,
+    "traded_notional_cost": 0.002,
+    "cash_return": 0,
+    "execution_delay_sessions": 1
+  },
+  "timing": "Decision at close t; next close rebalance; next interval return. Full raw calendar; missing forecast ->SAA. Reset capital/holdings per fold.",
+  "caveats": [
+    "Reviewed index Close is not an executable stock/ETF price.",
+    "No gold, savings interest, dividends or exact Vietnamese tax model.",
+    "Winner proxies use the SAME ensemble scores, not actual legacy ONNX predictions.",
+    "Daily rebalance assumption; includes drift/cost, no turnover-minimization gate.",
+    "History repeatedly inspected; no independent acceptance or automatic TAA enablement."
+  ],
+  "point_predictions_unchanged": true,
+  "deployed": false
+}

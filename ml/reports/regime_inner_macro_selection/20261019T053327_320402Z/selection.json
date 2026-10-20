@@ -1,0 +1,110 @@
+[
+  {
+    "study": "information",
+    "fold": 1,
+    "chosen": "vix",
+    "inner_mean": 0.21744436751325194,
+    "fallback_mean": 0.1983984108298503,
+    "latest_tuning_label_end": "2020-03-26",
+    "outer_boundary": "2020-03-27"
+  },
+  {
+    "study": "information",
+    "fold": 2,
+    "chosen": "indices",
+    "inner_mean": 0.4696650759599769,
+    "fallback_mean": 0.2719133935613776,
+    "latest_tuning_label_end": "2021-10-14",
+    "outer_boundary": "2021-10-15"
+  },
+  {
+    "study": "information",
+    "fold": 3,
+    "chosen": "control",
+    "inner_mean": 0.3631675104189724,
+    "fallback_mean": 0.3631675104189724,
+    "latest_tuning_label_end": "2023-07-14",
+    "outer_boundary": "2023-07-17"
+  },
+  {
+    "study": "information",
+    "fold": 4,
+    "chosen": "ohlcv",
+    "inner_mean": 0.35714472424763305,
+    "fallback_mean": 0.3439202419798317,
+    "latest_tuning_label_end": "2025-02-07",
+    "outer_boundary": "2025-02-10"
+  },
+  {
+    "study": "families",
+    "fold": 1,
+    "chosen": "SVC_RBF",
+    "inner_mean": 0.2448117617534745,
+    "fallback_mean": 0.17564724689272504,
+    "latest_tuning_label_end": "2020-03-26",
+    "outer_boundary": "2020-03-27"
+  },
+  {
+    "study": "families",
+    "fold": 2,
+    "chosen": "ExtraTrees",
+    "inner_mean": 0.3238446379509998,
+    "fallback_mean": 0.3063583664904781,
+    "latest_tuning_label_end": "2021-10-14",
+    "outer_boundary": "2021-10-15"
+  },
+  {
+    "study": "families",
+    "fold": 3,
+    "chosen": "legacy_equal",
+    "inner_mean": 0.383614639575983,
+    "fallback_mean": 0.383614639575983,
+    "latest_tuning_label_end": "2023-07-14",
+    "outer_boundary": "2023-07-17"
+  },
+  {
+    "study": "families",
+    "fold": 4,
+    "chosen": "legacy_equal",
+    "inner_mean": 0.30249189039264435,
+    "fallback_mean": 0.30249189039264435,
+    "latest_tuning_label_end": "2025-02-07",
+    "outer_boundary": "2025-02-10"
+  },
+  {
+    "study": "losses",
+    "fold": 1,
+    "chosen": "legacy_equal",
+    "inner_mean": 0.17564724689272504,
+    "fallback_mean": 0.17564724689272504,
+    "latest_tuning_label_end": "2020-03-26",
+    "outer_boundary": "2020-03-27"
+  },
+  {
+    "study": "losses",
+    "fold": 2,
+    "chosen": "legacy_equal",
+    "inner_mean": 0.3063583664904781,
+    "fallback_mean": 0.3063583664904781,
+    "latest_tuning_label_end": "2021-10-14",
+    "outer_boundary": "2021-10-15"
+  },
+  {
+    "study": "losses",
+    "fold": 3,
+    "chosen": "legacy_equal",
+    "inner_mean": 0.383614639575983,
+    "fallback_mean": 0.383614639575983,
+    "latest_tuning_label_end": "2023-07-14",
+    "outer_boundary": "2023-07-17"
+  },
+  {
+    "study": "losses",
+    "fold": 4,
+    "chosen": "legacy_equal",
+    "inner_mean": 0.30249189039264435,
+    "fallback_mean": 0.30249189039264435,
+    "latest_tuning_label_end": "2025-02-07",
+    "outer_boundary": "2025-02-10"
+  }
+]

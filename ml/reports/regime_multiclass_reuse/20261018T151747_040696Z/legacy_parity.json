@@ -1,0 +1,14 @@
+{
+  "trend": {
+    "passed": true,
+    "rows": 1560,
+    "prediction_matches": 1560,
+    "source_sha256": "159da1979ff3425be5cecbdcd03d612dc6187c4b870d80e1963562875cbc92e0"
+  },
+  "risk": {
+    "passed": true,
+    "rows": 1560,
+    "prediction_matches": 1560,
+    "source_sha256": "f11ffdf1a97fc2847a8e2af561ba63943bde2921c9d2f22b5457882b9e8b64e0"
+  }
+}

@@ -1,0 +1,534 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "boundary": "2020-03-27",
+    "n_target": 761,
+    "n_auxiliary": 0,
+    "unique_dates": 761,
+    "by_symbol": {
+      "VNINDEX": 761
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2020-03-26",
+    "target_class_prior": [
+      0.16557161629434955,
+      0.5611038107752957,
+      0.2733245729303548
+    ],
+    "total_date_mass": 761.0
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "boundary": "2020-06-29",
+    "n_target": 824,
+    "n_auxiliary": 0,
+    "unique_dates": 824,
+    "by_symbol": {
+      "VNINDEX": 824
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2020-06-26",
+    "target_class_prior": [
+      0.16262135922330098,
+      0.5606796116504854,
+      0.2766990291262136
+    ],
+    "total_date_mass": 824.0
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "boundary": "2020-09-25",
+    "n_target": 887,
+    "n_auxiliary": 0,
+    "unique_dates": 887,
+    "by_symbol": {
+      "VNINDEX": 887
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2020-09-24",
+    "target_class_prior": [
+      0.1589627959413754,
+      0.5783540022547914,
+      0.26268320180383314
+    ],
+    "total_date_mass": 887.0
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "boundary": "2020-12-23",
+    "n_target": 950,
+    "n_auxiliary": 0,
+    "unique_dates": 950,
+    "by_symbol": {
+      "VNINDEX": 950
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2020-12-22",
+    "target_class_prior": [
+      0.14842105263157895,
+      0.5578947368421052,
+      0.29368421052631577
+    ],
+    "total_date_mass": 950.0
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "boundary": "2021-03-30",
+    "n_target": 1013,
+    "n_auxiliary": 0,
+    "unique_dates": 1013,
+    "by_symbol": {
+      "VNINDEX": 1013
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2021-03-29",
+    "target_class_prior": [
+      0.14511352418558737,
+      0.5547877591312932,
+      0.30009871668311944
+    ],
+    "total_date_mass": 1013.0
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "boundary": "2021-06-30",
+    "n_target": 1076,
+    "n_auxiliary": 0,
+    "unique_dates": 1076,
+    "by_symbol": {
+      "VNINDEX": 1076
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2021-06-29",
+    "target_class_prior": [
+      0.1366171003717472,
+      0.5483271375464684,
+      0.3150557620817844
+    ],
+    "total_date_mass": 1076.0
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "boundary": "2021-09-29",
+    "n_target": 1139,
+    "n_auxiliary": 0,
+    "unique_dates": 1139,
+    "by_symbol": {
+      "VNINDEX": 1139
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2021-09-28",
+    "target_class_prior": [
+      0.14135206321334504,
+      0.5575065847234416,
+      0.30114135206321335
+    ],
+    "total_date_mass": 1139.0
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "boundary": "2021-10-15",
+    "n_target": 1151,
+    "n_auxiliary": 0,
+    "unique_dates": 1151,
+    "by_symbol": {
+      "VNINDEX": 1151
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2021-10-14",
+    "target_class_prior": [
+      0.13987836663770634,
+      0.5621198957428323,
+      0.29800173761946136
+    ],
+    "total_date_mass": 1151.0
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "boundary": "2022-01-13",
+    "n_target": 1214,
+    "n_auxiliary": 0,
+    "unique_dates": 1214,
+    "by_symbol": {
+      "VNINDEX": 1214
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2022-01-12",
+    "target_class_prior": [
+      0.13344316309719934,
+      0.5593080724876441,
+      0.30724876441515653
+    ],
+    "total_date_mass": 1214.0
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "boundary": "2022-04-20",
+    "n_target": 1277,
+    "n_auxiliary": 0,
+    "unique_dates": 1277,
+    "by_symbol": {
+      "VNINDEX": 1277
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2022-04-19",
+    "target_class_prior": [
+      0.12764291307752546,
+      0.5802662490211433,
+      0.2920908379013312
+    ],
+    "total_date_mass": 1277.0
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "boundary": "2022-07-20",
+    "n_target": 1302,
+    "n_auxiliary": 0,
+    "unique_dates": 1302,
+    "by_symbol": {
+      "VNINDEX": 1302
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2022-05-26",
+    "target_class_prior": [
+      0.14285714285714285,
+      0.5706605222734255,
+      0.28648233486943164
+    ],
+    "total_date_mass": 1302.0
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "boundary": "2022-10-19",
+    "n_target": 1357,
+    "n_auxiliary": 0,
+    "unique_dates": 1357,
+    "by_symbol": {
+      "VNINDEX": 1357
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2022-10-18",
+    "target_class_prior": [
+      0.15401621223286663,
+      0.5600589535740604,
+      0.28592483419307296
+    ],
+    "total_date_mass": 1357.0
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "boundary": "2023-01-17",
+    "n_target": 1420,
+    "n_auxiliary": 0,
+    "unique_dates": 1420,
+    "by_symbol": {
+      "VNINDEX": 1420
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2023-01-16",
+    "target_class_prior": [
+      0.15704225352112677,
+      0.5654929577464789,
+      0.2774647887323944
+    ],
+    "total_date_mass": 1420.0
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "boundary": "2023-04-21",
+    "n_target": 1483,
+    "n_auxiliary": 0,
+    "unique_dates": 1483,
+    "by_symbol": {
+      "VNINDEX": 1483
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2023-04-20",
+    "target_class_prior": [
+      0.153068105192178,
+      0.5792312879298719,
+      0.2677006068779501
+    ],
+    "total_date_mass": 1483.0
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "boundary": "2023-07-17",
+    "n_target": 1541,
+    "n_auxiliary": 0,
+    "unique_dates": 1541,
+    "by_symbol": {
+      "VNINDEX": 1541
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2023-07-14",
+    "target_class_prior": [
+      0.1473069435431538,
+      0.5743024010382868,
+      0.2783906554185594
+    ],
+    "total_date_mass": 1541.0
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "boundary": "2023-10-16",
+    "n_target": 1604,
+    "n_auxiliary": 0,
+    "unique_dates": 1604,
+    "by_symbol": {
+      "VNINDEX": 1604
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2023-10-13",
+    "target_class_prior": [
+      0.14588528678304238,
+      0.5716957605985037,
+      0.28241895261845384
+    ],
+    "total_date_mass": 1604.0
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "boundary": "2024-01-12",
+    "n_target": 1667,
+    "n_auxiliary": 0,
+    "unique_dates": 1667,
+    "by_symbol": {
+      "VNINDEX": 1667
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2024-01-11",
+    "target_class_prior": [
+      0.14577084583083383,
+      0.5824835032993402,
+      0.27174565086982605
+    ],
+    "total_date_mass": 1667.0
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "boundary": "2024-04-17",
+    "n_target": 1730,
+    "n_auxiliary": 0,
+    "unique_dates": 1730,
+    "by_symbol": {
+      "VNINDEX": 1730
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2024-04-16",
+    "target_class_prior": [
+      0.14046242774566475,
+      0.5751445086705202,
+      0.28439306358381505
+    ],
+    "total_date_mass": 1730.0
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "boundary": "2024-07-19",
+    "n_target": 1793,
+    "n_auxiliary": 0,
+    "unique_dates": 1793,
+    "by_symbol": {
+      "VNINDEX": 1793
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2024-07-18",
+    "target_class_prior": [
+      0.14054656999442275,
+      0.5828220858895705,
+      0.2766313441160067
+    ],
+    "total_date_mass": 1793.0
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "boundary": "2024-10-18",
+    "n_target": 1856,
+    "n_auxiliary": 0,
+    "unique_dates": 1856,
+    "by_symbol": {
+      "VNINDEX": 1856
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2024-10-17",
+    "target_class_prior": [
+      0.140625,
+      0.5883620689655172,
+      0.27101293103448276
+    ],
+    "total_date_mass": 1856.0
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "boundary": "2025-01-16",
+    "n_target": 1919,
+    "n_auxiliary": 0,
+    "unique_dates": 1919,
+    "by_symbol": {
+      "VNINDEX": 1919
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2025-01-15",
+    "target_class_prior": [
+      0.14174048983845752,
+      0.5935383011985409,
+      0.26472120896300155
+    ],
+    "total_date_mass": 1919.0
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "boundary": "2025-02-10",
+    "n_target": 1931,
+    "n_auxiliary": 0,
+    "unique_dates": 1931,
+    "by_symbol": {
+      "VNINDEX": 1931
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2025-02-07",
+    "target_class_prior": [
+      0.14085965820818228,
+      0.5960642154324184,
+      0.26307612635939925
+    ],
+    "total_date_mass": 1931.0
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "boundary": "2025-05-14",
+    "n_target": 1994,
+    "n_auxiliary": 0,
+    "unique_dates": 1994,
+    "by_symbol": {
+      "VNINDEX": 1994
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2025-05-13",
+    "target_class_prior": [
+      0.1464393179538616,
+      0.5862587763289869,
+      0.26730190571715146
+    ],
+    "total_date_mass": 1994.0
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "boundary": "2025-08-11",
+    "n_target": 2057,
+    "n_auxiliary": 0,
+    "unique_dates": 2057,
+    "by_symbol": {
+      "VNINDEX": 2057
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2025-08-08",
+    "target_class_prior": [
+      0.14195430238210988,
+      0.5862907146329607,
+      0.2717549829849295
+    ],
+    "total_date_mass": 2057.0
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "boundary": "2025-11-10",
+    "n_target": 2120,
+    "n_auxiliary": 0,
+    "unique_dates": 2120,
+    "by_symbol": {
+      "VNINDEX": 2120
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2025-11-07",
+    "target_class_prior": [
+      0.1391509433962264,
+      0.5891509433962264,
+      0.27169811320754716
+    ],
+    "total_date_mass": 2120.0
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "boundary": "2026-02-09",
+    "n_target": 2183,
+    "n_auxiliary": 0,
+    "unique_dates": 2183,
+    "by_symbol": {
+      "VNINDEX": 2183
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2026-02-06",
+    "target_class_prior": [
+      0.1374255611543747,
+      0.5904718277599633,
+      0.2721026110856619
+    ],
+    "total_date_mass": 2183.0
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "boundary": "2026-05-19",
+    "n_target": 2246,
+    "n_auxiliary": 0,
+    "unique_dates": 2246,
+    "by_symbol": {
+      "VNINDEX": 2246
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2026-05-18",
+    "target_class_prior": [
+      0.14158504007123776,
+      0.5886019590382903,
+      0.26981300089047194
+    ],
+    "total_date_mass": 2246.0
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "boundary": "2026-08-14",
+    "n_target": 2309,
+    "n_auxiliary": 0,
+    "unique_dates": 2309,
+    "by_symbol": {
+      "VNINDEX": 2309
+    },
+    "target_start": "2016-02-25",
+    "latest_label_end": "2026-08-13",
+    "target_class_prior": [
+      0.1476829796448679,
+      0.5898657427457774,
+      0.2624512776093547
+    ],
+    "total_date_mass": 2309.0
+  }
+]

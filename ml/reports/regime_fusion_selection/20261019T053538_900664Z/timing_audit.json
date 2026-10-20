@@ -1,0 +1,122 @@
+[
+  {
+    "outer_fold": 1,
+    "inner_fold": 1,
+    "boundary": "2018-05-24",
+    "classifier_label_end": "2018-05-23",
+    "density_label_end": "2018-05-23",
+    "classifier_rows": 330,
+    "density_rows": 330,
+    "validation_rows": 137
+  },
+  {
+    "outer_fold": 1,
+    "inner_fold": 2,
+    "boundary": "2018-12-04",
+    "classifier_label_end": "2018-12-03",
+    "density_label_end": "2018-12-03",
+    "classifier_rows": 467,
+    "density_rows": 467,
+    "validation_rows": 137
+  },
+  {
+    "outer_fold": 1,
+    "inner_fold": 3,
+    "boundary": "2019-08-12",
+    "classifier_label_end": "2019-08-09",
+    "density_label_end": "2019-08-09",
+    "classifier_rows": 530,
+    "density_rows": 604,
+    "validation_rows": 137
+  },
+  {
+    "outer_fold": 2,
+    "inner_fold": 1,
+    "boundary": "2020-01-10",
+    "classifier_label_end": "2020-01-09",
+    "density_label_end": "2020-01-09",
+    "classifier_rows": 637,
+    "density_rows": 711,
+    "validation_rows": 140
+  },
+  {
+    "outer_fold": 2,
+    "inner_fold": 2,
+    "boundary": "2020-08-05",
+    "classifier_label_end": "2020-08-04",
+    "density_label_end": "2020-08-04",
+    "classifier_rows": 697,
+    "density_rows": 851,
+    "validation_rows": 140
+  },
+  {
+    "outer_fold": 2,
+    "inner_fold": 3,
+    "boundary": "2021-02-26",
+    "classifier_label_end": "2021-02-25",
+    "density_label_end": "2021-02-25",
+    "classifier_rows": 701,
+    "density_rows": 991,
+    "validation_rows": 140
+  },
+  {
+    "outer_fold": 3,
+    "inner_fold": 1,
+    "boundary": "2021-08-20",
+    "classifier_label_end": "2021-08-19",
+    "density_label_end": "2021-08-19",
+    "classifier_rows": 701,
+    "density_rows": 1113,
+    "validation_rows": 136
+  },
+  {
+    "outer_fold": 3,
+    "inner_fold": 2,
+    "boundary": "2022-03-10",
+    "classifier_label_end": "2022-03-09",
+    "density_label_end": "2022-03-09",
+    "classifier_rows": 700,
+    "density_rows": 1249,
+    "validation_rows": 136
+  },
+  {
+    "outer_fold": 3,
+    "inner_fold": 3,
+    "boundary": "2022-11-28",
+    "classifier_label_end": "2022-11-25",
+    "density_label_end": "2022-11-25",
+    "classifier_rows": 684,
+    "density_rows": 1385,
+    "validation_rows": 136
+  },
+  {
+    "outer_fold": 4,
+    "inner_fold": 1,
+    "boundary": "2023-05-24",
+    "classifier_label_end": "2023-05-23",
+    "density_label_end": "2023-05-23",
+    "classifier_rows": 684,
+    "density_rows": 1503,
+    "validation_rows": 136
+  },
+  {
+    "outer_fold": 4,
+    "inner_fold": 2,
+    "boundary": "2023-12-04",
+    "classifier_label_end": "2023-12-01",
+    "density_label_end": "2023-12-01",
+    "classifier_rows": 682,
+    "density_rows": 1639,
+    "validation_rows": 136
+  },
+  {
+    "outer_fold": 4,
+    "inner_fold": 3,
+    "boundary": "2024-06-25",
+    "classifier_label_end": "2024-06-24",
+    "density_label_end": "2024-06-24",
+    "classifier_rows": 682,
+    "density_rows": 1775,
+    "validation_rows": 136
+  }
+]

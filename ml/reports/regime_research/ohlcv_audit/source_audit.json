@@ -1,0 +1,23 @@
+{
+  "vci": {
+    "sha256": "8b9d655e55a5418cf2533d2c238cf68f65ff4eaa380394846054c0a6d65d2f3a",
+    "contradictory_duplicate_dates": 0,
+    "n_dates": 4176,
+    "invalid_ohlc_rows": 21,
+    "nonpositive_volume": 2
+  },
+  "kbs": {
+    "sha256": "0c9c49951c42f3f4fe6e9a816c1bf34c0156f52e3120a24298def3e428270246",
+    "contradictory_duplicate_dates": 0,
+    "n_dates": 3577,
+    "invalid_ohlc_rows": 4,
+    "nonpositive_volume": 0
+  },
+  "vnd": {
+    "sha256": "2d97885a9549e3cd173fdd01cb04878778b2eecec2aba04ee77fecded2e3fc29",
+    "contradictory_duplicate_dates": 0,
+    "n_dates": 2271,
+    "invalid_ohlc_rows": 1,
+    "nonpositive_volume": 0
+  }
+}

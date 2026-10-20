@@ -106,7 +106,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-text-primary">EquiFolio Wealth Terminal</h3>
+              <h3 className="text-base font-bold text-text-primary">VNxCapital</h3>
               <p className="text-xs text-text-muted">Cổng xác thực danh tính & Quản trị tài sản cá nhân</p>
             </div>
           </div>

@@ -1,0 +1,37 @@
+{
+  "audited_at": "2026-10-18T16:31:23.333150+00:00",
+  "status": "objective_not_achieved_active",
+  "requirements": [
+    {
+      "requirement": "Original three-class target and frozen validation coverage",
+      "evidence": "All source and selector CSVs match1560 dates/endpoints/classes; dense causal_audit and selector prefix checks",
+      "status": "verified_development"
+    },
+    {
+      "requirement": "Causal labels/features and delayed feedback",
+      "evidence": "112 quantile refits,80 selection boundaries and5 future-label-corrupted prefix checks;171 regression tests",
+      "status": "verified_with_historical_source_vintage_caveats"
+    },
+    {
+      "requirement": "Development point improvement vs both original controls",
+      "evidence": "Mean F1 .42045, worst .38378, mean MCC .14118; meets predeclared point gates",
+      "status": "verified_point_gates_only"
+    },
+    {
+      "requirement": "Convincing independent evidence of better forecasting",
+      "evidence": "All6 paired mean-F1 intervals include0; historical outer periods repeatedly inspected",
+      "status": "not_verified"
+    },
+    {
+      "requirement": "Reliable probability/confidence output",
+      "evidence": "Expert vectors are class-balanced decision scores; calibration not established",
+      "status": "not_verified"
+    },
+    {
+      "requirement": "Reproducible operational model artifact",
+      "evidence": "Independent native replay matches1560 decisions,5 experts and80 choices;28 bundles1064 boosters pinned. Future verified inputs/emission pipeline not yet complete.",
+      "status": "historical_native_verified_future_emission_incomplete"
+    }
+  ],
+  "remaining": "Causal probability evaluation and validated genuine future VNINDEX+ETF forecast/outcome collection; independent forecast-quality confirmation. No live replacement."
+}

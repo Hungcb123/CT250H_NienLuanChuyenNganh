@@ -1,0 +1,30 @@
+[
+  {
+    "device": "desktop",
+    "state": "ready",
+    "errors": [],
+    "scrollWidth": 1440,
+    "viewportWidth": 1440
+  },
+  {
+    "device": "desktop",
+    "state": "unavailable",
+    "errors": [],
+    "scrollWidth": 1440,
+    "viewportWidth": 1440
+  },
+  {
+    "device": "mobile",
+    "state": "ready",
+    "errors": [],
+    "scrollWidth": 390,
+    "viewportWidth": 390
+  },
+  {
+    "device": "mobile",
+    "state": "unavailable",
+    "errors": [],
+    "scrollWidth": 390,
+    "viewportWidth": 390
+  }
+]

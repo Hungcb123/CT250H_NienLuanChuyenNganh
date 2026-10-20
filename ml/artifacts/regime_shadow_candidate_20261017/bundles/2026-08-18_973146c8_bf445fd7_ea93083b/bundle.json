@@ -1,0 +1,75 @@
+{
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "bf445fd7933ad9d8c106ba7bef6b5cadf9cfd8a8eed4f699339a26c114898b94",
+  "training_prefix_sha256": "ea93083b47aee7d795bde5ca85dbc12ad7296d1fa9f261d51901a11273de6704",
+  "refit_date": "2026-08-18",
+  "feature_schema": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200",
+    "Drawdown120",
+    "Drawdown252",
+    "HV20_60_Ratio",
+    "DownsideHV60",
+    "Stretch20",
+    "Shock5",
+    "VolRatio5_20",
+    "NegativeDays10",
+    "Drawdown20"
+  ],
+  "experts": [
+    {
+      "window": "3y",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_0.txt",
+      "model_sha256": "06022c4579e7ceca07249ef1c51c167e27a794ae0139c874d7556f484df85268",
+      "logit_center": -2.05604275617234,
+      "logit_scale": 1.098696730852045,
+      "n_core": 666,
+      "n_calibration": 40,
+      "core_start": "2023-08-18",
+      "core_end": "2026-04-22",
+      "core_label_end": "2026-05-25",
+      "calibration_start": "2026-05-26",
+      "calibration_end": "2026-07-20",
+      "calibration_label_end": "2026-08-17"
+    },
+    {
+      "window": "expanding",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_1.txt",
+      "model_sha256": "a9b80f8733defdba9c56ff79c43cf503ec60eb0d6d6d7b836610e1382b082a49",
+      "logit_center": -0.45175562299053534,
+      "logit_scale": 0.5559820051609631,
+      "n_core": 3813,
+      "n_calibration": 40,
+      "core_start": "2011-01-05",
+      "core_end": "2026-04-22",
+      "core_label_end": "2026-05-25",
+      "calibration_start": "2026-05-26",
+      "calibration_end": "2026-07-20",
+      "calibration_label_end": "2026-08-17"
+    }
+  ],
+  "calibration_threshold": 0.9572953772850117
+}

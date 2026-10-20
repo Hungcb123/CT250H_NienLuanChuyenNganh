@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-19T07:06:19.213438+00:00",
+  "highest_observed_f1": 0.5121492946584352,
+  "worst_f1": 0.3911202129927543,
+  "mean_mcc": 0.2958542895196485,
+  "bear_mean_f1": 0.3164668470428258,
+  "bull_mean_f1": 0.47842171229499403,
+  "fold_f1": [
+    0.5600762926756442,
+    0.6631035701661364,
+    0.3911202129927543,
+    0.43429710279920575
+  ],
+  "tests_passed": 234,
+  "independent_test": false,
+  "accepted": false,
+  "goal_achieved": false,
+  "goal_status": "active",
+  "deployment_changed": false
+}

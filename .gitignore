@@ -34,3 +34,9 @@ postgres_data/
 .env.local
 .gitnexus
 gen-lang-client-*.json
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Append-only live model input snapshots
+ml/data/live/

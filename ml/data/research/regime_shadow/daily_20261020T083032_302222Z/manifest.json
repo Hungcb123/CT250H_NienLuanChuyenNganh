@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "status": "accepted",
+  "base_snapshot_sha256": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+  "requested_start": "2026-08-27",
+  "requested_end": "2026-10-20",
+  "sources": {
+    "vnd": {
+      "provider": "vnd",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNINDEX",
+        "from": 1787763600,
+        "to": 1792515600
+      },
+      "body": null,
+      "response": "sources/vnd_VNINDEX.json",
+      "response_sha256": "f8f78c2d2e5db6fc9e8c2252b1f55f537e44957cb400fd6094e4310d7be1b924",
+      "downloaded_at": "2026-10-20T08:30:35.589685+00:00",
+      "rows": 36,
+      "start": "2026-08-27",
+      "end": "2026-10-20"
+    },
+    "vci": {
+      "provider": "vci",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VNINDEX"
+        ],
+        "to": 1792515600,
+        "countBack": 98
+      },
+      "response": "sources/vci_VNINDEX.json",
+      "response_sha256": "ac49ccb53b3a91f8c624d091b9a9f9298c6eca4a4e383ce32aede3a6249ef0c7",
+      "downloaded_at": "2026-10-20T08:30:36.198817+00:00",
+      "rows": 36,
+      "start": "2026-08-27",
+      "end": "2026-10-20"
+    }
+  },
+  "errors": [],
+  "collector_sha256": "a12a9ab6df4556e9819a5f59046c6a81e67f5bd179aca93038bf9596539e4351",
+  "created_at": "2026-10-20T08:30:34.833094+00:00",
+  "previous_snapshot_sha256": "c33166ac9ba0f2763351f0625cc5b8b9d70d8b8811d40390019c0fd8a49b716c",
+  "previous_latest_session": "2026-10-19",
+  "canonical_sha256": "df6a29c26776c1d81060bf381e1563473d1c7affcf7a88a21790826da7afa227",
+  "rows": 4187,
+  "latest_session": "2026-10-20",
+  "extension_rows": 1,
+  "policy": "Frozen reviewed prefix unchanged; new sessions require VCI/VND date and close agreement <= .011"
+}

@@ -1,0 +1,898 @@
+[
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "target_center": [
+      0.004696720256187185,
+      0.04276560987085809
+    ],
+    "target_scale": [
+      0.060101551157666,
+      0.04246152171558713
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "target_center": [
+      0.006916323027348642,
+      0.046600931727666925
+    ],
+    "target_scale": [
+      0.06575052449001412,
+      0.04686938856403294
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "target_center": [
+      0.00705284006535987,
+      0.046310144211700495
+    ],
+    "target_scale": [
+      0.06465863278411467,
+      0.04564523477230199
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "target_center": [
+      0.009673033160430751,
+      0.046326958189698245
+    ],
+    "target_scale": [
+      0.06363206453389604,
+      0.04465710719921742
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "target_center": [
+      0.011604598695463797,
+      0.047145035769733674
+    ],
+    "target_scale": [
+      0.06374332258366341,
+      0.04442026855185253
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "target_center": [
+      0.013664471468002228,
+      0.0471244009931561
+    ],
+    "target_scale": [
+      0.0626701925020827,
+      0.043493327704047326
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "target_center": [
+      0.01260978416357203,
+      0.046726581536541974
+    ],
+    "target_scale": [
+      0.06216822506914126,
+      0.04288056158265023
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "target_center": [
+      0.01267371453954914,
+      0.04644368286120773
+    ],
+    "target_scale": [
+      0.06186402074252576,
+      0.04276714195911834
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "target_center": [
+      0.013588652237389302,
+      0.045804150521546856
+    ],
+    "target_scale": [
+      0.06067109479863788,
+      0.0420242266209785
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "target_center": [
+      0.012849493982743277,
+      0.044337783925313935
+    ],
+    "target_scale": [
+      0.05941313063163031,
+      0.04156656437055401
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "target_center": [
+      0.010234017413762505,
+      0.04585519448223524
+    ],
+    "target_scale": [
+      0.0620485029983667,
+      0.04301763896225635
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "target_center": [
+      0.008771936349719739,
+      0.047170341772179346
+    ],
+    "target_scale": [
+      0.06387904660685792,
+      0.04394148585902872
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "target_center": [
+      0.007497016987560784,
+      0.048048974918793674
+    ],
+    "target_scale": [
+      0.06486987626678499,
+      0.04420423888324796
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "target_center": [
+      0.007536340575560105,
+      0.04737569331511133
+    ],
+    "target_scale": [
+      0.06405064316186591,
+      0.04374184321518212
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "target_center": [
+      0.008105761560046294,
+      0.04673096543612629
+    ],
+    "target_scale": [
+      0.06309409096552374,
+      0.04314405148075527
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "target_center": [
+      0.008057644527635197,
+      0.046627169338905455
+    ],
+    "target_scale": [
+      0.06270518771646987,
+      0.04267853698094526
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "target_center": [
+      0.007420404606038681,
+      0.04621165483975227
+    ],
+    "target_scale": [
+      0.062174718092480916,
+      0.04223733134416017
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "target_center": [
+      0.008493544265840093,
+      0.04593935616342315
+    ],
+    "target_scale": [
+      0.06145587243153976,
+      0.04168166533912674
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "target_center": [
+      0.008251499470319008,
+      0.045322448092506476
+    ],
+    "target_scale": [
+      0.060785121879130495,
+      0.04132415401025718
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "target_center": [
+      0.008048409799388083,
+      0.0446136374863967
+    ],
+    "target_scale": [
+      0.06001945765659441,
+      0.04093528415387959
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "target_center": [
+      0.007566739706391501,
+      0.04388575667233379
+    ],
+    "target_scale": [
+      0.059246862583491856,
+      0.04050323862105937
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "target_center": [
+      0.0074792887073915435,
+      0.04367409197181482
+    ],
+    "target_scale": [
+      0.05907742182321744,
+      0.04046845561456962
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "target_center": [
+      0.007118616781710036,
+      0.04402354672235281
+    ],
+    "target_scale": [
+      0.059392620545657956,
+      0.04048627422500438
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "target_center": [
+      0.008892615350375275,
+      0.0446672533190878
+    ],
+    "target_scale": [
+      0.059586919672424736,
+      0.04041762161275831
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "target_center": [
+      0.009601364952675644,
+      0.04465000335982899
+    ],
+    "target_scale": [
+      0.05935720990767515,
+      0.040260954405298754
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "target_center": [
+      0.01018183737507922,
+      0.04480476731693775
+    ],
+    "target_scale": [
+      0.05931009145705666,
+      0.04016238396272748
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "target_center": [
+      0.010044211270017988,
+      0.045423313107548
+    ],
+    "target_scale": [
+      0.05998051893414634,
+      0.04042768038900193
+    ]
+  },
+  {
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "target_center": [
+      0.009116569627983665,
+      0.045202128575761016
+    ],
+    "target_scale": [
+      0.059803270142390265,
+      0.04019280111381876
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "target_center": [
+      0.2533527789337354,
+      1.189973099677684
+    ],
+    "target_scale": [
+      1.6168272908312493,
+      1.1227214227884732
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "target_center": [
+      0.24234625599454004,
+      1.1976313476330738
+    ],
+    "target_scale": [
+      1.6441359470976067,
+      1.151487057143674
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "target_center": [
+      0.22646473508252715,
+      1.1583960381424154
+    ],
+    "target_scale": [
+      1.5975818773804458,
+      1.1225934688786785
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "target_center": [
+      0.30180317907560206,
+      1.1719327220378348
+    ],
+    "target_scale": [
+      1.5756239934051695,
+      1.0949422666752733
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "target_center": [
+      0.3419472362766602,
+      1.1854092740745372
+    ],
+    "target_scale": [
+      1.583494290098822,
+      1.1035913830636346
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "target_center": [
+      0.37831840114170445,
+      1.1723987668542681
+    ],
+    "target_scale": [
+      1.5480545271249697,
+      1.0788573956878829
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "target_center": [
+      0.3482636095157967,
+      1.148358131438436
+    ],
+    "target_scale": [
+      1.5255042150563087,
+      1.0623897697388702
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "target_center": [
+      0.3485030681676356,
+      1.1404268832123485
+    ],
+    "target_scale": [
+      1.5178158440210383,
+      1.0600096829673449
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "target_center": [
+      0.3776046318459282,
+      1.1348596114187408
+    ],
+    "target_scale": [
+      1.495790253619479,
+      1.0445684265969382
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "target_center": [
+      0.3574586013507099,
+      1.095838088347732
+    ],
+    "target_scale": [
+      1.4643199373122024,
+      1.0345566390152798
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "target_center": [
+      0.2935006426792984,
+      1.1318909646516617
+    ],
+    "target_scale": [
+      1.5287412233462223,
+      1.068221254515657
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "target_center": [
+      0.235574151958006,
+      1.1699692124046266
+    ],
+    "target_scale": [
+      1.6028516982614902,
+      1.1201929544589788
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "target_center": [
+      0.20756695074763223,
+      1.159775401736069
+    ],
+    "target_scale": [
+      1.5932311793099567,
+      1.1115183773967798
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "target_center": [
+      0.20210438384658713,
+      1.131340594819756
+    ],
+    "target_scale": [
+      1.5644158606044671,
+      1.0988519169603936
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "target_center": [
+      0.23124299120364805,
+      1.1320616778825454
+    ],
+    "target_scale": [
+      1.551953708824997,
+      1.0861273090841954
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "target_center": [
+      0.24526199622576492,
+      1.1392907625972477
+    ],
+    "target_scale": [
+      1.5516329009841825,
+      1.0811856772036215
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "target_center": [
+      0.22915928096622784,
+      1.1198298866576912
+    ],
+    "target_scale": [
+      1.5323462799461083,
+      1.0704480048978886
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "target_center": [
+      0.2716601608181844,
+      1.1314565338064424
+    ],
+    "target_scale": [
+      1.532357196597937,
+      1.068188275438497
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "target_center": [
+      0.25944116424184677,
+      1.1111555134930744
+    ],
+    "target_scale": [
+      1.5125216274716853,
+      1.0581651049287746
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "target_center": [
+      0.25176424143069775,
+      1.0953087704774593
+    ],
+    "target_scale": [
+      1.4947120068506106,
+      1.0474900212851923
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "target_center": [
+      0.23305836907020594,
+      1.0881963188850217
+    ],
+    "target_scale": [
+      1.4844320093577217,
+      1.0359026429066127
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "target_center": [
+      0.23026290836758082,
+      1.0836901015659042
+    ],
+    "target_scale": [
+      1.480524168190646,
+      1.034411700493255
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "target_center": [
+      0.19872791570764384,
+      1.1219456170467736
+    ],
+    "target_scale": [
+      1.5655556231922565,
+      1.1095420002744574
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "target_center": [
+      0.24069867289294342,
+      1.135640868551779
+    ],
+    "target_scale": [
+      1.5748133604889756,
+      1.1170021001522854
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "target_center": [
+      0.2600092046676414,
+      1.1353893334576106
+    ],
+    "target_scale": [
+      1.5748114101797828,
+      1.1215838677956238
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "target_center": [
+      0.26896962250277545,
+      1.1302655229699048
+    ],
+    "target_scale": [
+      1.5648771778356847,
+      1.1149586405859284
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "target_center": [
+      0.2551736492320185,
+      1.1272449160880869
+    ],
+    "target_scale": [
+      1.5585800688335727,
+      1.1059237407088065
+    ]
+  },
+  {
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "target_center": [
+      0.23111443415994123,
+      1.1217264189724352
+    ],
+    "target_scale": [
+      1.552673365847623,
+      1.0979145089152982
+    ]
+  }
+]

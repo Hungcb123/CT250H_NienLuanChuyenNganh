@@ -46,6 +46,12 @@ public class PortfolioSnapshot {
     @Column(name = "created_at")
     private Instant createdAt = Instant.now();
 
+    @Column(name = "snapshot_source", nullable = false, length = 32)
+    private String snapshotSource = "OBSERVED";
+
+    public String getSnapshotSource() { return snapshotSource; }
+    public void setSnapshotSource(String source) { this.snapshotSource = source; }
+
     public PortfolioSnapshot() {}
 
     public PortfolioSnapshot(User user, LocalDate snapshotDate, BigDecimal totalNav,

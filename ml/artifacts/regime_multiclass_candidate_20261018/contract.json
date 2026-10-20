@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "candidate_id": "multiclass_delayed_experts_v1",
+  "frozen_at": "2026-10-18T16:08:26.225263+00:00",
+  "status": "research_challenger_not_accepted_or_live",
+  "objective": "Original VNINDEX T+20 THREE classes: simple return < -5% bearish0, > +5% bullish2, equality/otherwise sideway1",
+  "feature_schemas": {
+    "trend": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200"
+    ],
+    "risk": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "Drawdown120",
+      "Drawdown252",
+      "HV20_60_Ratio",
+      "DownsideHV60"
+    ]
+  },
+  "density_features": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ETF_ROC20",
+    "ETF_HV20",
+    "ETF_Corr30_VNINDEX",
+    "ETF_ReturnSpread20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200"
+  ],
+  "feature_dtype": "float32",
+  "target_calendar": "Full accepted VNINDEX market calendar; shift endpoints20 sessions before feature filtering. No price filling.",
+  "model_refit": {
+    "market_sessions": 63,
+    "last_development_anchor": "2025-02-10",
+    "rule": "Refit at first feature-eligible prediction in each raw-market63-session bucket; only labels with label_end_date strictly before that boundary.",
+    "legacy_train_window": "3y",
+    "legacy_parameters": {
+      "trend": {
+        "n_estimators": 350,
+        "learning_rate": 0.04272080460529356,
+        "max_depth": 5,
+        "num_leaves": 59,
+        "min_child_samples": 42,
+        "subsample": 0.633488544315244,
+        "colsample_bytree": 0.8193227474355528,
+        "reg_alpha": 0.0021140781760156974,
+        "reg_lambda": 0.6394254572435746,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "risk": {
+        "n_estimators": 250,
+        "learning_rate": 0.12139707695554378,
+        "max_depth": 3,
+        "num_leaves": 20,
+        "min_child_samples": 23,
+        "subsample": 0.7301321323053057,
+        "colsample_bytree": 0.7554709158757928,
+        "reg_alpha": 2.7678419414850017e-06,
+        "reg_lambda": 0.28749982347407854,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      }
+    },
+    "legacy_hyperparameters": "Last original outer fold parameters frozen for future operation; no future automatic retuning.",
+    "legacy_training_cohort": "Finite union of close12,ETF4,trend3,risk4 features. Shared raw-calendar mature labels.",
+    "density_train_windows": [
+      "3y",
+      "expanding"
+    ],
+    "density_targets": [
+      "raw future log return",
+      "future log return / trailing20 horizon sigma"
+    ],
+    "density_training_cohort": "Finite close12,ETF4,trend3 plus positive known sigma; mature raw-calendar target.",
+    "quantiles": [
+      0.05,
+      0.15,
+      0.25,
+      0.35,
+      0.5,
+      0.65,
+      0.75,
+      0.85,
+      0.95
+    ],
+    "quantile_atom_weights": [
+      0.1,
+      0.1,
+      0.09999999999999998,
+      0.125,
+      0.14999999999999997,
+      0.125,
+      0.10000000000000009,
+      0.09999999999999987,
+      0.10000000000000009
+    ],
+    "density_parameters": {
+      "n_estimators": 300,
+      "learning_rate": 0.03,
+      "max_depth": 4,
+      "num_leaves": 15,
+      "min_child_samples": 50,
+      "colsample_bytree": 0.7,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0,
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1,
+      "objective": "quantile"
+    },
+    "density_scale": "std of last20 completed daily log returns,ddof1 * sqrt20; scale predictions back to log-return before class map"
+  },
+  "experts": {
+    "legacy_equal": "half trend3y and half risk3y class-balanced LightGBM probabilities",
+    "legacy_trend": "trend3y LightGBM scores",
+    "legacy_risk": "risk3y LightGBM scores",
+    "density_all": "equal mean of all FOUR quantile forecasters after dividing each raw class mass by its own mature training class frequency and renormalizing",
+    "density_expanding": "equal mean of RAW/NORMALIZED expanding quantile scores after each own-prior adjustment"
+  },
+  "density_class_map": "Sort nine predicted quantiles; fixed atom weights below log(.95) -> bearish, above log(1.05) -> bullish, equal/between -> sideway.",
+  "selector": {
+    "history_rows": 126,
+    "min_class_count": 5,
+    "improvement_margin": 0.03,
+    "refit_market_sessions": 20
+  },
+  "selector_pool": [
+    "legacy_equal",
+    "legacy_trend",
+    "legacy_risk",
+    "density_all",
+    "density_expanding"
+  ],
+  "selector_anchor": "2020-03-27",
+  "selector_decision": "Every20 raw sessions compare each expert macro F1 over last126 archived forecasts with label_end_date strictly before selection date. Require >=5 each actual class; switch only if best score >= legacy_equal +.03. Ties prefer pool order. Otherwise fallback legacy_equal. Hold expert between refreshes.",
+  "score_semantics": "Class-balanced decision scores, NOT calibrated event probabilities; no financial confidence/profitability claim.",
+  "development_metrics": {
+    "mean_f1": 0.42045100021628456,
+    "worst_f1": 0.383783152160406,
+    "mean_mcc": 0.14118317174733352,
+    "pooled": {
+      "f1_macro": 0.45021412366515606,
+      "mcc": 0.17703307066943813,
+      "accuracy": 0.5532051282051282,
+      "baseline_f1": 0.25753999475478623,
+      "confusion_matrix": [
+        [
+          62,
+          106,
+          23
+        ],
+        [
+          173,
+          654,
+          155
+        ],
+        [
+          49,
+          191,
+          147
+        ]
+      ],
+      "n_samples": 1560,
+      "bear_support": 191,
+      "bear_signals": 284,
+      "bear_hits": 62,
+      "bear_false_alarms": 222,
+      "bear_missed": 129,
+      "bear_precision": 0.21830985915492956,
+      "bear_recall": 0.32460732984293195,
+      "bear_false_alarm_rate": 0.16216216216216217,
+      "bear_false_discovery_rate": 0.7816901408450704
+    }
+  },
+  "audit": {
+    "default_parity_matches": 1560,
+    "prefix_checks": [
+      {
+        "end": "2021-10-14",
+        "n": 390,
+        "unmatured_labels_removed": 21,
+        "matches": 390
+      },
+      {
+        "end": "2023-07-14",
+        "n": 780,
+        "unmatured_labels_removed": 21,
+        "matches": 780
+      },
+      {
+        "end": "2025-02-07",
+        "n": 1170,
+        "unmatured_labels_removed": 21,
+        "matches": 1170
+      },
+      {
+        "end": "2026-04-08",
+        "n": 1460,
+        "unmatured_labels_removed": 21,
+        "matches": 1460
+      },
+      {
+        "end": "2026-09-03",
+        "n": 1560,
+        "unmatured_labels_removed": 21,
+        "matches": 1560
+      }
+    ],
+    "paired_intervals": "All6 paired20/60-block mean-F1 intervals against original controls/equal include0.",
+    "sensitivity": "8 single-factor perturbations, mean F1 .4173-.4256; some worst-fold results sensitive. Original126/5/.03/20 retained, no winning neighbor substituted."
+  },
+  "source_component_sha256": {
+    "train_regime_v2.py": "c9a94abcc3f97e9d100f5b108c38eb87d4fe70448f8519efb2e1af575218363f",
+    "experiment_regime.py": "527e6b89dfe4b5c63d177385525ed5f510ecf4eaed932cec5a92d32d4559a59b",
+    "experiment_regime_multiclass_reuse.py": "8126239e714d6c843049dfe6334cff9d11655bc3bcaf62d90efa1533c8c91c93",
+    "experiment_regime_return_distribution.py": "229244354fe84dc317fd0cd64e0fa3b1c7e1e84c30cac6df520dfd049c4bbdfd",
+    "experiment_regime_expert_selection.py": "9f40a26ea1ffaf957d26299d6ef0b10fbc76f5132eec43fe8a2b5c135c8bb59e"
+  },
+  "source_data_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "source_prediction_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/legacy_equal_63_predictions.csv": "5a079a343e4ca685b50349e8944a99a880a5218c6971b2f46d9608ce9d188720",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/legacy_trend_63_predictions.csv": "7fdd4be6a61304001f9840594cf224988f8448aa9daae2a1744db6b360a626d7",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/legacy_risk_63_predictions.csv": "66535f965d9dc3cc8581ccb0e1d128278f0be59cc315853d8140515c8bedbb96",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_raw_predictions.csv": "af5a6467cc18850128b7b6b8478c70ea92a689dbeca76f167c1765a52f14d516",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_normalized_predictions.csv": "bec9740cca6500e2ba23ef12cdd4afe9d15d93de323c56e2b924c30d63a78188",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_raw_predictions.csv": "83af3dd9d1197722b2b7a25eb31adcbf22aa36c3982f5669d34f6e91e55f4444",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_normalized_predictions.csv": "60b67a09af6db02ad10314ca69c5d37c68d13cb4eedbadb5319cf10dbe4e4568"
+  },
+  "source_reports": {
+    "ml/reports/regime_expert_selection/20261018T160007_360834Z/report.json": "f6d2ae042c95a8e04889c6472171784fceccb7889957ddbd6433ada8e7a24f3c",
+    "ml/reports/regime_expert_selection/20261018T160007_360834Z/robustness_report.json": "9ccc58e598e92c80a94cd351076785f16375b7a9c978ad639b9b06f7f532edeb",
+    "ml/reports/regime_expert_selection/20261018T160007_360834Z/plan.json": "7d3f5ab16eb3fb678bb1cf41661d8ba777d23be4ab67d47589ef1dc1ea4bd29c",
+    "ml/reports/regime_return_distribution/20261018T155423_383833Z/plan.json": "aaef0721844b17a7886d0fc88d1f7f0396a861c311b21bb79ac5d6fb5242dd22"
+  },
+  "environment": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "lightgbm": "4.7.0"
+  },
+  "exposure": {
+    "latest_reviewed_price_date": "2026-10-16",
+    "registry_sha256": "fcf2f545901988294c6f7944e050d0aec32a268cb2b76418cb7d3bd6194cb1e1",
+    "no_fresh_historical_test": true
+  },
+  "caveats": [
+    "Post-hoc design and repeated historical outer inspection; no independent test claim.",
+    "Mean fold MCC .1412 versus prior ensemble .1437: higher macro F1 does not show uniform improvement across metrics.",
+    "Broker histories are not independently point-in-time/exchange certified.",
+    "Prior imbalance correction is decision balancing, not calibrated probability estimation.",
+    "Passing provisional development point gates is not completed user goal or approval for model replacement."
+  ],
+  "remaining": [
+    "Implement independent native inference and replay parity for all experts and selector.",
+    "Prepare verified prospective VNINDEX+ETF data and prediction/outcome ledgers.",
+    "Evaluate genuinely new outcomes and score calibration before acceptance/deployment."
+  ]
+}

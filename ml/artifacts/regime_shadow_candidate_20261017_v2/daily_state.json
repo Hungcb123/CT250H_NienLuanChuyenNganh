@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-20T09:15:08.035289+00:00",
+  "local_date": "2026-10-20",
+  "status": "already_completed_today",
+  "last_completed_date": "2026-10-20",
+  "source_snapshot": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/regime_shadow/daily_20261020T083032_302222Z/VNINDEX.csv",
+  "source_snapshot_sha256": "df6a29c26776c1d81060bf381e1563473d1c7affcf7a88a21790826da7afa227",
+  "prediction_record_id": "equal_standardized_3y_expanding_online120_v1:2026-10-20",
+  "prospective_predictions": 2,
+  "matured_outcomes": 0,
+  "evidence_status": "insufficient_prospective_evidence",
+  "next_attempt_at": null
+}

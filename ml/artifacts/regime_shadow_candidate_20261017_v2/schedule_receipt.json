@@ -1,0 +1,11 @@
+{
+  "installed_at": "2026-10-18T13:16:08.792243+00:00",
+  "cron_service": "active",
+  "interpreter": "/usr/bin/python3",
+  "command": "(/usr/bin/python3 /mnt/d/project_ct250h_nienluanchuyennganh/ml/run_regime_shadow_daily.py --artifact /mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2 >> /mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/daily.log 2>&1) 2>> /tmp/regime-shadow-cron-errors.log",
+  "interval_minutes": 15,
+  "script_sha256": "750679ac1cef076a7f1bfc6ba1df632c360fd23b0a02dfcb24c1addd6ead88de",
+  "operations_lock_sha256": "86a781380c181d794a2ae6151880835ce9b18767a6c4e3a187a76ad35ae8526b",
+  "original_crontab_backup": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/cron_before_20261018T131608_779517Z.txt",
+  "limitation": "Runs only while this machine/WSL and cron are active; no external notifications or model deployment"
+}

@@ -1,0 +1,54 @@
+{
+  "role": "Final research comparison to actual goal-start reference documented in stage1, not an independent test. This does not replace failed incremental screens against later higher-mean incumbents.",
+  "reference": "ml/reports/regime_dynamic_information/20261019T052057_760569Z/inner_selected_blend_predictions.csv",
+  "candidate": "ml/reports/regime_shock_forest/20261019T072038_455776Z/shock_shrink_predictions.csv",
+  "results": [
+    {
+      "candidate": "goal_start_reference",
+      "mean_f1": 0.49250821828003344,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.2683507047693309,
+      "bear_f1": 0.2904853989105694,
+      "bull_f1": 0.44161034830014434,
+      "fold_f1": [
+        0.5046525283539176,
+        0.6532362241954977,
+        0.4000134347464767,
+        0.4121306858242417
+      ]
+    },
+    {
+      "candidate": "shock_shrink",
+      "mean_f1": 0.5137451636929175,
+      "worst_f1": 0.403056383096105,
+      "mean_mcc": 0.300524907816212,
+      "bear_f1": 0.31417630477138003,
+      "bull_f1": 0.4834556285674083,
+      "fold_f1": [
+        0.5642611356897071,
+        0.6543737157843653,
+        0.403056383096105,
+        0.43328942020149236
+      ]
+    }
+  ],
+  "fold_wins": 4,
+  "point_screen": true,
+  "paired_intervals": [
+    {
+      "block": 20,
+      "delta": 0.021236945412884012,
+      "low": -0.0002570957438729299,
+      "high": 0.03829991505490174
+    },
+    {
+      "block": 60,
+      "delta": 0.021236945412884012,
+      "low": 0.0010289752940522562,
+      "high": 0.03938858640657489
+    }
+  ],
+  "descriptive_both_lower_positive": false,
+  "independent_acceptance": false,
+  "caveat": "Adaptive repeated research selection unadjusted. Passing a retrospective goal-start screen cannot certify future advantage."
+}

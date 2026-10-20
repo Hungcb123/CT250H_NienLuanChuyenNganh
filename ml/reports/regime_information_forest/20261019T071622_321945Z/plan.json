@@ -1,0 +1,798 @@
+{
+  "mode": "trusted_context_empirical_forest_DEVELOPMENT",
+  "reference_report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "labels": {
+    "20": {
+      "policy": "vol_1sigma",
+      "k": 1.0,
+      "lookback": 20,
+      "horizon": 20,
+      "ddof": 1,
+      "equality": "sideway"
+    }
+  },
+  "base_feature_set": "close-etf",
+  "feature_groups": {
+    "trend": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200"
+    ]
+  },
+  "feature_version": "long-trend-risk-v1-research",
+  "train_windows": [
+    "3y",
+    "expanding"
+  ],
+  "refit_market_sessions": 63,
+  "inner_splits": 2,
+  "models": [
+    "LightGBM"
+  ],
+  "optuna": null,
+  "score_role": "Nested forward development comparison on already-inspected history; no fresh holdout claim.",
+  "assumptions": [
+    "All variants use identical dates and labels; adding a feature cannot remove a frozen validation date.",
+    "Parameters are selected once at each outer fold start using purged inner folds only.",
+    "The model is refitted periodically using labels known strictly before each prediction block.",
+    "Rolling windows are calendar years measured from the prediction block start.",
+    "Each refit uses the same fixed parameters until the next outer fold.",
+    "A drawdown feature measures current distance below the trailing peak.",
+    "No confidence threshold, new label definition, financial backtest, or ONNX deployment."
+  ],
+  "datasets": [
+    {
+      "horizon": 20,
+      "eligible_history_rows": 2341,
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2020-03-27",
+          "end": "2021-10-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+          "n_refits": 7
+        },
+        {
+          "fold": 2,
+          "start": "2021-10-15",
+          "end": "2023-07-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+          "n_refits": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-07-17",
+          "end": "2025-02-07",
+          "n_validation": 390,
+          "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+          "n_refits": 7
+        },
+        {
+          "fold": 4,
+          "start": "2025-02-10",
+          "end": "2026-09-03",
+          "n_validation": 390,
+          "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+          "n_refits": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "specification": {
+    "role": "Predeclared next study: dense conditional-return supervision for SAME three-class target; no fit yet",
+    "created_at": "2026-10-18T15:49:33.524205+00:00",
+    "motivation": "Three-family categorical comparison shows weak outer generalization; hard class labels discard magnitude within each class. Test continuous future-return supervision without redefining evaluation labels.",
+    "target": "Evaluation remains VNINDEX T+20 return strictly below -5%, above +5%, else sideway, same1560 dates.",
+    "features": "Same original19 close/ETF/trend; no additional source or universe",
+    "train_windows": [
+      "3y",
+      "expanding"
+    ],
+    "refit_market_sessions": 63,
+    "regression_targets": [
+      "future log return",
+      "future log return / (trailing20 daily log-return sample std * sqrt20)"
+    ],
+    "normalization_formula": "Z=log(P[t+20]/P[t]) / (std(last20 completed daily log returns,ddof=1)*sqrt20); only past sigma enters normalizer.",
+    "quantile_levels": [
+      0.05,
+      0.15,
+      0.25,
+      0.35,
+      0.5,
+      0.65,
+      0.75,
+      0.85,
+      0.95
+    ],
+    "quantile_atom_weights": [
+      0.1,
+      0.1,
+      0.09999999999999998,
+      0.125,
+      0.14999999999999997,
+      0.125,
+      0.10000000000000009,
+      0.09999999999999987,
+      0.10000000000000009
+    ],
+    "forecast_map": "Fit one conditional quantile per level, sort predicted quantiles, convert normalized predictions back to log returns. Quadrature class mass = sum fixed atom weights with return < log(.95), > log(1.05), otherwise sideway. Threshold equality stays sideway.",
+    "decision_rules": [
+      "argmax raw approximate masses",
+      "argmax mass / mature-training class frequency; decision balancing only, not calibrated posterior"
+    ],
+    "parameters": {
+      "n_estimators": 300,
+      "learning_rate": 0.03,
+      "max_depth": 4,
+      "num_leaves": 15,
+      "min_child_samples": 50,
+      "colsample_bytree": 0.7,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0,
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1,
+      "objective": "quantile"
+    },
+    "hyperparameter_search": false,
+    "total_forecasters": 4,
+    "decisions_per_forecaster": 2,
+    "timing": "All training labels must mature strictly before global prediction/refit boundary. Raw-calendar labels and sigma before any feature filter.",
+    "acceptance": "Compare same dates/labels vs original trend and risk controls: +.02 mean fold F1, no worse worst F1, MCC gain, >=3 improved folds. No independent acceptance from repeatedly inspected history.",
+    "limitations": [
+      "Quantile quadrature probabilities are approximate scores, not asserted calibrated event probabilities.",
+      "Previous quantile risk study used onlyq10 for binary risk; this study requires the full three-class distribution and fixed target.",
+      "No confidence subset, label policy change or automatic deployment."
+    ]
+  },
+  "specification_sha256": "dd968e42aa0801dac8b03e82c7588b4665d97e7b234b723b7b39f5cdd3761660",
+  "source_sha256": "229244354fe84dc317fd0cd64e0fa3b1c7e1e84c30cac6df520dfd049c4bbdfd",
+  "configs": [
+    {
+      "window": "3y",
+      "normalized": false
+    },
+    {
+      "window": "3y",
+      "normalized": true
+    },
+    {
+      "window": "expanding",
+      "normalized": false
+    },
+    {
+      "window": "expanding",
+      "normalized": true
+    }
+  ],
+  "decisions": [
+    "prediction_raw",
+    "prediction_prior_balanced"
+  ],
+  "environment": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "lightgbm": "4.7.0"
+  },
+  "supplementary_metrics": "Raw quadrature mass log loss/Brier vs causal training-class frequency; descriptive only, not substituted for original macro-F1 acceptance.",
+  "control_report_sha256": "cb92562ac3a11bb192f888f5e9056787a14fb606feb924ed8586e4909b66eb4e",
+  "reference_labels": {
+    "20": {
+      "name": "T+20",
+      "bull_threshold": 0.05,
+      "bear_threshold": -0.05
+    }
+  },
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/magnitude_shrink_predictions.csv": "bbfe9402a9303027ce114c0751c723935401e5b61cdb8d6e0f2fef49a7284d8f",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/plan.json": "92a56a05bd42a2738f6074f93a645ea9dff40b7a891e541333315c5dd6e505c6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/inner_selection.json": "5c26c715848841ea45703286b12389c8ba1a18239b11d48b9330dfb6f5079000",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/risk_predictions.csv": "9673be6656785f2d1e9aaf4bfb85ad1167cd1ed575ef3317c602612ba1ae0a80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/plan.json": "481f3f12019f8267381ef6af96f57ee16b4f96a8ffeefdfd843be9a8ec4d5d69",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/plan.json": "3fed146bbadffe7ce0c585f5e7005b870b4b58516ec3ea5f0f4dd89a0411502a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/vix_scores.csv": "9e998afa36bd6dfd2876f6e7bd7d0355cddba3faf855331c3b3ae07f8f0b5f93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/indices_scores.csv": "8eece2bacd2aa77ed285ad4f8cb1034310f206c54509638f4f68aea087fa0d5a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/control_scores.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/ohlcv_scores.csv": "6faa1040cce24ccd9a532d5d6da29843c4c0a2fab5bea55ddd262f92e60e8ee1",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed7_raw_scores.csv": "8c9c6657e23d062b6c21629277deb1068a9cc20254aea1a1ca3c5d1ece667a4a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed7_normalized_scores.csv": "92012aaa9af7322cc8037ed8c90186df5438dc7e66a7b3541139b6d1a9757bbd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed21_raw_scores.csv": "1ce9015949731376c56e1c45c3ab537de3dffc41b522ce7d4e17b37acdab5fde",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed21_normalized_scores.csv": "a081e31c455a9eb92ba04c0ceed81ae4ecdcc73d16cac8ede9bf9b7330ba28fc",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_raw_mapped_predictions.csv": "02a35e6b7ccc26877666aab9ccd0562781c11509277f16075bdb883457bc06df",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_normalized_mapped_predictions.csv": "f048d7e4a9107820c58b306315133b0b847c4a2e5509d7f6544e49205732e466",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed84_raw_scores.csv": "660c64030b929abf1a8c92455ca8716f9403999cec0f0c07a74b42a439507b94",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed84_normalized_scores.csv": "6c255d712cdb2013558ad6a93baf33c2f8aec02f1ef2f7fc787ce54ca7311941",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed126_raw_scores.csv": "f16c4990a5b57b3d8c4fa2ae9fb0c2a21d6d8943f32a405138eac800d48e9f94",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed126_normalized_scores.csv": "ae7af3c40014406f65fe4cfdf5fe2a0bc13fbfe92eb159b3058a16cc9a4fbb93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/RandomForest_raw_scores.csv": "43daba29dcff11a868b07bfc754fad1bbbcabee53991fbe4e03e41f5feb5841e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_empirical_forest/20261019T070202_443313Z/RandomForest_normalized_scores.csv": "bf32031e82235cac4f1e0eb8bc330cb9e7823e1816ac9012c9b6d4b58a4d0def",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/raw_scores.csv": "0317867a5b1c4899553a0e38f83495282b71231c7e1eb24120a48b05c7f7e22e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/normalized_scores.csv": "a14ea48d7da857b5cce52681e5bb97b0bb9bc343d8123f9151bf230089d01613",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_information_forest.py": "dfbd2893705ec0a3e5796c14455403423db783759ea809890361c468a370e2f5",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_information.py": "d619b00d4325313c84a15b933d8251a5a2ede6d82e02576a6c5e48130c77b41b",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_empirical_forest.py": "9bcee200cab9ccd34a323c99949c6b50e6ad9c5ddb371952048d9ddb19bd0cb2",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_forecast_smoothing.py": "12eb6797e7a3d4eabd7b08d9c8d4fec507f16769ae478118b0a96dd8e694e133",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_matched_calibration.py": "447413d8cb22974b2ee6fb7a7a7c76de3a868371cf558c6e9c43872b92e337ea",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_component_archive.py": "33eb9b11bcf2cf16327a2f40aee448f10f97fe04e2deb189e3221b8f0491ccc3",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_research_evaluation.py": "b4e0c29294d404fd6cdb00967c5d989a6c0e7550979f7bdba81e8492efa45142",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_matched_calibration/20261019T064830_252658Z/selection.json": "bbc14dcd0e0e409ec5b41a4244ba7357568c31d8a1a699fe824ffbaa92cdff30",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_dynamic_information.py": "0ea46965a1d1d39168791d290c3b66d7b8201c74a27af181732ee62d36e0a11d",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_dynamic_tuning.py": "2e1de2a0f89db660abb7c4f75449e0eb24e688482e7a4f7d5a247a41d27edf89",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/plan.json": "70cab9f02820d44764f297521f18f1f810f29f8b62d2072504ea9cf6d3cfe660",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/trend_predictions.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_ohlcv.py": "2e072adb86778727a99054b95f3c77106808afa6df72a0bbe98dfb048c243006",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_global.py": "2caa9585548a5eb129c14b288313d63f9fec51d16a53808e8dc4b7b64eafc54c",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_indices.py": "0ede9478bf061deeae6ed9ef420114daaa6da447218628a79d5f0dbde6a28253"
+  },
+  "parameters": {
+    "n_estimators": 300,
+    "max_depth": 6,
+    "min_samples_leaf": 30,
+    "max_features": 0.7,
+    "n_jobs": 2,
+    "random_state": 42
+  },
+  "feature_names": {
+    "control": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200"
+    ],
+    "ohlcv": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200",
+      "IntradayRangeSigma",
+      "CloseLocation",
+      "UpperWickSigma",
+      "BodySigma",
+      "VolumeLogRatio60",
+      "RangeVolumeInteraction"
+    ],
+    "vix": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200",
+      "VIX_LogLevel",
+      "VIX_LogChange5",
+      "VIX_LogChange20",
+      "VIX_DistMean60",
+      "VIX_StretchInteraction"
+    ],
+    "indices": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200",
+      "VN30_SpreadROC20",
+      "VN30_HV20Ratio",
+      "VN30_Corr60",
+      "VNMID_SpreadROC20",
+      "VNMID_HV20Ratio",
+      "VNMID_Corr60",
+      "VNSML_SpreadROC20",
+      "VNSML_HV20Ratio",
+      "VNSML_Corr60",
+      "IndexROC20Dispersion",
+      "IndexTrendParticipation"
+    ],
+    "combined": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200",
+      "IntradayRangeSigma",
+      "CloseLocation",
+      "UpperWickSigma",
+      "BodySigma",
+      "VolumeLogRatio60",
+      "RangeVolumeInteraction",
+      "VIX_LogLevel",
+      "VIX_LogChange5",
+      "VIX_LogChange20",
+      "VIX_DistMean60",
+      "VIX_StretchInteraction",
+      "VN30_SpreadROC20",
+      "VN30_HV20Ratio",
+      "VN30_Corr60",
+      "VNMID_SpreadROC20",
+      "VNMID_HV20Ratio",
+      "VNMID_Corr60",
+      "VNSML_SpreadROC20",
+      "VNSML_HV20Ratio",
+      "VNSML_Corr60",
+      "IndexROC20Dispersion",
+      "IndexTrendParticipation"
+    ]
+  },
+  "context_choices": {
+    "1": "vix",
+    "2": "indices",
+    "3": "control",
+    "4": "ohlcv"
+  },
+  "context_source_plan": {
+    "mode": "three_class_information_development_ablation",
+    "reference_report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+    "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+    "input_hashes": {
+      "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+      "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+    },
+    "labels": {
+      "20": {
+        "name": "T+20",
+        "bull_threshold": 0.05,
+        "bear_threshold": -0.05
+      }
+    },
+    "base_feature_set": "close-etf",
+    "feature_groups": {
+      "control": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "ohlcv": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200",
+        "IntradayRangeSigma",
+        "CloseLocation",
+        "UpperWickSigma",
+        "BodySigma",
+        "VolumeLogRatio60",
+        "RangeVolumeInteraction"
+      ],
+      "vix": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200",
+        "VIX_LogLevel",
+        "VIX_LogChange5",
+        "VIX_LogChange20",
+        "VIX_DistMean60",
+        "VIX_StretchInteraction"
+      ],
+      "indices": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200",
+        "VN30_SpreadROC20",
+        "VN30_HV20Ratio",
+        "VN30_Corr60",
+        "VNMID_SpreadROC20",
+        "VNMID_HV20Ratio",
+        "VNMID_Corr60",
+        "VNSML_SpreadROC20",
+        "VNSML_HV20Ratio",
+        "VNSML_Corr60",
+        "IndexROC20Dispersion",
+        "IndexTrendParticipation"
+      ],
+      "combined": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200",
+        "IntradayRangeSigma",
+        "CloseLocation",
+        "UpperWickSigma",
+        "BodySigma",
+        "VolumeLogRatio60",
+        "RangeVolumeInteraction",
+        "VIX_LogLevel",
+        "VIX_LogChange5",
+        "VIX_LogChange20",
+        "VIX_DistMean60",
+        "VIX_StretchInteraction",
+        "VN30_SpreadROC20",
+        "VN30_HV20Ratio",
+        "VN30_Corr60",
+        "VNMID_SpreadROC20",
+        "VNMID_HV20Ratio",
+        "VNMID_Corr60",
+        "VNSML_SpreadROC20",
+        "VNSML_HV20Ratio",
+        "VNSML_Corr60",
+        "IndexROC20Dispersion",
+        "IndexTrendParticipation"
+      ]
+    },
+    "feature_version": "long-trend-risk-v1-research",
+    "train_windows": [
+      "3y"
+    ],
+    "refit_market_sessions": 63,
+    "inner_splits": 2,
+    "models": [
+      "LightGBM"
+    ],
+    "optuna": {
+      "n_trials": 1,
+      "timeout_seconds": 1
+    },
+    "score_role": "Nested forward development comparison on already-inspected history; no fresh holdout claim.",
+    "assumptions": [
+      "All variants use identical dates and labels; adding a feature cannot remove a frozen validation date.",
+      "Parameters are selected once at each outer fold start using purged inner folds only.",
+      "The model is refitted periodically using labels known strictly before each prediction block.",
+      "Rolling windows are calendar years measured from the prediction block start.",
+      "Each refit uses the same fixed parameters until the next outer fold.",
+      "A drawdown feature measures current distance below the trailing peak.",
+      "No confidence threshold, new label definition, financial backtest, or ONNX deployment."
+    ],
+    "datasets": [
+      {
+        "horizon": 20,
+        "eligible_history_rows": 2341,
+        "folds": [
+          {
+            "fold": 1,
+            "start": "2020-03-27",
+            "end": "2021-10-14",
+            "n_validation": 390,
+            "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+            "n_refits": 7
+          },
+          {
+            "fold": 2,
+            "start": "2021-10-15",
+            "end": "2023-07-14",
+            "n_validation": 390,
+            "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+            "n_refits": 7
+          },
+          {
+            "fold": 3,
+            "start": "2023-07-17",
+            "end": "2025-02-07",
+            "n_validation": 390,
+            "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+            "n_refits": 7
+          },
+          {
+            "fold": 4,
+            "start": "2025-02-10",
+            "end": "2026-09-03",
+            "n_validation": 390,
+            "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+            "n_refits": 7
+          }
+        ]
+      }
+    ],
+    "errors": [],
+    "groups": [
+      "control",
+      "ohlcv",
+      "vix",
+      "indices",
+      "combined"
+    ],
+    "source_sha256": "d619b00d4325313c84a15b933d8251a5a2ede6d82e02576a6c5e48130c77b41b",
+    "source_component_sha256": {
+      "experiment_regime.py": "527e6b89dfe4b5c63d177385525ed5f510ecf4eaed932cec5a92d32d4559a59b",
+      "experiment_regime_candidates.py": "74934813dbf929077718be5369be8ff15e334c14f098f14090353f9c0612d6b0",
+      "experiment_regime_ohlcv.py": "2e072adb86778727a99054b95f3c77106808afa6df72a0bbe98dfb048c243006",
+      "experiment_regime_global.py": "2caa9585548a5eb129c14b288313d63f9fec51d16a53808e8dc4b7b64eafc54c",
+      "experiment_regime_indices.py": "0ede9478bf061deeae6ed9ef420114daaa6da447218628a79d5f0dbde6a28253"
+    },
+    "validation_coverage": {
+      "control": {},
+      "ohlcv": {
+        "IntradayRangeSigma": 0.9666666666666667,
+        "CloseLocation": 0.9666666666666667,
+        "UpperWickSigma": 0.9910256410256411,
+        "BodySigma": 0.9923076923076923,
+        "VolumeLogRatio60": 0.5455128205128205,
+        "RangeVolumeInteraction": 0.5121794871794871
+      },
+      "vix": {
+        "VIX_LogLevel": 1.0,
+        "VIX_LogChange5": 1.0,
+        "VIX_LogChange20": 1.0,
+        "VIX_DistMean60": 1.0,
+        "VIX_StretchInteraction": 1.0
+      },
+      "indices": {
+        "VN30_SpreadROC20": 0.9301282051282052,
+        "VN30_HV20Ratio": 0.9301282051282052,
+        "VN30_Corr60": 0.8532051282051282,
+        "VNMID_SpreadROC20": 0.8897435897435897,
+        "VNMID_HV20Ratio": 0.8897435897435897,
+        "VNMID_Corr60": 0.7794871794871795,
+        "VNSML_SpreadROC20": 0.8897435897435897,
+        "VNSML_HV20Ratio": 0.8897435897435897,
+        "VNSML_Corr60": 0.7794871794871795,
+        "IndexROC20Dispersion": 0.8897435897435897,
+        "IndexTrendParticipation": 0.8935897435897436
+      },
+      "combined": {
+        "IntradayRangeSigma": 0.9666666666666667,
+        "CloseLocation": 0.9666666666666667,
+        "UpperWickSigma": 0.9910256410256411,
+        "BodySigma": 0.9923076923076923,
+        "VolumeLogRatio60": 0.5455128205128205,
+        "RangeVolumeInteraction": 0.5121794871794871,
+        "VIX_LogLevel": 1.0,
+        "VIX_LogChange5": 1.0,
+        "VIX_LogChange20": 1.0,
+        "VIX_DistMean60": 1.0,
+        "VIX_StretchInteraction": 1.0,
+        "VN30_SpreadROC20": 0.9301282051282052,
+        "VN30_HV20Ratio": 0.9301282051282052,
+        "VN30_Corr60": 0.8532051282051282,
+        "VNMID_SpreadROC20": 0.8897435897435897,
+        "VNMID_HV20Ratio": 0.8897435897435897,
+        "VNMID_Corr60": 0.7794871794871795,
+        "VNSML_SpreadROC20": 0.8897435897435897,
+        "VNSML_HV20Ratio": 0.8897435897435897,
+        "VNSML_Corr60": 0.7794871794871795,
+        "IndexROC20Dispersion": 0.8897435897435897,
+        "IndexTrendParticipation": 0.8935897435897436
+      }
+    },
+    "consensus_sources": {
+      "vci": {
+        "sha256": "8b9d655e55a5418cf2533d2c238cf68f65ff4eaa380394846054c0a6d65d2f3a",
+        "rows": 4176
+      },
+      "kbs": {
+        "sha256": "0c9c49951c42f3f4fe6e9a816c1bf34c0156f52e3120a24298def3e428270246",
+        "rows": 3577
+      },
+      "vnd": {
+        "sha256": "2d97885a9549e3cd173fdd01cb04878778b2eecec2aba04ee77fecded2e3fc29",
+        "rows": 2271
+      }
+    },
+    "consensus_coverage": {
+      "Open": 0.7786296118830858,
+      "High": 0.8334930522280786,
+      "Low": 0.8167225682798275,
+      "Volume": 0.6885481552467657
+    },
+    "vix_source": {
+      "symbol": "VIX",
+      "publisher": "Cboe",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
+      "documentation": "https://www.cboe.com/tradable_products/vix/vix_historical_data",
+      "downloaded_at": "2026-10-17T16:00:49.894166+00:00",
+      "sha256": "a9742d4deab98f7644bda10df92db0b6afbca17ccc8b64139c52ad2ca0963d42",
+      "field": "CLOSE",
+      "observation_timezone": "US market session date",
+      "availability_policy": "Conservative observation date plus 2 calendar days, never same day",
+      "caveat": "Current historical snapshot, not original release vintages; not exchange-certified point-in-time archive"
+    },
+    "index_sources": {
+      "VN30": {
+        "sha256": "9cba88d5e4cc66f1a2b6fd99c8e89768be6b2969f4f465226917565afd15a5cc",
+        "rows": 2257,
+        "start": "2017-08-24",
+        "end": "2026-10-01",
+        "unresolved_or_single_source_rows": 1399,
+        "policy": "two-broker close agreement <= .011; no price fill"
+      },
+      "VNMID": {
+        "sha256": "82f30375d4df6312da7450fd7894b6e5094354e12bd4907c9ae2a8a5f93e2b6a",
+        "rows": 2252,
+        "start": "2017-08-24",
+        "end": "2026-10-01",
+        "unresolved_or_single_source_rows": 599,
+        "policy": "two-broker close agreement <= .011; no price fill"
+      },
+      "VNSML": {
+        "sha256": "a3cf39a72e4c82ca99d40d989ab1c3590207d087b90da302eff5dfaa2be4890a",
+        "rows": 2252,
+        "start": "2017-08-24",
+        "end": "2026-10-01",
+        "unresolved_or_single_source_rows": 598,
+        "policy": "two-broker close agreement <= .011; no price fill"
+      }
+    },
+    "missing_policy": "Keep all old validation dates. Broker conflicts/unavailable groups remain NaN; native LightGBM missing handling. No global imputation or filling.",
+    "timing": "All local features after same-day close. VIX observation date +2 calendar days, backward join max7 days stale. Inner training labels strictly mature before inner validation; outer-refit labels mature before block.",
+    "acceptance": "Development only: mean F1 control +.02, worst-fold >= control, MCC gain, >=3/4 improved folds; also compare both original trend/risk controls. No independent test acceptance.",
+    "tuning_budget": "Exactly requested trials per outer fold per group, fixed seed42; timeout must not silently reduce budget.",
+    "caveat": "All historical periods inspected. Broker data vintage/release timestamps not independently certified. Missing source patterns may encode historical era."
+  },
+  "architectures": [
+    "mean",
+    "magnitude"
+  ],
+  "targets": [
+    "raw",
+    "normalized"
+  ],
+  "missing": "Native sklearn1.7 RandomForest NaN branches; preserve absent/conflicted fields. No feature/price filling or dropped evaluation rows.",
+  "primary": "context_shrink: .75 existing density+.25 new context forest density, average4 mean/magnitude x raw/normalized forests.",
+  "secondary": "context_forest_replace: .5 quantile+.5 new context forest density. Combined all-information variant diagnostic only. Existing classifier/inner anchors/current-EMA5 fixed.",
+  "maturity": "Expanding, refit63. All target endpoints before block start. Context choice known at outer start; VIX observation+2 calendar days, stale<=7; source disagreements remain missing.",
+  "caveat": "Context group originally chosen for classifier, not forest. No outer feature selection. Vintage/release timestamps not independently certified; repeatedly inspected historical development, no independent test/deployment.",
+  "official_missing_api": "https://scikit-learn.org/1.7/modules/impute.html#estimators-that-handle-nan-values"
+}

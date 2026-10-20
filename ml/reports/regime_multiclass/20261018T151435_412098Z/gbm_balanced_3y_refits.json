@@ -1,0 +1,1784 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "prediction_start": "2020-03-27",
+    "train_start": "2017-04-13",
+    "train_label_end": "2020-03-26",
+    "n_train": 687,
+    "train_counts": [
+      95,
+      478,
+      114
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 0,
+      "latest_label_end": null
+    }
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "prediction_start": "2020-04-27",
+    "train_start": "2017-04-27",
+    "train_label_end": "2020-04-24",
+    "n_train": 697,
+    "train_counts": [
+      104,
+      473,
+      120
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 0,
+      "latest_label_end": null
+    }
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "prediction_start": "2020-05-27",
+    "train_start": "2017-05-29",
+    "train_label_end": "2020-05-26",
+    "n_train": 697,
+    "train_counts": [
+      104,
+      453,
+      140
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 20,
+      "latest_label_end": "2020-05-26 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "prediction_start": "2020-06-24",
+    "train_start": "2017-06-26",
+    "train_label_end": "2020-06-23",
+    "n_train": 697,
+    "train_counts": [
+      104,
+      443,
+      150
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 40,
+      "latest_label_end": "2020-06-23 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "prediction_start": "2020-07-22",
+    "train_start": "2017-07-24",
+    "train_label_end": "2020-07-21",
+    "n_train": 697,
+    "train_counts": [
+      106,
+      441,
+      150
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 60,
+      "latest_label_end": "2020-07-21 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "prediction_start": "2020-08-19",
+    "train_start": "2017-08-21",
+    "train_label_end": "2020-08-18",
+    "n_train": 697,
+    "train_counts": [
+      110,
+      438,
+      149
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 80,
+      "latest_label_end": "2020-08-18 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "prediction_start": "2020-09-17",
+    "train_start": "2017-09-18",
+    "train_label_end": "2020-09-16",
+    "n_train": 698,
+    "train_counts": [
+      110,
+      425,
+      163
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 100,
+      "latest_label_end": "2020-09-16 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 8,
+    "prediction_start": "2020-10-15",
+    "train_start": "2017-10-16",
+    "train_label_end": "2020-10-14",
+    "n_train": 698,
+    "train_counts": [
+      110,
+      426,
+      162
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 120,
+      "latest_label_end": "2020-10-14 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 9,
+    "prediction_start": "2020-11-12",
+    "train_start": "2017-11-13",
+    "train_label_end": "2020-11-11",
+    "n_train": 698,
+    "train_counts": [
+      110,
+      444,
+      144
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 140,
+      "latest_label_end": "2020-11-11 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 10,
+    "prediction_start": "2020-12-10",
+    "train_start": "2017-12-11",
+    "train_label_end": "2020-12-09",
+    "n_train": 698,
+    "train_counts": [
+      110,
+      438,
+      150
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 160,
+      "latest_label_end": "2020-12-09 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 11,
+    "prediction_start": "2021-01-08",
+    "train_start": "2018-01-08",
+    "train_label_end": "2021-01-07",
+    "n_train": 699,
+    "train_counts": [
+      110,
+      436,
+      153
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 180,
+      "latest_label_end": "2021-01-07 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 12,
+    "prediction_start": "2021-02-05",
+    "train_start": "2018-02-05",
+    "train_label_end": "2021-02-04",
+    "n_train": 701,
+    "train_counts": [
+      113,
+      428,
+      160
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 200,
+      "latest_label_end": "2021-02-04 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 13,
+    "prediction_start": "2021-03-12",
+    "train_start": "2018-03-12",
+    "train_label_end": "2021-03-11",
+    "n_train": 701,
+    "train_counts": [
+      115,
+      434,
+      152
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 220,
+      "latest_label_end": "2021-03-11 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 14,
+    "prediction_start": "2021-04-09",
+    "train_start": "2018-04-09",
+    "train_label_end": "2021-04-08",
+    "n_train": 701,
+    "train_counts": [
+      104,
+      442,
+      155
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 240,
+      "latest_label_end": "2021-04-08 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 15,
+    "prediction_start": "2021-05-12",
+    "train_start": "2018-05-14",
+    "train_label_end": "2021-05-11",
+    "n_train": 699,
+    "train_counts": [
+      88,
+      449,
+      162
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-05-11 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 16,
+    "prediction_start": "2021-06-09",
+    "train_start": "2018-06-11",
+    "train_label_end": "2021-06-08",
+    "n_train": 699,
+    "train_counts": [
+      83,
+      444,
+      172
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-06-08 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 17,
+    "prediction_start": "2021-07-07",
+    "train_start": "2018-07-09",
+    "train_label_end": "2021-07-06",
+    "n_train": 699,
+    "train_counts": [
+      75,
+      440,
+      184
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-07-06 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 18,
+    "prediction_start": "2021-08-04",
+    "train_start": "2018-08-06",
+    "train_label_end": "2021-08-03",
+    "n_train": 699,
+    "train_counts": [
+      89,
+      435,
+      175
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-08-03 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 19,
+    "prediction_start": "2021-09-01",
+    "train_start": "2018-09-04",
+    "train_label_end": "2021-08-31",
+    "n_train": 699,
+    "train_counts": [
+      89,
+      429,
+      181
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-08-31 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 20,
+    "prediction_start": "2021-10-01",
+    "train_start": "2018-10-01",
+    "train_label_end": "2021-09-30",
+    "n_train": 700,
+    "train_counts": [
+      84,
+      437,
+      179
+    ],
+    "decision_weights": [
+      1.5,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-09-30 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "prediction_start": "2021-10-15",
+    "train_start": "2018-10-15",
+    "train_label_end": "2021-10-14",
+    "n_train": 700,
+    "train_counts": [
+      75,
+      446,
+      179
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-10-14 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "prediction_start": "2021-11-12",
+    "train_start": "2018-11-12",
+    "train_label_end": "2021-11-11",
+    "n_train": 700,
+    "train_counts": [
+      71,
+      439,
+      190
+    ],
+    "decision_weights": [
+      1.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-11-11 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "prediction_start": "2021-12-10",
+    "train_start": "2018-12-10",
+    "train_label_end": "2021-12-09",
+    "n_train": 700,
+    "train_counts": [
+      66,
+      442,
+      192
+    ],
+    "decision_weights": [
+      1.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-12-09 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "prediction_start": "2022-01-10",
+    "train_start": "2019-01-10",
+    "train_label_end": "2022-01-07",
+    "n_train": 699,
+    "train_counts": [
+      62,
+      444,
+      193
+    ],
+    "decision_weights": [
+      1.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-01-07 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "prediction_start": "2022-02-14",
+    "train_start": "2019-02-14",
+    "train_label_end": "2022-02-11",
+    "n_train": 699,
+    "train_counts": [
+      62,
+      464,
+      173
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-02-11 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "prediction_start": "2022-03-14",
+    "train_start": "2019-05-02",
+    "train_label_end": "2022-03-11",
+    "n_train": 699,
+    "train_counts": [
+      62,
+      467,
+      170
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-03-11 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "prediction_start": "2022-04-12",
+    "train_start": "2019-05-02",
+    "train_label_end": "2022-04-08",
+    "n_train": 719,
+    "train_counts": [
+      62,
+      487,
+      170
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-04-08 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 8,
+    "prediction_start": "2022-07-04",
+    "train_start": "2019-07-04",
+    "train_label_end": "2022-05-26",
+    "n_train": 705,
+    "train_counts": [
+      87,
+      449,
+      169
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-05-26 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 9,
+    "prediction_start": "2022-07-07",
+    "train_start": "2019-07-08",
+    "train_label_end": "2022-05-26",
+    "n_train": 703,
+    "train_counts": [
+      87,
+      447,
+      169
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-05-26 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 10,
+    "prediction_start": "2022-08-04",
+    "train_start": "2019-08-05",
+    "train_label_end": "2022-08-03",
+    "n_train": 686,
+    "train_counts": [
+      87,
+      428,
+      171
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-08-03 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 11,
+    "prediction_start": "2022-09-05",
+    "train_start": "2019-09-05",
+    "train_label_end": "2022-08-31",
+    "n_train": 684,
+    "train_counts": [
+      87,
+      409,
+      188
+    ],
+    "decision_weights": [
+      1.5,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-08-31 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 12,
+    "prediction_start": "2022-10-03",
+    "train_start": "2019-10-03",
+    "train_label_end": "2022-09-30",
+    "n_train": 684,
+    "train_counts": [
+      94,
+      402,
+      188
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-09-30 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 13,
+    "prediction_start": "2022-10-31",
+    "train_start": "2019-10-31",
+    "train_label_end": "2022-10-28",
+    "n_train": 684,
+    "train_counts": [
+      114,
+      382,
+      188
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-10-28 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 14,
+    "prediction_start": "2022-11-28",
+    "train_start": "2019-11-28",
+    "train_label_end": "2022-11-25",
+    "n_train": 684,
+    "train_counts": [
+      118,
+      378,
+      188
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-11-25 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 15,
+    "prediction_start": "2022-12-26",
+    "train_start": "2019-12-26",
+    "train_label_end": "2022-12-23",
+    "n_train": 684,
+    "train_counts": [
+      118,
+      362,
+      204
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-12-23 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 16,
+    "prediction_start": "2023-01-31",
+    "train_start": "2020-01-31",
+    "train_label_end": "2023-01-30",
+    "n_train": 684,
+    "train_counts": [
+      115,
+      361,
+      208
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-01-30 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 17,
+    "prediction_start": "2023-02-28",
+    "train_start": "2020-02-28",
+    "train_label_end": "2023-02-27",
+    "n_train": 684,
+    "train_counts": [
+      101,
+      370,
+      213
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-02-27 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 18,
+    "prediction_start": "2023-03-28",
+    "train_start": "2020-03-30",
+    "train_label_end": "2023-03-27",
+    "n_train": 683,
+    "train_counts": [
+      95,
+      382,
+      206
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-03-27 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 19,
+    "prediction_start": "2023-04-25",
+    "train_start": "2020-04-27",
+    "train_label_end": "2023-04-24",
+    "n_train": 684,
+    "train_counts": [
+      95,
+      401,
+      188
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-04-24 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 20,
+    "prediction_start": "2023-05-26",
+    "train_start": "2020-05-26",
+    "train_label_end": "2023-05-25",
+    "n_train": 685,
+    "train_counts": [
+      95,
+      413,
+      177
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-05-25 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 21,
+    "prediction_start": "2023-06-23",
+    "train_start": "2020-06-23",
+    "train_label_end": "2023-06-22",
+    "n_train": 685,
+    "train_counts": [
+      93,
+      410,
+      182
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-06-22 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "prediction_start": "2023-07-17",
+    "train_start": "2020-07-17",
+    "train_label_end": "2023-07-14",
+    "n_train": 683,
+    "train_counts": [
+      89,
+      408,
+      186
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-07-14 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "prediction_start": "2023-08-14",
+    "train_start": "2020-08-14",
+    "train_label_end": "2023-08-11",
+    "n_train": 683,
+    "train_counts": [
+      89,
+      403,
+      191
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-08-11 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "prediction_start": "2023-09-13",
+    "train_start": "2020-09-14",
+    "train_label_end": "2023-09-12",
+    "n_train": 683,
+    "train_counts": [
+      89,
+      405,
+      189
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-09-12 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "prediction_start": "2023-10-11",
+    "train_start": "2020-10-12",
+    "train_label_end": "2023-10-10",
+    "n_train": 683,
+    "train_counts": [
+      96,
+      400,
+      187
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-10-10 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "prediction_start": "2023-11-08",
+    "train_start": "2020-11-09",
+    "train_label_end": "2023-11-07",
+    "n_train": 683,
+    "train_counts": [
+      111,
+      394,
+      178
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-11-07 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "prediction_start": "2023-12-06",
+    "train_start": "2020-12-07",
+    "train_label_end": "2023-12-05",
+    "n_train": 683,
+    "train_counts": [
+      111,
+      412,
+      160
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-12-05 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "prediction_start": "2024-01-04",
+    "train_start": "2021-01-04",
+    "train_label_end": "2024-01-03",
+    "n_train": 684,
+    "train_counts": [
+      110,
+      427,
+      147
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-01-03 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 8,
+    "prediction_start": "2024-02-01",
+    "train_start": "2021-02-01",
+    "train_label_end": "2024-01-31",
+    "n_train": 684,
+    "train_counts": [
+      106,
+      428,
+      150
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-01-31 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 9,
+    "prediction_start": "2024-03-07",
+    "train_start": "2021-03-08",
+    "train_label_end": "2024-03-06",
+    "n_train": 684,
+    "train_counts": [
+      106,
+      424,
+      154
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-03-06 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 10,
+    "prediction_start": "2024-04-04",
+    "train_start": "2021-04-05",
+    "train_label_end": "2024-04-03",
+    "n_train": 684,
+    "train_counts": [
+      106,
+      429,
+      149
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-04-03 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 11,
+    "prediction_start": "2024-05-08",
+    "train_start": "2021-05-10",
+    "train_label_end": "2024-05-07",
+    "n_train": 682,
+    "train_counts": [
+      114,
+      428,
+      140
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-05-07 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 12,
+    "prediction_start": "2024-06-05",
+    "train_start": "2021-06-07",
+    "train_label_end": "2024-06-04",
+    "n_train": 682,
+    "train_counts": [
+      114,
+      436,
+      132
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-06-04 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 13,
+    "prediction_start": "2024-07-03",
+    "train_start": "2021-07-05",
+    "train_label_end": "2024-07-02",
+    "n_train": 682,
+    "train_counts": [
+      101,
+      449,
+      132
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-07-02 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 14,
+    "prediction_start": "2024-07-31",
+    "train_start": "2021-08-02",
+    "train_label_end": "2024-07-30",
+    "n_train": 682,
+    "train_counts": [
+      100,
+      456,
+      126
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-07-30 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 15,
+    "prediction_start": "2024-08-28",
+    "train_start": "2021-08-30",
+    "train_label_end": "2024-08-27",
+    "n_train": 682,
+    "train_counts": [
+      104,
+      452,
+      126
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-08-27 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 16,
+    "prediction_start": "2024-09-27",
+    "train_start": "2021-09-27",
+    "train_label_end": "2024-09-26",
+    "n_train": 684,
+    "train_counts": [
+      104,
+      453,
+      127
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-09-26 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 17,
+    "prediction_start": "2024-10-25",
+    "train_start": "2021-10-25",
+    "train_label_end": "2024-10-24",
+    "n_train": 684,
+    "train_counts": [
+      104,
+      469,
+      111
+    ],
+    "decision_weights": [
+      1.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-10-24 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 18,
+    "prediction_start": "2024-11-22",
+    "train_start": "2021-11-22",
+    "train_label_end": "2024-11-21",
+    "n_train": 684,
+    "train_counts": [
+      106,
+      468,
+      110
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-11-21 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 19,
+    "prediction_start": "2024-12-20",
+    "train_start": "2021-12-20",
+    "train_label_end": "2024-12-19",
+    "n_train": 684,
+    "train_counts": [
+      106,
+      471,
+      107
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-12-19 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 20,
+    "prediction_start": "2025-01-20",
+    "train_start": "2022-01-20",
+    "train_label_end": "2025-01-17",
+    "n_train": 682,
+    "train_counts": [
+      106,
+      469,
+      107
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-01-17 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "prediction_start": "2025-02-10",
+    "train_start": "2022-02-10",
+    "train_label_end": "2025-02-07",
+    "n_train": 682,
+    "train_counts": [
+      106,
+      469,
+      107
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-02-07 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "prediction_start": "2025-03-10",
+    "train_start": "2022-03-10",
+    "train_label_end": "2025-03-07",
+    "n_train": 682,
+    "train_counts": [
+      106,
+      469,
+      107
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-03-07 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "prediction_start": "2025-04-08",
+    "train_start": "2022-04-08",
+    "train_label_end": "2025-04-04",
+    "n_train": 681,
+    "train_counts": [
+      94,
+      477,
+      110
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-04-04 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "prediction_start": "2025-05-09",
+    "train_start": "2022-07-04",
+    "train_label_end": "2025-05-08",
+    "n_train": 689,
+    "train_counts": [
+      101,
+      478,
+      110
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-05-08 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "prediction_start": "2025-06-06",
+    "train_start": "2022-07-04",
+    "train_label_end": "2025-06-05",
+    "n_train": 709,
+    "train_counts": [
+      101,
+      478,
+      130
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-06-05 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "prediction_start": "2025-07-04",
+    "train_start": "2022-07-04",
+    "train_label_end": "2025-07-03",
+    "n_train": 729,
+    "train_counts": [
+      101,
+      498,
+      130
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-07-03 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "prediction_start": "2025-08-01",
+    "train_start": "2022-08-01",
+    "train_label_end": "2025-07-31",
+    "n_train": 729,
+    "train_counts": [
+      101,
+      498,
+      130
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-07-31 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 8,
+    "prediction_start": "2025-08-29",
+    "train_start": "2022-08-29",
+    "train_label_end": "2025-08-28",
+    "n_train": 729,
+    "train_counts": [
+      97,
+      483,
+      149
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-08-28 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 9,
+    "prediction_start": "2025-09-30",
+    "train_start": "2022-09-30",
+    "train_label_end": "2025-09-29",
+    "n_train": 727,
+    "train_counts": [
+      75,
+      499,
+      153
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-09-29 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 10,
+    "prediction_start": "2025-10-28",
+    "train_start": "2022-10-28",
+    "train_label_end": "2025-10-27",
+    "n_train": 727,
+    "train_counts": [
+      63,
+      509,
+      155
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-10-27 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 11,
+    "prediction_start": "2025-11-25",
+    "train_start": "2022-11-25",
+    "train_label_end": "2025-11-24",
+    "n_train": 727,
+    "train_counts": [
+      68,
+      519,
+      140
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-11-24 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 12,
+    "prediction_start": "2025-12-23",
+    "train_start": "2022-12-23",
+    "train_label_end": "2025-12-22",
+    "n_train": 727,
+    "train_counts": [
+      67,
+      518,
+      142
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-12-22 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 13,
+    "prediction_start": "2026-01-22",
+    "train_start": "2023-01-27",
+    "train_label_end": "2026-01-21",
+    "n_train": 728,
+    "train_counts": [
+      67,
+      512,
+      149
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-01-21 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 14,
+    "prediction_start": "2026-02-26",
+    "train_start": "2023-02-27",
+    "train_label_end": "2026-02-25",
+    "n_train": 727,
+    "train_counts": [
+      66,
+      509,
+      152
+    ],
+    "decision_weights": [
+      0.75,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-02-25 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 15,
+    "prediction_start": "2026-03-26",
+    "train_start": "2023-03-27",
+    "train_label_end": "2026-03-25",
+    "n_train": 727,
+    "train_counts": [
+      73,
+      503,
+      151
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-03-25 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 16,
+    "prediction_start": "2026-04-23",
+    "train_start": "2023-04-24",
+    "train_label_end": "2026-04-22",
+    "n_train": 727,
+    "train_counts": [
+      79,
+      491,
+      157
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-04-22 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 17,
+    "prediction_start": "2026-05-26",
+    "train_start": "2023-05-26",
+    "train_label_end": "2026-05-25",
+    "n_train": 726,
+    "train_counts": [
+      79,
+      478,
+      169
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-05-25 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 18,
+    "prediction_start": "2026-06-23",
+    "train_start": "2023-06-23",
+    "train_label_end": "2026-06-22",
+    "n_train": 726,
+    "train_counts": [
+      86,
+      477,
+      163
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-06-22 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 19,
+    "prediction_start": "2026-07-21",
+    "train_start": "2023-07-21",
+    "train_label_end": "2026-07-20",
+    "n_train": 726,
+    "train_counts": [
+      87,
+      495,
+      144
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-07-20 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 20,
+    "prediction_start": "2026-08-18",
+    "train_start": "2023-08-18",
+    "train_label_end": "2026-08-17",
+    "n_train": 726,
+    "train_counts": [
+      96,
+      486,
+      144
+    ],
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-08-17 00:00:00"
+    }
+  }
+]

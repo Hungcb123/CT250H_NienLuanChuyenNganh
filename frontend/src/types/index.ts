@@ -38,6 +38,7 @@ export interface PortfolioValuation {
 }
 
 export interface RebalanceAction {
+  earlySettlement?: boolean;
   actionType: string;
   ticker: string;
   assetName: string;
@@ -53,15 +54,37 @@ export interface RebalanceAction {
 }
 
 export interface MlPredictionInfo {
+  horizonSessions?: number;
   assetClass: string;
   modelName: string;
   signal: number;     // -1, 0, +1
   confidence: number; // 0.0 → 1.0
   regimeName: string;
   deltaWeight: number;
+  scoreSemantics?: string | null;
+  nativeForecast?: {
+    available: boolean;
+    status: string;
+    session: string | null;
+    modelId: string;
+    classScores: number[];
+    netScore: number | null;
+    emaReset: boolean;
+    bundleSha256: string | null;
+  } | null;
+}
+
+export interface EquityPreference {
+  mode: 'ETF' | 'STOCKS' | 'MIXED';
+  etfWeight: number;
 }
 
 export interface RebalancePlan {
+  equityPreference?: EquityPreference | null;
+  equityNotice?: string | null;
+  horizonSessions?: number;
+  planToken?: string;
+  taaEnabled?: boolean;
   driftDetected: boolean;
   maxDriftPercent: number;
   currentAllocations: Record<string, number>;
@@ -91,6 +114,13 @@ export interface SnapshotPoint {
 }
 
 export interface PortfolioHistoryResponse {
+  dataVersion?: string;
+  formulaVersion?: number;
+  generatedAt?: string;
+  priceAsOf?: string;
+  status?: 'PREPARING' | 'UPDATING' | 'READY';
+  updating?: boolean;
+  provisional?: boolean;
   timeframe: string;
   currentNav: number;
   portfolioReturnPercent: number;
@@ -160,6 +190,7 @@ export interface EntryItem {
   assetName: string;
   amount: number;
   entryType: 'DEBIT' | 'CREDIT';
+  monetaryValue?: number | null;
 }
 
 export interface TransactionItem {
@@ -172,6 +203,7 @@ export interface TransactionItem {
   entries: EntryItem[];
   totalAmount: number;
   acidBalanced: boolean;
+  auditVerifiable?: boolean;
 }
 
 export interface SavingsDepositItem {
@@ -242,6 +274,7 @@ export interface LedgerAuditReport {
   totalTransactionsChecked: number;
   balancedTransactions: number;
   unbalancedTransactions: number;
+  unverifiedTransactions?: number;
   allTransactionsBalanced: boolean;
   allAccountsConsistent: boolean;
   auditStatus: string;

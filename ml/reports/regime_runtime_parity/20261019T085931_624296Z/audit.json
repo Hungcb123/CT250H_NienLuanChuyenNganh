@@ -1,0 +1,20 @@
+{
+  "recipe_id": "a01cb65ae2c96091eb876ba4d0613dee03583eb5f02444d584dc458c59e103b5",
+  "rows": 1560,
+  "restarts": 1560,
+  "max_score_error": 2.220446049250313e-16,
+  "all_labels_match": true,
+  "fold_f1": [
+    0.5642611356897071,
+    0.6543737157843653,
+    0.403056383096105,
+    0.43328942020149236
+  ],
+  "mean_f1": 0.5137451636929175,
+  "verified_sources": 87,
+  "native_model_weights_exported": false,
+  "prospective_parameter_selection_frozen": false,
+  "independent_test": false,
+  "deployed": false,
+  "role": "Historical component-score replay; no feature-to-score inference"
+}

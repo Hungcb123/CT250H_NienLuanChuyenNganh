@@ -1,0 +1,96 @@
+{
+  "requested_start": "2010-01-01",
+  "requested_end": "2026-10-01",
+  "sources": {
+    "vci_VN30": {
+      "provider": "vci",
+      "symbol": "VN30",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VN30"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "downloaded_at": "2026-10-17T16:16:00.419071+00:00",
+      "response": "sources/vci_VN30.json",
+      "response_sha256": "56d2d9ce9ddb646ba63ff4c50571b3b83ae1879fe4ca112e124319efc76e380f",
+      "rows": 3656,
+      "start": "2012-02-06",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 60,
+      "zero_volume_rows": 2,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified",
+      "canonical_symbol": "VN30",
+      "provider_symbol": "VN30"
+    },
+    "vnd_VN30": {
+      "provider": "vnd",
+      "symbol": "VN30",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VN30",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "response": "sources/vnd_VN30.json",
+      "response_sha256": "cebb3f70ad316f44a58080e64e0c8e84374e7409a59655b84a113c580718c1ff",
+      "downloaded_at": "2026-10-17T16:16:00.432588+00:00",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01"
+    },
+    "vnd_VNMID": {
+      "provider": "vnd",
+      "symbol": "VNMID",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNMID",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "response": "sources/vnd_VNMID.json",
+      "response_sha256": "19e6e30d41e6c4f236469912e5bd306b886fdf4ed40fc9fb102ac815e0c27b57",
+      "downloaded_at": "2026-10-17T16:16:01.259526+00:00",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01"
+    },
+    "vnd_VNSML": {
+      "provider": "vnd",
+      "symbol": "VNSML",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNSML",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "response": "sources/vnd_VNSML.json",
+      "response_sha256": "18b94540f401a207dcba9d3357baf5a4418027bc6afc9c884f0a2e63194acd5e",
+      "downloaded_at": "2026-10-17T16:16:01.381866+00:00",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01"
+    }
+  },
+  "errors": {
+    "vci_VNMID": "vci VNMIDCAP: invalid Open",
+    "vci_VNSML": "vci VNSMALLCAP: invalid Open"
+  },
+  "canonical": {
+    "VN30": {
+      "sha256": "9cba88d5e4cc66f1a2b6fd99c8e89768be6b2969f4f465226917565afd15a5cc",
+      "rows": 2257,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 1399,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    }
+  }
+}

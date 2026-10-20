@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-10-19T09:08:29.989713+00:00",
+  "role": "Historical development probability diagnostic",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/audit_regime_shock_probabilities.py": "0c2ae98ac88d42ce1ecf6e4dff2bafce2c26264530f6fae758d62f9379d52edb",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shock_forest/20261019T072038_455776Z/shock_shrink_predictions.csv": "4655744f3b338351570247730b736275c298f857885b3a1ce333bbb3315b4e80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_labels.py": "3eea3bf79158d54668a23a3fcfd16b7a2a744f33ef87ef058b110442eccbd201"
+  },
+  "specification": {
+    "model": "LogisticRegression",
+    "C": 0.1,
+    "max_iter": 1000,
+    "random_state": 42,
+    "mature_score_window": 504,
+    "min_rows": 120,
+    "min_per_class": 10,
+    "refit_market_sessions": 20,
+    "inputs": "Centered log class scores, fixed epsilon1e-8",
+    "fallback": "Last504 mature full-index dynamic-label class frequency"
+  },
+  "comparison": "Evaluate all methods on the SAME dates where a mature logistic model was available. Also report whole-cohort prior fallback. No confidence threshold or label/prediction subset optimization.",
+  "point_policy_changed": false,
+  "acceptance": false,
+  "caveat": "No independent test. A lower Brier score is not proof of calibration or trading profitability."
+}

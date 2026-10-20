@@ -1,0 +1,38 @@
+{
+  "names": [
+    "Prior\nensemble",
+    "Return\nquantiles",
+    "Fixed\nblend",
+    "Past-only\nselector"
+  ],
+  "mean_f1": [
+    0.3956661442488774,
+    0.4151389043402987,
+    0.43756435967243795,
+    0.42045100021628456
+  ],
+  "worst_f1": [
+    0.3599921460154105,
+    0.2736329367993342,
+    0.3409863003581847,
+    0.383783152160406
+  ],
+  "paired_intervals": [
+    {
+      "reference": "original_equal",
+      "block_sessions": 20,
+      "point_delta": 0.02478485596740715,
+      "delta_low": -0.008612075490505806,
+      "delta_high": 0.05820575550591426,
+      "repeats": 1000
+    },
+    {
+      "reference": "original_equal",
+      "block_sessions": 60,
+      "point_delta": 0.02478485596740715,
+      "delta_low": -0.010267660098297736,
+      "delta_high": 0.057414367131009454,
+      "repeats": 1000
+    }
+  ]
+}

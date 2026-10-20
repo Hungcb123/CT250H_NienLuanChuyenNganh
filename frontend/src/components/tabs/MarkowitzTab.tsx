@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import {
-  TrendingUp, Shield, Cpu, RefreshCw,
+  TrendingUp, Shield, RefreshCw,
   CheckCircle2, AlertTriangle, Layers, Percent, Activity,
   Sliders, Sparkles, Save
 } from 'lucide-react';
@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import { RebalancePlan, UserProfile, PortfolioValuation } from '../../types';
 import { formatVND } from '../../utils/formatters';
-import { submitRiskSurvey, updatePortfolioTargets, getRiskFreeRate } from '../../services/api';
+import { submitRiskSurvey, getRiskFreeRate } from '../../services/api';
 import { useTheme } from '../../context/ThemeContext';
 
 interface MarkowitzTabProps {
@@ -122,9 +122,9 @@ export function MarkowitzTab({
   profile,
   valuation,
   onConfirmRebalance,
-  confirmedExecution = false,
+  confirmedExecution: _confirmedExecution = false,
   executing = false,
-  onRefreshData,
+  onRefreshData: _onRefreshData,
 }: MarkowitzTabProps) {
   const { isDark } = useTheme();
   // Interactive Risk Aversion Slider Lambda λ (1.0 to 10.0)
@@ -135,8 +135,6 @@ export function MarkowitzTab({
   const [isSavingLambda, setIsSavingLambda] = useState(false);
   const [saveLambdaSuccess, setSaveLambdaSuccess] = useState(false);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>({ row: 0, col: 1 });
-  const [isApplyingTAA, setIsApplyingTAA] = useState(false);
-  const [appliedTAASuccess, setAppliedTAASuccess] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -148,28 +146,6 @@ export function MarkowitzTab({
     }).catch(console.warn);
     return () => { active = false; };
   }, []);
-
-  // Handle applying TAA Tactical Shift (+10% Stock, -10% Cash/Savings, Gold unchanged)
-  const handleApplyTAA = async () => {
-    setIsApplyingTAA(true);
-    try {
-      await updatePortfolioTargets({
-        stock: 0.50,
-        gold: 0.20,
-        savings: 0.20,
-        cash: 0.10,
-      });
-      setAppliedTAASuccess(true);
-      if (onRefreshData) {
-        await onRefreshData();
-      }
-      setTimeout(() => setAppliedTAASuccess(false), 4000);
-    } catch (err) {
-      console.error("Failed to apply TAA targets", err);
-    } finally {
-      setIsApplyingTAA(false);
-    }
-  };
 
   const currentNetWorth = valuation?.totalNetWorth || 185000000;
 
@@ -285,29 +261,10 @@ export function MarkowitzTab({
   return (
     <div className="space-y-6">
       {/* 1. Header Banner */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <section className="vnx-panel px-4 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-surface-container-high text-accent-blue">
-              <Cpu className="w-5 h-5 text-accent-blue" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2.5">
-                <h2 className="text-xl font-bold text-text-primary tracking-tight">
-                  Bộ Tối Ưu Hóa Danh Mục Markowitz (MVO & TAA Suite)
-                </h2>
-                <span className="px-2.5 py-0.5 rounded-full bg-accent-blue-light text-accent-blue text-xs font-semibold border border-accent-blue/20">
-                  Modern Portfolio Theory
-                </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-surface-container-high text-text-secondary text-xs font-medium font-mono-num">
-                  600+ Monte Carlo Simulations
-                </span>
-              </div>
-              <p className="text-xs text-text-secondary mt-1">
-                Giải bài toán Quadratic Programming cực đại hóa hàm thỏa dụng U = wᵀμ - 0.5λ wᵀΣw với ma trận hiệp phương sai đa tài sản
-              </p>
-            </div>
-          </div>
+          <h2 className="text-base font-bold text-text-primary">Tối ưu danh mục</h2>
+          <p className="text-xs text-text-secondary mt-0.5">So sánh phương án phân bổ theo mức rủi ro của bạn.</p>
         </div>
 
         {/* Status Chips */}
@@ -346,7 +303,7 @@ export function MarkowitzTab({
       </section>
 
       {/* 2. Interactive Risk Aversion Slider (Thanh Trượt λ) */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-4">
+      <section className="vnx-panel p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-subtle pb-4">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-lg bg-accent-blue-light text-accent-blue">
@@ -366,7 +323,7 @@ export function MarkowitzTab({
             <button
               onClick={handleSaveLambda}
               disabled={isSavingLambda}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-text-primary border border-border-subtle text-xs font-bold transition-all shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-text-primary border border-border-subtle text-xs font-bold transition-all "
             >
               {isSavingLambda ? (
                 <>
@@ -394,7 +351,7 @@ export function MarkowitzTab({
             <span className="text-xs font-bold text-text-secondary">
               Chấp nhận mạo hiểm (λ = 1.0)
             </span>
-            <span className="px-3 py-1 rounded-full bg-accent-blue text-white font-mono-num font-bold text-sm shadow-xs">
+            <span className="px-3 py-1 rounded-full bg-accent-blue text-white font-mono-num font-bold text-sm ">
               λ = {lambda.toFixed(2)}
             </span>
             <span className="text-xs font-bold text-text-secondary">
@@ -464,12 +421,12 @@ export function MarkowitzTab({
 
       {/* 3. Quantitative Key Metrics (Real-time Updated with λ) */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-panel p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Tỷ Suất Kỳ Vọng (μ*(λ))</span>
+            <span className="text-xs font-medium">Tỷ Suất Kỳ Vọng (μ*(λ))</span>
             <TrendingUp className="w-4 h-4 text-accent-emerald" />
           </div>
-          <div className="text-2xl font-black text-text-primary tracking-tight font-mono-num">
+          <div className="text-2xl font-semibold text-text-primary tracking-tight font-mono-num">
             {optimalAllocation.ret.toFixed(1)}% <span className="text-xs font-normal text-text-muted">/ năm</span>
           </div>
           <p className="text-[11px] text-accent-emerald mt-2 font-medium font-mono-num">
@@ -477,12 +434,12 @@ export function MarkowitzTab({
           </p>
         </div>
 
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-panel p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Độ Biến Động Dự Báo (σ*(λ))</span>
+            <span className="text-xs font-medium">Độ Biến Động Dự Báo (σ*(λ))</span>
             <Activity className="w-4 h-4 text-accent-gold" />
           </div>
-          <div className="text-2xl font-black text-text-primary tracking-tight font-mono-num">
+          <div className="text-2xl font-semibold text-text-primary tracking-tight font-mono-num">
             {optimalAllocation.vol.toFixed(1)}% <span className="text-xs font-normal text-text-muted">/ năm</span>
           </div>
           <p className="text-[11px] text-text-secondary mt-2">
@@ -490,12 +447,12 @@ export function MarkowitzTab({
           </p>
         </div>
 
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-panel p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Hệ Số Sharpe (SR*(λ))</span>
+            <span className="text-xs font-medium">Hệ Số Sharpe (SR*(λ))</span>
             <Percent className="w-4 h-4 text-accent-blue" />
           </div>
-          <div className="text-2xl font-black text-accent-blue tracking-tight font-mono-num">
+          <div className="text-2xl font-semibold text-accent-blue tracking-tight font-mono-num">
             {optimalAllocation.sharpe.toFixed(2)}
           </div>
           <p className="text-[11px] text-accent-emerald mt-2 font-medium">
@@ -503,12 +460,12 @@ export function MarkowitzTab({
           </p>
         </div>
 
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm hover:border-border-highlight transition-all">
+        <div className="vnx-panel p-5 transition-colors">
           <div className="flex items-center justify-between text-text-muted mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Hàm Thỏa Dụng U*(λ)</span>
+            <span className="text-xs font-medium">Hàm Thỏa Dụng U*(λ)</span>
             <Sparkles className="w-4 h-4 text-accent-purple" />
           </div>
-          <div className="text-2xl font-black text-text-primary tracking-tight font-mono-num">
+          <div className="text-2xl font-semibold text-text-primary tracking-tight font-mono-num">
             {(optimalAllocation.ret - 0.5 * lambda * Math.pow(optimalAllocation.vol / 10, 2)).toFixed(2)}
           </div>
           <p className="text-[11px] text-text-secondary mt-2 font-mono">
@@ -520,7 +477,7 @@ export function MarkowitzTab({
       {/* 4. Monte Carlo Scatter Plot & Correlation Matrix Heatmap */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left (2 cols): 600+ Monte Carlo Efficient Frontier Scatter Chart */}
-        <div className="lg:col-span-2 bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-4">
+        <div className="lg:col-span-2 vnx-panel p-6 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <h3 className="text-base font-bold text-text-primary tracking-tight">
@@ -652,7 +609,7 @@ export function MarkowitzTab({
         </div>
 
         {/* Right (1 col): Correlation Matrix Heatmap */}
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="vnx-panel p-5 space-y-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
@@ -750,65 +707,8 @@ export function MarkowitzTab({
         </div>
       </div>
 
-      {/* TAA Machine Learning Recommendation Banner */}
-      <section className="rounded-xl border border-accent-emerald/30 bg-gradient-to-r from-accent-emerald/10 via-surface-container-low to-surface-container-low p-5 shadow-xs relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-          <div className="space-y-1.5 flex-1">
-            <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-accent-emerald animate-pulse"></span>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-accent-emerald">
-                Khuyến Nghị Phân Bổ Chiến Thuật (TAA - Machine Learning)
-              </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-emerald/20 text-accent-emerald font-semibold border border-accent-emerald/30">
-                Mô hình ONNX T+20
-              </span>
-            </div>
-            <h4 className="text-sm font-bold text-text-primary">
-              Cổ Phiếu VN30 Tích Lũy Tăng Trưởng (Xác suất 78.4%) — Khuyến Nghị Tăng Tỷ Trọng Vốn
-            </h4>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Mô hình học máy ONNX nhận diện thị trường cổ phiếu bước vào chu kỳ tăng trưởng tích lũy T+20 (xác suất tăng 78.4%). 
-              Trong khi đó, <strong className="text-text-primary font-medium">Vàng SJC (ρ = -0.15)</strong> đóng vai trò neo phòng thủ an toàn (giữ nguyên 20%). 
-              Khuyến nghị điều chỉnh chiến thuật (TAA): <strong className="text-accent-emerald font-semibold">Tăng Cổ phiếu 40% → 50% (+10%)</strong> bằng cách tái phân bổ từ Tiền gửi tiết kiệm, vẫn đảm bảo trong khung kiểm soát rủi ro an toàn.
-            </p>
-            <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px]">
-              <span className="text-text-muted">Mục tiêu SAA: Cổ phiếu 40% | Vàng 20% | Tiết kiệm 30% | Tiền mặt 10%</span>
-              <span className="text-accent-emerald font-bold">➔ TAA Đề xuất: Cổ phiếu 50% (+10%) | Vàng 20% | Tiết kiệm 20% | Tiền mặt 10%</span>
-            </div>
-          </div>
-          <div className="shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
-            <button
-              onClick={handleApplyTAA}
-              disabled={isApplyingTAA}
-              className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm ${
-                appliedTAASuccess
-                  ? 'bg-accent-emerald text-white'
-                  : 'bg-accent-emerald hover:bg-emerald-600 text-white cursor-pointer active:scale-95'
-              }`}
-            >
-              {isApplyingTAA ? (
-                <>
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                  Đang Cập Nhật Mục Tiêu...
-                </>
-              ) : appliedTAASuccess ? (
-                <>
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Đã Áp Dụng TAA (+10% Cổ Phiếu)!
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Áp Dụng TAA (+10% Cổ Phiếu)
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* 5. Dynamic Asset Weights Comparison Matrix (Current vs Target TAA vs λ Simulation) */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-5">
+      <section className="vnx-panel p-6 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-border-subtle pb-4">
           <div>
             <h3 className="text-base font-bold text-text-primary tracking-tight">
@@ -833,7 +733,7 @@ export function MarkowitzTab({
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
           {/* Asset 1: Cổ phiếu */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2.5">
+          <div className="vnx-detail p-4     space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="font-bold text-text-primary text-xs">Cổ Phiếu VN30</span>
               <span className="text-xs font-mono-num font-bold text-accent-blue">{currentStockWeight.toFixed(1)}%</span>
@@ -853,7 +753,7 @@ export function MarkowitzTab({
           </div>
 
           {/* Asset 2: Vàng */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2.5">
+          <div className="vnx-detail p-4     space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="font-bold text-text-primary text-xs">Vàng Miếng SJC</span>
               <span className="text-xs font-mono-num font-bold text-accent-gold">{currentGoldWeight.toFixed(1)}%</span>
@@ -873,7 +773,7 @@ export function MarkowitzTab({
           </div>
 
           {/* Asset 3: Tiền gửi tiết kiệm */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2.5">
+          <div className="vnx-detail p-4     space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="font-bold text-text-primary text-xs">Tiền Gửi Tiết Kiệm (Rf)</span>
               <span className="text-xs font-mono-num font-bold text-indigo-600">{currentSavingsWeight.toFixed(1)}%</span>
@@ -893,7 +793,7 @@ export function MarkowitzTab({
           </div>
 
           {/* Asset 4: Tiền mặt khả dụng */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2.5">
+          <div className="vnx-detail p-4     space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="font-bold text-text-primary text-xs">Tiền Mặt Khả Dụng (T+0)</span>
               <span className="text-xs font-mono-num font-bold text-sky-600">{currentCashWeight.toFixed(1)}%</span>
@@ -915,13 +815,25 @@ export function MarkowitzTab({
       </section>
 
       {/* 6. Actionable Rebalance Execution Plan */}
-      <section className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-5">
+      <section className="vnx-panel p-6 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h3 className="text-base font-bold text-text-primary tracking-tight">
-              Đề Xuất Kế Hoạch Tái Cơ Cấu Lệnh (Rebalance Orders)
-            </h3>
-            <p className="text-xs text-text-secondary">
+            <div className="flex items-center gap-2.5">
+              <h3 className="text-base font-bold text-text-primary tracking-tight">
+                Đề Xuất Kế Hoạch Tái Cơ Cấu Lệnh (Rebalance Orders)
+              </h3>
+              {plan?.driftDetected ? (
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-accent-rose-light text-accent-rose border border-accent-rose/30">
+                  Lệch {plan.maxDriftPercent}% &gt; 5%
+                </span>
+              ) : (
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-accent-emerald-light text-accent-emerald border border-accent-emerald/30 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" />
+                  Cân bằng tối ưu (&lt; 5%)
+                </span>
+              )}
+            </div>
+            <p className="text-xs text-text-secondary mt-1">
               {plan?.executiveSummary || 'Hệ thống đã tính toán các lệnh mua/bán cần thiết để đưa danh mục về vị thế tối ưu Markowitz.'}
             </p>
           </div>
@@ -929,19 +841,19 @@ export function MarkowitzTab({
           {onConfirmRebalance && (
             <button
               onClick={() => onConfirmRebalance()}
-              disabled={executing || (confirmedExecution && !plan?.driftDetected)}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-bold transition-all shadow-sm ${
-                (confirmedExecution && !plan?.driftDetected)
-                  ? 'bg-accent-emerald text-white cursor-default'
+              disabled={executing || !plan?.driftDetected || !plan?.actions || plan.actions.length === 0}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-bold transition-all  ${
+                !plan?.driftDetected || !plan?.actions || plan.actions.length === 0
+                  ? 'bg-surface-container-high text-text-muted border border-border-subtle cursor-default opacity-80'
                   : executing
                   ? 'bg-accent-blue/80 text-white cursor-wait'
                   : 'bg-accent-blue hover:bg-accent-blue/90 text-white active:scale-95 cursor-pointer'
               }`}
             >
-              {(confirmedExecution && !plan?.driftDetected) ? (
+              {!plan?.driftDetected || !plan?.actions || plan.actions.length === 0 ? (
                 <>
-                  <CheckCircle2 className="w-4 h-4 text-white" />
-                  Đã Khớp Lệnh Toàn Bộ
+                  <CheckCircle2 className="w-4 h-4 text-accent-emerald" />
+                  Vị Thế Đang Cân Bằng (Không Cần Can Thiệp)
                 </>
               ) : executing ? (
                 <>

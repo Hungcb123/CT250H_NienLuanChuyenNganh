@@ -1,0 +1,277 @@
+[
+  {
+    "study": "state decisions",
+    "path": "ml/reports/regime_state_decisions/20261019T062906_887444Z",
+    "checked": [
+      {
+        "candidate": "incumbent",
+        "rows": 1560,
+        "mean_f1": 0.49492737914367657,
+        "sha256": "ebee9b7ffb217121e045dac98f5a391331ae964e1b7cd258c2f0f4b1e09b37e9",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "hysteresis05",
+        "rows": 1560,
+        "mean_f1": 0.48330353016393895,
+        "sha256": "be3304e7c3fd01fce7d8f1c86e93f1c0da7bdcb2423ce2b64131a3714206a5b1",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "confirm2",
+        "rows": 1560,
+        "mean_f1": 0.4941523782144172,
+        "sha256": "8ccb72c9532401942f866314d52fa84f71d74322209c67c2a681985b3e4ccf44",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "hysteresis025",
+        "rows": 1560,
+        "mean_f1": 0.4877888451670216,
+        "sha256": "7277e645ca8b021ae521b0b5376e3a0714c011417d2d3785311451be6a8ea336",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "hysteresis10",
+        "rows": 1560,
+        "mean_f1": 0.4675054267707974,
+        "sha256": "66f5db8058d27d027671cdc8f6890d670e4f0a6c6d0436f41992e6a35f63a908",
+        "truth_and_endpoints_exact": true
+      }
+    ],
+    "comparisons": [
+      {
+        "candidate": "hysteresis05",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "confirm2",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "forward transitions",
+    "path": "ml/reports/regime_forward_filter/20261019T062959_300808Z",
+    "checked": [
+      {
+        "candidate": "incumbent",
+        "rows": 1560,
+        "mean_f1": 0.49492737914367657,
+        "sha256": "ebee9b7ffb217121e045dac98f5a391331ae964e1b7cd258c2f0f4b1e09b37e9",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "filter1",
+        "rows": 1560,
+        "mean_f1": 0.47101876961572314,
+        "sha256": "4e07a6018e36a9c2a4cc15c2ea063794483fa7ba43d2b05697f3f3eba826fbce",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "filter2",
+        "rows": 1560,
+        "mean_f1": 0.4813485708073847,
+        "sha256": "e0147a285ebdd601cfbd9f57261f9ae49a70fbfb147dee5e30575d4cefc01d88",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "filter4",
+        "rows": 1560,
+        "mean_f1": 0.49268581258043276,
+        "sha256": "b3bb2b36fc0b1245d6fc7802b6427446e04075f46d44dc2b794b9fe5d586b2c6",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "filter2_shrink",
+        "rows": 1560,
+        "mean_f1": 0.49096711197251774,
+        "sha256": "94145dfe1286578a6ac517586f3d81c3dc78d2fa606cfd0d577f5641cfc22589",
+        "truth_and_endpoints_exact": true
+      }
+    ],
+    "comparisons": [
+      {
+        "candidate": "filter2",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "filter2_shrink",
+        "fold_wins": 2,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "causal fusion",
+    "path": "ml/reports/regime_temporal_fusion/20261019T063220_032375Z",
+    "checked": [
+      {
+        "candidate": "incumbent",
+        "rows": 1560,
+        "mean_f1": 0.49492737914367657,
+        "sha256": "ebee9b7ffb217121e045dac98f5a391331ae964e1b7cd258c2f0f4b1e09b37e9",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "adaptive_pool_smoothed",
+        "rows": 1560,
+        "mean_f1": 0.49729198084164405,
+        "sha256": "1b6a4f182a48f9a6a7b9b96fd0aac28a673391b869579ff4b1ae95717dcc6539",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "adaptive504_smoothed",
+        "rows": 1560,
+        "mean_f1": 0.494027070848268,
+        "sha256": "acfa5a12b7e0dd998b96e3f7a1d3ccd5fbc7133f4b629ad19798a13f518a87a7",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "adaptive252_raw",
+        "rows": 1560,
+        "mean_f1": 0.49262305706139903,
+        "sha256": "1bfebe8955237a70c789247244e841354d975a2b08b610bd2e54bd09f871b3bb",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "adaptive504_raw",
+        "rows": 1560,
+        "mean_f1": 0.49669501780007025,
+        "sha256": "62812f6132bb757aff7f86fec1361965c4a5ea6dd28aa1fef194bc8fe3132abe",
+        "truth_and_endpoints_exact": true
+      }
+    ],
+    "comparisons": [
+      {
+        "candidate": "adaptive_pool_smoothed",
+        "fold_wins": 2,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "adaptive504_smoothed",
+        "fold_wins": 2,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "small GRU",
+    "path": "ml/reports/regime_gru/20261019T063557_085560Z",
+    "checked": [
+      {
+        "candidate": "incumbent",
+        "rows": 1560,
+        "mean_f1": 0.49492737914367657,
+        "sha256": "ebee9b7ffb217121e045dac98f5a391331ae964e1b7cd258c2f0f4b1e09b37e9",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gru1",
+        "rows": 1560,
+        "mean_f1": 0.35974925671149444,
+        "sha256": "69f9b2ec924bd287d53ba1694aabe2785bd305c8d38ba69cddeb7a74bc8032c2",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gru1_supplement",
+        "rows": 1560,
+        "mean_f1": 0.4800180088149993,
+        "sha256": "ca7e113caf3d4e5238d2a71294bddfdcb7adc4eb9ea9a123e105ed8f46a25637",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gru1_replace",
+        "rows": 1560,
+        "mean_f1": 0.4373503432685102,
+        "sha256": "ca487464237543625bfc160014b01744674236ab351174dad4706e3c66829287",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gru10",
+        "rows": 1560,
+        "mean_f1": 0.3588969541786266,
+        "sha256": "5d8bb9725765eea30aa7717ecee8e5c6f5cc8760e677c5b8627fffa670cb230d",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gru10_supplement",
+        "rows": 1560,
+        "mean_f1": 0.4546164296802874,
+        "sha256": "49b70d933601ae05983a26f1d7745a3f609119d6cfb8eb95c36fcb18e93c4dba",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gru10_replace",
+        "rows": 1560,
+        "mean_f1": 0.4349042333296074,
+        "sha256": "4576a7a02fecc806f31e1a2f41c05188a233b42fadc6182dca9fecaaf23d26c5",
+        "truth_and_endpoints_exact": true
+      }
+    ],
+    "comparisons": [
+      {
+        "candidate": "gru10_supplement",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "gru10_replace",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  },
+  {
+    "study": "component gate",
+    "path": "ml/reports/regime_component_gate/20261019T064133_306712Z",
+    "checked": [
+      {
+        "candidate": "incumbent",
+        "rows": 1560,
+        "mean_f1": 0.49729198084164405,
+        "sha256": "1b6a4f182a48f9a6a7b9b96fd0aac28a673391b869579ff4b1ae95717dcc6539",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gate_supplement",
+        "rows": 1560,
+        "mean_f1": 0.48234776100485144,
+        "sha256": "0e8b846968eddcd33581b476d2a13536cfe771fca35add7b43dcaff9e3cd71ec",
+        "truth_and_endpoints_exact": true
+      },
+      {
+        "candidate": "gate_replace",
+        "rows": 1560,
+        "mean_f1": 0.4727233835536995,
+        "sha256": "267d380e8d61f81509f85cd0869fdf6fe8e3c91f03edda201320fd3cd7c426cf",
+        "truth_and_endpoints_exact": true
+      }
+    ],
+    "comparisons": [
+      {
+        "candidate": "gate_supplement",
+        "fold_wins": 1,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      },
+      {
+        "candidate": "gate_replace",
+        "fold_wins": 2,
+        "point_screen": false,
+        "provisional_robust_evidence": false
+      }
+    ]
+  }
+]

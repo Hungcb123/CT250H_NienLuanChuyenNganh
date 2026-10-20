@@ -1,0 +1,1494 @@
+[
+  {
+    "Date": "2020-03-27",
+    "chosen": "legacy_equal",
+    "bucket": 0,
+    "n": 0,
+    "latest_label_end": null,
+    "class_counts": [
+      0,
+      0,
+      0
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-04-27",
+    "chosen": "legacy_equal",
+    "bucket": 1,
+    "n": 0,
+    "latest_label_end": null,
+    "class_counts": [
+      0,
+      0,
+      0
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-05-27",
+    "chosen": "legacy_equal",
+    "bucket": 2,
+    "n": 20,
+    "latest_label_end": "2020-05-26 00:00:00",
+    "class_counts": [
+      0,
+      14,
+      6
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-06-24",
+    "chosen": "legacy_equal",
+    "bucket": 3,
+    "n": 40,
+    "latest_label_end": "2020-06-23 00:00:00",
+    "class_counts": [
+      0,
+      23,
+      17
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-07-22",
+    "chosen": "legacy_equal",
+    "bucket": 4,
+    "n": 60,
+    "latest_label_end": "2020-07-21 00:00:00",
+    "class_counts": [
+      7,
+      36,
+      17
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-08-19",
+    "chosen": "legacy_equal",
+    "bucket": 5,
+    "n": 80,
+    "latest_label_end": "2020-08-18 00:00:00",
+    "class_counts": [
+      7,
+      56,
+      17
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-09-17",
+    "chosen": "legacy_equal",
+    "bucket": 6,
+    "n": 100,
+    "latest_label_end": "2020-09-16 00:00:00",
+    "class_counts": [
+      7,
+      72,
+      21
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-10-15",
+    "chosen": "legacy_equal",
+    "bucket": 7,
+    "n": 120,
+    "latest_label_end": "2020-10-14 00:00:00",
+    "class_counts": [
+      7,
+      83,
+      30
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2020-11-12",
+    "chosen": "density_all",
+    "bucket": 8,
+    "n": 126,
+    "latest_label_end": "2020-11-11 00:00:00",
+    "class_counts": [
+      7,
+      80,
+      39
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.33075979993273225,
+      "legacy_trend": 0.343153080441216,
+      "legacy_risk": 0.3024428684003152,
+      "density_all": 0.3710630560426002,
+      "density_expanding": 0.32966957712720424
+    }
+  },
+  {
+    "Date": "2020-12-10",
+    "chosen": "density_all",
+    "bucket": 9,
+    "n": 126,
+    "latest_label_end": "2020-12-09 00:00:00",
+    "class_counts": [
+      7,
+      77,
+      42
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4535179608974087,
+      "legacy_trend": 0.45540540540540536,
+      "legacy_risk": 0.43899992836163043,
+      "density_all": 0.4837174077680407,
+      "density_expanding": 0.44235374615121453
+    }
+  },
+  {
+    "Date": "2021-01-08",
+    "chosen": "legacy_equal",
+    "bucket": 10,
+    "n": 126,
+    "latest_label_end": "2021-01-07 00:00:00",
+    "class_counts": [
+      0,
+      64,
+      62
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2021-02-05",
+    "chosen": "legacy_equal",
+    "bucket": 11,
+    "n": 126,
+    "latest_label_end": "2021-02-04 00:00:00",
+    "class_counts": [
+      4,
+      48,
+      74
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2021-03-12",
+    "chosen": "legacy_equal",
+    "bucket": 12,
+    "n": 126,
+    "latest_label_end": "2021-03-11 00:00:00",
+    "class_counts": [
+      6,
+      48,
+      72
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.40585978733812206,
+      "legacy_trend": 0.4245125655896162,
+      "legacy_risk": 0.3585434173669468,
+      "density_all": 0.432814640829908,
+      "density_expanding": 0.39111624411079954
+    }
+  },
+  {
+    "Date": "2021-04-09",
+    "chosen": "legacy_trend",
+    "bucket": 13,
+    "n": 126,
+    "latest_label_end": "2021-04-08 00:00:00",
+    "class_counts": [
+      6,
+      51,
+      69
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4686930942709063,
+      "legacy_trend": 0.5169910282953761,
+      "legacy_risk": 0.4199590283874744,
+      "density_all": 0.4246309246309246,
+      "density_expanding": 0.4190446618019976
+    }
+  },
+  {
+    "Date": "2021-05-12",
+    "chosen": "legacy_equal",
+    "bucket": 14,
+    "n": 126,
+    "latest_label_end": "2021-05-11 00:00:00",
+    "class_counts": [
+      6,
+      54,
+      66
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.47545257772530497,
+      "legacy_trend": 0.4941761081295965,
+      "legacy_risk": 0.4311868686868687,
+      "density_all": 0.43930581169905897,
+      "density_expanding": 0.4776036224312086
+    }
+  },
+  {
+    "Date": "2021-06-09",
+    "chosen": "legacy_trend",
+    "bucket": 15,
+    "n": 126,
+    "latest_label_end": "2021-06-08 00:00:00",
+    "class_counts": [
+      6,
+      58,
+      62
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.40873854827343203,
+      "legacy_trend": 0.4423526450174417,
+      "legacy_risk": 0.37446120689655177,
+      "density_all": 0.4070961718020542,
+      "density_expanding": 0.437085137085137
+    }
+  },
+  {
+    "Date": "2021-07-07",
+    "chosen": "density_expanding",
+    "bucket": 16,
+    "n": 126,
+    "latest_label_end": "2021-07-06 00:00:00",
+    "class_counts": [
+      6,
+      62,
+      58
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.39669184981684985,
+      "legacy_trend": 0.38730441671618143,
+      "legacy_risk": 0.35737704918032787,
+      "density_all": 0.37148717948717946,
+      "density_expanding": 0.44885864793678665
+    }
+  },
+  {
+    "Date": "2021-08-04",
+    "chosen": "density_expanding",
+    "bucket": 17,
+    "n": 126,
+    "latest_label_end": "2021-08-03 00:00:00",
+    "class_counts": [
+      20,
+      66,
+      40
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4496287762416795,
+      "legacy_trend": 0.4383741438005004,
+      "legacy_risk": 0.3956306358605209,
+      "density_all": 0.49899484099111097,
+      "density_expanding": 0.5749974255998352
+    }
+  },
+  {
+    "Date": "2021-09-01",
+    "chosen": "density_expanding",
+    "bucket": 18,
+    "n": 126,
+    "latest_label_end": "2021-08-31 00:00:00",
+    "class_counts": [
+      14,
+      71,
+      41
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4573575240820065,
+      "legacy_trend": 0.49283247999008656,
+      "legacy_risk": 0.40125356125356126,
+      "density_all": 0.5622210994126492,
+      "density_expanding": 0.6281045751633987
+    }
+  },
+  {
+    "Date": "2021-10-01",
+    "chosen": "density_expanding",
+    "bucket": 19,
+    "n": 126,
+    "latest_label_end": "2021-09-30 00:00:00",
+    "class_counts": [
+      14,
+      73,
+      39
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4574823165340407,
+      "legacy_trend": 0.49309143663982374,
+      "legacy_risk": 0.4109263015551048,
+      "density_all": 0.551937984496124,
+      "density_expanding": 0.6383656692497691
+    }
+  },
+  {
+    "Date": "2021-10-29",
+    "chosen": "density_expanding",
+    "bucket": 20,
+    "n": 126,
+    "latest_label_end": "2021-10-28 00:00:00",
+    "class_counts": [
+      14,
+      78,
+      34
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.5165817146530743,
+      "legacy_trend": 0.4795254128587462,
+      "legacy_risk": 0.4630389920712501,
+      "density_all": 0.508254902330611,
+      "density_expanding": 0.6329288864500132
+    }
+  },
+  {
+    "Date": "2021-11-26",
+    "chosen": "density_expanding",
+    "bucket": 21,
+    "n": 126,
+    "latest_label_end": "2021-11-25 00:00:00",
+    "class_counts": [
+      14,
+      63,
+      49
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.6045993706124425,
+      "legacy_trend": 0.5138038895688835,
+      "legacy_risk": 0.5767552708729179,
+      "density_all": 0.5334559051697386,
+      "density_expanding": 0.6612820512820513
+    }
+  },
+  {
+    "Date": "2021-12-24",
+    "chosen": "density_expanding",
+    "bucket": 22,
+    "n": 126,
+    "latest_label_end": "2021-12-23 00:00:00",
+    "class_counts": [
+      15,
+      77,
+      34
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.5252969252969253,
+      "legacy_trend": 0.438192140997518,
+      "legacy_risk": 0.5412445061300023,
+      "density_all": 0.5413824099602208,
+      "density_expanding": 0.5873015873015873
+    }
+  },
+  {
+    "Date": "2022-01-24",
+    "chosen": "density_all",
+    "bucket": 23,
+    "n": 126,
+    "latest_label_end": "2022-01-21 00:00:00",
+    "class_counts": [
+      6,
+      89,
+      31
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.47441066997518605,
+      "legacy_trend": 0.3957597957597958,
+      "legacy_risk": 0.4641376995147557,
+      "density_all": 0.5620230078563412,
+      "density_expanding": 0.5266155702429278
+    }
+  },
+  {
+    "Date": "2022-02-28",
+    "chosen": "legacy_equal",
+    "bucket": 24,
+    "n": 126,
+    "latest_label_end": "2022-02-25 00:00:00",
+    "class_counts": [
+      1,
+      95,
+      30
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2022-03-28",
+    "chosen": "legacy_equal",
+    "bucket": 25,
+    "n": 126,
+    "latest_label_end": "2022-03-25 00:00:00",
+    "class_counts": [
+      1,
+      95,
+      30
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2022-04-26",
+    "chosen": "legacy_equal",
+    "bucket": 26,
+    "n": 126,
+    "latest_label_end": "2022-04-25 00:00:00",
+    "class_counts": [
+      6,
+      92,
+      28
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3182525652596588,
+      "legacy_trend": 0.2868428530832623,
+      "legacy_risk": 0.31251167133520075,
+      "density_all": 0.32061794414735595,
+      "density_expanding": 0.3337638681900977
+    }
+  },
+  {
+    "Date": "2022-07-04",
+    "chosen": "density_all",
+    "bucket": 28,
+    "n": 126,
+    "latest_label_end": "2022-05-26 00:00:00",
+    "class_counts": [
+      25,
+      93,
+      8
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.33893944500617906,
+      "legacy_trend": 0.30857011218113534,
+      "legacy_risk": 0.31923093767792227,
+      "density_all": 0.3911615081063091,
+      "density_expanding": 0.3683062314996348
+    }
+  },
+  {
+    "Date": "2022-07-21",
+    "chosen": "density_all",
+    "bucket": 29,
+    "n": 126,
+    "latest_label_end": "2022-05-26 00:00:00",
+    "class_counts": [
+      25,
+      93,
+      8
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.33893944500617906,
+      "legacy_trend": 0.30857011218113534,
+      "legacy_risk": 0.31923093767792227,
+      "density_all": 0.3911615081063091,
+      "density_expanding": 0.3683062314996348
+    }
+  },
+  {
+    "Date": "2022-08-18",
+    "chosen": "density_expanding",
+    "bucket": 30,
+    "n": 126,
+    "latest_label_end": "2022-08-17 00:00:00",
+    "class_counts": [
+      24,
+      93,
+      9
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3393836263944035,
+      "legacy_trend": 0.28551971326164877,
+      "legacy_risk": 0.3049547190149773,
+      "density_all": 0.419391502010841,
+      "density_expanding": 0.4685842985842987
+    }
+  },
+  {
+    "Date": "2022-09-19",
+    "chosen": "density_expanding",
+    "bucket": 31,
+    "n": 126,
+    "latest_label_end": "2022-09-16 00:00:00",
+    "class_counts": [
+      25,
+      86,
+      15
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3253940872536698,
+      "legacy_trend": 0.2932091839078197,
+      "legacy_risk": 0.383513134709307,
+      "density_all": 0.49197012627100073,
+      "density_expanding": 0.5211180124223603
+    }
+  },
+  {
+    "Date": "2022-10-17",
+    "chosen": "density_expanding",
+    "bucket": 32,
+    "n": 126,
+    "latest_label_end": "2022-10-14 00:00:00",
+    "class_counts": [
+      45,
+      66,
+      15
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.23298103767735737,
+      "legacy_trend": 0.23588563547186273,
+      "legacy_risk": 0.3033731383651127,
+      "density_all": 0.5535598175012977,
+      "density_expanding": 0.5894640136062389
+    }
+  },
+  {
+    "Date": "2022-11-14",
+    "chosen": "density_expanding",
+    "bucket": 33,
+    "n": 126,
+    "latest_label_end": "2022-11-11 00:00:00",
+    "class_counts": [
+      58,
+      53,
+      15
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3475573620982844,
+      "legacy_trend": 0.34453342231120004,
+      "legacy_risk": 0.4071385096948091,
+      "density_all": 0.5611012081600317,
+      "density_expanding": 0.6117614269788182
+    }
+  },
+  {
+    "Date": "2022-12-12",
+    "chosen": "density_expanding",
+    "bucket": 34,
+    "n": 126,
+    "latest_label_end": "2022-12-09 00:00:00",
+    "class_counts": [
+      61,
+      47,
+      18
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.45106022629754383,
+      "legacy_trend": 0.4401665539510151,
+      "legacy_risk": 0.5112156931738213,
+      "density_all": 0.5383333577487072,
+      "density_expanding": 0.6030609210678026
+    }
+  },
+  {
+    "Date": "2023-01-10",
+    "chosen": "density_expanding",
+    "bucket": 35,
+    "n": 126,
+    "latest_label_end": "2023-01-09 00:00:00",
+    "class_counts": [
+      48,
+      57,
+      21
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4876353276353276,
+      "legacy_trend": 0.49560666910064494,
+      "legacy_risk": 0.5612372918018603,
+      "density_all": 0.6355297184639942,
+      "density_expanding": 0.6840485503911643
+    }
+  },
+  {
+    "Date": "2023-02-14",
+    "chosen": "density_expanding",
+    "bucket": 36,
+    "n": 126,
+    "latest_label_end": "2023-02-13 00:00:00",
+    "class_counts": [
+      37,
+      68,
+      21
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.44067157140162233,
+      "legacy_trend": 0.4567987567987568,
+      "legacy_risk": 0.5421355421355422,
+      "density_all": 0.6763000852514919,
+      "density_expanding": 0.7231787809647979
+    }
+  },
+  {
+    "Date": "2023-03-14",
+    "chosen": "density_expanding",
+    "bucket": 37,
+    "n": 126,
+    "latest_label_end": "2023-03-13 00:00:00",
+    "class_counts": [
+      41,
+      76,
+      9
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4413862036042487,
+      "legacy_trend": 0.5017121627345612,
+      "legacy_risk": 0.4639936838164074,
+      "density_all": 0.644261286298589,
+      "density_expanding": 0.6470746108427269
+    }
+  },
+  {
+    "Date": "2023-04-11",
+    "chosen": "density_expanding",
+    "bucket": 38,
+    "n": 126,
+    "latest_label_end": "2023-04-10 00:00:00",
+    "class_counts": [
+      26,
+      91,
+      9
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.5458333711334282,
+      "legacy_trend": 0.5726495726495726,
+      "legacy_risk": 0.587037037037037,
+      "density_all": 0.6881911004102016,
+      "density_expanding": 0.6910032498348838
+    }
+  },
+  {
+    "Date": "2023-05-12",
+    "chosen": "density_all",
+    "bucket": 39,
+    "n": 126,
+    "latest_label_end": "2023-05-11 00:00:00",
+    "class_counts": [
+      9,
+      108,
+      9
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.29823493609251367,
+      "legacy_trend": 0.3197403124365997,
+      "legacy_risk": 0.35503663003663005,
+      "density_all": 0.44613511868533173,
+      "density_expanding": 0.443922305764411
+    }
+  },
+  {
+    "Date": "2023-06-09",
+    "chosen": "legacy_equal",
+    "bucket": 40,
+    "n": 126,
+    "latest_label_end": "2023-06-08 00:00:00",
+    "class_counts": [
+      4,
+      104,
+      18
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2023-07-07",
+    "chosen": "legacy_equal",
+    "bucket": 41,
+    "n": 126,
+    "latest_label_end": "2023-07-06 00:00:00",
+    "class_counts": [
+      4,
+      93,
+      29
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2023-08-04",
+    "chosen": "legacy_equal",
+    "bucket": 42,
+    "n": 126,
+    "latest_label_end": "2023-08-03 00:00:00",
+    "class_counts": [
+      4,
+      75,
+      47
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2023-09-05",
+    "chosen": "legacy_equal",
+    "bucket": 43,
+    "n": 126,
+    "latest_label_end": "2023-08-31 00:00:00",
+    "class_counts": [
+      1,
+      69,
+      56
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2023-10-03",
+    "chosen": "legacy_equal",
+    "bucket": 44,
+    "n": 126,
+    "latest_label_end": "2023-10-02 00:00:00",
+    "class_counts": [
+      0,
+      70,
+      56
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2023-10-31",
+    "chosen": "legacy_equal",
+    "bucket": 45,
+    "n": 126,
+    "latest_label_end": "2023-10-30 00:00:00",
+    "class_counts": [
+      14,
+      56,
+      56
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.40602836879432624,
+      "legacy_trend": 0.3740070981916512,
+      "legacy_risk": 0.410579656408355,
+      "density_all": 0.3516087516087516,
+      "density_expanding": 0.36142394822006474
+    }
+  },
+  {
+    "Date": "2023-11-28",
+    "chosen": "legacy_equal",
+    "bucket": 46,
+    "n": 126,
+    "latest_label_end": "2023-11-27 00:00:00",
+    "class_counts": [
+      16,
+      57,
+      53
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4756676057694624,
+      "legacy_trend": 0.42817059483726155,
+      "legacy_risk": 0.4807098765432099,
+      "density_all": 0.3386327503974563,
+      "density_expanding": 0.3424649859943978
+    }
+  },
+  {
+    "Date": "2023-12-26",
+    "chosen": "legacy_equal",
+    "bucket": 47,
+    "n": 126,
+    "latest_label_end": "2023-12-25 00:00:00",
+    "class_counts": [
+      16,
+      77,
+      33
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4920889704196285,
+      "legacy_trend": 0.48352010547132496,
+      "legacy_risk": 0.4920889704196285,
+      "density_all": 0.41421568627450983,
+      "density_expanding": 0.42528629762672315
+    }
+  },
+  {
+    "Date": "2024-01-24",
+    "chosen": "legacy_equal",
+    "bucket": 48,
+    "n": 126,
+    "latest_label_end": "2024-01-23 00:00:00",
+    "class_counts": [
+      16,
+      87,
+      23
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4426767676767677,
+      "legacy_trend": 0.43858969391708635,
+      "legacy_risk": 0.46100605611172907,
+      "density_all": 0.3946360153256705,
+      "density_expanding": 0.40994397759103646
+    }
+  },
+  {
+    "Date": "2024-02-28",
+    "chosen": "legacy_risk",
+    "bucket": 49,
+    "n": 126,
+    "latest_label_end": "2024-02-27 00:00:00",
+    "class_counts": [
+      16,
+      88,
+      22
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3409090909090909,
+      "legacy_trend": 0.2949343339587242,
+      "legacy_risk": 0.4011469534050179,
+      "density_all": 0.2997416020671834,
+      "density_expanding": 0.2449683726279471
+    }
+  },
+  {
+    "Date": "2024-03-27",
+    "chosen": "legacy_risk",
+    "bucket": 50,
+    "n": 126,
+    "latest_label_end": "2024-03-26 00:00:00",
+    "class_counts": [
+      16,
+      71,
+      39
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4632768361581921,
+      "legacy_trend": 0.43858969391708635,
+      "legacy_risk": 0.5010046483730695,
+      "density_all": 0.429038854805726,
+      "density_expanding": 0.2698412698412698
+    }
+  },
+  {
+    "Date": "2024-04-25",
+    "chosen": "legacy_risk",
+    "bucket": 51,
+    "n": 126,
+    "latest_label_end": "2024-04-24 00:00:00",
+    "class_counts": [
+      10,
+      77,
+      39
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4766138742243216,
+      "legacy_trend": 0.452023988005997,
+      "legacy_risk": 0.514616833260901,
+      "density_all": 0.4236024844720497,
+      "density_expanding": 0.281661600810537
+    }
+  },
+  {
+    "Date": "2024-05-28",
+    "chosen": "legacy_risk",
+    "bucket": 52,
+    "n": 126,
+    "latest_label_end": "2024-05-27 00:00:00",
+    "class_counts": [
+      9,
+      74,
+      43
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.44678766925957936,
+      "legacy_trend": 0.4236499068901303,
+      "legacy_risk": 0.4942528735632184,
+      "density_all": 0.38292220113852,
+      "density_expanding": 0.2524251145933269
+    }
+  },
+  {
+    "Date": "2024-06-25",
+    "chosen": "legacy_risk",
+    "bucket": 53,
+    "n": 126,
+    "latest_label_end": "2024-06-24 00:00:00",
+    "class_counts": [
+      9,
+      74,
+      43
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.44678766925957936,
+      "legacy_trend": 0.4236499068901303,
+      "legacy_risk": 0.4942528735632184,
+      "density_all": 0.4134183793999527,
+      "density_expanding": 0.27429498884155
+    }
+  },
+  {
+    "Date": "2024-07-23",
+    "chosen": "legacy_risk",
+    "bucket": 54,
+    "n": 126,
+    "latest_label_end": "2024-07-22 00:00:00",
+    "class_counts": [
+      9,
+      75,
+      42
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3887758827517864,
+      "legacy_trend": 0.3905448193034174,
+      "legacy_risk": 0.41905938046722246,
+      "density_all": 0.35497835497835495,
+      "density_expanding": 0.2345419513049571
+    }
+  },
+  {
+    "Date": "2024-08-20",
+    "chosen": "legacy_trend",
+    "bucket": 55,
+    "n": 126,
+    "latest_label_end": "2024-08-19 00:00:00",
+    "class_counts": [
+      18,
+      81,
+      27
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.46305214723926386,
+      "legacy_trend": 0.5222428174235403,
+      "legacy_risk": 0.459010939868896,
+      "density_all": 0.45257152836394327,
+      "density_expanding": 0.22460317460317458
+    }
+  },
+  {
+    "Date": "2024-09-19",
+    "chosen": "legacy_trend",
+    "bucket": 56,
+    "n": 126,
+    "latest_label_end": "2024-09-18 00:00:00",
+    "class_counts": [
+      18,
+      94,
+      14
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.36115246760408054,
+      "legacy_trend": 0.39600670789225445,
+      "legacy_risk": 0.3374418953366322,
+      "density_all": 0.28755020080321286,
+      "density_expanding": 0.2346368715083799
+    }
+  },
+  {
+    "Date": "2024-10-17",
+    "chosen": "legacy_trend",
+    "bucket": 57,
+    "n": 126,
+    "latest_label_end": "2024-10-16 00:00:00",
+    "class_counts": [
+      18,
+      97,
+      11
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.364230540701129,
+      "legacy_trend": 0.4112410519529541,
+      "legacy_risk": 0.31393861892583125,
+      "density_all": 0.3326239248026957,
+      "density_expanding": 0.24175824175824176
+    }
+  },
+  {
+    "Date": "2024-11-14",
+    "chosen": "legacy_trend",
+    "bucket": 58,
+    "n": 126,
+    "latest_label_end": "2024-11-13 00:00:00",
+    "class_counts": [
+      14,
+      101,
+      11
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3809250069412671,
+      "legacy_trend": 0.43440493124703644,
+      "legacy_risk": 0.3085470085470085,
+      "density_all": 0.35137278223808105,
+      "density_expanding": 0.27017543859649124
+    }
+  },
+  {
+    "Date": "2024-12-12",
+    "chosen": "legacy_trend",
+    "bucket": 59,
+    "n": 126,
+    "latest_label_end": "2024-12-11 00:00:00",
+    "class_counts": [
+      20,
+      99,
+      7
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3249326705634084,
+      "legacy_trend": 0.3671479094263361,
+      "legacy_risk": 0.2867002193831462,
+      "density_all": 0.3080156402737048,
+      "density_expanding": 0.26373626373626374
+    }
+  },
+  {
+    "Date": "2025-01-10",
+    "chosen": "legacy_equal",
+    "bucket": 60,
+    "n": 126,
+    "latest_label_end": "2025-01-09 00:00:00",
+    "class_counts": [
+      20,
+      94,
+      12
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.37678724288893783,
+      "legacy_trend": 0.3943062820155511,
+      "legacy_risk": 0.360915430001788,
+      "density_all": 0.3461538461538461,
+      "density_expanding": 0.3141938782964424
+    }
+  },
+  {
+    "Date": "2025-02-14",
+    "chosen": "density_expanding",
+    "bucket": 61,
+    "n": 126,
+    "latest_label_end": "2025-02-13 00:00:00",
+    "class_counts": [
+      14,
+      100,
+      12
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.30779054916985954,
+      "legacy_trend": 0.2908429902294933,
+      "legacy_risk": 0.33796296296296297,
+      "density_all": 0.2852900069881202,
+      "density_expanding": 0.35714845280062674
+    }
+  },
+  {
+    "Date": "2025-03-14",
+    "chosen": "legacy_equal",
+    "bucket": 62,
+    "n": 126,
+    "latest_label_end": "2025-03-13 00:00:00",
+    "class_counts": [
+      11,
+      90,
+      25
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.30019331676332506,
+      "legacy_trend": 0.2779503105590062,
+      "legacy_risk": 0.3282101806239737,
+      "density_all": 0.28374279648164996,
+      "density_expanding": 0.3178524374176548
+    }
+  },
+  {
+    "Date": "2025-04-14",
+    "chosen": "legacy_risk",
+    "bucket": 63,
+    "n": 126,
+    "latest_label_end": "2025-04-11 00:00:00",
+    "class_counts": [
+      17,
+      80,
+      29
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.25281045751633985,
+      "legacy_trend": 0.21812549960031977,
+      "legacy_risk": 0.3132149901380671,
+      "density_all": 0.2103640634174985,
+      "density_expanding": 0.28145856085426524
+    }
+  },
+  {
+    "Date": "2025-05-15",
+    "chosen": "legacy_risk",
+    "bucket": 64,
+    "n": 126,
+    "latest_label_end": "2025-05-14 00:00:00",
+    "class_counts": [
+      30,
+      66,
+      30
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.2364341085271318,
+      "legacy_trend": 0.1714507585212303,
+      "legacy_risk": 0.3095407799613074,
+      "density_all": 0.1767845049437898,
+      "density_expanding": 0.2514347202295552
+    }
+  },
+  {
+    "Date": "2025-06-12",
+    "chosen": "legacy_risk",
+    "bucket": 65,
+    "n": 126,
+    "latest_label_end": "2025-06-11 00:00:00",
+    "class_counts": [
+      20,
+      76,
+      30
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.2933732933732934,
+      "legacy_trend": 0.24818826257675178,
+      "legacy_risk": 0.3448275862068966,
+      "density_all": 0.25780509668331414,
+      "density_expanding": 0.2813390313390314
+    }
+  },
+  {
+    "Date": "2025-07-10",
+    "chosen": "legacy_equal",
+    "bucket": 66,
+    "n": 126,
+    "latest_label_end": "2025-07-09 00:00:00",
+    "class_counts": [
+      20,
+      77,
+      29
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.2790144328605867,
+      "legacy_trend": 0.24630824372759855,
+      "legacy_risk": 0.30661966314140227,
+      "density_all": 0.2752069716775599,
+      "density_expanding": 0.2435129740518962
+    }
+  },
+  {
+    "Date": "2025-08-07",
+    "chosen": "legacy_equal",
+    "bucket": 67,
+    "n": 126,
+    "latest_label_end": "2025-08-06 00:00:00",
+    "class_counts": [
+      20,
+      57,
+      49
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.37034720050046915,
+      "legacy_trend": 0.32521703395489804,
+      "legacy_risk": 0.3829608267243451,
+      "density_all": 0.3353024378068059,
+      "density_expanding": 0.3196004993757802
+    }
+  },
+  {
+    "Date": "2025-09-08",
+    "chosen": "density_expanding",
+    "bucket": 68,
+    "n": 126,
+    "latest_label_end": "2025-09-05 00:00:00",
+    "class_counts": [
+      20,
+      51,
+      55
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.32217704097591493,
+      "legacy_trend": 0.2941666666666667,
+      "legacy_risk": 0.3214317673378076,
+      "density_all": 0.3809130231148579,
+      "density_expanding": 0.3976171976171976
+    }
+  },
+  {
+    "Date": "2025-10-06",
+    "chosen": "density_all",
+    "bucket": 69,
+    "n": 126,
+    "latest_label_end": "2025-10-03 00:00:00",
+    "class_counts": [
+      20,
+      61,
+      45
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.38236617183985605,
+      "legacy_trend": 0.36772486772486773,
+      "legacy_risk": 0.3581196581196582,
+      "density_all": 0.4776281556451383,
+      "density_expanding": 0.4535523319773838
+    }
+  },
+  {
+    "Date": "2025-11-03",
+    "chosen": "legacy_equal",
+    "bucket": 70,
+    "n": 126,
+    "latest_label_end": "2025-10-31 00:00:00",
+    "class_counts": [
+      0,
+      81,
+      45
+    ],
+    "reason": "insufficient_mature_class_history",
+    "scores": {}
+  },
+  {
+    "Date": "2025-12-01",
+    "chosen": "density_expanding",
+    "bucket": 71,
+    "n": 126,
+    "latest_label_end": "2025-11-28 00:00:00",
+    "class_counts": [
+      8,
+      75,
+      43
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.611457763181901,
+      "legacy_trend": 0.6145969498910676,
+      "legacy_risk": 0.4288427321588258,
+      "density_all": 0.6532790910218839,
+      "density_expanding": 0.6601327633545337
+    }
+  },
+  {
+    "Date": "2025-12-29",
+    "chosen": "density_expanding",
+    "bucket": 72,
+    "n": 126,
+    "latest_label_end": "2025-12-26 00:00:00",
+    "class_counts": [
+      8,
+      70,
+      48
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.6015702643609621,
+      "legacy_trend": 0.5893270049896556,
+      "legacy_risk": 0.41849067112225,
+      "density_all": 0.6297098832310101,
+      "density_expanding": 0.6690621696191433
+    }
+  },
+  {
+    "Date": "2026-01-28",
+    "chosen": "density_expanding",
+    "bucket": 73,
+    "n": 126,
+    "latest_label_end": "2026-01-27 00:00:00",
+    "class_counts": [
+      8,
+      75,
+      43
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4829916815210933,
+      "legacy_trend": 0.4432051700353179,
+      "legacy_risk": 0.29278567104654063,
+      "density_all": 0.6283796671843984,
+      "density_expanding": 0.6777009638189432
+    }
+  },
+  {
+    "Date": "2026-03-04",
+    "chosen": "density_expanding",
+    "bucket": 74,
+    "n": 126,
+    "latest_label_end": "2026-03-03 00:00:00",
+    "class_counts": [
+      11,
+      92,
+      23
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.4090354090354091,
+      "legacy_trend": 0.3886375062845651,
+      "legacy_risk": 0.30418192918192916,
+      "density_all": 0.4509821562453142,
+      "density_expanding": 0.5409652076318744
+    }
+  },
+  {
+    "Date": "2026-04-01",
+    "chosen": "density_expanding",
+    "bucket": 75,
+    "n": 126,
+    "latest_label_end": "2026-03-31 00:00:00",
+    "class_counts": [
+      24,
+      84,
+      18
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.39560545000959507,
+      "legacy_trend": 0.40849673202614384,
+      "legacy_risk": 0.340952961495479,
+      "density_all": 0.4233716475095785,
+      "density_expanding": 0.47057531840140526
+    }
+  },
+  {
+    "Date": "2026-05-04",
+    "chosen": "density_expanding",
+    "bucket": 76,
+    "n": 126,
+    "latest_label_end": "2026-04-29 00:00:00",
+    "class_counts": [
+      26,
+      75,
+      25
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.40062331775038956,
+      "legacy_trend": 0.4060846560846561,
+      "legacy_risk": 0.3308308308308308,
+      "density_all": 0.4060563619387148,
+      "density_expanding": 0.46428571428571425
+    }
+  },
+  {
+    "Date": "2026-06-01",
+    "chosen": "density_expanding",
+    "bucket": 77,
+    "n": 126,
+    "latest_label_end": "2026-05-29 00:00:00",
+    "class_counts": [
+      18,
+      78,
+      30
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3716837404780667,
+      "legacy_trend": 0.3818304043023144,
+      "legacy_risk": 0.3405236738570072,
+      "density_all": 0.34830242570180653,
+      "density_expanding": 0.44817190887760255
+    }
+  },
+  {
+    "Date": "2026-06-29",
+    "chosen": "density_all",
+    "bucket": 78,
+    "n": 126,
+    "latest_label_end": "2026-06-26 00:00:00",
+    "class_counts": [
+      26,
+      73,
+      27
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.332032266458496,
+      "legacy_trend": 0.3513227513227513,
+      "legacy_risk": 0.30594565509819743,
+      "density_all": 0.38964206829375364,
+      "density_expanding": 0.3843079443079443
+    }
+  },
+  {
+    "Date": "2026-07-27",
+    "chosen": "density_all",
+    "bucket": 79,
+    "n": 126,
+    "latest_label_end": "2026-07-24 00:00:00",
+    "class_counts": [
+      31,
+      80,
+      15
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.3247747747747748,
+      "legacy_trend": 0.3693310331608204,
+      "legacy_risk": 0.2888888888888889,
+      "density_all": 0.37674382355233416,
+      "density_expanding": 0.3749697409828128
+    }
+  },
+  {
+    "Date": "2026-08-24",
+    "chosen": "density_expanding",
+    "bucket": 80,
+    "n": 126,
+    "latest_label_end": "2026-08-21 00:00:00",
+    "class_counts": [
+      38,
+      76,
+      12
+    ],
+    "reason": "mature_macro_f1_with_baseline_margin",
+    "scores": {
+      "legacy_equal": 0.28704318936877077,
+      "legacy_trend": 0.34193959678061997,
+      "legacy_risk": 0.2501545631806725,
+      "density_all": 0.39867641936607456,
+      "density_expanding": 0.4124074948826957
+    }
+  }
+]

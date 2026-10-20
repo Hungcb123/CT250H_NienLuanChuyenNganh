@@ -1,0 +1,2168 @@
+[
+  {
+    "outer_fold": 1,
+    "parameters": {
+      "kernel": "linear",
+      "C": 22.022254601874433,
+      "class_weight": null,
+      "probability": false,
+      "cache_size": 256,
+      "random_state": 42
+    },
+    "inner_selection_f1": 0.2939838288659574,
+    "n_trials": 15,
+    "best_trial": 13,
+    "trials": [
+      {
+        "number": 0,
+        "value": 0.2710523840488138,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2428748451053284,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.2992299229922992,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "value": 0.2926264872526463,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.29287634408602153,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.29237663041927103,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "value": 0.24542564212481693,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2126984126984127,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.27815287155122115,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "value": 0.25360914873017,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2047688831898394,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "value": 0.2838538151164709,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.001378323745500718
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.001378323745500718
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2652582159624413,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "value": 0.251160892058282,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2069906223358909,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.29533116178067315,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "value": 0.28436764199177145,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2662858697130423,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "value": 0.2838538151164709,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2652582159624413,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "value": 0.2838538151164709,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2652582159624413,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "value": 0.2838538151164709,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.006516990611177174
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.006516990611177174
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2652582159624413,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "value": 0.28769774917189966,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 6.427536726318603,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 6.427536726318603,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2830188679245283,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.29237663041927103,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "value": 0.2903586103233268,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 5.275901868165461,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 5.275901868165461,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.2883405902273826,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.29237663041927103,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "value": 0.28829259356993164,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 1.0054881116682886,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 1.0054881116682886,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.28648239712517903,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.2901027900146843,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "value": 0.2939838288659574,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 22.022254601874433,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 22.022254601874433,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.28551824346141425,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "value": 0.2939838288659574,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 27.466556451341795,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 27.466556451341795,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 325,
+            "n_validation": 171,
+            "f1": 0.28551824346141425,
+            "latest_train_label_end": "2018-08-28",
+            "validation_start": "2018-08-29"
+          },
+          {
+            "n_train": 496,
+            "n_validation": 171,
+            "f1": 0.30244941427050054,
+            "latest_train_label_end": "2019-06-24",
+            "validation_start": "2019-06-25"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "outer_fold": 2,
+    "parameters": {
+      "kernel": "linear",
+      "C": 0.01190423738433755,
+      "class_weight": "balanced",
+      "probability": false,
+      "cache_size": 256,
+      "random_state": 42
+    },
+    "inner_selection_f1": 0.2962503295884781,
+    "n_trials": 15,
+    "best_trial": 13,
+    "trials": [
+      {
+        "number": 0,
+        "value": 0.23847787235201512,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.22570306038047974,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.25125268432355047,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "value": 0.13144072666264967,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.08599149388623073,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.17688995943906863,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "value": 0.23603191081513708,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.1968569065343259,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.27520691509594825,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "value": 0.26192459847420513,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.26275174101261056,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.2610974559357997,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "value": 0.24376149198844232,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.001378323745500718
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.001378323745500718
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23456790123456792,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.25295508274231676,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "value": 0.29616460068003786,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.21045506240483106,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.38187413895524464,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "value": 0.26237301587301587,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23466666666666666,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.2900793650793651,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "value": 0.24376149198844232,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23456790123456792,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.25295508274231676,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "value": 0.24376149198844232,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23456790123456792,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.25295508274231676,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "value": 0.24376149198844232,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.006516990611177174
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.006516990611177174
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23456790123456792,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.25295508274231676,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "value": 0.23536513142909207,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.5512978139289976,
+          "class_weight": "balanced",
+          "gamma_mode": "numeric",
+          "gamma": 0.6264278041381325
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.5512978139289976,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.6264278041381325
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23456790123456792,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.23616236162361623,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "value": 0.1846241658232211,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.1854296939442394,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.1854296939442394,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.15714365661200963,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.21210467503443256,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "value": 0.2908333063271484,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01058425150827897,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01058425150827897,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.24409812409812406,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.33756848855617266,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "value": 0.2962503295884781,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01190423738433755,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01190423738433755,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.23815781164786587,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.35434284752909023,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "value": 0.2324007413738213,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 19.439947164980595,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 19.439947164980595,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 330,
+            "n_validation": 175,
+            "f1": 0.20042194092827004,
+            "latest_train_label_end": "2020-04-24",
+            "validation_start": "2020-04-27"
+          },
+          {
+            "n_train": 505,
+            "n_validation": 175,
+            "f1": 0.26437954181937257,
+            "latest_train_label_end": "2020-12-30",
+            "validation_start": "2020-12-31"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "outer_fold": 3,
+    "parameters": {
+      "kernel": "linear",
+      "C": 0.011289174526731078,
+      "class_weight": null,
+      "probability": false,
+      "cache_size": 256,
+      "random_state": 42
+    },
+    "inner_selection_f1": 0.35100858750239555,
+    "n_trials": 15,
+    "best_trial": 13,
+    "trials": [
+      {
+        "number": 0,
+        "value": 0.29703355155482813,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.20774231678486998,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.3863247863247863,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "value": 0.2586947295827697,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.24413145539906103,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.2732580037664783,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "value": 0.1831847672499854,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.17262417820142306,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.19374535629854775,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "value": 0.2796618815494539,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.2612971823498139,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.29802658074909383,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "value": 0.25565086610179866,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.001378323745500718
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.001378323745500718
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.23409669211195927,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.27720504009163804,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "value": 0.19002212602745858,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.19010688540889883,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.18993736664601832,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "value": 0.3166967022472776,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.28778809769521846,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.3456053067993367,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "value": 0.25565086610179866,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.23409669211195927,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.27720504009163804,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "value": 0.25565086610179866,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.23409669211195927,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.27720504009163804,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "value": 0.25565086610179866,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.006516990611177174
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.006516990611177174
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.23409669211195927,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.27720504009163804,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "value": 0.3020965891933634,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 9.463668758894501,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 9.463668758894501,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.28791208791208794,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.31628109047463887,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "value": 0.2987798921945264,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 14.83998528266237,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 14.83998528266237,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.28791208791208794,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.3096476964769648,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "value": 0.2930418897256202,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.9186623687759903,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.9186623687759903,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.28178418803418803,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.30429959141705226,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "value": 0.35100858750239555,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.011289174526731078,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.011289174526731078,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.3299019607843137,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.3721152142204774,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "value": 0.3480555142180226,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01162140352843412,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01162140352843412,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 323,
+            "n_validation": 170,
+            "f1": 0.3239958142155679,
+            "latest_train_label_end": "2021-11-25",
+            "validation_start": "2021-11-26"
+          },
+          {
+            "n_train": 493,
+            "n_validation": 170,
+            "f1": 0.3721152142204774,
+            "latest_train_label_end": "2022-10-10",
+            "validation_start": "2022-10-11"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "outer_fold": 4,
+    "parameters": {
+      "kernel": "rbf",
+      "C": 12.970552783496963,
+      "class_weight": null,
+      "probability": false,
+      "cache_size": 256,
+      "random_state": 42,
+      "gamma": "scale"
+    },
+    "inner_selection_f1": 0.33733763749601786,
+    "n_trials": 15,
+    "best_trial": 10,
+    "trials": [
+      {
+        "number": 0,
+        "value": 0.32324950353550963,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 3.5093904781414595,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.3489164398255307,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.2975825672454886,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "value": 0.3017677162611103,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 2.897705266717829,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2836911449973248,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.3198442875248959,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "value": 0.2393518712003015,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.04287730278993501,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.32263475872498426,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.15606898367561875,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "value": 0.29061414355532,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.10295300642650058,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2549019607843137,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.32632632632632635,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "value": 0.2933901643579063,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.001378323745500718
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.3853103152262982,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.001378323745500718
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2604540023894863,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.32632632632632635,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "value": 0.23174991641996362,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced"
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.01683419201821693,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2979564061669325,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.1655434266729948,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "value": 0.2935979457718588,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 0.02185837053086609,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2608695652173913,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.32632632632632635,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "value": 0.2933901643579063,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.013169614353741137,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2604540023894863,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.32632632632632635,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 8,
+        "value": 0.2933901643579063,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.04393001548364004,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2604540023894863,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.32632632632632635,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 9,
+        "value": 0.2933901643579063,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "gamma_mode": "numeric",
+          "gamma": 0.006516990611177174
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.02030949663934824,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": 0.006516990611177174
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.2604540023894863,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.32632632632632635,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 10,
+        "value": 0.33733763749601786,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 12.970552783496963,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 12.970552783496963,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.37865850350356617,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.2960167714884696,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 11,
+        "value": 0.3259515682030963,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 17.77264573384304,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 17.77264573384304,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.3676188521219083,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.28428428428428426,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 12,
+        "value": 0.31056727769981707,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 22.407968264875255,
+          "class_weight": null,
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 22.407968264875255,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.35464805784624875,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.2664864975533853,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 13,
+        "value": 0.2933529389915904,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "linear",
+          "C": 26.863650827277045,
+          "class_weight": null
+        },
+        "model_parameters": {
+          "kernel": "linear",
+          "C": 26.863650827277045,
+          "class_weight": null,
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.26662432854383317,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.3200815494393476,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      },
+      {
+        "number": 14,
+        "value": 0.31939501754931254,
+        "state": "COMPLETE",
+        "parameters": {
+          "kernel": "rbf",
+          "C": 0.5622971019608751,
+          "class_weight": "balanced",
+          "gamma_mode": "scale"
+        },
+        "model_parameters": {
+          "kernel": "rbf",
+          "C": 0.5622971019608751,
+          "class_weight": "balanced",
+          "probability": false,
+          "cache_size": 256,
+          "random_state": 42,
+          "gamma": "scale"
+        },
+        "inner_folds": [
+          {
+            "n_train": 322,
+            "n_validation": 170,
+            "f1": 0.3807590817887019,
+            "latest_train_label_end": "2023-08-25",
+            "validation_start": "2023-08-28"
+          },
+          {
+            "n_train": 492,
+            "n_validation": 170,
+            "f1": 0.25803095330992326,
+            "latest_train_label_end": "2024-05-07",
+            "validation_start": "2024-05-08"
+          }
+        ]
+      }
+    ]
+  }
+]

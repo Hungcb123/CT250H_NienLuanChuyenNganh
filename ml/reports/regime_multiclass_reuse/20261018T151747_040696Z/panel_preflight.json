@@ -1,0 +1,38 @@
+{
+  "role": "Prerequisite audit for next controlled THREE-CLASS pooled-index experiment, no fit yet",
+  "index_inputs": {
+    "VN30": {
+      "source_start": "2017-08-24",
+      "source_end": "2026-10-01",
+      "observed_closes": 2257,
+      "index_calendar_overlap": 2257,
+      "missing_on_vn_calendar_after_start": 14,
+      "sha256": "9cba88d5e4cc66f1a2b6fd99c8e89768be6b2969f4f465226917565afd15a5cc"
+    },
+    "VNMID": {
+      "source_start": "2017-08-24",
+      "source_end": "2026-10-01",
+      "observed_closes": 2252,
+      "index_calendar_overlap": 2252,
+      "missing_on_vn_calendar_after_start": 19,
+      "sha256": "82f30375d4df6312da7450fd7894b6e5094354e12bd4907c9ae2a8a5f93e2b6a"
+    },
+    "VNSML": {
+      "source_start": "2017-08-24",
+      "source_end": "2026-10-01",
+      "observed_closes": 2252,
+      "index_calendar_overlap": 2252,
+      "missing_on_vn_calendar_after_start": 19,
+      "sha256": "a3cf39a72e4c82ca99d40d989ab1c3590207d087b90da302eff5dfaa2be4890a"
+    }
+  },
+  "training_policy": "Use full VNINDEX calendar, no fill; labels shifted before filtering. Every auxiliary and target label must mature before global refit boundary.",
+  "target": "Unchanged VNINDEX T+20 +/-5% with exactly the same 1560 validation dates",
+  "features": "Close-only relative indicators with matched target-only control; no current stock-universe pool",
+  "weights": "Total training weight one per session; target half and available auxiliaries share half when present; no claim that correlated indices are independent samples",
+  "model_plan": "Fixed shallow and medium GBM, target-only vs pooled, 3y vs expanding; 8 configurations, no new broad parameter search",
+  "caveats": [
+    "Past index membership automatically reflected in historical index closes, but broker histories are not independently point-in-time certified.",
+    "Cross-index transfer may fail; all candidate outcomes must be retained."
+  ]
+}

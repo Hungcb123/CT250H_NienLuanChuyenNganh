@@ -1,0 +1,25 @@
+{
+  "candidate": "shock_shrink",
+  "schema": 1,
+  "horizon_sessions": 20,
+  "label": "log_return_vs_20day_sample_vol_times_sqrt20",
+  "classes": [
+    "bearish",
+    "sideway",
+    "bullish"
+  ],
+  "density_weights": {
+    "quantile": 0.28125,
+    "forest": 0.140625,
+    "magnitude": 0.140625,
+    "analog": 0.1875,
+    "shock": 0.25
+  },
+  "classifier": "equal_selected_trend_and_risk",
+  "smoothing": {
+    "span": 5,
+    "current_weight": 0.5,
+    "ema_weight": 0.5
+  },
+  "score_semantics": "class_balanced_decision_scores_not_probabilities"
+}

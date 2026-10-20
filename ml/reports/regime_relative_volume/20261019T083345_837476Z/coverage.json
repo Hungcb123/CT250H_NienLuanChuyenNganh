@@ -1,0 +1,10 @@
+{
+  "old_field_all": 0.6885481552467657,
+  "new_field_all": 0.7544321993291806,
+  "old_field_frozen": 0.5679487179487179,
+  "new_field_frozen": 0.7391025641025641,
+  "features_frozen": {
+    "RelativeVolumeLogRatio60": 0.7185897435897436,
+    "RelativeVolumeLogChange5": 0.7166666666666667
+  }
+}

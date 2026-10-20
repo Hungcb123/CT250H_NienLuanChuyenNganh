@@ -40,7 +40,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
   const [bankName, setBankName] = useState('Vietcombank');
   const [principalAmount, setPrincipalAmount] = useState<string>('50000000');
   const [termMonths, setTermMonths] = useState<number>(6);
-  const [interestRate, setInterestRate] = useState<number>(5.50);
+  const [interestRate, setInterestRate] = useState<string>('5.50');
   const [autoRollover, setAutoRollover] = useState(true);
 
   // Compound Simulator state (SRS 4.3 & 7.3)
@@ -111,18 +111,18 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
 
   const handleBankChange = (newBank: string) => {
     setBankName(newBank);
-    setInterestRate(getRateFor(newBank, termMonths));
+    setInterestRate(String(getRateFor(newBank, termMonths)));
   };
 
   const handleTermChange = (term: number) => {
     setTermMonths(term);
-    setInterestRate(getRateFor(bankName, term));
+    setInterestRate(String(getRateFor(bankName, term)));
   };
 
   const handleSelectBankFromTable = (selectedBank: string, term: number) => {
     setBankName(selectedBank);
     setTermMonths(term);
-    setInterestRate(getRateFor(selectedBank, term));
+    setInterestRate(String(getRateFor(selectedBank, term)));
     setShowModal(true);
   };
 
@@ -149,12 +149,22 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
       return;
     }
 
+    const numRate = parseFloat(String(interestRate));
+    if (isNaN(numRate) || numRate <= 0) {
+      toast.warning("Lãi suất phải lớn hơn 0%", "Lãi suất không hợp lệ");
+      return;
+    }
+    if (numRate > 30) {
+      toast.warning("Lãi suất tối đa hợp lệ là 30%/năm", "Lãi suất quá cao");
+      return;
+    }
+
     setSubmitting(true);
     try {
       const payload: OpenSavingsPayload = {
         bankName,
         principalAmount: amount,
-        interestRate,
+        interestRate: numRate,
         termMonths,
         autoRollover
       };
@@ -209,8 +219,9 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
     }
   };
 
+  const currentInterestRateNum = parseFloat(String(interestRate)) || 0;
   const estimatedMaturityInterest =
-    ((parseFloat(principalAmount) || 0) * (interestRate / 100) * termMonths) / 12;
+    ((parseFloat(principalAmount) || 0) * (currentInterestRateNum / 100) * termMonths) / 12;
 
   const totalActivePrincipal = deposits
     .filter((d) => d.status === 'ACTIVE')
@@ -223,19 +234,10 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
   return (
     <div className="space-y-6">
       {/* Header Summary */}
-      <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="vnx-panel px-4 py-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-text-primary tracking-tight">
-              Sổ Tiền Gửi Tiết Kiệm & Động Cơ Lãi Kép
-            </h2>
-            <span className="px-2 py-0.5 rounded bg-accent-gold-light text-accent-gold text-[10px] font-bold border border-accent-gold/30">
-              Auto-Compound Engine
-            </span>
-          </div>
-          <p className="text-xs text-text-secondary mt-1">
-            Batch Job tự động tính lãi tích lũy hàng ngày và tái tục gốc + lãi khi đáo hạn (Auto-Rollover)
-          </p>
+          <h2 className="text-base font-bold text-text-primary">Sổ tiết kiệm</h2>
+          <p className="text-xs text-text-secondary mt-0.5">Theo dõi tiền gửi, lãi tích lũy và ngày đáo hạn.</p>
         </div>
 
         <div className="flex items-center gap-2 self-start md:self-auto">
@@ -243,7 +245,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
             type="button"
             onClick={handleSyncMarket}
             disabled={syncingMarket}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-subtle bg-surface-container hover:bg-surface-container-high transition-all text-xs font-semibold text-text-primary shadow-2xs"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-subtle bg-surface-container hover:bg-surface-container-high transition-all text-xs font-semibold text-text-primary "
             title="Đồng bộ biểu lãi suất các ngân hàng từ thị trường ngoài"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${syncingMarket ? 'animate-spin text-accent-emerald' : 'text-text-muted'}`} />
@@ -252,7 +254,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           <button
             type="button"
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold shadow-sm"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-emerald text-white hover:bg-accent-emerald/90 transition-all text-xs font-bold "
           >
             <PlusCircle className="w-4 h-4" />
             <span>Mở sổ tiết kiệm mới</span>
@@ -261,8 +263,8 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
       </div>
 
       {/* KPI Cards for Savings */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 shadow-xs">
+      <div className="vnx-stat-strip grid grid-cols-1 sm:grid-cols-3 gap-0">
+        <div className="vnx-stat p-4">
           <div className="flex items-center justify-between text-text-muted mb-1 text-xs font-semibold">
             <span>Tổng Tiền Gốc Đang Gửi</span>
             <PiggyBank className="w-4 h-4 text-accent-emerald" />
@@ -275,7 +277,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           </span>
         </div>
 
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 shadow-xs">
+        <div className="vnx-stat p-4">
           <div className="flex items-center justify-between text-text-muted mb-1 text-xs font-semibold">
             <span>Lãi Lũy Kế Tạm Tính</span>
             <Percent className="w-4 h-4 text-accent-gold" />
@@ -288,7 +290,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           </span>
         </div>
 
-        <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 shadow-xs">
+        <div className="vnx-stat p-4">
           <div className="flex items-center justify-between text-text-muted mb-1 text-xs font-semibold">
             <span>Cơ Chế Tái Tục</span>
             <RefreshCw className="w-4 h-4 text-accent-blue" />
@@ -303,7 +305,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
       </div>
 
       {/* Live Bank Rates Comparison Section */}
-      <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-xs space-y-3">
+      <div className="vnx-panel p-5 space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3">
           <div className="flex items-center gap-2">
             <Building2 className="w-4 h-4 text-accent-emerald" />
@@ -411,7 +413,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           deposits.map((dep) => (
             <div
               key={dep.id}
-              className="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 shadow-xs space-y-4 hover:border-border-highlight transition-all"
+              className="vnx-savings-row py-5 space-y-4"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-subtle pb-3">
                 <div className="flex items-center gap-3">
@@ -505,7 +507,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
       </div>
 
       {/* Simulator: Mô Phỏng Tích Sản & Động Cơ Lãi Kép (SRS Section 4.3 & 7.3) */}
-      <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 shadow-sm space-y-6">
+      <div className="vnx-panel p-6 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-border-subtle pb-4">
           <div>
             <div className="flex items-center gap-2">
@@ -537,7 +539,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
         {/* Input Parameters Controls */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* 1. Vốn ban đầu P */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2">
+          <div className="vnx-detail p-4     space-y-2">
             <div className="flex justify-between items-center text-xs">
               <label className="font-semibold text-text-secondary">Vốn gốc ban đầu (P)</label>
               <span className="font-bold font-mono text-accent-emerald text-sm">
@@ -572,7 +574,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           </div>
 
           {/* 2. Tiền góp hàng tháng PMT */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2">
+          <div className="vnx-detail p-4     space-y-2">
             <div className="flex justify-between items-center text-xs">
               <label className="font-semibold text-text-secondary">Tích lũy mỗi tháng (PMT)</label>
               <span className="font-bold font-mono text-accent-emerald text-sm">
@@ -607,7 +609,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           </div>
 
           {/* 3. Lãi suất r */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2">
+          <div className="vnx-detail p-4     space-y-2">
             <div className="flex justify-between items-center text-xs">
               <label className="font-semibold text-text-secondary">Lãi suất kỳ vọng (r)</label>
               <span className="font-bold font-mono text-accent-gold text-sm">
@@ -642,7 +644,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           </div>
 
           {/* 4. Thời gian t (Năm) */}
-          <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2">
+          <div className="vnx-detail p-4     space-y-2">
             <div className="flex justify-between items-center text-xs">
               <label className="font-semibold text-text-secondary">Thời gian tích sản (t)</label>
               <span className="font-bold font-mono text-accent-blue text-sm">
@@ -682,7 +684,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Card 1: Tổng vốn góp */}
-              <div className="p-4 rounded-xl bg-surface-container border border-border-subtle">
+              <div className="vnx-detail p-4    ">
                 <div className="text-text-muted text-[11px] font-semibold mb-1 flex items-center justify-between">
                   <span>Tổng Vốn Đã Góp</span>
                   <Calendar className="w-3.5 h-3.5 text-text-muted" />
@@ -696,7 +698,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
               </div>
 
               {/* Card 2: Lãi kép tích lũy */}
-              <div className="p-4 rounded-xl bg-accent-emerald-light/20 border border-accent-emerald/30">
+              <div className="vnx-detail p-4    ">
                 <div className="text-accent-emerald text-[11px] font-semibold mb-1 flex items-center justify-between">
                   <span>Tiền Lãi Sinh Sôi (Lãi Kép)</span>
                   <TrendingUp className="w-3.5 h-3.5 text-accent-emerald" />
@@ -715,7 +717,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
               </div>
 
               {/* Card 3: Tổng tài sản tương lai FV */}
-              <div className="p-4 rounded-xl bg-surface-container-high border border-border-subtle shadow-xs">
+              <div className="vnx-detail p-4     ">
                 <div className="text-text-muted text-[11px] font-semibold mb-1 flex items-center justify-between">
                   <span>Tổng Tài Sản Đáo Hạn (FV)</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-accent-gold" />
@@ -729,7 +731,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
               </div>
 
               {/* Card 4: Bội số tài sản */}
-              <div className="p-4 rounded-xl bg-accent-blue-light/20 border border-accent-blue/30">
+              <div className="vnx-detail p-4    ">
                 <div className="text-accent-blue text-[11px] font-semibold mb-1 flex items-center justify-between">
                   <span>Bội Số Tăng Trưởng</span>
                   <Sparkles className="w-3.5 h-3.5 text-accent-blue" />
@@ -744,7 +746,7 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
             </div>
 
             {/* Visual Ratio Bar */}
-            <div className="p-4 rounded-xl bg-surface-container-low border border-border-subtle space-y-2">
+            <div className="vnx-detail p-4     space-y-2">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-semibold text-text-secondary">Cơ cấu tài sản tích lũy (FV)</span>
                 <span className="text-[11px] text-text-muted">
@@ -931,9 +933,40 @@ export function SavingsTab({ onRefresh }: SavingsTabProps) {
               </div>
 
               {/* Lãi suất */}
-              <div className="flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-border-subtle">
-                <span className="text-text-secondary font-medium">Lãi suất áp dụng:</span>
-                <span className="font-bold text-accent-gold text-sm">{interestRate}%/năm</span>
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block font-semibold text-text-primary text-xs">
+                    Lãi suất áp dụng (%/năm)
+                  </label>
+                  {currentInterestRateNum !== getRateFor(bankName, termMonths) && (
+                    <button
+                      type="button"
+                      onClick={() => setInterestRate(String(getRateFor(bankName, termMonths)))}
+                      className="text-[11px] text-accent-blue hover:underline cursor-pointer font-medium"
+                    >
+                      Dùng lãi suất chuẩn ({getRateFor(bankName, termMonths)}%)
+                    </button>
+                  )}
+                </div>
+                <div className="relative">
+                  <input
+                    type="number"
+                    step="0.05"
+                    min="0.1"
+                    max="30"
+                    value={interestRate}
+                    onChange={(e) => setInterestRate(e.target.value)}
+                    placeholder="Ví dụ: 6.2..."
+                    required
+                    className="w-full px-3 py-2 pr-16 rounded-lg border border-border-subtle bg-surface-container-lowest text-text-primary focus:outline-hidden focus:border-accent-emerald font-mono font-bold text-sm"
+                  />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-text-muted pointer-events-none">
+                    %/năm
+                  </div>
+                </div>
+                <p className="text-[11px] text-text-muted mt-1">
+                  * Tự động điền theo biểu niêm yết, bạn có thể tự nhập theo lãi suất đàm phán hoặc ưu đãi riêng.
+                </p>
               </div>
 
               {/* Tiền lãi dự kiến khi đáo hạn */}

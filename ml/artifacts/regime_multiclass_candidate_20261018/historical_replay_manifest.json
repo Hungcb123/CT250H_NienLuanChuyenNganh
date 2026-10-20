@@ -1,0 +1,269 @@
+{
+  "role": "Historical replay provenance only; future parameters remain last-fold values in contract",
+  "original_report": "ml/reports/regime_experiments/20261017T141838_654956Z/experiment_report.json",
+  "original_report_sha256": "cb92562ac3a11bb192f888f5e9056787a14fb606feb924ed8586e4909b66eb4e",
+  "legacy_models": {
+    "trend": {
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "per_fold_parameters": [
+        {
+          "outer_fold": 1,
+          "inner_selection_f1": 0.35856998942579615,
+          "best_params": {
+            "n_estimators": 150,
+            "learning_rate": 0.01302780710309028,
+            "max_depth": 7,
+            "num_leaves": 33,
+            "min_child_samples": 29,
+            "subsample": 0.798070764044508,
+            "colsample_bytree": 0.6137554084460873,
+            "reg_alpha": 1.527156759251193,
+            "reg_lambda": 2.133142332373004e-06,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        },
+        {
+          "outer_fold": 2,
+          "inner_selection_f1": 0.30208017939922827,
+          "best_params": {
+            "n_estimators": 75,
+            "learning_rate": 0.034594879590580115,
+            "max_depth": 6,
+            "num_leaves": 44,
+            "min_child_samples": 79,
+            "subsample": 0.6019600295821981,
+            "colsample_bytree": 0.9141016744105681,
+            "reg_alpha": 1.7272786429851023e-07,
+            "reg_lambda": 6.108613640246106,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        },
+        {
+          "outer_fold": 3,
+          "inner_selection_f1": 0.32562804734909917,
+          "best_params": {
+            "n_estimators": 225,
+            "learning_rate": 0.1415792151901798,
+            "max_depth": 5,
+            "num_leaves": 15,
+            "min_child_samples": 30,
+            "subsample": 0.6215780208376839,
+            "colsample_bytree": 0.7786308642132331,
+            "reg_alpha": 1.759536160948061e-06,
+            "reg_lambda": 0.07356953134258702,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        },
+        {
+          "outer_fold": 4,
+          "inner_selection_f1": 0.4072554489158659,
+          "best_params": {
+            "n_estimators": 350,
+            "learning_rate": 0.04272080460529356,
+            "max_depth": 5,
+            "num_leaves": 59,
+            "min_child_samples": 42,
+            "subsample": 0.633488544315244,
+            "colsample_bytree": 0.8193227474355528,
+            "reg_alpha": 0.0021140781760156974,
+            "reg_lambda": 0.6394254572435746,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        }
+      ],
+      "folds": [
+        {
+          "fold": 1,
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "fold": 2,
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "fold": 3,
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "fold": 4,
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ]
+    },
+    "risk": {
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "Drawdown120",
+        "Drawdown252",
+        "HV20_60_Ratio",
+        "DownsideHV60"
+      ],
+      "per_fold_parameters": [
+        {
+          "outer_fold": 1,
+          "inner_selection_f1": 0.37403031109927665,
+          "best_params": {
+            "n_estimators": 150,
+            "learning_rate": 0.11418800685553612,
+            "max_depth": 3,
+            "num_leaves": 22,
+            "min_child_samples": 20,
+            "subsample": 0.6313300063577484,
+            "colsample_bytree": 0.8131566014842485,
+            "reg_alpha": 6.8712371782446345e-06,
+            "reg_lambda": 0.02543106241086852,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        },
+        {
+          "outer_fold": 2,
+          "inner_selection_f1": 0.41542768756644205,
+          "best_params": {
+            "n_estimators": 100,
+            "learning_rate": 0.010532153655490309,
+            "max_depth": 7,
+            "num_leaves": 29,
+            "min_child_samples": 24,
+            "subsample": 0.6679603338292528,
+            "colsample_bytree": 0.8808900129717107,
+            "reg_alpha": 2.3030774513905485,
+            "reg_lambda": 3.776859870118303e-07,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        },
+        {
+          "outer_fold": 3,
+          "inner_selection_f1": 0.263791912810356,
+          "best_params": {
+            "n_estimators": 225,
+            "learning_rate": 0.1415792151901798,
+            "max_depth": 5,
+            "num_leaves": 15,
+            "min_child_samples": 30,
+            "subsample": 0.6215780208376839,
+            "colsample_bytree": 0.7786308642132331,
+            "reg_alpha": 1.759536160948061e-06,
+            "reg_lambda": 0.07356953134258702,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        },
+        {
+          "outer_fold": 4,
+          "inner_selection_f1": 0.38420696387227826,
+          "best_params": {
+            "n_estimators": 250,
+            "learning_rate": 0.12139707695554378,
+            "max_depth": 3,
+            "num_leaves": 20,
+            "min_child_samples": 23,
+            "subsample": 0.7301321323053057,
+            "colsample_bytree": 0.7554709158757928,
+            "reg_alpha": 2.7678419414850017e-06,
+            "reg_lambda": 0.28749982347407854,
+            "class_weight": "balanced",
+            "random_state": 42,
+            "n_jobs": 2,
+            "verbosity": -1
+          },
+          "n_trials": 15
+        }
+      ],
+      "folds": [
+        {
+          "fold": 1,
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "fold": 2,
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "fold": 3,
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "fold": 4,
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ]
+    }
+  },
+  "historical_bucket_rule": "Each original outer fold resets63-session learner buckets to first feature-eligible forecast. Selector20-session buckets remain anchored2020-03-27 across folds.",
+  "density_anchors": [
+    "2020-03-27",
+    "2021-10-15",
+    "2023-07-17",
+    "2025-02-10"
+  ]
+}

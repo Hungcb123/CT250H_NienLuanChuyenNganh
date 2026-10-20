@@ -1,0 +1,43 @@
+{
+  "role": "Research negative-evidence and data-quality snapshot; no native model bundle, new acceptance or deployment",
+  "created_at": "2026-10-19T08:39:08.621975+00:00",
+  "metrics": {
+    "at": "2026-10-19T08:39:08.621975+00:00",
+    "highest_observed_f1": 0.5144884151429698,
+    "balanced_candidate": {
+      "name": "shock_shrink",
+      "mean_f1": 0.5137451636929175,
+      "worst_f1": 0.403056383096105
+    },
+    "new_studies": 3,
+    "new_high_found": false,
+    "forecast_files_audited": 13,
+    "source_hashes_verified": 47,
+    "focused_tests_passed": 8,
+    "independent_test": false,
+    "accepted": false,
+    "goal_achieved": false,
+    "goal_status": "active",
+    "deployment_changed": false
+  },
+  "files": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage6/independent_metric_audit.json": "0cf5f459d4e385fb6f8b2fe7d4304982efe5a3bf12eba21952837c52d2b4498a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage6/audit_volume_alignment.py": "9795718a324b0a25d36b8b42dfd47e419b0dd4ebddae7a7a0e5974b9ba51c163",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage6/volume_alignment_audit.json": "c1dd7e52947290fa78bd888825713b3adc862fe94aa532dba289c4323872c4c6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage6/volume_ratio_audit.csv": "05cdab7052ab0a3fbf7ddee0e360f6b0e8e2be27da530723065ce520c5c9e54d",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage6/volume_lag_audit.csv": "2e4e65b1a23adccdefa1d63127ea240a7a7102785655da00117958c7ae0d7144",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage6/recalculate.py": "f05086bcfbd962a220b3a489ee0c65cca8193054c316bb5d22978a49d21d51a1",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_metric_analog/20261019T073046_885436Z/plan.json": "afdd3f65732646c01cb29b0a048ab6f94cc6d886daa6c5b3f1a5fbee4c26e271",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_metric_analog/20261019T073046_885436Z/report.json": "a8516f35eb232c83e202509742ecd2b63851afd75407089a0a1d5795bfe45c63",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_metric_analog/20261019T073046_885436Z/comparison.csv": "10674a2d854a688be7d383155d277208e230f3507d6b57407f70989ef915dfbe",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_metric_analog/20261019T073046_885436Z/timing_audit.json": "be07d0a4d1c7fa5290eff74f61d04834178ca1fed8c75614f84a91ff737214d3",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_extended_forest/20261019T073305_918472Z/plan.json": "98cc7a392d290acad9b5e1655e2403ec2198d872d9687a4a9c09238b48a94747",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_extended_forest/20261019T073305_918472Z/report.json": "a43dbb6e7d0ea3a8243a367c9c9bd3807d4d1ef159626daa2386a2a6ecfc9317",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_extended_forest/20261019T073305_918472Z/comparison.csv": "5e0720960056a7e361f4b19120ab5a7ac44c72f2725316f6af37be7497a6a970",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_extended_forest/20261019T073305_918472Z/timing_audit.json": "b6dd907b473ccecf3e56c30baa6c1a5750e633903d7daba9dfd13e6fa2cb3356",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_relative_volume/20261019T083345_837476Z/plan.json": "456837a45fceab0f9c959522a4100d64206fe528975d2614933c1b2f59d59a32",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_relative_volume/20261019T083345_837476Z/report.json": "7812c166c8465e67363ed564af8350f1da118884cb9ad24c4b44cb4781fe3cc7",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_relative_volume/20261019T083345_837476Z/comparison.csv": "b5fb791312e5375b112c0c7b3f6d57bbf96e40074c4a87b73149b0ff90efeb99",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_relative_volume/20261019T083345_837476Z/timing_audit.json": "ecf63d12b67eb21bd8574be66dfa905a9f5cf9cc5e90f9bf1ce3735fed261459"
+  }
+}

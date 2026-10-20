@@ -1,0 +1,2028 @@
+{
+  "mode": "historical_three_class_index_transfer_development",
+  "target": "VNINDEX simple T+20 return: < -5% class0; > +5% class2; otherwise class1",
+  "source_sha256": "ae62c588bfdcce8ffa44220cf44146bad379a3cc78f5e037545e557ea7fec2fa",
+  "input_hash": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+  "reference_etf_hash": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "index_inputs": {
+    "VN30": {
+      "sha256": "9cba88d5e4cc66f1a2b6fd99c8e89768be6b2969f4f465226917565afd15a5cc",
+      "rows": 2257,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 1399,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    },
+    "VNMID": {
+      "sha256": "82f30375d4df6312da7450fd7894b6e5094354e12bd4907c9ae2a8a5f93e2b6a",
+      "rows": 2252,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 599,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    },
+    "VNSML": {
+      "sha256": "a3cf39a72e4c82ca99d40d989ab1c3590207d087b90da302eff5dfaa2be4890a",
+      "rows": 2252,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "unresolved_or_single_source_rows": 598,
+      "policy": "two-broker close agreement <= .011; no price fill"
+    }
+  },
+  "features": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20"
+  ],
+  "feature_choice": "12 shared relative features; chosen on availability before fitting, long-window features leave little early auxiliary history",
+  "cohorts": {
+    "VN30": {
+      "rows": 1385,
+      "start": "2019-09-05",
+      "end": "2026-09-03"
+    },
+    "VNINDEX": {
+      "rows": 4095,
+      "start": "2010-04-02",
+      "end": "2026-09-03"
+    },
+    "VNMID": {
+      "rows": 1197,
+      "start": "2019-12-09",
+      "end": "2026-09-03"
+    },
+    "VNSML": {
+      "rows": 1197,
+      "start": "2019-12-09",
+      "end": "2026-09-03"
+    }
+  },
+  "validation_folds": [
+    {
+      "fold": 1,
+      "n": 390,
+      "date_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+      "start": "2020-03-27",
+      "end": "2021-10-14"
+    },
+    {
+      "fold": 2,
+      "n": 390,
+      "date_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+      "start": "2021-10-15",
+      "end": "2023-07-14"
+    },
+    {
+      "fold": 3,
+      "n": 390,
+      "date_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+      "start": "2023-07-17",
+      "end": "2025-02-07"
+    },
+    {
+      "fold": 4,
+      "n": 390,
+      "date_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+      "start": "2025-02-10",
+      "end": "2026-09-03"
+    }
+  ],
+  "configs": [
+    {
+      "window": "3y",
+      "capacity": "shallow",
+      "pooled": false
+    },
+    {
+      "window": "3y",
+      "capacity": "shallow",
+      "pooled": true
+    },
+    {
+      "window": "3y",
+      "capacity": "medium",
+      "pooled": false
+    },
+    {
+      "window": "3y",
+      "capacity": "medium",
+      "pooled": true
+    },
+    {
+      "window": "expanding",
+      "capacity": "shallow",
+      "pooled": false
+    },
+    {
+      "window": "expanding",
+      "capacity": "shallow",
+      "pooled": true
+    },
+    {
+      "window": "expanding",
+      "capacity": "medium",
+      "pooled": false
+    },
+    {
+      "window": "expanding",
+      "capacity": "medium",
+      "pooled": true
+    }
+  ],
+  "parameters": {
+    "shallow": {
+      "n_estimators": 150,
+      "learning_rate": 0.03,
+      "max_depth": 3,
+      "num_leaves": 7,
+      "min_child_samples": 50
+    },
+    "medium": {
+      "n_estimators": 300,
+      "learning_rate": 0.03,
+      "max_depth": 4,
+      "num_leaves": 15,
+      "min_child_samples": 30
+    }
+  },
+  "common_parameters": {
+    "colsample_bytree": 0.7,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": 2,
+    "verbosity": -1
+  },
+  "refit_market_sessions": 63,
+  "decision": "argmax; no new decision-rule search",
+  "weights": "Before class costs, each target date has unit mass: target .5, available auxiliaries share .5; without auxiliary target weight1. Class factors computed on weighted date mass. Correlated assets are not independent samples.",
+  "preflight_training": [
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 1,
+      "boundary": "2020-03-27",
+      "n_target": 730,
+      "n_auxiliary": 226,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 120,
+        "VNMID": 53,
+        "VNSML": 53
+      },
+      "latest_label_end": "2020-03-26",
+      "auxiliary_latest_label_end": "2020-03-26",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        97.83333333333366,
+        518.166666666667,
+        114.0
+      ],
+      "class_cost_factors": [
+        2.4872231686541655,
+        0.46960437439691194,
+        2.134502923976608
+      ],
+      "weighted_class_mass": [
+        243.33333333333337,
+        243.3333333333308,
+        243.3333333333336
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 2,
+      "boundary": "2020-06-29",
+      "n_target": 728,
+      "n_auxiliary": 307,
+      "unique_dates": 728,
+      "by_symbol": {
+        "VNINDEX": 728,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2020-06-26",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 728.0,
+      "class_base_mass": [
+        106.83333333333377,
+        471.66666666666873,
+        149.50000000000017
+      ],
+      "class_cost_factors": [
+        2.2714508580343122,
+        0.5144876325088317,
+        1.6231884057970996
+      ],
+      "weighted_class_mass": [
+        242.6666666666658,
+        242.666666666663,
+        242.66666666666586
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 3,
+      "boundary": "2020-09-25",
+      "n_target": 730,
+      "n_auxiliary": 307,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2020-09-24",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        112.83333333333377,
+        451.66666666666873,
+        165.50000000000017
+      ],
+      "class_cost_factors": [
+        2.156573116691277,
+        0.5387453874538721,
+        1.4702920443101697
+      ],
+      "weighted_class_mass": [
+        243.3333333333333,
+        243.33333333333493,
+        243.33333333333243
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 4,
+      "boundary": "2020-12-23",
+      "n_target": 728,
+      "n_auxiliary": 307,
+      "unique_dates": 728,
+      "by_symbol": {
+        "VNINDEX": 728,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2020-12-22",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 728.0,
+      "class_base_mass": [
+        112.83333333333377,
+        466.66666666666873,
+        148.50000000000017
+      ],
+      "class_cost_factors": [
+        2.1506646971934926,
+        0.5199999999999977,
+        1.634118967452299
+      ],
+      "weighted_class_mass": [
+        242.66666666666586,
+        242.66666666666634,
+        242.66666666666714
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 5,
+      "boundary": "2021-03-30",
+      "n_target": 730,
+      "n_auxiliary": 307,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2021-03-29",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        112.83333333333377,
+        465.66666666666873,
+        151.49999999999991
+      ],
+      "class_cost_factors": [
+        2.156573116691277,
+        0.5225483178239061,
+        1.6061606160616069
+      ],
+      "weighted_class_mass": [
+        243.3333333333333,
+        243.3333333333358,
+        243.33333333333263
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 6,
+      "boundary": "2021-06-30",
+      "n_target": 730,
+      "n_auxiliary": 307,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2021-06-29",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        77.83333333333316,
+        467.66666666666873,
+        184.49999999999991
+      ],
+      "class_cost_factors": [
+        3.1263383297644607,
+        0.5203136136849585,
+        1.318879855465222
+      ],
+      "weighted_class_mass": [
+        243.3333333333339,
+        243.33333333332988,
+        243.3333333333327
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 1,
+      "block": 7,
+      "boundary": "2021-09-29",
+      "n_target": 729,
+      "n_auxiliary": 307,
+      "unique_dates": 729,
+      "by_symbol": {
+        "VNINDEX": 729,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2021-09-28",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 729.0,
+      "class_base_mass": [
+        86.83333333333312,
+        463.66666666666737,
+        178.49999999999991
+      ],
+      "class_cost_factors": [
+        2.7984644913627714,
+        0.5240833932422709,
+        1.3613445378151265
+      ],
+      "weighted_class_mass": [
+        243.00000000000114,
+        243.00000000000082,
+        242.99999999999926
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 1,
+      "boundary": "2021-10-15",
+      "n_target": 731,
+      "n_auxiliary": 313,
+      "unique_dates": 731,
+      "by_symbol": {
+        "VNINDEX": 731,
+        "VN30": 149,
+        "VNMID": 82,
+        "VNSML": 82
+      },
+      "latest_label_end": "2021-10-14",
+      "auxiliary_latest_label_end": "2021-10-14",
+      "base_mass": 731.0,
+      "class_base_mass": [
+        77.83333333333323,
+        474.333333333334,
+        178.83333333333323
+      ],
+      "class_cost_factors": [
+        3.1306209850107107,
+        0.5137034434293738,
+        1.362534948741846
+      ],
+      "weighted_class_mass": [
+        243.6666666666679,
+        243.66666666666433,
+        243.66666666666765
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 2,
+      "boundary": "2022-01-13",
+      "n_target": 731,
+      "n_auxiliary": 502,
+      "unique_dates": 731,
+      "by_symbol": {
+        "VNINDEX": 731,
+        "VN30": 212,
+        "VNMID": 145,
+        "VNSML": 145
+      },
+      "latest_label_end": "2022-01-12",
+      "auxiliary_latest_label_end": "2022-01-12",
+      "base_mass": 731.0,
+      "class_base_mass": [
+        64.99999999999999,
+        469.5000000000008,
+        196.4999999999991
+      ],
+      "class_cost_factors": [
+        3.7487179487179496,
+        0.5189918352857642,
+        1.2400339270568335
+      ],
+      "weighted_class_mass": [
+        243.66666666666669,
+        243.66666666666472,
+        243.66666666666768
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 3,
+      "boundary": "2022-04-20",
+      "n_target": 730,
+      "n_auxiliary": 609,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 275,
+        "VNMID": 167,
+        "VNSML": 167
+      },
+      "latest_label_end": "2022-04-19",
+      "auxiliary_latest_label_end": "2022-04-19",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        70.6666666666668,
+        483.6666666666681,
+        175.66666666666575
+      ],
+      "class_cost_factors": [
+        3.443396226415088,
+        0.5031013094417628,
+        1.3851992409867244
+      ],
+      "weighted_class_mass": [
+        243.33333333333232,
+        243.33333333333493,
+        243.3333333333338
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 4,
+      "boundary": "2022-07-20",
+      "n_target": 731,
+      "n_auxiliary": 672,
+      "unique_dates": 731,
+      "by_symbol": {
+        "VNINDEX": 731,
+        "VN30": 338,
+        "VNMID": 167,
+        "VNSML": 167
+      },
+      "latest_label_end": "2022-07-19",
+      "auxiliary_latest_label_end": "2022-07-19",
+      "base_mass": 731.0,
+      "class_base_mass": [
+        109.1666666666668,
+        445.6666666666697,
+        176.16666666666575
+      ],
+      "class_cost_factors": [
+        2.2320610687022873,
+        0.5467464472700038,
+        1.3831598864711518
+      ],
+      "weighted_class_mass": [
+        243.66666666666754,
+        243.66666666666526,
+        243.6666666666687
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 5,
+      "boundary": "2022-10-19",
+      "n_target": 730,
+      "n_auxiliary": 795,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 369,
+        "VNMID": 213,
+        "VNSML": 213
+      },
+      "latest_label_end": "2022-10-18",
+      "auxiliary_latest_label_end": "2022-10-18",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        129.16666666666703,
+        408.83333333333644,
+        191.99999999999878
+      ],
+      "class_cost_factors": [
+        1.8838709677419303,
+        0.5951895637994248,
+        1.2673611111111192
+      ],
+      "weighted_class_mass": [
+        243.33333333333232,
+        243.33333333333096,
+        243.33333333333425
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 6,
+      "boundary": "2023-01-17",
+      "n_target": 730,
+      "n_auxiliary": 865,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 369,
+        "VNMID": 248,
+        "VNSML": 248
+      },
+      "latest_label_end": "2023-01-16",
+      "auxiliary_latest_label_end": "2023-01-16",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        140.99999999999997,
+        381.50000000000136,
+        207.49999999999835
+      ],
+      "class_cost_factors": [
+        1.7257683215130029,
+        0.6378331148973329,
+        1.1726907630522183
+      ],
+      "weighted_class_mass": [
+        243.33333333333417,
+        243.33333333332777,
+        243.33333333333803
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 2,
+      "block": 7,
+      "boundary": "2023-04-21",
+      "n_target": 732,
+      "n_auxiliary": 898,
+      "unique_dates": 732,
+      "by_symbol": {
+        "VNINDEX": 732,
+        "VN30": 380,
+        "VNMID": 259,
+        "VNSML": 259
+      },
+      "latest_label_end": "2023-04-20",
+      "auxiliary_latest_label_end": "2023-04-20",
+      "base_mass": 732.0,
+      "class_base_mass": [
+        120.66666666666752,
+        413.50000000000307,
+        197.83333333333138
+      ],
+      "class_cost_factors": [
+        2.022099447513798,
+        0.590084643288992,
+        1.2333614153327839
+      ],
+      "weighted_class_mass": [
+        244.00000000000134,
+        244.00000000000026,
+        244.000000000006
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 1,
+      "boundary": "2023-07-17",
+      "n_target": 729,
+      "n_auxiliary": 1072,
+      "unique_dates": 729,
+      "by_symbol": {
+        "VNINDEX": 729,
+        "VN30": 438,
+        "VNMID": 317,
+        "VNSML": 317
+      },
+      "latest_label_end": "2023-07-14",
+      "auxiliary_latest_label_end": "2023-07-14",
+      "base_mass": 729.0,
+      "class_base_mass": [
+        114.66666666666751,
+        416.16666666667174,
+        198.1666666666647
+      ],
+      "class_cost_factors": [
+        2.1191860465116124,
+        0.5839006808169732,
+        1.226240538267464
+      ],
+      "weighted_class_mass": [
+        242.99999999999716,
+        242.99999999999704,
+        243.0000000000047
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 2,
+      "boundary": "2023-10-16",
+      "n_target": 728,
+      "n_auxiliary": 1261,
+      "unique_dates": 728,
+      "by_symbol": {
+        "VNINDEX": 728,
+        "VN30": 501,
+        "VNMID": 380,
+        "VNSML": 380
+      },
+      "latest_label_end": "2023-10-13",
+      "auxiliary_latest_label_end": "2023-10-13",
+      "base_mass": 728.0,
+      "class_base_mass": [
+        124.50000000000098,
+        403.0000000000065,
+        200.49999999999818
+      ],
+      "class_cost_factors": [
+        1.949129852744295,
+        0.6021505376343989,
+        1.2103075644222887
+      ],
+      "weighted_class_mass": [
+        242.6666666666658,
+        242.666666666654,
+        242.66666666666688
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 3,
+      "boundary": "2024-01-12",
+      "n_target": 730,
+      "n_auxiliary": 1450,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 564,
+        "VNMID": 443,
+        "VNSML": 443
+      },
+      "latest_label_end": "2024-01-11",
+      "auxiliary_latest_label_end": "2024-01-11",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        133.16666666666745,
+        431.8333333333416,
+        164.9999999999996
+      ],
+      "class_cost_factors": [
+        1.8272841051314033,
+        0.5634890003859406,
+        1.4747474747474782
+      ],
+      "weighted_class_mass": [
+        243.33333333333437,
+        243.33333333332902,
+        243.333333333336
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 4,
+      "boundary": "2024-04-17",
+      "n_target": 729,
+      "n_auxiliary": 1639,
+      "unique_dates": 729,
+      "by_symbol": {
+        "VNINDEX": 729,
+        "VN30": 627,
+        "VNMID": 506,
+        "VNSML": 506
+      },
+      "latest_label_end": "2024-04-16",
+      "auxiliary_latest_label_end": "2024-04-16",
+      "base_mass": 729.0,
+      "class_base_mass": [
+        132.5000000000008,
+        431.0000000000079,
+        165.49999999999957
+      ],
+      "class_cost_factors": [
+        1.8339622641509323,
+        0.5638051044083423,
+        1.468277945619339
+      ],
+      "weighted_class_mass": [
+        242.9999999999998,
+        242.9999999999915,
+        243.0000000000027
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 5,
+      "boundary": "2024-07-19",
+      "n_target": 730,
+      "n_auxiliary": 1828,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VNINDEX": 730,
+        "VN30": 690,
+        "VNMID": 569,
+        "VNSML": 569
+      },
+      "latest_label_end": "2024-07-18",
+      "auxiliary_latest_label_end": "2024-07-18",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        126.33333333333417,
+        453.3333333333415,
+        150.3333333333335
+      ],
+      "class_cost_factors": [
+        1.9261213720316495,
+        0.5367647058823433,
+        1.6186252771618606
+      ],
+      "weighted_class_mass": [
+        243.3333333333348,
+        243.33333333333093,
+        243.33333333333533
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 6,
+      "boundary": "2024-10-18",
+      "n_target": 730,
+      "n_auxiliary": 1948,
+      "unique_dates": 730,
+      "by_symbol": {
+        "VN30": 730,
+        "VNINDEX": 730,
+        "VNMID": 609,
+        "VNSML": 609
+      },
+      "latest_label_end": "2024-10-17",
+      "auxiliary_latest_label_end": "2024-10-17",
+      "base_mass": 730.0,
+      "class_base_mass": [
+        132.50000000000068,
+        462.3333333333411,
+        135.16666666666708
+      ],
+      "class_cost_factors": [
+        1.8364779874213741,
+        0.5263157894736754,
+        1.8002466091245322
+      ],
+      "weighted_class_mass": [
+        243.3333333333328,
+        243.33333333333525,
+        243.33333333333206
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 3,
+      "block": 7,
+      "boundary": "2025-01-16",
+      "n_target": 729,
+      "n_auxiliary": 1947,
+      "unique_dates": 729,
+      "by_symbol": {
+        "VN30": 729,
+        "VNINDEX": 729,
+        "VNMID": 609,
+        "VNSML": 609
+      },
+      "latest_label_end": "2025-01-15",
+      "auxiliary_latest_label_end": "2025-01-15",
+      "base_mass": 729.0,
+      "class_base_mass": [
+        129.00000000000082,
+        476.6666666666763,
+        123.33333333333408
+      ],
+      "class_cost_factors": [
+        1.883720930232546,
+        0.5097902097901995,
+        1.9702702702702581
+      ],
+      "weighted_class_mass": [
+        242.99999999999565,
+        242.99999999998883,
+        242.9999999999975
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 1,
+      "boundary": "2025-02-10",
+      "n_target": 728,
+      "n_auxiliary": 1968,
+      "unique_dates": 728,
+      "by_symbol": {
+        "VN30": 728,
+        "VNINDEX": 728,
+        "VNMID": 620,
+        "VNSML": 620
+      },
+      "latest_label_end": "2025-02-07",
+      "auxiliary_latest_label_end": "2025-02-07",
+      "base_mass": 728.0,
+      "class_base_mass": [
+        129.00000000000082,
+        475.83333333334303,
+        123.1666666666674
+      ],
+      "class_cost_factors": [
+        1.8811369509043807,
+        0.5099824868651385,
+        1.9702300405953876
+      ],
+      "weighted_class_mass": [
+        242.66666666666387,
+        242.66666666666382,
+        242.6666666666668
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 2,
+      "boundary": "2025-05-14",
+      "n_target": 727,
+      "n_auxiliary": 2093,
+      "unique_dates": 727,
+      "by_symbol": {
+        "VN30": 727,
+        "VNINDEX": 727,
+        "VNMID": 683,
+        "VNSML": 683
+      },
+      "latest_label_end": "2025-05-13",
+      "auxiliary_latest_label_end": "2025-05-13",
+      "base_mass": 727.0,
+      "class_base_mass": [
+        121.50000000000061,
+        475.00000000000915,
+        130.5000000000008
+      ],
+      "class_cost_factors": [
+        1.9945130315500585,
+        0.5101754385964814,
+        1.8569604086845353
+      ],
+      "weighted_class_mass": [
+        242.33333333333323,
+        242.33333333332726,
+        242.33333333332948
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 3,
+      "boundary": "2025-08-11",
+      "n_target": 727,
+      "n_auxiliary": 2181,
+      "unique_dates": 727,
+      "by_symbol": {
+        "VN30": 727,
+        "VNINDEX": 727,
+        "VNMID": 727,
+        "VNSML": 727
+      },
+      "latest_label_end": "2025-08-08",
+      "auxiliary_latest_label_end": "2025-08-08",
+      "base_mass": 727.0,
+      "class_base_mass": [
+        109.00000000000045,
+        462.1666666666754,
+        155.83333333333346
+      ],
+      "class_cost_factors": [
+        2.223241590214058,
+        0.5243418680129724,
+        1.555080213903742
+      ],
+      "weighted_class_mass": [
+        242.3333333333335,
+        242.33333333333232,
+        242.33333333333223
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 4,
+      "boundary": "2025-11-10",
+      "n_target": 727,
+      "n_auxiliary": 2181,
+      "unique_dates": 727,
+      "by_symbol": {
+        "VN30": 727,
+        "VNINDEX": 727,
+        "VNMID": 727,
+        "VNSML": 727
+      },
+      "latest_label_end": "2025-11-07",
+      "auxiliary_latest_label_end": "2025-11-07",
+      "base_mass": 727.0,
+      "class_base_mass": [
+        68.66666666666659,
+        487.00000000000995,
+        171.33333333333297
+      ],
+      "class_cost_factors": [
+        3.529126213592237,
+        0.4976043805612493,
+        1.4143968871595363
+      ],
+      "weighted_class_mass": [
+        242.3333333333335,
+        242.33333333333138,
+        242.33333333333167
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 5,
+      "boundary": "2026-02-09",
+      "n_target": 731,
+      "n_auxiliary": 2193,
+      "unique_dates": 731,
+      "by_symbol": {
+        "VN30": 731,
+        "VNINDEX": 731,
+        "VNMID": 731,
+        "VNSML": 731
+      },
+      "latest_label_end": "2026-02-06",
+      "auxiliary_latest_label_end": "2026-02-06",
+      "base_mass": 731.0,
+      "class_base_mass": [
+        68.66666666666653,
+        497.6666666666777,
+        164.66666666666669
+      ],
+      "class_cost_factors": [
+        3.548543689320395,
+        0.4896182183522999,
+        1.4797570850202428
+      ],
+      "weighted_class_mass": [
+        243.66666666666777,
+        243.66666666665364,
+        243.66666666666663
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 6,
+      "boundary": "2026-05-19",
+      "n_target": 726,
+      "n_auxiliary": 2178,
+      "unique_dates": 726,
+      "by_symbol": {
+        "VN30": 726,
+        "VNINDEX": 726,
+        "VNMID": 726,
+        "VNSML": 726
+      },
+      "latest_label_end": "2026-05-18",
+      "auxiliary_latest_label_end": "2026-05-18",
+      "base_mass": 726.0,
+      "class_base_mass": [
+        81.6666666666667,
+        476.5000000000105,
+        167.83333333333343
+      ],
+      "class_cost_factors": [
+        2.9632653061224477,
+        0.507869884575015,
+        1.441906653426017
+      ],
+      "weighted_class_mass": [
+        241.9999999999988,
+        241.9999999999983,
+        242.00000000000244
+      ]
+    },
+    {
+      "window": "3y",
+      "fold": 4,
+      "block": 7,
+      "boundary": "2026-08-14",
+      "n_target": 728,
+      "n_auxiliary": 2184,
+      "unique_dates": 728,
+      "by_symbol": {
+        "VN30": 728,
+        "VNINDEX": 728,
+        "VNMID": 728,
+        "VNSML": 728
+      },
+      "latest_label_end": "2026-08-13",
+      "auxiliary_latest_label_end": "2026-08-13",
+      "base_mass": 728.0,
+      "class_base_mass": [
+        99.33333333333363,
+        488.000000000011,
+        140.666666666667
+      ],
+      "class_cost_factors": [
+        2.4429530201342207,
+        0.49726775956283026,
+        1.725118483412318
+      ],
+      "weighted_class_mass": [
+        242.6666666666652,
+        242.66666666666165,
+        242.6666666666675
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 1,
+      "boundary": "2020-03-27",
+      "n_target": 2469,
+      "n_auxiliary": 226,
+      "unique_dates": 2469,
+      "by_symbol": {
+        "VNINDEX": 2469,
+        "VN30": 120,
+        "VNMID": 53,
+        "VNSML": 53
+      },
+      "latest_label_end": "2020-03-26",
+      "auxiliary_latest_label_end": "2020-03-26",
+      "base_mass": 2469.0,
+      "class_base_mass": [
+        390.8333333333346,
+        1616.1666666666736,
+        462.0
+      ],
+      "class_cost_factors": [
+        2.10575692963752,
+        0.5092296586573145,
+        1.7813852813852813
+      ],
+      "weighted_class_mass": [
+        822.9999999999953,
+        822.9999999999919,
+        822.9999999999953
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 2,
+      "boundary": "2020-06-29",
+      "n_target": 2532,
+      "n_auxiliary": 307,
+      "unique_dates": 2532,
+      "by_symbol": {
+        "VNINDEX": 2532,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2020-06-26",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 2532.0,
+      "class_base_mass": [
+        399.8333333333351,
+        1633.666666666675,
+        498.50000000000074
+      ],
+      "class_cost_factors": [
+        2.1108795331387986,
+        0.5166292593348271,
+        1.693079237713137
+      ],
+      "weighted_class_mass": [
+        843.9999999999962,
+        844.0000000000263,
+        844.0000000000064
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 3,
+      "boundary": "2020-09-25",
+      "n_target": 2595,
+      "n_auxiliary": 307,
+      "unique_dates": 2595,
+      "by_symbol": {
+        "VNINDEX": 2595,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2020-09-24",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 2595.0,
+      "class_base_mass": [
+        405.8333333333351,
+        1672.666666666675,
+        516.5000000000007
+      ],
+      "class_cost_factors": [
+        2.1314168377823317,
+        0.5171383021123929,
+        1.674733785091963
+      ],
+      "weighted_class_mass": [
+        865.0000000000019,
+        864.9999999999945,
+        864.9999999999915
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 4,
+      "boundary": "2020-12-23",
+      "n_target": 2658,
+      "n_auxiliary": 307,
+      "unique_dates": 2658,
+      "by_symbol": {
+        "VNINDEX": 2658,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2020-12-22",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 2658.0,
+      "class_base_mass": [
+        405.8333333333351,
+        1712.666666666675,
+        539.5000000000007
+      ],
+      "class_cost_factors": [
+        2.1831622176591283,
+        0.5173219151420761,
+        1.6422613531047245
+      ],
+      "weighted_class_mass": [
+        885.9999999999986,
+        885.9999999999596,
+        885.9999999999925
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 5,
+      "boundary": "2021-03-30",
+      "n_target": 2721,
+      "n_auxiliary": 307,
+      "unique_dates": 2721,
+      "by_symbol": {
+        "VNINDEX": 2721,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2021-03-29",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 2721.0,
+      "class_base_mass": [
+        410.8333333333351,
+        1740.666666666675,
+        569.5000000000007
+      ],
+      "class_cost_factors": [
+        2.2077079107504978,
+        0.5210647261585575,
+        1.5926251097453887
+      ],
+      "weighted_class_mass": [
+        906.9999999999969,
+        906.9999999999898,
+        907.0000000000059
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 6,
+      "boundary": "2021-06-30",
+      "n_target": 2784,
+      "n_auxiliary": 307,
+      "unique_dates": 2784,
+      "by_symbol": {
+        "VNINDEX": 2784,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2021-06-29",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 2784.0,
+      "class_base_mass": [
+        410.8333333333351,
+        1769.666666666675,
+        603.5000000000007
+      ],
+      "class_cost_factors": [
+        2.258823529411755,
+        0.5243925409681648,
+        1.5376967688483827
+      ],
+      "weighted_class_mass": [
+        927.9999999999966,
+        928.0000000000002,
+        927.9999999999961
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 1,
+      "block": 7,
+      "boundary": "2021-09-29",
+      "n_target": 2847,
+      "n_auxiliary": 307,
+      "unique_dates": 2847,
+      "by_symbol": {
+        "VNINDEX": 2847,
+        "VN30": 147,
+        "VNMID": 80,
+        "VNSML": 80
+      },
+      "latest_label_end": "2021-09-28",
+      "auxiliary_latest_label_end": "2020-05-08",
+      "base_mass": 2847.0,
+      "class_base_mass": [
+        424.8333333333351,
+        1811.666666666675,
+        610.5000000000007
+      ],
+      "class_cost_factors": [
+        2.2338171832090925,
+        0.5238270469181209,
+        1.5544635544635528
+      ],
+      "weighted_class_mass": [
+        949.0000000000018,
+        948.9999999999752,
+        949.0000000000134
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 1,
+      "boundary": "2021-10-15",
+      "n_target": 2859,
+      "n_auxiliary": 313,
+      "unique_dates": 2859,
+      "by_symbol": {
+        "VNINDEX": 2859,
+        "VN30": 149,
+        "VNMID": 82,
+        "VNSML": 82
+      },
+      "latest_label_end": "2021-10-14",
+      "auxiliary_latest_label_end": "2021-10-14",
+      "base_mass": 2859.0,
+      "class_base_mass": [
+        424.8333333333351,
+        1823.333333333342,
+        610.8333333333339
+      ],
+      "class_cost_factors": [
+        2.24323264025107,
+        0.5226691042047508,
+        1.5601637107776247
+      ],
+      "weighted_class_mass": [
+        953.000000000002,
+        952.9999999999864,
+        952.9999999999893
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 2,
+      "boundary": "2022-01-13",
+      "n_target": 2922,
+      "n_auxiliary": 502,
+      "unique_dates": 2922,
+      "by_symbol": {
+        "VNINDEX": 2922,
+        "VN30": 212,
+        "VNMID": 145,
+        "VNSML": 145
+      },
+      "latest_label_end": "2022-01-12",
+      "auxiliary_latest_label_end": "2022-01-12",
+      "base_mass": 2922.0,
+      "class_base_mass": [
+        425.00000000000176,
+        1860.5000000000157,
+        636.499999999997
+      ],
+      "class_cost_factors": [
+        2.2917647058823434,
+        0.5235151840902939,
+        1.530243519245883
+      ],
+      "weighted_class_mass": [
+        973.999999999987,
+        974.0000000000066,
+        974.0000000000101
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 3,
+      "boundary": "2022-04-20",
+      "n_target": 2985,
+      "n_auxiliary": 609,
+      "unique_dates": 2985,
+      "by_symbol": {
+        "VNINDEX": 2985,
+        "VN30": 275,
+        "VNMID": 167,
+        "VNSML": 167
+      },
+      "latest_label_end": "2022-04-19",
+      "auxiliary_latest_label_end": "2022-04-19",
+      "base_mass": 2985.0,
+      "class_base_mass": [
+        430.666666666669,
+        1917.666666666685,
+        636.6666666666637
+      ],
+      "class_cost_factors": [
+        2.310371517027851,
+        0.5188597253606765,
+        1.5628272251308974
+      ],
+      "weighted_class_mass": [
+        995.0000000000014,
+        995.0000000000198,
+        995.0000000000078
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 4,
+      "boundary": "2022-07-20",
+      "n_target": 3048,
+      "n_auxiliary": 672,
+      "unique_dates": 3048,
+      "by_symbol": {
+        "VNINDEX": 3048,
+        "VN30": 338,
+        "VNMID": 167,
+        "VNSML": 167
+      },
+      "latest_label_end": "2022-07-19",
+      "auxiliary_latest_label_end": "2022-07-19",
+      "base_mass": 3048.0,
+      "class_base_mass": [
+        469.166666666669,
+        1940.666666666685,
+        638.1666666666637
+      ],
+      "class_cost_factors": [
+        2.1655417406749446,
+        0.5235314324974186,
+        1.5920605902324443
+      ],
+      "weighted_class_mass": [
+        1016.000000000002,
+        1015.9999999999862,
+        1016.0000000000131
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 5,
+      "boundary": "2022-10-19",
+      "n_target": 3111,
+      "n_auxiliary": 827,
+      "unique_dates": 3111,
+      "by_symbol": {
+        "VNINDEX": 3111,
+        "VN30": 401,
+        "VNMID": 213,
+        "VNSML": 213
+      },
+      "latest_label_end": "2022-10-18",
+      "auxiliary_latest_label_end": "2022-10-18",
+      "base_mass": 3111.0,
+      "class_base_mass": [
+        489.1666666666702,
+        1967.8333333333549,
+        653.9999999999958
+      ],
+      "class_cost_factors": [
+        2.1199318568994734,
+        0.5269755229948279,
+        1.585626911314995
+      ],
+      "weighted_class_mass": [
+        1036.999999999994,
+        1036.9999999999875,
+        1037.0000000000098
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 6,
+      "boundary": "2023-01-17",
+      "n_target": 3174,
+      "n_auxiliary": 1016,
+      "unique_dates": 3174,
+      "by_symbol": {
+        "VNINDEX": 3174,
+        "VN30": 464,
+        "VNMID": 276,
+        "VNSML": 276
+      },
+      "latest_label_end": "2023-01-16",
+      "auxiliary_latest_label_end": "2023-01-16",
+      "base_mass": 3174.0,
+      "class_base_mass": [
+        514.0000000000047,
+        1990.500000000026,
+        669.4999999999941
+      ],
+      "class_cost_factors": [
+        2.058365758754845,
+        0.5315247425269963,
+        1.5802837938760408
+      ],
+      "weighted_class_mass": [
+        1057.9999999999982,
+        1057.9999999999902,
+        1057.999999999992
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 2,
+      "block": 7,
+      "boundary": "2023-04-21",
+      "n_target": 3237,
+      "n_auxiliary": 1205,
+      "unique_dates": 3237,
+      "by_symbol": {
+        "VNINDEX": 3237,
+        "VN30": 527,
+        "VNMID": 339,
+        "VNSML": 339
+      },
+      "latest_label_end": "2023-04-20",
+      "auxiliary_latest_label_end": "2023-04-20",
+      "base_mass": 3237.0,
+      "class_base_mass": [
+        520.5000000000038,
+        2035.166666666702,
+        681.3333333333259
+      ],
+      "class_cost_factors": [
+        2.0730067243035393,
+        0.5301777086233632,
+        1.583659491193755
+      ],
+      "weighted_class_mass": [
+        1078.9999999999861,
+        1078.999999999942,
+        1079.000000000023
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 1,
+      "boundary": "2023-07-17",
+      "n_target": 3295,
+      "n_auxiliary": 1379,
+      "unique_dates": 3295,
+      "by_symbol": {
+        "VNINDEX": 3295,
+        "VN30": 585,
+        "VNMID": 397,
+        "VNSML": 397
+      },
+      "latest_label_end": "2023-07-14",
+      "auxiliary_latest_label_end": "2023-07-14",
+      "base_mass": 3295.0,
+      "class_base_mass": [
+        520.5000000000038,
+        2077.8333333333603,
+        696.6666666666567
+      ],
+      "class_cost_factors": [
+        2.110150496317628,
+        0.5285954920991349,
+        1.5765550239234676
+      ],
+      "weighted_class_mass": [
+        1098.3333333333123,
+        1098.3333333333524,
+        1098.3333333333387
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 2,
+      "boundary": "2023-10-16",
+      "n_target": 3358,
+      "n_auxiliary": 1568,
+      "unique_dates": 3358,
+      "by_symbol": {
+        "VNINDEX": 3358,
+        "VN30": 648,
+        "VNMID": 460,
+        "VNSML": 460
+      },
+      "latest_label_end": "2023-10-13",
+      "auxiliary_latest_label_end": "2023-10-13",
+      "base_mass": 3358.0,
+      "class_base_mass": [
+        530.333333333336,
+        2108.66666666668,
+        718.9999999999874
+      ],
+      "class_cost_factors": [
+        2.1106222501571232,
+        0.5308251659816596,
+        1.556791840519267
+      ],
+      "weighted_class_mass": [
+        1119.3333333333314,
+        1119.3333333333594,
+        1119.3333333333296
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 3,
+      "boundary": "2024-01-12",
+      "n_target": 3421,
+      "n_auxiliary": 1757,
+      "unique_dates": 3421,
+      "by_symbol": {
+        "VNINDEX": 3421,
+        "VN30": 711,
+        "VNMID": 523,
+        "VNSML": 523
+      },
+      "latest_label_end": "2024-01-11",
+      "auxiliary_latest_label_end": "2024-01-11",
+      "base_mass": 3421.0000000000005,
+      "class_base_mass": [
+        543.0000000000011,
+        2152.499999999996,
+        725.4999999999861
+      ],
+      "class_cost_factors": [
+        2.100061387354201,
+        0.5297715834301211,
+        1.571789570411241
+      ],
+      "weighted_class_mass": [
+        1140.3333333333385,
+        1140.333333333287,
+        1140.3333333333344
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 4,
+      "boundary": "2024-04-17",
+      "n_target": 3484,
+      "n_auxiliary": 1946,
+      "unique_dates": 3484,
+      "by_symbol": {
+        "VNINDEX": 3484,
+        "VN30": 774,
+        "VNMID": 586,
+        "VNSML": 586
+      },
+      "latest_label_end": "2024-04-16",
+      "auxiliary_latest_label_end": "2024-04-16",
+      "base_mass": 3484.0,
+      "class_base_mass": [
+        543.3333333333344,
+        2195.6666666666424,
+        744.9999999999841
+      ],
+      "class_cost_factors": [
+        2.1374233128834312,
+        0.5289206011841564,
+        1.5588366890380647
+      ],
+      "weighted_class_mass": [
+        1161.3333333333437,
+        1161.3333333334517,
+        1161.333333333352
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 5,
+      "boundary": "2024-07-19",
+      "n_target": 3547,
+      "n_auxiliary": 2135,
+      "unique_dates": 3547,
+      "by_symbol": {
+        "VNINDEX": 3547,
+        "VN30": 837,
+        "VNMID": 649,
+        "VNSML": 649
+      },
+      "latest_label_end": "2024-07-18",
+      "auxiliary_latest_label_end": "2024-07-18",
+      "base_mass": 3547.0,
+      "class_base_mass": [
+        551.1666666666669,
+        2238.9999999999577,
+        756.8333333333156
+      ],
+      "class_cost_factors": [
+        2.145146658602963,
+        0.5280631234182026,
+        1.562210966747449
+      ],
+      "weighted_class_mass": [
+        1182.333333333358,
+        1182.3333333333144,
+        1182.3333333333571
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 6,
+      "boundary": "2024-10-18",
+      "n_target": 3610,
+      "n_auxiliary": 2324,
+      "unique_dates": 3610,
+      "by_symbol": {
+        "VNINDEX": 3610,
+        "VN30": 900,
+        "VNMID": 712,
+        "VNSML": 712
+      },
+      "latest_label_end": "2024-10-17",
+      "auxiliary_latest_label_end": "2024-10-17",
+      "base_mass": 3610.0,
+      "class_base_mass": [
+        557.3333333333326,
+        2294.1666666666006,
+        758.499999999982
+      ],
+      "class_cost_factors": [
+        2.159090909090912,
+        0.524518706865253,
+        1.586464513293819
+      ],
+      "weighted_class_mass": [
+        1203.3333333333458,
+        1203.3333333334285,
+        1203.3333333333205
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 3,
+      "block": 7,
+      "boundary": "2025-01-16",
+      "n_target": 3673,
+      "n_auxiliary": 2513,
+      "unique_dates": 3673,
+      "by_symbol": {
+        "VNINDEX": 3673,
+        "VN30": 963,
+        "VNMID": 775,
+        "VNSML": 775
+      },
+      "latest_label_end": "2025-01-15",
+      "auxiliary_latest_label_end": "2025-01-15",
+      "base_mass": 3673.0,
+      "class_base_mass": [
+        559.1666666666657,
+        2353.9999999999072,
+        759.8333333333151
+      ],
+      "class_cost_factors": [
+        2.1895678092399438,
+        0.5201076182384798,
+        1.6113182715508172
+      ],
+      "weighted_class_mass": [
+        1224.3333333333662,
+        1224.333333333273,
+        1224.333333333319
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 1,
+      "boundary": "2025-02-10",
+      "n_target": 3685,
+      "n_auxiliary": 2549,
+      "unique_dates": 3685,
+      "by_symbol": {
+        "VNINDEX": 3685,
+        "VN30": 975,
+        "VNMID": 787,
+        "VNSML": 787
+      },
+      "latest_label_end": "2025-02-07",
+      "auxiliary_latest_label_end": "2025-02-07",
+      "base_mass": 3685.0,
+      "class_base_mass": [
+        559.1666666666657,
+        2365.999999999902,
+        759.8333333333151
+      ],
+      "class_cost_factors": [
+        2.1967213114754136,
+        0.5191603268526561,
+        1.6165825839000167
+      ],
+      "weighted_class_mass": [
+        1228.3333333333173,
+        1228.3333333333346,
+        1228.3333333333087
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 2,
+      "boundary": "2025-05-14",
+      "n_target": 3748,
+      "n_auxiliary": 2738,
+      "unique_dates": 3748,
+      "by_symbol": {
+        "VNINDEX": 3748,
+        "VN30": 1038,
+        "VNMID": 850,
+        "VNSML": 850
+      },
+      "latest_label_end": "2025-05-13",
+      "auxiliary_latest_label_end": "2025-05-13",
+      "base_mass": 3748.0,
+      "class_base_mass": [
+        578.1666666666637,
+        2401.1666666665533,
+        768.6666666666471
+      ],
+      "class_cost_factors": [
+        2.160853271836275,
+        0.5203026306656732,
+        1.6253252385082808
+      ],
+      "weighted_class_mass": [
+        1249.333333333356,
+        1249.333333333354,
+        1249.3333333333326
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 3,
+      "boundary": "2025-08-11",
+      "n_target": 3811,
+      "n_auxiliary": 2927,
+      "unique_dates": 3811,
+      "by_symbol": {
+        "VNINDEX": 3811,
+        "VN30": 1101,
+        "VNMID": 913,
+        "VNSML": 913
+      },
+      "latest_label_end": "2025-08-08",
+      "auxiliary_latest_label_end": "2025-08-08",
+      "base_mass": 3811.0,
+      "class_base_mass": [
+        578.1666666666637,
+        2422.9999999998763,
+        809.8333333333092
+      ],
+      "class_cost_factors": [
+        2.197174978379948,
+        0.5242811941120091,
+        1.5686355217123336
+      ],
+      "weighted_class_mass": [
+        1270.333333333353,
+        1270.3333333335659,
+        1270.3333333332953
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 4,
+      "boundary": "2025-11-10",
+      "n_target": 3874,
+      "n_auxiliary": 3116,
+      "unique_dates": 3874,
+      "by_symbol": {
+        "VNINDEX": 3874,
+        "VN30": 1164,
+        "VNMID": 976,
+        "VNSML": 976
+      },
+      "latest_label_end": "2025-11-07",
+      "auxiliary_latest_label_end": "2025-11-07",
+      "base_mass": 3874.0,
+      "class_base_mass": [
+        581.666666666663,
+        2463.6666666665255,
+        828.6666666666404
+      ],
+      "class_cost_factors": [
+        2.2200573065902716,
+        0.5241509944527428,
+        1.5583266291231388
+      ],
+      "weighted_class_mass": [
+        1291.3333333333114,
+        1291.3333333333333,
+        1291.3333333334347
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 5,
+      "boundary": "2026-02-09",
+      "n_target": 3937,
+      "n_auxiliary": 3305,
+      "unique_dates": 3937,
+      "by_symbol": {
+        "VNINDEX": 3937,
+        "VN30": 1227,
+        "VNMID": 1039,
+        "VNSML": 1039
+      },
+      "latest_label_end": "2026-02-06",
+      "auxiliary_latest_label_end": "2026-02-06",
+      "base_mass": 3937.0,
+      "class_base_mass": [
+        587.9999999999956,
+        2506.3333333331693,
+        842.6666666666397
+      ],
+      "class_cost_factors": [
+        2.2318594104308556,
+        0.5236068626147437,
+        1.5573575949367586
+      ],
+      "weighted_class_mass": [
+        1312.3333333333615,
+        1312.3333333334754,
+        1312.3333333333367
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 6,
+      "boundary": "2026-05-19",
+      "n_target": 4000,
+      "n_auxiliary": 3494,
+      "unique_dates": 4000,
+      "by_symbol": {
+        "VNINDEX": 4000,
+        "VN30": 1290,
+        "VNMID": 1102,
+        "VNSML": 1102
+      },
+      "latest_label_end": "2026-05-18",
+      "auxiliary_latest_label_end": "2026-05-18",
+      "base_mass": 4000.0,
+      "class_base_mass": [
+        602.1666666666608,
+        2540.6666666664833,
+        857.1666666666388
+      ],
+      "class_cost_factors": [
+        2.2142264046498967,
+        0.5247966413015336,
+        1.555512346879304
+      ],
+      "weighted_class_mass": [
+        1333.3333333333637,
+        1333.3333333333908,
+        1333.3333333333817
+      ]
+    },
+    {
+      "window": "expanding",
+      "fold": 4,
+      "block": 7,
+      "boundary": "2026-08-14",
+      "n_target": 4063,
+      "n_auxiliary": 3683,
+      "unique_dates": 4063,
+      "by_symbol": {
+        "VNINDEX": 4063,
+        "VN30": 1353,
+        "VNMID": 1165,
+        "VNSML": 1165
+      },
+      "latest_label_end": "2026-08-13",
+      "auxiliary_latest_label_end": "2026-08-13",
+      "base_mass": 4063.0,
+      "class_base_mass": [
+        619.8333333333254,
+        2584.9999999997963,
+        858.1666666666388
+      ],
+      "class_cost_factors": [
+        2.1849959666577314,
+        0.5239200515796674,
+        1.578170518547342
+      ],
+      "weighted_class_mass": [
+        1354.333333333406,
+        1354.33333333355,
+        1354.3333333333235
+      ]
+    }
+  ],
+  "local_screen": "Pooled vs matched target-only: mean fold macro F1 +.02, no worst-fold decline, mean MCC increase, >=3 improved folds.",
+  "objective_screen": "Also compare BOTH original trend/risk controls; no independent acceptance on inspected history.",
+  "caveats": [
+    "No filling or current constituent list; broker historical revisions not independently point-in-time certified.",
+    "Additional asset rows are correlated; date weights do not create independent economic events.",
+    "Fixed -5/+5 labels have different frequencies across assets; transfer may be negative.",
+    "All results saved. No ONNX export, runtime changes or automatic winner deployment."
+  ]
+}

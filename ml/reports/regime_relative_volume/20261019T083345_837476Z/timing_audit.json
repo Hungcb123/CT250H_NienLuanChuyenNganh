@@ -1,0 +1,1122 @@
+[
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "train_nan_fraction": 0.0007508916838746011
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "train_nan_fraction": 0.0006934812760055479
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "train_nan_fraction": 0.0014495087775809308
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "train_nan_fraction": 0.0013533834586466164
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "train_nan_fraction": 0.0014102383302778169
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "train_nan_fraction": 0.0013276686139139671
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "train_nan_fraction": 0.0015050796437978177
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "train_nan_fraction": 0.0014893881097182574
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "train_nan_fraction": 0.002196595277320154
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "train_nan_fraction": 0.0027967334153708467
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "train_nan_fraction": 0.0027430326969497478
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "train_nan_fraction": 0.003088044355546198
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "train_nan_fraction": 0.007176391683433937
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "train_nan_fraction": 0.010917381112930674
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "train_nan_fraction": 0.014091035505701307
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "train_nan_fraction": 0.017278232988956182
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "train_nan_fraction": 0.020224526523266777
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "train_nan_fraction": 0.02295623451692816
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "train_nan_fraction": 0.023477544949937586
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "train_nan_fraction": 0.022757594417077177
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "train_nan_fraction": 0.022010471723864115
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "train_nan_fraction": 0.021947670834258096
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "train_nan_fraction": 0.021254238907197784
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "train_nan_fraction": 0.02067273190267843
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "train_nan_fraction": 0.020058400718778076
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "train_nan_fraction": 0.019479527954104226
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "train_nan_fraction": 0.018933129796887587
+  },
+  {
+    "architecture": "mean",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "train_nan_fraction": 0.01841654808307039
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "train_nan_fraction": 0.0007508916838746011
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "train_nan_fraction": 0.0006934812760055479
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "train_nan_fraction": 0.0014495087775809308
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "train_nan_fraction": 0.0013533834586466164
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "train_nan_fraction": 0.0014102383302778169
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "train_nan_fraction": 0.0013276686139139671
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "train_nan_fraction": 0.0015050796437978177
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "train_nan_fraction": 0.0014893881097182574
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "train_nan_fraction": 0.002196595277320154
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "train_nan_fraction": 0.0027967334153708467
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "train_nan_fraction": 0.0027430326969497478
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "train_nan_fraction": 0.003088044355546198
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "train_nan_fraction": 0.007176391683433937
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "train_nan_fraction": 0.010917381112930674
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "train_nan_fraction": 0.014091035505701307
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "train_nan_fraction": 0.017278232988956182
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "train_nan_fraction": 0.020224526523266777
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "train_nan_fraction": 0.02295623451692816
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "train_nan_fraction": 0.023477544949937586
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "train_nan_fraction": 0.022757594417077177
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "train_nan_fraction": 0.022010471723864115
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "train_nan_fraction": 0.021947670834258096
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "train_nan_fraction": 0.021254238907197784
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "train_nan_fraction": 0.02067273190267843
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "train_nan_fraction": 0.020058400718778076
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "train_nan_fraction": 0.019479527954104226
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "train_nan_fraction": 0.018933129796887587
+  },
+  {
+    "architecture": "mean",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "train_nan_fraction": 0.01841654808307039
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "train_nan_fraction": 0.0007508916838746011
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "train_nan_fraction": 0.0006934812760055479
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "train_nan_fraction": 0.0014495087775809308
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "train_nan_fraction": 0.0013533834586466164
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "train_nan_fraction": 0.0014102383302778169
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "train_nan_fraction": 0.0013276686139139671
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 1,
+    "refit_block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "train_nan_fraction": 0.0015050796437978177
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "train_nan_fraction": 0.0014893881097182574
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "train_nan_fraction": 0.002196595277320154
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "train_nan_fraction": 0.0027967334153708467
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "train_nan_fraction": 0.0027430326969497478
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "train_nan_fraction": 0.003088044355546198
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "train_nan_fraction": 0.007176391683433937
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 2,
+    "refit_block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "train_nan_fraction": 0.010917381112930674
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "train_nan_fraction": 0.014091035505701307
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "train_nan_fraction": 0.017278232988956182
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "train_nan_fraction": 0.020224526523266777
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "train_nan_fraction": 0.02295623451692816
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "train_nan_fraction": 0.023477544949937586
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "train_nan_fraction": 0.022757594417077177
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 3,
+    "refit_block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "train_nan_fraction": 0.022010471723864115
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "train_nan_fraction": 0.021947670834258096
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "train_nan_fraction": 0.021254238907197784
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "train_nan_fraction": 0.02067273190267843
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "train_nan_fraction": 0.020058400718778076
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "train_nan_fraction": 0.019479527954104226
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "train_nan_fraction": 0.018933129796887587
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": false,
+    "fold": 4,
+    "refit_block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "train_nan_fraction": 0.01841654808307039
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 1,
+    "n_train": 761,
+    "latest_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "train_nan_fraction": 0.0007508916838746011
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 2,
+    "n_train": 824,
+    "latest_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "train_nan_fraction": 0.0006934812760055479
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 3,
+    "n_train": 887,
+    "latest_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "train_nan_fraction": 0.0014495087775809308
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 4,
+    "n_train": 950,
+    "latest_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "train_nan_fraction": 0.0013533834586466164
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 5,
+    "n_train": 1013,
+    "latest_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "train_nan_fraction": 0.0014102383302778169
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 6,
+    "n_train": 1076,
+    "latest_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "train_nan_fraction": 0.0013276686139139671
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 1,
+    "refit_block": 7,
+    "n_train": 1139,
+    "latest_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "train_nan_fraction": 0.0015050796437978177
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 1,
+    "n_train": 1151,
+    "latest_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "train_nan_fraction": 0.0014893881097182574
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 2,
+    "n_train": 1214,
+    "latest_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "train_nan_fraction": 0.002196595277320154
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 3,
+    "n_train": 1277,
+    "latest_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "train_nan_fraction": 0.0027967334153708467
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 4,
+    "n_train": 1302,
+    "latest_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "train_nan_fraction": 0.0027430326969497478
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 5,
+    "n_train": 1357,
+    "latest_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "train_nan_fraction": 0.003088044355546198
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 6,
+    "n_train": 1420,
+    "latest_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "train_nan_fraction": 0.007176391683433937
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 2,
+    "refit_block": 7,
+    "n_train": 1483,
+    "latest_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "train_nan_fraction": 0.010917381112930674
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 1,
+    "n_train": 1541,
+    "latest_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "train_nan_fraction": 0.014091035505701307
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 2,
+    "n_train": 1604,
+    "latest_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "train_nan_fraction": 0.017278232988956182
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 3,
+    "n_train": 1667,
+    "latest_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "train_nan_fraction": 0.020224526523266777
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 4,
+    "n_train": 1730,
+    "latest_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "train_nan_fraction": 0.02295623451692816
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 5,
+    "n_train": 1793,
+    "latest_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "train_nan_fraction": 0.023477544949937586
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 6,
+    "n_train": 1856,
+    "latest_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "train_nan_fraction": 0.022757594417077177
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 3,
+    "refit_block": 7,
+    "n_train": 1919,
+    "latest_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "train_nan_fraction": 0.022010471723864115
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 1,
+    "n_train": 1931,
+    "latest_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "train_nan_fraction": 0.021947670834258096
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 2,
+    "n_train": 1994,
+    "latest_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "train_nan_fraction": 0.021254238907197784
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 3,
+    "n_train": 2057,
+    "latest_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "train_nan_fraction": 0.02067273190267843
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 4,
+    "n_train": 2120,
+    "latest_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "train_nan_fraction": 0.020058400718778076
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 5,
+    "n_train": 2183,
+    "latest_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "train_nan_fraction": 0.019479527954104226
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 6,
+    "n_train": 2246,
+    "latest_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "train_nan_fraction": 0.018933129796887587
+  },
+  {
+    "architecture": "magnitude",
+    "normalized": true,
+    "fold": 4,
+    "refit_block": 7,
+    "n_train": 2309,
+    "latest_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "train_nan_fraction": 0.01841654808307039
+  }
+]

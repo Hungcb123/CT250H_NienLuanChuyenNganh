@@ -1,0 +1,102 @@
+[
+  {
+    "candidate": "hysteresis05",
+    "rows": 390,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis05",
+    "rows": 780,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis05",
+    "rows": 1170,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis05",
+    "rows": 1460,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis05",
+    "rows": 1560,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "confirm2",
+    "rows": 390,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "confirm2",
+    "rows": 780,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "confirm2",
+    "rows": 1170,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "confirm2",
+    "rows": 1460,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "confirm2",
+    "rows": 1560,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis025",
+    "rows": 390,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis025",
+    "rows": 780,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis025",
+    "rows": 1170,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis025",
+    "rows": 1460,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis025",
+    "rows": 1560,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis10",
+    "rows": 390,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis10",
+    "rows": 780,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis10",
+    "rows": 1170,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis10",
+    "rows": 1460,
+    "prefix_invariance": true
+  },
+  {
+    "candidate": "hysteresis10",
+    "rows": 1560,
+    "prefix_invariance": true
+  }
+]

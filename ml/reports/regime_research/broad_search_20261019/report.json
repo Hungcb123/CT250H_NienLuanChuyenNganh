@@ -1,0 +1,176 @@
+{
+  "role": "Repeatedly inspected historical DEVELOPMENT, no independent acceptance",
+  "retained_baseline": {
+    "mean_f1": 0.48930885619483216,
+    "worst_f1": 0.4000134347464767,
+    "bear_f1": 0.2945916594627638,
+    "bull_f1": 0.4309582735643647
+  },
+  "highest_observed_challenger": {
+    "candidate": "inner_selected_information_blend",
+    "mean_f1": 0.49250821828003344,
+    "worst_f1": 0.4000134347464767,
+    "bear_f1": 0.2904853989105694,
+    "bull_f1": 0.44161034830014434,
+    "mean_mcc": 0.2683507047693309,
+    "report": "ml/reports/regime_dynamic_information/20261019T052057_760569Z",
+    "accepted": false,
+    "mean_f1_delta": 0.003199362085201274,
+    "paired_60_interval": [
+      -0.013465279037247611,
+      0.023073702664862073
+    ]
+  },
+  "results": [
+    {
+      "study": "Information inputs",
+      "report": "ml/reports/regime_dynamic_information/20261019T052057_760569Z",
+      "candidate": "inner_selected_blend",
+      "mean_f1": 0.49250821828003344,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.2683507047693309,
+      "bear_mean_f1": 0.2904853989105694,
+      "bull_mean_f1": 0.44161034830014434
+    },
+    {
+      "study": "Information inputs",
+      "report": "ml/reports/regime_dynamic_information/20261019T052057_760569Z",
+      "candidate": "combined_blend",
+      "mean_f1": 0.46045873674333665,
+      "worst_f1": 0.33332024090075935,
+      "mean_mcc": 0.232878455374588,
+      "bear_mean_f1": 0.2441545893719807,
+      "bull_mean_f1": 0.40137466630785856
+    },
+    {
+      "study": "Long history and asset transfer",
+      "report": "ml/reports/regime_volatility_transfer/20261019T052340_598397Z",
+      "candidate": "extended_target_blend",
+      "mean_f1": 0.46745245897584276,
+      "worst_f1": 0.38174403608784385,
+      "mean_mcc": 0.23004310676055661,
+      "bear_mean_f1": 0.27290233138809045,
+      "bull_mean_f1": 0.40640841332330696
+    },
+    {
+      "study": "Long history and asset transfer",
+      "report": "ml/reports/regime_volatility_transfer/20261019T052340_598397Z",
+      "candidate": "extended_pooled_blend",
+      "mean_f1": 0.4703232317543422,
+      "worst_f1": 0.38312506313468936,
+      "mean_mcc": 0.23901566714210837,
+      "bear_mean_f1": 0.2689611633577151,
+      "bull_mean_f1": 0.4142375767381996
+    },
+    {
+      "study": "Diverse model families",
+      "report": "ml/reports/regime_dynamic_families/20261019T052530_594387Z",
+      "candidate": "inner_supplement_blend",
+      "mean_f1": 0.48731376206712607,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.26276249120770123,
+      "bear_mean_f1": 0.292625287957946,
+      "bull_mean_f1": 0.4216122102491251
+    },
+    {
+      "study": "Diverse model families",
+      "report": "ml/reports/regime_dynamic_families/20261019T052530_594387Z",
+      "candidate": "inner_replacement_blend",
+      "mean_f1": 0.4840378747204678,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.24850436634768336,
+      "bear_mean_f1": 0.3103114478114478,
+      "bull_mean_f1": 0.40322755759181106
+    },
+    {
+      "study": "Focal and smoothed losses",
+      "report": "ml/reports/regime_dynamic_losses/20261019T052808_023744Z",
+      "candidate": "inner_supplement_blend",
+      "mean_f1": 0.48930885619483216,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.2621639796855759,
+      "bear_mean_f1": 0.2945916594627638,
+      "bull_mean_f1": 0.4309582735643647
+    },
+    {
+      "study": "Focal and smoothed losses",
+      "report": "ml/reports/regime_dynamic_losses/20261019T052808_023744Z",
+      "candidate": "inner_replacement_blend",
+      "mean_f1": 0.48930885619483216,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.2621639796855759,
+      "bear_mean_f1": 0.2945916594627638,
+      "bull_mean_f1": 0.4309582735643647
+    },
+    {
+      "study": "CDF and 19 quantiles",
+      "report": "ml/reports/regime_quantile_resolution/20261019T053037_944295Z",
+      "candidate": "linear19_blend",
+      "mean_f1": 0.4866520882866982,
+      "worst_f1": 0.4010001692774457,
+      "mean_mcc": 0.2550713104760686,
+      "bear_mean_f1": 0.29802238368686274,
+      "bull_mean_f1": 0.42485657495430157
+    },
+    {
+      "study": "CDF and 19 quantiles",
+      "report": "ml/reports/regime_quantile_resolution/20261019T053037_944295Z",
+      "candidate": "linear19_supplement",
+      "mean_f1": 0.4870743992869701,
+      "worst_f1": 0.3971486478982731,
+      "mean_mcc": 0.25682749517111464,
+      "bear_mean_f1": 0.2950390027854817,
+      "bull_mean_f1": 0.42785209346007896
+    },
+    {
+      "study": "Pure inner macro selection",
+      "report": "ml/reports/regime_inner_macro_selection/20261019T053327_320402Z",
+      "candidate": "macro_information_blend",
+      "mean_f1": 0.49250821828003344,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.2683507047693309,
+      "bear_mean_f1": 0.2904853989105694,
+      "bull_mean_f1": 0.44161034830014434
+    },
+    {
+      "study": "Pure inner macro selection",
+      "report": "ml/reports/regime_inner_macro_selection/20261019T053327_320402Z",
+      "candidate": "macro_families_supplement",
+      "mean_f1": 0.48291372891700146,
+      "worst_f1": 0.4000134347464767,
+      "mean_mcc": 0.2555010977941148,
+      "bear_mean_f1": 0.2860274681071141,
+      "bull_mean_f1": 0.41731113498030786
+    },
+    {
+      "study": "Full inner fusion selection",
+      "report": "ml/reports/regime_fusion_selection/20261019T053538_900664Z",
+      "candidate": "fusion_macro",
+      "mean_f1": 0.43350126557745156,
+      "worst_f1": 0.24011504566247963,
+      "mean_mcc": 0.19534076256320673,
+      "bear_mean_f1": 0.2486705157477834,
+      "bull_mean_f1": 0.35041548338422335
+    },
+    {
+      "study": "Full inner fusion selection",
+      "report": "ml/reports/regime_fusion_selection/20261019T053538_900664Z",
+      "candidate": "fusion_robust",
+      "mean_f1": 0.3974114965906339,
+      "worst_f1": 0.24011504566247963,
+      "mean_mcc": 0.15886844236929845,
+      "bear_mean_f1": 0.15770255678722497,
+      "bull_mean_f1": 0.3776395588663827
+    }
+  ],
+  "goal_achieved": false,
+  "production_updated": false,
+  "verification": "190 full regime tests passed; all saved study source hashes verified unchanged after completion.",
+  "limitations": [
+    "All historical outcomes repeatedly inspected. Selecting a highest outer score is descriptive, not acceptance.",
+    "MLP hit max_iter500 in some fits; fixed-budget result is not proof of best attainable MLP performance.",
+    "Two ETF bars on previously reviewed HOSE non-sessions were explicitly excluded from the transfer panel; archived data files unchanged.",
+    "Added correlated asset rows share date mass, not independent events.",
+    "Focal Hessian is a positive diagonal surrogate; gradients and moderate-region curvature independently checked by finite differences."
+  ]
+}

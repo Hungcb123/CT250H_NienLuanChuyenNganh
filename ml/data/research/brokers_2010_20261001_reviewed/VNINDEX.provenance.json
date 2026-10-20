@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "symbol": "VNINDEX",
+  "asset_type": "index",
+  "csv_sha256": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+  "primary_provider": "vci",
+  "sources": {
+    "vci_VNINDEX": {
+      "provider": "vci",
+      "symbol": "VNINDEX",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VNINDEX"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "downloaded_at": "2026-10-17T13:39:18.497405+00:00",
+      "response": "sources/vci_VNINDEX.json",
+      "response_sha256": "8b9d655e55a5418cf2533d2c238cf68f65ff4eaa380394846054c0a6d65d2f3a",
+      "rows": 4176,
+      "start": "2010-01-04",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 21,
+      "zero_volume_rows": 2,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified",
+      "replayed_from": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/data/research/brokers_2010_20261001/sources/vci_VNINDEX.json"
+    },
+    "kbs_VNINDEX": {
+      "provider": "kbs",
+      "symbol": "VNINDEX",
+      "url": "https://kbbuddywts.kbsec.com.vn/iis-server/investment/index/VNINDEX/data_day",
+      "params": {
+        "sdate": "01-01-2010",
+        "edate": "01-10-2026"
+      },
+      "body": null,
+      "downloaded_at": "2026-10-17T13:39:19.777953+00:00",
+      "response": "sources/kbs_VNINDEX.json",
+      "response_sha256": "0c9c49951c42f3f4fe6e9a816c1bf34c0156f52e3120a24298def3e428270246",
+      "rows": 3577,
+      "start": "2012-06-01",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 4,
+      "zero_volume_rows": 0,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified",
+      "replayed_from": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/data/research/brokers_2010_20261001/sources/kbs_VNINDEX.json"
+    },
+    "vnd_VNINDEX": {
+      "provider": "vnd",
+      "symbol": "VNINDEX",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNINDEX",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "body": null,
+      "downloaded_at": "2026-10-17T13:39:21.061758+00:00",
+      "response": "sources/vnd_VNINDEX.json",
+      "response_sha256": "2d97885a9549e3cd173fdd01cb04878778b2eecec2aba04ee77fecded2e3fc29",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 1,
+      "zero_volume_rows": 0,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified",
+      "replayed_from": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/data/research/brokers_2010_20261001/sources/vnd_VNINDEX.json"
+    }
+  },
+  "comparisons": {
+    "kbs": {
+      "overlap_rows": 3577,
+      "matching_close_rows": 3568,
+      "close_tolerance": 0.011,
+      "close_conflicts": [
+        {
+          "date": "2015-06-19",
+          "primary": 584.7,
+          "secondary": 585.15
+        },
+        {
+          "date": "2015-10-02",
+          "primary": 564.15,
+          "secondary": 562.31
+        },
+        {
+          "date": "2018-01-22",
+          "primary": 1086.51,
+          "secondary": 1087.42
+        },
+        {
+          "date": "2018-01-24",
+          "primary": 1086.51,
+          "secondary": 1087.42
+        },
+        {
+          "date": "2018-02-28",
+          "primary": 1124.87,
+          "secondary": 1121.54
+        },
+        {
+          "date": "2018-11-13",
+          "primary": 907.99,
+          "secondary": 905.38
+        },
+        {
+          "date": "2019-01-23",
+          "primary": 908.02,
+          "secondary": 908.18
+        },
+        {
+          "date": "2019-03-14",
+          "primary": 1009.56,
+          "secondary": 1008.44
+        },
+        {
+          "date": "2019-09-23",
+          "primary": 987.54,
+          "secondary": 985.75
+        }
+      ],
+      "max_close_difference": 3.3299999999999272,
+      "primary_dates_missing_in_secondary": 599,
+      "secondary_dates_missing_in_primary": 0,
+      "other_field_mismatch_counts": {
+        "Open": 1061,
+        "High": 253,
+        "Low": 454,
+        "Volume": 1609
+      }
+    },
+    "vnd": {
+      "overlap_rows": 2271,
+      "matching_close_rows": 2263,
+      "close_tolerance": 0.011,
+      "close_conflicts": [
+        {
+          "date": "2018-01-22",
+          "primary": 1086.51,
+          "secondary": 1087.42
+        },
+        {
+          "date": "2018-02-28",
+          "primary": 1124.87,
+          "secondary": 1121.54
+        },
+        {
+          "date": "2018-11-13",
+          "primary": 907.99,
+          "secondary": 905.38
+        },
+        {
+          "date": "2019-01-23",
+          "primary": 908.02,
+          "secondary": 908.18
+        },
+        {
+          "date": "2019-03-14",
+          "primary": 1009.56,
+          "secondary": 1008.44
+        },
+        {
+          "date": "2019-09-23",
+          "primary": 987.54,
+          "secondary": 985.75
+        },
+        {
+          "date": "2020-06-09",
+          "primary": 899.43,
+          "secondary": 903.1
+        },
+        {
+          "date": "2020-06-10",
+          "primary": 900.0,
+          "secondary": 900.68
+        }
+      ],
+      "max_close_difference": 3.6700000000000728,
+      "primary_dates_missing_in_secondary": 1905,
+      "secondary_dates_missing_in_primary": 0,
+      "other_field_mismatch_counts": {
+        "Open": 362,
+        "High": 153,
+        "Low": 299,
+        "Volume": 1667
+      }
+    },
+    "existing_local_csv": {
+      "overlap_rows": 1430,
+      "matching_close_rows": 1430,
+      "close_tolerance": 0.011,
+      "close_conflicts": [],
+      "max_close_difference": 0.0,
+      "primary_dates_missing_in_secondary": 2746,
+      "secondary_dates_missing_in_primary": 0,
+      "other_field_mismatch_counts": {
+        "Open": 255,
+        "High": 63,
+        "Low": 155,
+        "Volume": 1430
+      },
+      "sha256": "e791d62d30881170110a6e7b45a125739eab4b118eb63b06697e7439808de653"
+    }
+  },
+  "excluded_source_conflict_dates": [],
+  "normalization": "daily date conversion, requested-range filtering, and recorded source reconciliation; no price filling",
+  "reconciliation": {
+    "review": {
+      "schema_version": 1,
+      "reviewed_on": "2026-10-17",
+      "policy": "Primary VCI dates and Close; resolve conflicts by agreement of at least two brokers, except explicitly cited reviewed closes. Never infer a missing price. A broker consensus can share an upstream feed and is not independent exchange certification.",
+      "nontrading_dates": {
+        "2018-01-23": {
+          "reason": "HOSE suspended trading following the 22 January system incident; repeated chart values are not sessions.",
+          "source": "https://baochinhphu.vn/hose-tiep-tuc-ngung-giao-dich-vao-ngay-24-1-102233813.htm"
+        },
+        "2018-01-24": {
+          "reason": "HOSE remained suspended for market-wide system testing; chart bars are not trading sessions.",
+          "source": "https://baochinhphu.vn/hose-tiep-tuc-ngung-giao-dich-vao-ngay-24-1-102233813.htm"
+        }
+      },
+      "reviewed_closes": {
+        "2015-06-19": {
+          "close": 584.7,
+          "source": "https://www.mbs.com.vn/media/dkrdomtr/t-e1-bb-95ngh-e1-bb-a3pth-e1-bb-9dng_19062015.pdf",
+          "reason": "MBS daily strategy, dated 19/06/2015, reports VN-index 584.70; VCI agrees and KBS differs."
+        },
+        "2015-10-02": {
+          "close": 562.31,
+          "source": "https://www.mbs.com.vn/media/kjqdggnz/t-e1-bb-95ngh-e1-bb-a3pth-e1-bb-9dng_02102015.pdf",
+          "reason": "MBS daily strategy, dated 02/10/2015, reports VN-index 562.31; KBS agrees and VCI differs."
+        }
+      }
+    },
+    "review_sha256": "5a5b0fd2d6b16f6f70ec3257d984aab80ac0dbdb99f0557c317210530b1edb29",
+    "decision_file": "index_source_decisions.csv",
+    "changed_primary_closes": 7,
+    "single_source_sessions": 598,
+    "removed_nontrading_dates": [
+      "2018-01-23",
+      "2018-01-24"
+    ]
+  },
+  "columns": [
+    "Date",
+    "Close"
+  ],
+  "source_provenance": "saved_broker_responses_with_partial_cross_source_close_checks",
+  "adjustment_status": "price_index_points",
+  "calendar_status": "broker_index_session_dates_crosschecked_on_overlap; not an official exchange calendar"
+}

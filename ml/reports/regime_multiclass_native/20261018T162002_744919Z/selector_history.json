@@ -1,0 +1,881 @@
+[
+  {
+    "Date": "2020-03-27",
+    "selected": "legacy_equal",
+    "n": 0,
+    "label_end": null
+  },
+  {
+    "Date": "2020-04-27",
+    "selected": "legacy_equal",
+    "n": 0,
+    "label_end": null
+  },
+  {
+    "Date": "2020-05-27",
+    "selected": "legacy_equal",
+    "n": 20,
+    "label_end": "2020-05-26 00:00:00"
+  },
+  {
+    "Date": "2020-06-24",
+    "selected": "legacy_equal",
+    "n": 40,
+    "label_end": "2020-06-23 00:00:00"
+  },
+  {
+    "Date": "2020-07-22",
+    "selected": "legacy_equal",
+    "n": 60,
+    "label_end": "2020-07-21 00:00:00"
+  },
+  {
+    "Date": "2020-08-19",
+    "selected": "legacy_equal",
+    "n": 80,
+    "label_end": "2020-08-18 00:00:00"
+  },
+  {
+    "Date": "2020-09-17",
+    "selected": "legacy_equal",
+    "n": 100,
+    "label_end": "2020-09-16 00:00:00"
+  },
+  {
+    "Date": "2020-10-15",
+    "selected": "legacy_equal",
+    "n": 120,
+    "label_end": "2020-10-14 00:00:00"
+  },
+  {
+    "Date": "2020-11-12",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2020-11-11 00:00:00",
+    "scores": {
+      "legacy_equal": 0.34499244778988625,
+      "legacy_trend": 0.3514847725374041,
+      "legacy_risk": 0.2627512707001148,
+      "density_all": 0.2475783475783476,
+      "density_expanding": 0.26697291779258997
+    }
+  },
+  {
+    "Date": "2020-12-10",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2020-12-09 00:00:00",
+    "scores": {
+      "legacy_equal": 0.28642365831270983,
+      "legacy_trend": 0.2784679089026915,
+      "legacy_risk": 0.25597377315706155,
+      "density_all": 0.30078502415458935,
+      "density_expanding": 0.3024800503868578
+    }
+  },
+  {
+    "Date": "2021-01-08",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2021-01-07 00:00:00"
+  },
+  {
+    "Date": "2021-02-05",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2021-02-04 00:00:00"
+  },
+  {
+    "Date": "2021-03-12",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2021-03-11 00:00:00",
+    "scores": {
+      "legacy_equal": 0.40136453876911893,
+      "legacy_trend": 0.4175635166347241,
+      "legacy_risk": 0.3341585729702279,
+      "density_all": 0.3952190367284707,
+      "density_expanding": 0.33875443099865543
+    }
+  },
+  {
+    "Date": "2021-04-09",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2021-04-08 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3671569355717328,
+      "legacy_trend": 0.3790086127909107,
+      "legacy_risk": 0.35304659498207885,
+      "density_all": 0.38033352549481586,
+      "density_expanding": 0.3137254901960784
+    }
+  },
+  {
+    "Date": "2021-05-12",
+    "selected": "density_all",
+    "n": 126,
+    "label_end": "2021-05-11 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3202362025891438,
+      "legacy_trend": 0.32037172902910244,
+      "legacy_risk": 0.3232122117139539,
+      "density_all": 0.41408869727453795,
+      "density_expanding": 0.3298611111111111
+    }
+  },
+  {
+    "Date": "2021-06-09",
+    "selected": "density_all",
+    "n": 126,
+    "label_end": "2021-06-08 00:00:00",
+    "scores": {
+      "legacy_equal": 0.2966085351406452,
+      "legacy_trend": 0.3466473008956669,
+      "legacy_risk": 0.2986289252543122,
+      "density_all": 0.46526377944739683,
+      "density_expanding": 0.39471964346175953
+    }
+  },
+  {
+    "Date": "2021-07-07",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2021-07-06 00:00:00",
+    "scores": {
+      "legacy_equal": 0.2722552629094685,
+      "legacy_trend": 0.33704283313047007,
+      "legacy_risk": 0.21222222222222223,
+      "density_all": 0.39866475197138035,
+      "density_expanding": 0.4037792014495567
+    }
+  },
+  {
+    "Date": "2021-08-04",
+    "selected": "density_all",
+    "n": 126,
+    "label_end": "2021-08-03 00:00:00",
+    "scores": {
+      "legacy_equal": 0.35252057613168725,
+      "legacy_trend": 0.4187381754346788,
+      "legacy_risk": 0.2663231261199719,
+      "density_all": 0.5381578640005608,
+      "density_expanding": 0.4853653653653654
+    }
+  },
+  {
+    "Date": "2021-09-01",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2021-08-31 00:00:00",
+    "scores": {
+      "legacy_equal": 0.28113553113553114,
+      "legacy_trend": 0.3784155328798186,
+      "legacy_risk": 0.2558312293259024,
+      "density_all": 0.48643410852713176,
+      "density_expanding": 0.5001221001221001
+    }
+  },
+  {
+    "Date": "2021-10-01",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2021-09-30 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3601953601953602,
+      "legacy_trend": 0.3428817310056553,
+      "legacy_risk": 0.3079473908270037,
+      "density_all": 0.5143051226724207,
+      "density_expanding": 0.5277843891207267
+    }
+  },
+  {
+    "Date": "2021-10-29",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2021-10-28 00:00:00",
+    "scores": {
+      "legacy_equal": 0.42209375835363544,
+      "legacy_trend": 0.3369395711500975,
+      "legacy_risk": 0.3633479965287129,
+      "density_all": 0.5041472939244523,
+      "density_expanding": 0.5726017675188834
+    }
+  },
+  {
+    "Date": "2021-11-26",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2021-11-25 00:00:00",
+    "scores": {
+      "legacy_equal": 0.44945900076522216,
+      "legacy_trend": 0.34875180046178683,
+      "legacy_risk": 0.3859438439983988,
+      "density_all": 0.45880510531673324,
+      "density_expanding": 0.5325713712810486
+    }
+  },
+  {
+    "Date": "2021-12-24",
+    "selected": "density_all",
+    "n": 126,
+    "label_end": "2021-12-23 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4232164660736089,
+      "legacy_trend": 0.2877143943016171,
+      "legacy_risk": 0.41074072836990766,
+      "density_all": 0.47135607319649503,
+      "density_expanding": 0.45976145637162585
+    }
+  },
+  {
+    "Date": "2022-01-24",
+    "selected": "density_all",
+    "n": 126,
+    "label_end": "2022-01-21 00:00:00",
+    "scores": {
+      "legacy_equal": 0.29794762915782025,
+      "legacy_trend": 0.19461261206991756,
+      "legacy_risk": 0.3320674234606123,
+      "density_all": 0.5749912188268352,
+      "density_expanding": 0.40986568986568983
+    }
+  },
+  {
+    "Date": "2022-02-28",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2022-02-25 00:00:00"
+  },
+  {
+    "Date": "2022-03-28",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2022-03-25 00:00:00"
+  },
+  {
+    "Date": "2022-04-26",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2022-04-25 00:00:00",
+    "scores": {
+      "legacy_equal": 0.14935016152054692,
+      "legacy_trend": 0.16069509686530964,
+      "legacy_risk": 0.23120300751879697,
+      "density_all": 0.2588996763754045,
+      "density_expanding": 0.30844645550527905
+    }
+  },
+  {
+    "Date": "2022-07-04",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2022-05-26 00:00:00"
+  },
+  {
+    "Date": "2022-07-21",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2022-05-26 00:00:00"
+  },
+  {
+    "Date": "2022-08-18",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2022-08-17 00:00:00",
+    "scores": {
+      "legacy_equal": 0.27331384713274476,
+      "legacy_trend": 0.20476543775043343,
+      "legacy_risk": 0.46155075939248597,
+      "density_all": 0.5145801910507792,
+      "density_expanding": 0.5885191549931434
+    }
+  },
+  {
+    "Date": "2022-09-19",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2022-09-16 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3732031539875982,
+      "legacy_trend": 0.21807172995780588,
+      "legacy_risk": 0.5166390270867883,
+      "density_all": 0.5595028627286692,
+      "density_expanding": 0.5867519751597033
+    }
+  },
+  {
+    "Date": "2022-10-17",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2022-10-14 00:00:00",
+    "scores": {
+      "legacy_equal": 0.46446183025130394,
+      "legacy_trend": 0.27098239826434556,
+      "legacy_risk": 0.5101787412689567,
+      "density_all": 0.577020202020202,
+      "density_expanding": 0.6601351426167065
+    }
+  },
+  {
+    "Date": "2022-11-14",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2022-11-11 00:00:00",
+    "scores": {
+      "legacy_equal": 0.560598908273921,
+      "legacy_trend": 0.3509868794498776,
+      "legacy_risk": 0.5769544577955793,
+      "density_all": 0.5495552066980638,
+      "density_expanding": 0.6108893679489825
+    }
+  },
+  {
+    "Date": "2022-12-12",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2022-12-09 00:00:00",
+    "scores": {
+      "legacy_equal": 0.5313175737584753,
+      "legacy_trend": 0.39680145562498503,
+      "legacy_risk": 0.533704390847248,
+      "density_all": 0.46588744588744585,
+      "density_expanding": 0.5055995854912648
+    }
+  },
+  {
+    "Date": "2023-01-10",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-01-09 00:00:00",
+    "scores": {
+      "legacy_equal": 0.5332518693084286,
+      "legacy_trend": 0.4236792229329543,
+      "legacy_risk": 0.5328857511997047,
+      "density_all": 0.48967802174633296,
+      "density_expanding": 0.48805765041059157
+    }
+  },
+  {
+    "Date": "2023-02-14",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-02-13 00:00:00",
+    "scores": {
+      "legacy_equal": 0.5832931582418901,
+      "legacy_trend": 0.4879404673219106,
+      "legacy_risk": 0.5390488738314825,
+      "density_all": 0.5322866993230732,
+      "density_expanding": 0.543789184952978
+    }
+  },
+  {
+    "Date": "2023-03-14",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-03-13 00:00:00",
+    "scores": {
+      "legacy_equal": 0.5976283846872082,
+      "legacy_trend": 0.5751689461166545,
+      "legacy_risk": 0.5259654125524912,
+      "density_all": 0.5719847655331527,
+      "density_expanding": 0.5955809062887103
+    }
+  },
+  {
+    "Date": "2023-04-11",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-04-10 00:00:00",
+    "scores": {
+      "legacy_equal": 0.6203906745917248,
+      "legacy_trend": 0.6062284801969723,
+      "legacy_risk": 0.5505446623093683,
+      "density_all": 0.622603540250599,
+      "density_expanding": 0.6194752871771506
+    }
+  },
+  {
+    "Date": "2023-05-12",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2023-05-11 00:00:00",
+    "scores": {
+      "legacy_equal": 0.41336685522732036,
+      "legacy_trend": 0.39628857235294634,
+      "legacy_risk": 0.371250758955677,
+      "density_all": 0.4455391351943076,
+      "density_expanding": 0.44832763798281033
+    }
+  },
+  {
+    "Date": "2023-06-09",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2023-06-08 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4478854478854479,
+      "legacy_trend": 0.4152179390274628,
+      "legacy_risk": 0.42410015649452265,
+      "density_all": 0.530812324929972,
+      "density_expanding": 0.5329768270944742
+    }
+  },
+  {
+    "Date": "2023-07-07",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2023-07-06 00:00:00",
+    "scores": {
+      "legacy_equal": 0.35802469135802467,
+      "legacy_trend": 0.3161977930930591,
+      "legacy_risk": 0.3617742410845859,
+      "density_all": 0.4357142857142857,
+      "density_expanding": 0.43758169934640523
+    }
+  },
+  {
+    "Date": "2023-08-04",
+    "selected": "legacy_risk",
+    "n": 126,
+    "label_end": "2023-08-03 00:00:00",
+    "scores": {
+      "legacy_equal": 0.35830429732868757,
+      "legacy_trend": 0.27090729783037476,
+      "legacy_risk": 0.40451351926761764,
+      "density_all": 0.3156565656565657,
+      "density_expanding": 0.3173705379587733
+    }
+  },
+  {
+    "Date": "2023-09-05",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-08-31 00:00:00"
+  },
+  {
+    "Date": "2023-10-03",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-10-02 00:00:00"
+  },
+  {
+    "Date": "2023-10-31",
+    "selected": "legacy_risk",
+    "n": 126,
+    "label_end": "2023-10-30 00:00:00",
+    "scores": {
+      "legacy_equal": 0.30142807384186693,
+      "legacy_trend": 0.2659194686591947,
+      "legacy_risk": 0.33921568627450976,
+      "density_all": 0.21505376344086022,
+      "density_expanding": 0.23589743589743592
+    }
+  },
+  {
+    "Date": "2023-11-28",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-11-27 00:00:00",
+    "scores": {
+      "legacy_equal": 0.317979797979798,
+      "legacy_trend": 0.29732336628888356,
+      "legacy_risk": 0.346462063086104,
+      "density_all": 0.192090395480226,
+      "density_expanding": 0.2553402881271734
+    }
+  },
+  {
+    "Date": "2023-12-26",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2023-12-25 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3627831054886758,
+      "legacy_trend": 0.34330156148830765,
+      "legacy_risk": 0.3744047619047619,
+      "density_all": 0.19157088122605362,
+      "density_expanding": 0.2361418160976009
+    }
+  },
+  {
+    "Date": "2024-01-24",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-01-23 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3707534971200188,
+      "legacy_trend": 0.36875856725668993,
+      "legacy_risk": 0.37188643712468467,
+      "density_all": 0.19157088122605362,
+      "density_expanding": 0.2335309617918314
+    }
+  },
+  {
+    "Date": "2024-02-28",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-02-27 00:00:00",
+    "scores": {
+      "legacy_equal": 0.2549019607843137,
+      "legacy_trend": 0.2847222222222222,
+      "legacy_risk": 0.24666666666666667,
+      "density_all": 0.21981981981981982,
+      "density_expanding": 0.26071456250484387
+    }
+  },
+  {
+    "Date": "2024-03-27",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-03-26 00:00:00",
+    "scores": {
+      "legacy_equal": 0.44615600056014565,
+      "legacy_trend": 0.46675048401567737,
+      "legacy_risk": 0.44615600056014565,
+      "density_all": 0.2292768959435626,
+      "density_expanding": 0.2487657270265966
+    }
+  },
+  {
+    "Date": "2024-04-25",
+    "selected": "legacy_trend",
+    "n": 126,
+    "label_end": "2024-04-24 00:00:00",
+    "scores": {
+      "legacy_equal": 0.47276688453159044,
+      "legacy_trend": 0.5046783625730994,
+      "legacy_risk": 0.4799070847851336,
+      "density_all": 0.24054982817869416,
+      "density_expanding": 0.28009259259259256
+    }
+  },
+  {
+    "Date": "2024-05-28",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-05-27 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4343434343434343,
+      "legacy_trend": 0.4092236507755907,
+      "legacy_risk": 0.44123404588520865,
+      "density_all": 0.24561403508771928,
+      "density_expanding": 0.2355072463768116
+    }
+  },
+  {
+    "Date": "2024-06-25",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-06-24 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4323950161513613,
+      "legacy_trend": 0.4120194102276969,
+      "legacy_risk": 0.43879944345060623,
+      "density_all": 0.2699186991869919,
+      "density_expanding": 0.26929392446633826
+    }
+  },
+  {
+    "Date": "2024-07-23",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-07-22 00:00:00",
+    "scores": {
+      "legacy_equal": 0.42843822843822843,
+      "legacy_trend": 0.40484633569739953,
+      "legacy_risk": 0.43078046998660663,
+      "density_all": 0.25380710659898476,
+      "density_expanding": 0.24870466321243523
+    }
+  },
+  {
+    "Date": "2024-08-20",
+    "selected": "legacy_risk",
+    "n": 126,
+    "label_end": "2024-08-19 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4831816928591122,
+      "legacy_trend": 0.450986050986051,
+      "legacy_risk": 0.541564004397104,
+      "density_all": 0.3057371096586783,
+      "density_expanding": 0.2465277777777778
+    }
+  },
+  {
+    "Date": "2024-09-19",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-09-18 00:00:00",
+    "scores": {
+      "legacy_equal": 0.32822886989553657,
+      "legacy_trend": 0.31527093596059114,
+      "legacy_risk": 0.3387387387387388,
+      "density_all": 0.3269123394751535,
+      "density_expanding": 0.26666666666666666
+    }
+  },
+  {
+    "Date": "2024-10-17",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-10-16 00:00:00",
+    "scores": {
+      "legacy_equal": 0.33192239858906525,
+      "legacy_trend": 0.32822886989553657,
+      "legacy_risk": 0.30404941660947155,
+      "density_all": 0.3474429583005507,
+      "density_expanding": 0.25641025641025644
+    }
+  },
+  {
+    "Date": "2024-11-14",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-11-13 00:00:00"
+  },
+  {
+    "Date": "2024-12-12",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2024-12-11 00:00:00"
+  },
+  {
+    "Date": "2025-01-10",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2025-01-09 00:00:00"
+  },
+  {
+    "Date": "2025-02-14",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2025-02-13 00:00:00"
+  },
+  {
+    "Date": "2025-03-14",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2025-03-13 00:00:00"
+  },
+  {
+    "Date": "2025-04-14",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2025-04-11 00:00:00"
+  },
+  {
+    "Date": "2025-05-15",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2025-05-14 00:00:00",
+    "scores": {
+      "legacy_equal": 0.2984126984126984,
+      "legacy_trend": 0.2955665024630542,
+      "legacy_risk": 0.279874213836478,
+      "density_all": 0.32414848832759285,
+      "density_expanding": 0.31614864445685215
+    }
+  },
+  {
+    "Date": "2025-06-12",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2025-06-11 00:00:00",
+    "scores": {
+      "legacy_equal": 0.27891156462585037,
+      "legacy_trend": 0.2743055555555555,
+      "legacy_risk": 0.2735042735042735,
+      "density_all": 0.3522727272727273,
+      "density_expanding": 0.3571964956195244
+    }
+  },
+  {
+    "Date": "2025-07-10",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2025-07-09 00:00:00",
+    "scores": {
+      "legacy_equal": 0.27288428324697755,
+      "legacy_trend": 0.26807760141093473,
+      "legacy_risk": 0.29257043131388677,
+      "density_all": 0.3591583610188261,
+      "density_expanding": 0.3765079365079365
+    }
+  },
+  {
+    "Date": "2025-08-07",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2025-08-06 00:00:00",
+    "scores": {
+      "legacy_equal": 0.2919254658385093,
+      "legacy_trend": 0.30453821656050956,
+      "legacy_risk": 0.3116439781857541,
+      "density_all": 0.31592442645074226,
+      "density_expanding": 0.3772032902467685
+    }
+  },
+  {
+    "Date": "2025-09-08",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2025-09-05 00:00:00",
+    "scores": {
+      "legacy_equal": 0.22468085106382982,
+      "legacy_trend": 0.2317676503113905,
+      "legacy_risk": 0.2416488983653163,
+      "density_all": 0.265140503875969,
+      "density_expanding": 0.36283741368487127
+    }
+  },
+  {
+    "Date": "2025-10-06",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2025-10-03 00:00:00",
+    "scores": {
+      "legacy_equal": 0.22952529994783513,
+      "legacy_trend": 0.24846514987360058,
+      "legacy_risk": 0.23661993064978137,
+      "density_all": 0.21421670117322292,
+      "density_expanding": 0.3481130721767829
+    }
+  },
+  {
+    "Date": "2025-11-03",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2025-10-31 00:00:00"
+  },
+  {
+    "Date": "2025-12-01",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2025-11-28 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3694949494949495,
+      "legacy_trend": 0.47338772338772345,
+      "legacy_risk": 0.313873473917869,
+      "density_all": 0.2758377425044092,
+      "density_expanding": 0.4909074741007515
+    }
+  },
+  {
+    "Date": "2025-12-29",
+    "selected": "legacy_trend",
+    "n": 126,
+    "label_end": "2025-12-26 00:00:00",
+    "scores": {
+      "legacy_equal": 0.38531614089152,
+      "legacy_trend": 0.4847545346465538,
+      "legacy_risk": 0.34307043167802664,
+      "density_all": 0.198349154870894,
+      "density_expanding": 0.48164335664335667
+    }
+  },
+  {
+    "Date": "2026-01-28",
+    "selected": "density_expanding",
+    "n": 126,
+    "label_end": "2026-01-27 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3425132919514942,
+      "legacy_trend": 0.4055711730130335,
+      "legacy_risk": 0.2884990253411306,
+      "density_all": 0.18347478030576622,
+      "density_expanding": 0.4626984126984128
+    }
+  },
+  {
+    "Date": "2026-03-04",
+    "selected": "legacy_trend",
+    "n": 126,
+    "label_end": "2026-03-03 00:00:00",
+    "scores": {
+      "legacy_equal": 0.36602816081196315,
+      "legacy_trend": 0.41720197026972256,
+      "legacy_risk": 0.33314054366685947,
+      "density_all": 0.22251520353987145,
+      "density_expanding": 0.39199752028247214
+    }
+  },
+  {
+    "Date": "2026-04-01",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2026-03-31 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4122574055158324,
+      "legacy_trend": 0.4318528693528694,
+      "legacy_risk": 0.36582650065796135,
+      "density_all": 0.20386940268830034,
+      "density_expanding": 0.2930486569303383
+    }
+  },
+  {
+    "Date": "2026-05-04",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2026-04-29 00:00:00",
+    "scores": {
+      "legacy_equal": 0.5134455451599095,
+      "legacy_trend": 0.5209750566893424,
+      "legacy_risk": 0.4310221756923956,
+      "density_all": 0.2564717054913133,
+      "density_expanding": 0.30489365706757016
+    }
+  },
+  {
+    "Date": "2026-06-01",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2026-05-29 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4359820650143231,
+      "legacy_trend": 0.418663279915902,
+      "legacy_risk": 0.39035506094329625,
+      "density_all": 0.2098150296908061,
+      "density_expanding": 0.30121908742598397
+    }
+  },
+  {
+    "Date": "2026-06-29",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2026-06-26 00:00:00",
+    "scores": {
+      "legacy_equal": 0.3898371179170291,
+      "legacy_trend": 0.3657909140667761,
+      "legacy_risk": 0.3495670995670996,
+      "density_all": 0.2495755818379121,
+      "density_expanding": 0.2904628766697732
+    }
+  },
+  {
+    "Date": "2026-07-27",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2026-07-24 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4307506839152409,
+      "legacy_trend": 0.4071758976510513,
+      "legacy_risk": 0.38838652482269503,
+      "density_all": 0.3230400109397629,
+      "density_expanding": 0.34497068280094306
+    }
+  },
+  {
+    "Date": "2026-08-24",
+    "selected": "legacy_equal",
+    "n": 126,
+    "label_end": "2026-08-21 00:00:00",
+    "scores": {
+      "legacy_equal": 0.4655551954190638,
+      "legacy_trend": 0.4345178099095302,
+      "legacy_risk": 0.43404047974157867,
+      "density_all": 0.34015594541910327,
+      "density_expanding": 0.3682496105282653
+    }
+  }
+]

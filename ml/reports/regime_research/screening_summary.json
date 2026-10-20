@@ -1,0 +1,21 @@
+{
+  "role": "Audited historical DEVELOPMENT screening, not independent test evidence",
+  "configurations_screened": 113,
+  "passes": 0,
+  "passed_candidates": [],
+  "canonical_prediction_days": 1560,
+  "gate": {
+    "role": "Provisional research acceptance criteria, fixed before the next studies; not proof of deployability",
+    "common_outcome": "T+20 simple return below -5%",
+    "causal_precision_min": 0.25,
+    "causal_recall_min": 0.3,
+    "causal_alarm_rate_max": 0.15,
+    "folds_ap_above_prevalence_min": 3,
+    "no_fold_auroc_below": 0.45,
+    "requirements": [
+      "Causal timing audits and paired comparison against baseline",
+      "Sensitivity to overlapping labels and repeated development reuse",
+      "Freeze selected pipeline for prospective shadow evaluation before live replacement"
+    ]
+  }
+}

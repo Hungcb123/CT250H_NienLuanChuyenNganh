@@ -1,0 +1,394 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "n_train": 761,
+    "train_label_end": "2020-03-26",
+    "prediction_start": "2020-03-27",
+    "prediction_end": "2020-06-26",
+    "class_prior": [
+      0.12483574244415244,
+      0.7056504599211564,
+      0.16951379763469118
+    ],
+    "pre_sort_crossing_rows": 38
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "n_train": 824,
+    "train_label_end": "2020-06-26",
+    "prediction_start": "2020-06-29",
+    "prediction_end": "2020-09-24",
+    "class_prior": [
+      0.1262135922330097,
+      0.6723300970873787,
+      0.20145631067961164
+    ],
+    "pre_sort_crossing_rows": 43
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "n_train": 887,
+    "train_label_end": "2020-09-24",
+    "prediction_start": "2020-09-25",
+    "prediction_end": "2020-12-22",
+    "class_prior": [
+      0.12401352874859076,
+      0.6685456595264938,
+      0.20744081172491544
+    ],
+    "pre_sort_crossing_rows": 34
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "n_train": 950,
+    "train_label_end": "2020-12-22",
+    "prediction_start": "2020-12-23",
+    "prediction_end": "2021-03-29",
+    "class_prior": [
+      0.11578947368421053,
+      0.6663157894736842,
+      0.21789473684210525
+    ],
+    "pre_sort_crossing_rows": 50
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "n_train": 1013,
+    "train_label_end": "2021-03-29",
+    "prediction_start": "2021-03-30",
+    "prediction_end": "2021-06-29",
+    "class_prior": [
+      0.11352418558736427,
+      0.6525172754195459,
+      0.23395853899308983
+    ],
+    "pre_sort_crossing_rows": 58
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "n_train": 1076,
+    "train_label_end": "2021-06-29",
+    "prediction_start": "2021-06-30",
+    "prediction_end": "2021-09-28",
+    "class_prior": [
+      0.10687732342007435,
+      0.6412639405204461,
+      0.25185873605947956
+    ],
+    "pre_sort_crossing_rows": 54
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "n_train": 1139,
+    "train_label_end": "2021-09-28",
+    "prediction_start": "2021-09-29",
+    "prediction_end": "2021-10-14",
+    "class_prior": [
+      0.11325724319578578,
+      0.6426690079016681,
+      0.2440737489025461
+    ],
+    "pre_sort_crossing_rows": 10
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "n_train": 1151,
+    "train_label_end": "2021-10-14",
+    "prediction_start": "2021-10-15",
+    "prediction_end": "2022-01-12",
+    "class_prior": [
+      0.11207645525629888,
+      0.6463944396177237,
+      0.24152910512597742
+    ],
+    "pre_sort_crossing_rows": 42
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "n_train": 1214,
+    "train_label_end": "2022-01-12",
+    "prediction_start": "2022-01-13",
+    "prediction_end": "2022-04-19",
+    "class_prior": [
+      0.10626029654036244,
+      0.6482701812191104,
+      0.24546952224052718
+    ],
+    "pre_sort_crossing_rows": 53
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "n_train": 1277,
+    "train_label_end": "2022-04-19",
+    "prediction_start": "2022-04-20",
+    "prediction_end": "2022-07-19",
+    "class_prior": [
+      0.10180109631949882,
+      0.6648394675019577,
+      0.23335943617854346
+    ],
+    "pre_sort_crossing_rows": 2
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "n_train": 1302,
+    "train_label_end": "2022-05-26",
+    "prediction_start": "2022-07-20",
+    "prediction_end": "2022-10-18",
+    "class_prior": [
+      0.11827956989247312,
+      0.65284178187404,
+      0.22887864823348694
+    ],
+    "pre_sort_crossing_rows": 24
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "n_train": 1357,
+    "train_label_end": "2022-10-18",
+    "prediction_start": "2022-10-19",
+    "prediction_end": "2023-01-16",
+    "class_prior": [
+      0.12748710390567428,
+      0.6389093588798821,
+      0.23360353721444363
+    ],
+    "pre_sort_crossing_rows": 41
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "n_train": 1420,
+    "train_label_end": "2023-01-16",
+    "prediction_start": "2023-01-17",
+    "prediction_end": "2023-04-20",
+    "class_prior": [
+      0.13661971830985917,
+      0.6288732394366198,
+      0.23450704225352112
+    ],
+    "pre_sort_crossing_rows": 35
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "n_train": 1483,
+    "train_label_end": "2023-04-20",
+    "prediction_start": "2023-04-21",
+    "prediction_end": "2023-07-14",
+    "class_prior": [
+      0.1341874578556979,
+      0.6345246122724207,
+      0.23128792987188132
+    ],
+    "pre_sort_crossing_rows": 33
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "n_train": 1541,
+    "train_label_end": "2023-07-14",
+    "prediction_start": "2023-07-17",
+    "prediction_end": "2023-10-13",
+    "class_prior": [
+      0.1291369240752758,
+      0.6424399740428294,
+      0.22842310188189488
+    ],
+    "pre_sort_crossing_rows": 39
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "n_train": 1604,
+    "train_label_end": "2023-10-13",
+    "prediction_start": "2023-10-16",
+    "prediction_end": "2024-01-11",
+    "class_prior": [
+      0.13029925187032418,
+      0.6371571072319202,
+      0.23254364089775562
+    ],
+    "pre_sort_crossing_rows": 31
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "n_train": 1667,
+    "train_label_end": "2024-01-11",
+    "prediction_start": "2024-01-12",
+    "prediction_end": "2024-04-16",
+    "class_prior": [
+      0.13257348530293941,
+      0.6424715056988602,
+      0.22495500899820037
+    ],
+    "pre_sort_crossing_rows": 37
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "n_train": 1730,
+    "train_label_end": "2024-04-16",
+    "prediction_start": "2024-04-17",
+    "prediction_end": "2024-07-18",
+    "class_prior": [
+      0.12774566473988438,
+      0.6433526011560694,
+      0.22890173410404624
+    ],
+    "pre_sort_crossing_rows": 28
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "n_train": 1793,
+    "train_label_end": "2024-07-18",
+    "prediction_start": "2024-07-19",
+    "prediction_end": "2024-10-17",
+    "class_prior": [
+      0.12771890686001117,
+      0.6469604015616286,
+      0.2253206915783603
+    ],
+    "pre_sort_crossing_rows": 32
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "n_train": 1856,
+    "train_label_end": "2024-10-17",
+    "prediction_start": "2024-10-18",
+    "prediction_end": "2025-01-15",
+    "class_prior": [
+      0.1255387931034483,
+      0.65625,
+      0.2182112068965517
+    ],
+    "pre_sort_crossing_rows": 33
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "n_train": 1919,
+    "train_label_end": "2025-01-15",
+    "prediction_start": "2025-01-16",
+    "prediction_end": "2025-02-07",
+    "class_prior": [
+      0.12245961438249088,
+      0.6664929650859823,
+      0.21104742053152684
+    ],
+    "pre_sort_crossing_rows": 10
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "n_train": 1931,
+    "train_label_end": "2025-02-07",
+    "prediction_start": "2025-02-10",
+    "prediction_end": "2025-05-13",
+    "class_prior": [
+      0.12169860176074573,
+      0.6685655100983946,
+      0.20973588814085967
+    ],
+    "pre_sort_crossing_rows": 31
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "n_train": 1994,
+    "train_label_end": "2025-05-13",
+    "prediction_start": "2025-05-14",
+    "prediction_end": "2025-08-08",
+    "class_prior": [
+      0.12788365095285859,
+      0.6659979939819458,
+      0.20611835506519557
+    ],
+    "pre_sort_crossing_rows": 40
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "n_train": 2057,
+    "train_label_end": "2025-08-08",
+    "prediction_start": "2025-08-11",
+    "prediction_end": "2025-11-07",
+    "class_prior": [
+      0.12396694214876033,
+      0.6558094312105007,
+      0.22022362664073894
+    ],
+    "pre_sort_crossing_rows": 42
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "n_train": 2120,
+    "train_label_end": "2025-11-07",
+    "prediction_start": "2025-11-10",
+    "prediction_end": "2026-02-06",
+    "class_prior": [
+      0.12075471698113208,
+      0.6566037735849056,
+      0.22264150943396227
+    ],
+    "pre_sort_crossing_rows": 31
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "n_train": 2183,
+    "train_label_end": "2026-02-06",
+    "prediction_start": "2026-02-09",
+    "prediction_end": "2026-05-18",
+    "class_prior": [
+      0.12001832340815392,
+      0.6536875858909758,
+      0.22629409070087037
+    ],
+    "pre_sort_crossing_rows": 32
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "n_train": 2246,
+    "train_label_end": "2026-05-18",
+    "prediction_start": "2026-05-19",
+    "prediction_end": "2026-08-13",
+    "class_prior": [
+      0.12377560106856635,
+      0.6469278717720391,
+      0.22929652715939447
+    ],
+    "pre_sort_crossing_rows": 17
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "n_train": 2309,
+    "train_label_end": "2026-08-13",
+    "prediction_start": "2026-08-14",
+    "prediction_end": "2026-09-03",
+    "class_prior": [
+      0.1277609354699004,
+      0.6483326115201385,
+      0.223906453009961
+    ],
+    "pre_sort_crossing_rows": 4
+  }
+]

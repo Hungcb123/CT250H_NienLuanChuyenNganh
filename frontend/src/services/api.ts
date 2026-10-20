@@ -1,3 +1,4 @@
+import type { EquityPreference } from '../types';
 // API Client for Spring Boot Backend with Graceful Mock Fallbacks
 import {
   PortfolioValuation,
@@ -288,27 +289,17 @@ export async function getRebalancePlan(): Promise<RebalancePlan> {
   };
 }
 
-export async function executeRebalancePlan(): Promise<{
+export async function executeRebalancePlan(planToken: string): Promise<{
   success: boolean;
   message: string;
   updatedValuation?: PortfolioValuation;
   updatedPlan?: RebalancePlan;
 }> {
-  // Ưu tiên endpoint xác nhận chuẩn SRS Mục 4.2 (/ledger/rebalance/confirm)
-  let res = await fetch(`${API_BASE}/ledger/rebalance/confirm`, {
+  const res = await fetch(`${API_BASE}/ledger/rebalance/confirm?planToken=${encodeURIComponent(planToken)}`, {
     method: 'POST',
     headers: getAuthHeaders(),
     credentials: 'include'
   });
-
-  if (!res.ok && res.status !== 401) {
-    // Fallback sang /optimizer/rebalance/execute nếu cần
-    res = await fetch(`${API_BASE}/optimizer/rebalance/execute`, {
-      method: 'POST',
-      headers: getAuthHeaders(),
-      credentials: 'include'
-    });
-  }
 
   if (!res.ok) {
     const errorJson = await res.json().catch(() => ({}));
@@ -317,7 +308,7 @@ export async function executeRebalancePlan(): Promise<{
   const json = await res.json();
   return {
     success: true,
-    message: json.message || 'Thực thi tái cơ cấu thành công',
+    message: json.data?.message || json.message || 'Thực thi tái cơ cấu thành công',
     updatedValuation: json.data?.updatedValuation,
     updatedPlan: json.data?.updatedPlan
   };
@@ -353,21 +344,7 @@ export async function getPortfolioHistory(timeframe: string = '1M'): Promise<Por
     console.warn("Failed to fetch portfolio history from backend", e);
   }
 
-  // Fallback demo data if backend unavailable
-  return {
-    timeframe,
-    currentNav: 1450280000,
-    portfolioReturnPercent: 4.2,
-    vniReturnPercent: 1.8,
-    alphaPercent: 2.4,
-    points: [
-      { date: "01/10", nav: 1390000000, navReturn: 0.0, vniReturn: 0.0, vnindex: 1250 },
-      { date: "07/10", nav: 1410000000, navReturn: 1.4, vniReturn: 0.6, vnindex: 1258 },
-      { date: "14/10", nav: 1405000000, navReturn: 1.1, vniReturn: 0.9, vnindex: 1262 },
-      { date: "21/10", nav: 1435000000, navReturn: 3.2, vniReturn: 1.3, vnindex: 1266 },
-      { date: "28/10", nav: 1450280000, navReturn: 4.2, vniReturn: 1.8, vnindex: 1272 }
-    ]
-  };
+  throw new Error('Không tải được lịch sử danh mục. Đăng nhập và thử lại.');
 }
 
 export async function getRiskMetrics(): Promise<RiskMetrics> {
@@ -384,17 +361,7 @@ export async function getRiskMetrics(): Promise<RiskMetrics> {
     console.warn("Failed to fetch risk metrics from backend", e);
   }
 
-  return {
-    sharpeRatio: 1.24,
-    maxDrawdownPercent: 3.8,
-    annualizedVolatilityPercent: 8.6,
-    annualizedReturnPercent: 15.6,
-    riskFreeRatePercent: 5.0,
-    alphaPercent: 2.4,
-    beta: 0.78,
-    riskRating: "EXCELLENT",
-    interpretation: "Hiệu suất sinh lời vượt trội trên mỗi đơn vị rủi ro (Sharpe = 1.24 > 1.0). Danh mục được bảo vệ tốt nhờ phân bổ Vàng và Tiền gửi."
-  };
+  throw new Error('Không tải được chỉ số hiệu suất. Đăng nhập và thử lại.');
 }
 
 export async function recordDividend(payload: DividendPayload): Promise<TransactionItem> {
@@ -830,6 +797,8 @@ export interface MarketPriceItem {
 }
 
 export interface VNIndexSummaryData {
+  history?: Array<{ date: string; close: number; volumeM: number; ma20: number | null; ma50: number | null }>;
+  updatedAt?: string;
   latestDate: string;
   currentPoints: number;
   changePoints: number;
@@ -1070,3 +1039,42 @@ export async function syncExternalMarket(): Promise<any> {
 }
 
 
+
+export async function saveAllocationPreference(mode: 'SAA' | 'TAA', horizonSessions: number): Promise<void> {
+  const response = await fetch(`${API_BASE}/profile/allocation-preference`, {
+    method: 'PUT', credentials: 'include', headers: getAuthHeaders(),
+    body: JSON.stringify({ mode, horizonSessions }),
+  });
+  if (!response.ok) throw new Error('Không lưu được chế độ phân bổ. Vui lòng thử lại.');
+}
+
+export async function getEquityPreference(): Promise<EquityPreference | null> {
+  const response = await fetch(`${API_BASE}/profile/equity-preference`, { headers: getAuthHeaders(), credentials: 'include' });
+  if (!response.ok) throw new Error('Không tải được cách đầu tư');
+  return (await response.json()).data ?? null;
+}
+export async function saveEquityPreference(preference: EquityPreference): Promise<EquityPreference> {
+  const response = await fetch(`${API_BASE}/profile/equity-preference`, {
+    method: 'PUT', headers: getAuthHeaders(), credentials: 'include', body: JSON.stringify(preference),
+  });
+  if (!response.ok) throw new Error('Không lưu được cách đầu tư');
+  return (await response.json()).data;
+}
+
+export async function recordCashWithdrawal(payload: { amount: number; description?: string }): Promise<void> {
+  const res = await fetch(`${API_BASE}/ledger/withdrawal`, {
+    method: 'POST', headers: getAuthHeaders(), credentials: 'include', body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error.message || 'Không thể rút tiền. Vui lòng thử lại.');
+  }
+}
+
+export async function getAvailableCashBalance(): Promise<number> {
+  const res = await fetch(`${API_BASE}/ledger/accounts`, { headers: getAuthHeaders(), credentials: 'include' });
+  if (!res.ok) throw new Error('Không tải được số dư.');
+  const json = await res.json();
+  if (!Array.isArray(json.data)) throw new Error('Không tải được số dư.');
+  return Number(json.data.find((account: { accountCode: string }) => account.accountCode === 'VND_WALLET')?.balance ?? 0);
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "rows": 390,
+    "future_label_corruption_invariant": true
+  },
+  {
+    "rows": 780,
+    "future_label_corruption_invariant": true
+  },
+  {
+    "rows": 1170,
+    "future_label_corruption_invariant": true
+  },
+  {
+    "rows": 1460,
+    "future_label_corruption_invariant": true
+  },
+  {
+    "rows": 1560,
+    "future_label_corruption_invariant": true
+  }
+]

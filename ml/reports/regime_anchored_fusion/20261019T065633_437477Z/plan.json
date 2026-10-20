@@ -1,0 +1,292 @@
+{
+  "mode": "purged_inner_prior_mature_online_fusion_DEVELOPMENT",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_matched_calibration/20261019T064830_252658Z/matched_robust_predictions.csv": "67de8ef8589982400e415fb37f4e955056f1b04842d247b34cbcd8bc3cdac22d",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_matched_calibration/20261019T064830_252658Z/plan.json": "044b142b8bb1215dabc910192df87f50121f672b2324b6871ceb4ac300215e15",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/inner_selection.json": "5c26c715848841ea45703286b12389c8ba1a18239b11d48b9330dfb6f5079000",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/risk_predictions.csv": "9673be6656785f2d1e9aaf4bfb85ad1167cd1ed575ef3317c602612ba1ae0a80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/plan.json": "481f3f12019f8267381ef6af96f57ee16b4f96a8ffeefdfd843be9a8ec4d5d69",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/plan.json": "3fed146bbadffe7ce0c585f5e7005b870b4b58516ec3ea5f0f4dd89a0411502a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/vix_scores.csv": "9e998afa36bd6dfd2876f6e7bd7d0355cddba3faf855331c3b3ae07f8f0b5f93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/indices_scores.csv": "8eece2bacd2aa77ed285ad4f8cb1034310f206c54509638f4f68aea087fa0d5a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/control_scores.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/ohlcv_scores.csv": "6faa1040cce24ccd9a532d5d6da29843c4c0a2fab5bea55ddd262f92e60e8ee1",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed7_raw_scores.csv": "8c9c6657e23d062b6c21629277deb1068a9cc20254aea1a1ca3c5d1ece667a4a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed7_normalized_scores.csv": "92012aaa9af7322cc8037ed8c90186df5438dc7e66a7b3541139b6d1a9757bbd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed21_raw_scores.csv": "1ce9015949731376c56e1c45c3ab537de3dffc41b522ce7d4e17b37acdab5fde",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed21_normalized_scores.csv": "a081e31c455a9eb92ba04c0ceed81ae4ecdcc73d16cac8ede9bf9b7330ba28fc",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_raw_mapped_predictions.csv": "02a35e6b7ccc26877666aab9ccd0562781c11509277f16075bdb883457bc06df",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_normalized_mapped_predictions.csv": "f048d7e4a9107820c58b306315133b0b847c4a2e5509d7f6544e49205732e466",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed84_raw_scores.csv": "660c64030b929abf1a8c92455ca8716f9403999cec0f0c07a74b42a439507b94",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed84_normalized_scores.csv": "6c255d712cdb2013558ad6a93baf33c2f8aec02f1ef2f7fc787ce54ca7311941",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed126_raw_scores.csv": "f16c4990a5b57b3d8c4fa2ae9fb0c2a21d6d8943f32a405138eac800d48e9f94",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed126_normalized_scores.csv": "ae7af3c40014406f65fe4cfdf5fe2a0bc13fbfe92eb159b3058a16cc9a4fbb93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_anchored_fusion.py": "0715935adaab3026022aeae2c4a5dfd749239cbdefa9468fdf204d093fd2c1dd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_matched_calibration.py": "447413d8cb22974b2ee6fb7a7a7c76de3a868371cf558c6e9c43872b92e337ea",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_temporal_fusion.py": "dc1fc5d5b6c2dfa99e8b702f89333642227c48d59e21784c7bc67b63b7018d89",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_forecast_smoothing.py": "12eb6797e7a3d4eabd7b08d9c8d4fec507f16769ae478118b0a96dd8e694e133",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_component_archive.py": "33eb9b11bcf2cf16327a2f40aee448f10f97fe04e2deb189e3221b8f0491ccc3",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_research_evaluation.py": "b4e0c29294d404fd6cdb00967c5d989a6c0e7550979f7bdba81e8492efa45142",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_matched_calibration/20261019T064830_252658Z/selection.json": "bbc14dcd0e0e409ec5b41a4244ba7357568c31d8a1a699fe824ffbaa92cdff30"
+  },
+  "anchors": {
+    "1": [
+      0.75,
+      0.75,
+      1.0
+    ],
+    "2": [
+      0.6,
+      0.75,
+      0.75
+    ],
+    "3": [
+      0.75,
+      0.75,
+      1.0
+    ],
+    "4": [
+      0.75,
+      0.75,
+      1.5
+    ]
+  },
+  "grid": [
+    [
+      0.5,
+      1.0,
+      1.0
+    ],
+    [
+      0.25,
+      0.75,
+      0.75
+    ],
+    [
+      0.25,
+      0.75,
+      1.0
+    ],
+    [
+      0.25,
+      0.75,
+      1.5
+    ],
+    [
+      0.25,
+      1.0,
+      0.75
+    ],
+    [
+      0.25,
+      1.0,
+      1.0
+    ],
+    [
+      0.25,
+      1.0,
+      1.5
+    ],
+    [
+      0.25,
+      1.5,
+      0.75
+    ],
+    [
+      0.25,
+      1.5,
+      1.0
+    ],
+    [
+      0.25,
+      1.5,
+      1.5
+    ],
+    [
+      0.4,
+      0.75,
+      0.75
+    ],
+    [
+      0.4,
+      0.75,
+      1.0
+    ],
+    [
+      0.4,
+      0.75,
+      1.5
+    ],
+    [
+      0.4,
+      1.0,
+      0.75
+    ],
+    [
+      0.4,
+      1.0,
+      1.0
+    ],
+    [
+      0.4,
+      1.0,
+      1.5
+    ],
+    [
+      0.4,
+      1.5,
+      0.75
+    ],
+    [
+      0.4,
+      1.5,
+      1.0
+    ],
+    [
+      0.4,
+      1.5,
+      1.5
+    ],
+    [
+      0.5,
+      0.75,
+      0.75
+    ],
+    [
+      0.5,
+      0.75,
+      1.0
+    ],
+    [
+      0.5,
+      0.75,
+      1.5
+    ],
+    [
+      0.5,
+      1.0,
+      0.75
+    ],
+    [
+      0.5,
+      1.0,
+      1.5
+    ],
+    [
+      0.5,
+      1.5,
+      0.75
+    ],
+    [
+      0.5,
+      1.5,
+      1.0
+    ],
+    [
+      0.5,
+      1.5,
+      1.5
+    ],
+    [
+      0.6,
+      0.75,
+      0.75
+    ],
+    [
+      0.6,
+      0.75,
+      1.0
+    ],
+    [
+      0.6,
+      0.75,
+      1.5
+    ],
+    [
+      0.6,
+      1.0,
+      0.75
+    ],
+    [
+      0.6,
+      1.0,
+      1.0
+    ],
+    [
+      0.6,
+      1.0,
+      1.5
+    ],
+    [
+      0.6,
+      1.5,
+      0.75
+    ],
+    [
+      0.6,
+      1.5,
+      1.0
+    ],
+    [
+      0.6,
+      1.5,
+      1.5
+    ],
+    [
+      0.75,
+      0.75,
+      0.75
+    ],
+    [
+      0.75,
+      0.75,
+      1.0
+    ],
+    [
+      0.75,
+      0.75,
+      1.5
+    ],
+    [
+      0.75,
+      1.0,
+      0.75
+    ],
+    [
+      0.75,
+      1.0,
+      1.0
+    ],
+    [
+      0.75,
+      1.0,
+      1.5
+    ],
+    [
+      0.75,
+      1.5,
+      0.75
+    ],
+    [
+      0.75,
+      1.5,
+      1.0
+    ],
+    [
+      0.75,
+      1.5,
+      1.5
+    ]
+  ],
+  "windows": [
+    252,
+    504
+  ],
+  "selection": "Default to preset purged-inner robust anchor each fold. Every20 market sessions (also at fold change), use only126+ mature OOF outcomes/5 each class. Optimize EMA-blended candidate macroF1 minus squared distance penalty to anchor; require +.01 past improvement.",
+  "primary": "anchored_pool: half inner-prior raw forecast, quarter adaptive252 and quarter adaptive504; then equal current/causalEMA5",
+  "secondary": "anchored_adaptive: equal adaptive252/504 raw forecasts; same EMA5 mixture",
+  "timing": "Anchor chosen before outer start; adjustments require label_end_date strictly before decision. No backward smoothing, current-label fit or outer coefficient selection.",
+  "acceptance": "Mean F1 incumbent+.01, no worst/directional decline, higher MCC and >=3 wins; paired20/60 lower>0 for provisional evidence.",
+  "caveat": "Prior branch was identified after inspected historical outcomes; post-hoc study design remains. No independent acceptance, calibrated probabilities or deployment."
+}

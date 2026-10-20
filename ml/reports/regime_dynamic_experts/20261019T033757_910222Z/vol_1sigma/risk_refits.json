@@ -1,0 +1,898 @@
+[
+  {
+    "fold": 1,
+    "block": 1,
+    "prediction_start": "2020-03-27",
+    "train_start": "2017-04-13",
+    "train_label_end": "2020-03-26",
+    "n_train": 687,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 0,
+      "latest_label_end": null
+    }
+  },
+  {
+    "fold": 1,
+    "block": 2,
+    "prediction_start": "2020-06-29",
+    "train_start": "2017-06-29",
+    "train_label_end": "2020-06-26",
+    "n_train": 697,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 43,
+      "latest_label_end": "2020-06-26 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 3,
+    "prediction_start": "2020-09-25",
+    "train_start": "2017-09-25",
+    "train_label_end": "2020-09-24",
+    "n_train": 699,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 106,
+      "latest_label_end": "2020-09-24 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 4,
+    "prediction_start": "2020-12-23",
+    "train_start": "2017-12-25",
+    "train_label_end": "2020-12-22",
+    "n_train": 697,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 169,
+      "latest_label_end": "2020-12-22 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 5,
+    "prediction_start": "2021-03-30",
+    "train_start": "2018-03-30",
+    "train_label_end": "2021-03-29",
+    "n_train": 699,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 232,
+      "latest_label_end": "2021-03-29 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 6,
+    "prediction_start": "2021-06-30",
+    "train_start": "2018-07-02",
+    "train_label_end": "2021-06-29",
+    "n_train": 699,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-06-29 00:00:00"
+    }
+  },
+  {
+    "fold": 1,
+    "block": 7,
+    "prediction_start": "2021-09-29",
+    "train_start": "2018-10-01",
+    "train_label_end": "2021-09-28",
+    "n_train": 698,
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.11418800685553612,
+      "max_depth": 3,
+      "num_leaves": 22,
+      "min_child_samples": 20,
+      "subsample": 0.6313300063577484,
+      "colsample_bytree": 0.8131566014842485,
+      "reg_alpha": 6.8712371782446345e-06,
+      "reg_lambda": 0.02543106241086852,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-09-28 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 1,
+    "prediction_start": "2021-10-15",
+    "train_start": "2018-10-15",
+    "train_label_end": "2021-10-14",
+    "n_train": 700,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2021-10-14 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 2,
+    "prediction_start": "2022-01-13",
+    "train_start": "2019-01-14",
+    "train_label_end": "2022-01-12",
+    "n_train": 700,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-01-12 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 3,
+    "prediction_start": "2022-04-20",
+    "train_start": "2019-05-02",
+    "train_label_end": "2022-04-19",
+    "n_train": 725,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-04-19 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 4,
+    "prediction_start": "2022-07-20",
+    "train_start": "2019-07-22",
+    "train_label_end": "2022-05-26",
+    "n_train": 693,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-05-26 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 5,
+    "prediction_start": "2022-10-19",
+    "train_start": "2019-10-21",
+    "train_label_end": "2022-10-18",
+    "n_train": 684,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2022-10-18 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 6,
+    "prediction_start": "2023-01-17",
+    "train_start": "2020-01-17",
+    "train_label_end": "2023-01-16",
+    "n_train": 684,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-01-16 00:00:00"
+    }
+  },
+  {
+    "fold": 2,
+    "block": 7,
+    "prediction_start": "2023-04-21",
+    "train_start": "2020-04-21",
+    "train_label_end": "2023-04-20",
+    "n_train": 686,
+    "parameters": {
+      "n_estimators": 100,
+      "learning_rate": 0.010532153655490309,
+      "max_depth": 7,
+      "num_leaves": 29,
+      "min_child_samples": 24,
+      "subsample": 0.6679603338292528,
+      "colsample_bytree": 0.8808900129717107,
+      "reg_alpha": 2.3030774513905485,
+      "reg_lambda": 3.776859870118303e-07,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-04-20 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 1,
+    "prediction_start": "2023-07-17",
+    "train_start": "2020-07-17",
+    "train_label_end": "2023-07-14",
+    "n_train": 683,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-07-14 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 2,
+    "prediction_start": "2023-10-16",
+    "train_start": "2020-10-16",
+    "train_label_end": "2023-10-13",
+    "n_train": 682,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2023-10-13 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 3,
+    "prediction_start": "2024-01-12",
+    "train_start": "2021-01-12",
+    "train_label_end": "2024-01-11",
+    "n_train": 684,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.75,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-01-11 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 4,
+    "prediction_start": "2024-04-17",
+    "train_start": "2021-04-19",
+    "train_label_end": "2024-04-16",
+    "n_train": 683,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-04-16 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 5,
+    "prediction_start": "2024-07-19",
+    "train_start": "2021-07-19",
+    "train_label_end": "2024-07-18",
+    "n_train": 684,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-07-18 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 6,
+    "prediction_start": "2024-10-18",
+    "train_start": "2021-10-18",
+    "train_label_end": "2024-10-17",
+    "n_train": 684,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      2.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2024-10-17 00:00:00"
+    }
+  },
+  {
+    "fold": 3,
+    "block": 7,
+    "prediction_start": "2025-01-16",
+    "train_start": "2022-01-17",
+    "train_label_end": "2025-01-15",
+    "n_train": 683,
+    "parameters": {
+      "n_estimators": 225,
+      "learning_rate": 0.1415792151901798,
+      "max_depth": 5,
+      "num_leaves": 15,
+      "min_child_samples": 30,
+      "subsample": 0.6215780208376839,
+      "colsample_bytree": 0.7786308642132331,
+      "reg_alpha": 1.759536160948061e-06,
+      "reg_lambda": 0.07356953134258702,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      2.0,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-01-15 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 1,
+    "prediction_start": "2025-02-10",
+    "train_start": "2022-02-10",
+    "train_label_end": "2025-02-07",
+    "n_train": 682,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      2.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-02-07 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 2,
+    "prediction_start": "2025-05-14",
+    "train_start": "2022-07-04",
+    "train_label_end": "2025-05-13",
+    "n_train": 692,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-05-13 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 3,
+    "prediction_start": "2025-08-11",
+    "train_start": "2022-08-11",
+    "train_label_end": "2025-08-08",
+    "n_train": 727,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-08-08 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 4,
+    "prediction_start": "2025-11-10",
+    "train_start": "2022-11-10",
+    "train_label_end": "2025-11-07",
+    "n_train": 727,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2025-11-07 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 5,
+    "prediction_start": "2026-02-09",
+    "train_start": "2023-02-09",
+    "train_label_end": "2026-02-06",
+    "n_train": 731,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      1.5,
+      1.0,
+      2.0
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-02-06 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 6,
+    "prediction_start": "2026-05-19",
+    "train_start": "2023-05-19",
+    "train_label_end": "2026-05-18",
+    "n_train": 726,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      0.5,
+      1.0,
+      0.75
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-05-18 00:00:00"
+    }
+  },
+  {
+    "fold": 4,
+    "block": 7,
+    "prediction_start": "2026-08-14",
+    "train_start": "2023-08-14",
+    "train_label_end": "2026-08-13",
+    "n_train": 728,
+    "parameters": {
+      "n_estimators": 250,
+      "learning_rate": 0.12139707695554378,
+      "max_depth": 3,
+      "num_leaves": 20,
+      "min_child_samples": 23,
+      "subsample": 0.7301321323053057,
+      "colsample_bytree": 0.7554709158757928,
+      "reg_alpha": 2.7678419414850017e-06,
+      "reg_lambda": 0.28749982347407854,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    },
+    "decision_weights": [
+      2.0,
+      1.0,
+      0.5
+    ],
+    "decision_history": {
+      "n": 252,
+      "latest_label_end": "2026-08-13 00:00:00"
+    }
+  }
+]

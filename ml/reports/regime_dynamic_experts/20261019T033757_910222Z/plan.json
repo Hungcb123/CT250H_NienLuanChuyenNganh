@@ -1,0 +1,386 @@
+{
+  "mode": "fixed_vs_volatility_target_heterogeneous_DEVELOPMENT",
+  "reference_report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "labels": {
+    "20": {
+      "name": "T+20",
+      "bull_threshold": 0.05,
+      "bear_threshold": -0.05
+    }
+  },
+  "base_feature_set": "close-etf",
+  "feature_groups": {
+    "trend": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200"
+    ],
+    "risk": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "Drawdown120",
+      "Drawdown252",
+      "HV20_60_Ratio",
+      "DownsideHV60"
+    ]
+  },
+  "feature_version": "long-trend-risk-v1-research",
+  "train_windows": [
+    "3y"
+  ],
+  "refit_market_sessions": 63,
+  "inner_splits": 2,
+  "models": [
+    "LightGBM"
+  ],
+  "optuna": null,
+  "score_role": "Nested forward development comparison on already-inspected history; no fresh holdout claim.",
+  "assumptions": [
+    "All variants use identical dates and labels; adding a feature cannot remove a frozen validation date.",
+    "Parameters are selected once at each outer fold start using purged inner folds only.",
+    "The model is refitted periodically using labels known strictly before each prediction block.",
+    "Rolling windows are calendar years measured from the prediction block start.",
+    "Each refit uses the same fixed parameters until the next outer fold.",
+    "A drawdown feature measures current distance below the trailing peak.",
+    "No confidence threshold, new label definition, financial backtest, or ONNX deployment."
+  ],
+  "datasets": [
+    {
+      "horizon": 20,
+      "eligible_history_rows": 2341,
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2020-03-27",
+          "end": "2021-10-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+          "n_refits": 7
+        },
+        {
+          "fold": 2,
+          "start": "2021-10-15",
+          "end": "2023-07-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+          "n_refits": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-07-17",
+          "end": "2025-02-07",
+          "n_validation": 390,
+          "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+          "n_refits": 7
+        },
+        {
+          "fold": 4,
+          "start": "2025-02-10",
+          "end": "2026-09-03",
+          "n_validation": 390,
+          "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+          "n_refits": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "created_at": "2026-10-19T03:37:57.901630+00:00",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_dynamic_experts.py": "e1ab9c95ce88e4677112582c9feca7baf7c1a476f3cfa6ee6ddf0d3c5748d444",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_experiments/20261017T141838_654956Z/experiment_report.json": "cb92562ac3a11bb192f888f5e9056787a14fb606feb924ed8586e4909b66eb4e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime.py": "527e6b89dfe4b5c63d177385525ed5f510ecf4eaed932cec5a92d32d4559a59b",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_labels.py": "3eea3bf79158d54668a23a3fcfd16b7a2a744f33ef87ef058b110442eccbd201",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_multiclass_reuse.py": "8126239e714d6c843049dfe6334cff9d11655bc3bcaf62d90efa1533c8c91c93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_return_distribution.py": "229244354fe84dc317fd0cd64e0fa3b1c7e1e84c30cac6df520dfd049c4bbdfd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_expert_selection.py": "9f40a26ea1ffaf957d26299d6ef0b10fbc76f5132eec43fe8a2b5c135c8bb59e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/audit_regime_expert_selection.py": "2b85fbcaf133806c1c23a6e334c718d4e38b361f11b939b5ee235316c1ff5051",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/train_regime_v2.py": "c9a94abcc3f97e9d100f5b108c38eb87d4fe70448f8519efb2e1af575218363f",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_normalized_predictions.csv": "bec9740cca6500e2ba23ef12cdd4afe9d15d93de323c56e2b924c30d63a78188",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_raw_predictions.csv": "af5a6467cc18850128b7b6b8478c70ea92a689dbeca76f167c1765a52f14d516",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_normalized_predictions.csv": "60b67a09af6db02ad10314ca69c5d37c68d13cb4eedbadb5319cf10dbe4e4568",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_raw_predictions.csv": "83af3dd9d1197722b2b7a25eb31adcbf22aa36c3982f5669d34f6e91e55f4444",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_normalized_refits.json": "98268ddab662f1fadd9bd04bd31fd4a95e48fe5e8c7c5fc48f7eaff29cd1f164",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/3y_raw_refits.json": "010d9cb1fe6e425928fd7a46be62ef14a6f4881361cf7f99473f4d2b1ac5d38d",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_normalized_refits.json": "2e8cbe1037c40d39d512ea06ce3053a6968d294b717ac5587bbfa05411cc1773",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/expanding_raw_refits.json": "d03961b75c5dbe517097f5a8d14f2ee3f5f0d5ae50d8dadf1387583fc9bff9fe",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_return_distribution/20261018T155423_383833Z/plan.json": "aaef0721844b17a7886d0fc88d1f7f0396a861c311b21bb79ac5d6fb5242dd22",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_multiclass_reuse/20261018T151747_040696Z/plan.json": "6fda5bbb36f3714909fa99b821283603d5175538d0f51abe5566640d48c8ec9b"
+  },
+  "policies": [
+    "fixed_5pct",
+    "vol_1sigma"
+  ],
+  "label_rule": "log(P[t+20]/P[t]) compared to +/- std(last20 daily log returns,ddof1)*sqrt20; equality sideway",
+  "fixed_rule": "Simple return < -.05 bear, > .05 bull, equality/otherwise sideway",
+  "parameter_policy": "Same original fixed-label purged-inner parameters per outer fold, reused unchanged for both targets. No new tuning; dynamic task may be under-tuned.",
+  "classifier_parameters": {
+    "trend": [
+      {
+        "outer_fold": 1,
+        "inner_selection_f1": 0.35856998942579615,
+        "best_params": {
+          "n_estimators": 150,
+          "learning_rate": 0.01302780710309028,
+          "max_depth": 7,
+          "num_leaves": 33,
+          "min_child_samples": 29,
+          "subsample": 0.798070764044508,
+          "colsample_bytree": 0.6137554084460873,
+          "reg_alpha": 1.527156759251193,
+          "reg_lambda": 2.133142332373004e-06,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      },
+      {
+        "outer_fold": 2,
+        "inner_selection_f1": 0.30208017939922827,
+        "best_params": {
+          "n_estimators": 75,
+          "learning_rate": 0.034594879590580115,
+          "max_depth": 6,
+          "num_leaves": 44,
+          "min_child_samples": 79,
+          "subsample": 0.6019600295821981,
+          "colsample_bytree": 0.9141016744105681,
+          "reg_alpha": 1.7272786429851023e-07,
+          "reg_lambda": 6.108613640246106,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      },
+      {
+        "outer_fold": 3,
+        "inner_selection_f1": 0.32562804734909917,
+        "best_params": {
+          "n_estimators": 225,
+          "learning_rate": 0.1415792151901798,
+          "max_depth": 5,
+          "num_leaves": 15,
+          "min_child_samples": 30,
+          "subsample": 0.6215780208376839,
+          "colsample_bytree": 0.7786308642132331,
+          "reg_alpha": 1.759536160948061e-06,
+          "reg_lambda": 0.07356953134258702,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      },
+      {
+        "outer_fold": 4,
+        "inner_selection_f1": 0.4072554489158659,
+        "best_params": {
+          "n_estimators": 350,
+          "learning_rate": 0.04272080460529356,
+          "max_depth": 5,
+          "num_leaves": 59,
+          "min_child_samples": 42,
+          "subsample": 0.633488544315244,
+          "colsample_bytree": 0.8193227474355528,
+          "reg_alpha": 0.0021140781760156974,
+          "reg_lambda": 0.6394254572435746,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      }
+    ],
+    "risk": [
+      {
+        "outer_fold": 1,
+        "inner_selection_f1": 0.37403031109927665,
+        "best_params": {
+          "n_estimators": 150,
+          "learning_rate": 0.11418800685553612,
+          "max_depth": 3,
+          "num_leaves": 22,
+          "min_child_samples": 20,
+          "subsample": 0.6313300063577484,
+          "colsample_bytree": 0.8131566014842485,
+          "reg_alpha": 6.8712371782446345e-06,
+          "reg_lambda": 0.02543106241086852,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      },
+      {
+        "outer_fold": 2,
+        "inner_selection_f1": 0.41542768756644205,
+        "best_params": {
+          "n_estimators": 100,
+          "learning_rate": 0.010532153655490309,
+          "max_depth": 7,
+          "num_leaves": 29,
+          "min_child_samples": 24,
+          "subsample": 0.6679603338292528,
+          "colsample_bytree": 0.8808900129717107,
+          "reg_alpha": 2.3030774513905485,
+          "reg_lambda": 3.776859870118303e-07,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      },
+      {
+        "outer_fold": 3,
+        "inner_selection_f1": 0.263791912810356,
+        "best_params": {
+          "n_estimators": 225,
+          "learning_rate": 0.1415792151901798,
+          "max_depth": 5,
+          "num_leaves": 15,
+          "min_child_samples": 30,
+          "subsample": 0.6215780208376839,
+          "colsample_bytree": 0.7786308642132331,
+          "reg_alpha": 1.759536160948061e-06,
+          "reg_lambda": 0.07356953134258702,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      },
+      {
+        "outer_fold": 4,
+        "inner_selection_f1": 0.38420696387227826,
+        "best_params": {
+          "n_estimators": 250,
+          "learning_rate": 0.12139707695554378,
+          "max_depth": 3,
+          "num_leaves": 20,
+          "min_child_samples": 23,
+          "subsample": 0.7301321323053057,
+          "colsample_bytree": 0.7554709158757928,
+          "reg_alpha": 2.7678419414850017e-06,
+          "reg_lambda": 0.28749982347407854,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "n_jobs": 2,
+          "verbosity": -1
+        },
+        "n_trials": 15
+      }
+    ]
+  },
+  "quantile_policy": "Reuse archived quantiles because regression targets/features/training windows are unchanged; verify training dates, n_train and old class priors. Recompute new label priors on each original training cohort.",
+  "thresholds_predeclared": {
+    "lookback": 20,
+    "horizon": 20,
+    "k": 1.0
+  },
+  "selector_rule": {
+    "history_rows": 126,
+    "min_class_count": 5,
+    "improvement_margin": 0.03,
+    "refit_market_sessions": 20
+  },
+  "selector_pool": [
+    "legacy_equal",
+    "legacy_trend",
+    "legacy_risk",
+    "density_all",
+    "density_expanding"
+  ],
+  "mixtures": "Equal all four densities; equal two expanding densities; each blended half with equal trend/risk classifiers. No weight search.",
+  "uncertainty": {
+    "paired_circular_blocks": [
+      20,
+      60
+    ],
+    "repeats": 1000,
+    "seed": 42,
+    "comparison": "selector or fixed expanding blend vs equal classifier, WITHIN each task only"
+  },
+  "interpretation": "Different target tasks: no ranking fixed F1 against dynamic F1. All inspected historical development; no independent test, calibrated probability or trading profitability claim.",
+  "dynamic_upper_threshold_quantiles": {
+    "0": 0.016620217097727662,
+    "0.1": 0.025714880653893678,
+    "0.5": 0.046069052878335646,
+    "0.9": 0.08896742342507516,
+    "1": 0.15942712149772456
+  },
+  "dynamic_upper_below_fixed_fraction": 0.5544871794871795,
+  "target_transition_counts": [
+    [
+      171,
+      20,
+      0
+    ],
+    [
+      37,
+      821,
+      124
+    ],
+    [
+      0,
+      113,
+      274
+    ]
+  ],
+  "target_counts": {
+    "fixed_5pct": {
+      "bearish": 191,
+      "sideway": 982,
+      "bullish": 387
+    },
+    "vol_1sigma": {
+      "bearish": 208,
+      "sideway": 954,
+      "bullish": 398
+    }
+  }
+}

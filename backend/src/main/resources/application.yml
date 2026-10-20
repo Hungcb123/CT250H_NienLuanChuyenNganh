@@ -4,6 +4,10 @@ server:
     context-path: /
 
 spring:
+  task:
+    scheduling:
+      pool:
+        size: 4
   application:
     name: equifolio-backend
 
@@ -62,3 +66,23 @@ market-data:
     gold-url: "https://vapi.vnappmob.com/api/v2/gold/sjc"
 
 
+
+# OpenAI-compatible embeddings endpoint. Empty URL means explicit full-text mode.
+knowledge:
+  embedding-url: ${EMBEDDING_URL:}
+  embedding-model: ${EMBEDDING_MODEL:}
+  embedding-key: ${EMBEDDING_API_KEY:}
+
+# Experimental: current OOS TAA underperforms SAA. Explicit opt-in only.
+ml:
+  taa-enabled: ${ML_TAA_ENABLED:false}
+  stock-model: ${ML_STOCK_MODEL:native}
+  native-url: ${REGIME_NATIVE_URL:http://127.0.0.1:8091}
+  native-token: ${REGIME_API_TOKEN:}
+  native-managed: ${REGIME_MANAGED:true}
+  native-python: ${REGIME_PYTHON:python3}
+  native-script: ${REGIME_WORKER_SCRIPT:../ml/serve_regime_shock.py}
+
+# Annual percentage used by the application for early savings withdrawals.
+savings:
+  early-withdrawal-rate: ${SAVINGS_EARLY_WITHDRAWAL_RATE:0.1}

@@ -13,6 +13,28 @@ public class PortfolioHistoryDTO {
     private BigDecimal alphaPercent = BigDecimal.ZERO;
     private List<SnapshotPoint> points = new ArrayList<>();
 
+    private String dataVersion;
+    public String getDataVersion() { return dataVersion; }
+    public void setDataVersion(String value) { dataVersion=value; }
+    private String generatedAt;
+    public String getGeneratedAt() { return generatedAt; }
+    public void setGeneratedAt(String value) { generatedAt=value; }
+    private String priceAsOf;
+    public String getPriceAsOf() { return priceAsOf; }
+    public void setPriceAsOf(String value) { priceAsOf=value; }
+    private String status;
+    public String getStatus() { return status; }
+    public void setStatus(String value) { status=value; }
+    private Integer formulaVersion;
+    public Integer getFormulaVersion() { return formulaVersion; }
+    public void setFormulaVersion(Integer value) { formulaVersion=value; }
+    private boolean updating;
+    public boolean getUpdating() { return updating; }
+    public void setUpdating(boolean value) { updating=value; }
+    private boolean provisional;
+    public boolean getProvisional() { return provisional; }
+    public void setProvisional(boolean value) { provisional=value; }
+
     public static class SnapshotPoint {
         private String date; // 'YYYY-MM-DD' or formatted
         private BigDecimal nav;

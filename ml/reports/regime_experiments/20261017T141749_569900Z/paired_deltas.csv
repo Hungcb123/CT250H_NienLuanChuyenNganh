@@ -1,0 +1,3 @@
+candidate,control,mean_f1_delta,mean_mcc_delta,worst_f1_delta,bear_false_alarms_delta,bear_missed_delta,folds_beating_control
+t20_LightGBM_baseline_expanding,t20_LightGBM_baseline_expanding,0.0,0.0,0.0,0,0,0
+t20_LightGBM_long_expanding,t20_LightGBM_baseline_expanding,0.008302121543944163,0.02266894347212528,-0.04179802336588129,-55,6,2

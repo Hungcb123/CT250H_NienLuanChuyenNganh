@@ -1,0 +1,507 @@
+{
+  "objective": "Build a useful, robust VNINDEX regime/risk model; autonomous research authorized by user",
+  "status": "native_server_code_integrated_postgres_ema_net_policy_experimental",
+  "independent_test_status": "No untouched historical final test remains in reviewed snapshot; all current scores are development evidence",
+  "research_gate": {
+    "role": "Provisional research acceptance criteria, fixed before the next studies; not proof of deployability",
+    "common_outcome": "T+20 simple return below -5%",
+    "causal_precision_min": 0.25,
+    "causal_recall_min": 0.3,
+    "causal_alarm_rate_max": 0.15,
+    "folds_ap_above_prevalence_min": 3,
+    "no_fold_auroc_below": 0.45,
+    "requirements": [
+      "Causal timing audits and paired comparison against baseline",
+      "Sensitivity to overlapping labels and repeated development reuse",
+      "Freeze selected pipeline for prospective shadow evaluation before live replacement"
+    ]
+  },
+  "completed": [
+    {
+      "study": "fixed shallow trees and causal rolling thresholds",
+      "report": "ml/reports/regime_risk/20261017T153519_376909Z",
+      "conclusion": "Rolling thresholds improve alarm-rate control but not detection; fold3 ranking remains poor; reject as improvement"
+    },
+    {
+      "study": "six regularized model/expanded-risk-feature candidates",
+      "report": "ml/reports/regime_candidates/20261017T154743_717260Z",
+      "conclusion": "No clear improvement; best retrospective equal-count TP42 vs prior tuned volatility TP44; not accepted"
+    },
+    {
+      "study": "close-only long history fixed models",
+      "report": "ml/reports/regime_history/20261017T155014_918591Z",
+      "conclusion": "Best expanding LightGBM static precision .2181 recall .2147 alarm .1205; fails predeclared research gate; inspect fold stability before any further selection"
+    },
+    {
+      "study": "consensus OHLCV feature ablation",
+      "report": "ml/reports/regime_ohlcv/20261017T155354_185246Z",
+      "conclusion": "4 additional candidates; no sufficient gain over close-only controls; raw conflicts retained missing"
+    },
+    {
+      "study": "official Cboe VIX lagged feature ablation",
+      "report": "ml/reports/regime_global/20261017T160115_134573Z",
+      "conclusion": "4 candidates; observation date +2 calendar days backward alignment; no sufficient improvement"
+    },
+    {
+      "study": "short calibration/faster refit ablation",
+      "report": "ml/reports/regime_fresh/20261017T160231_480894Z",
+      "conclusion": "3y/cal20/refit20 has AP above base and AUROC >.5 in all 4 folds, including fold3 AUROC .574; precision .1578 recall .3089 alarm .2397 still fails screen. Expanding variants rank better overall but fold3 weak."
+    },
+    {
+      "study": "fixed freshness followup 3y/5y cal20/40 refit5/20",
+      "report": "ml/reports/regime_fresh_followup/20261017T161140_104962Z",
+      "conclusion": "No gate pass. 3y cal40 refit20 precision .2007 recall .3141 alarm .1917; 5y fold3 remains poor."
+    },
+    {
+      "study": "cross-broker historical group-index features",
+      "report": "ml/reports/regime_indices/20261017T161931_207282Z",
+      "conclusion": "4 candidates; no full gate pass. All source close arrays validated; malformed unused OHLC retained only in raw audit."
+    },
+    {
+      "study": "two-history standardized causal ensemble",
+      "report": "ml/reports/regime_ensemble/20261017T162100_738897Z",
+      "conclusion": "Normalization improves cross-refit score comparability; 3y standardized AUC .656 and all four fold AUC>.57. Static alarm rate remains high."
+    },
+    {
+      "study": "volatility-to-absolute-loss mixture heads",
+      "report": "ml/reports/regime_distribution/20261017T162344_829359Z",
+      "conclusion": "8 head/threshold variants; no full gate pass."
+    },
+    {
+      "study": "archived causal online quantile replay",
+      "report": "ml/reports/regime_online/20261017T162627_969154Z",
+      "conclusion": "Equal ensemble online120 is research challenger: precision .2489 recall .2932 alarm .1442; 56TP169FP vs original55TP270FP; intervals include0, not accepted."
+    },
+    {
+      "study": "fixed 2:1 recency blend replay",
+      "report": "ml/reports/regime_recency_blend/20261017T162737_554556Z",
+      "conclusion": "No full gate pass; no further blend-weight grid justified."
+    },
+    {
+      "study": "dense forward-return quantile regression",
+      "report": "ml/reports/regime_quantile/20261017T163013_958720Z",
+      "conclusion": "8 variants; no full gate pass."
+    }
+  ],
+  "next_study": "Refresh reviewed input data and freeze operational refit/calendar policy before current predictions; evaluate prospective outcomes. Net policy is not auto-enabled.",
+  "deployment": "Existing production models preserved",
+  "data_findings": {
+    "ohlcv_audit": "ml/reports/regime_research/ohlcv_audit",
+    "warning": "Broker OHLC/volume fields differ materially; cannot append volume/exhaustion features as trusted data without resolving field semantics and dates",
+    "vci_kbs_volume_agreement_fraction": 0.550182,
+    "vci_kbs_open_agreement_fraction": 0.703383
+  },
+  "screening_summary": "ml/reports/regime_research/screening_summary.json",
+  "research_candidate_contract": "ml/artifacts/regime_shadow_candidate_20261017_v2/contract.json",
+  "fresh_evidence_block": {
+    "first_observed": "2026-10-17",
+    "reason": "All historical prediction periods have been repeatedly inspected; no genuinely prospective T+20 outcome can mature until after the newly frozen algorithm emits future-session predictions",
+    "audit_turn_count": 3,
+    "status": "Verified external blocker: runtime, collection, scheduling and evaluator ready; no genuinely prospective matured outcome exists.",
+    "last_audited_at": "2026-10-18T13:17:25.570280+00:00",
+    "scope": "Only independent prospective confirmation of the frozen RISK candidate; not a blocker for offline three-class development."
+  },
+  "runtime_readiness": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/readiness.json",
+  "latest_label_price_exposure": "2026-10-16",
+  "automation_readiness": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/automation_readiness.json",
+  "schedule_receipt": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/schedule_receipt.json",
+  "prospective_status": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/prospective_status.json",
+  "prospective_predictions": 0,
+  "matured_prospective_outcomes": 0,
+  "resumed_fresh_evidence_block": {
+    "audit_turn_count": 2,
+    "last_checked_at": "2026-10-18T14:48:51.846216+00:00",
+    "previous_turn_classification": "no progress toward model quality; rechecked live scheduler",
+    "current_evidence": "Cron daily.log contains six automatic ticks from 13:30 through 14:45 UTC on 2026-10-18; all correctly skip Sunday. Zero prospective forecasts and zero mature outcomes.",
+    "reason": "Same external condition: no completed post-freeze trading session or future T+20 outcome yet.",
+    "scope": "Superseded as a whole-goal blocker by original three-class objective clarification."
+  },
+  "scope_correction": {
+    "at": "2026-10-18T15:14:46.875669+00:00",
+    "reason": "User clarified that waiting for prospective risk outcomes does not replace improving the original three-class forecasting model.",
+    "objective": "Improve three-class VNINDEX forecasting; risk shadow remains a separate frozen experiment.",
+    "current_study": "ml/experiment_regime_multiclass.py",
+    "training_log": "/tmp/regime-multiclass-training.log",
+    "target": "Unchanged T+20 fixed +/-5%; same frozen development dates",
+    "configurations": 10,
+    "decision_rules_per_configuration": 2
+  },
+  "three_class_followup": {
+    "completed_at": "2026-10-18T15:22:08.254156+00:00",
+    "fixed_models_report": "ml/reports/regime_multiclass/20261018T151435_412098Z",
+    "legacy_reuse_report": "ml/reports/regime_multiclass_reuse/20261018T151747_040696Z",
+    "decision_variants": 32,
+    "same_dates": 1560,
+    "refits_causality_audited": 1137,
+    "legacy_parity": "Both original model streams match 1560/1560 predictions",
+    "regression_tests_passed": 133,
+    "best_mean_fold_macro_f1": 0.3956661442488774,
+    "original_risk_mean_fold_macro_f1": 0.3897924183128308,
+    "accepted": false,
+    "reason": "Gain small, worse worst-fold than trend control; paired 20/60-block sensitivity intervals include zero; no variant passes both controls.",
+    "summary": "docs/regime-multiclass-research.md"
+  },
+  "three_class_panel_live": {
+    "script": "ml/experiment_regime_panel.py",
+    "training_log": "/tmp/regime-panel-training.log",
+    "new_tests_passed": 9,
+    "input_preflight": "ml/reports/regime_panel/20261018T152621_523666Z/plan.json",
+    "test_scope": "Causal cross-asset labels, fixed date mapping, missing calendars, unit-invariant features, weighted class/day exposure",
+    "status": "completed_negative_transfer"
+  },
+  "three_class_panel_result": {
+    "report": "ml/reports/regime_panel/20261018T152634_420727Z",
+    "configs": 8,
+    "paired_transfer_comparisons": 4,
+    "pooled_mean_f1_improvements": 0,
+    "best_target_only_mean_f1": 0.3802358272573327,
+    "best_pooled_mean_f1": 0.36754886697583133,
+    "accepted": false,
+    "all_validation_days": 1560,
+    "refits_audited": 224,
+    "tests_passed": 143,
+    "report_recovery": "reporting_repair.json; training/predictions unchanged"
+  },
+  "three_class_information_live": {
+    "script": "ml/experiment_regime_information.py",
+    "log": "/tmp/regime-information-training.log",
+    "audit_report": "ml/reports/regime_information/20261018T153155_839661Z",
+    "new_tests_passed": 5,
+    "role": "three-class fixed-target development; no independent-test claim",
+    "status": "completed_no_feature_group_improvement"
+  },
+  "three_class_information_result": {
+    "report": "ml/reports/regime_information/20261018T153237_309880Z",
+    "groups": 5,
+    "inner_tuning_trials_total": 300,
+    "validation_days": 1560,
+    "control_exact_prediction_matches": 1560,
+    "mean_fold_f1": {
+      "control": 0.38602801588311664,
+      "ohlcv": 0.36016222144172017,
+      "vix": 0.3491065398858282,
+      "indices": 0.33968543111761174,
+      "combined": 0.3490304678464999
+    },
+    "accepted": false,
+    "tests_passed": 148,
+    "reason": "All four additions lower mean macro F1 than matched control. No deployment."
+  },
+  "three_class_families_live": {
+    "script": "ml/experiment_regime_families.py",
+    "log": "/tmp/regime-families-training.log",
+    "predeclared_plan": "ml/reports/regime_information/20261018T153237_309880Z/next_family_plan.json",
+    "preflight": "ml/reports/regime_families/20261018T154005_683832Z/plan.json",
+    "families": [
+      "SVC",
+      "CatBoost",
+      "ExtraTrees"
+    ],
+    "trials_per_outer_fold": 15,
+    "new_tests_passed": 6,
+    "status": "completed"
+  },
+  "three_class_families_result": {
+    "report": "ml/reports/regime_families/20261018T154106_332331Z",
+    "families": 3,
+    "hyperparameter_trials": 180,
+    "status": "completed_no_family_improvement",
+    "mean_fold_f1": {
+      "SVC": 0.3395421925093157,
+      "CatBoost": 0.3579002962602657,
+      "ExtraTrees": 0.31467015509014284
+    },
+    "accepted": false,
+    "diagnosis": "All three selected unweighted parameters on outerfold3 and predicted only sideway; post-hoc balanced restriction sensitivity running.",
+    "tests_passed": 159
+  },
+  "three_class_balance_live": {
+    "script": "ml/experiment_regime_family_balance.py",
+    "log": "/tmp/regime-family-balance-training.log",
+    "new_trials": 0,
+    "disclosure": "Post-hoc restriction based on outer diagnostics; choose saved trials by inner scores only, not independent evidence.",
+    "status": "completed_no_improvement_over_controls"
+  },
+  "three_class_family_balance_result": {
+    "report": "ml/reports/regime_family_balance/20261018T154841_212343Z",
+    "accepted": false,
+    "new_trials": 0,
+    "results": [
+      {
+        "family": "SVC",
+        "unrestricted_f1": 0.3395421925093157,
+        "balanced_f1": 0.29193559754545134,
+        "balanced_worst_f1": 0.222614469968926,
+        "balanced_mcc": -0.0120962002531553
+      },
+      {
+        "family": "CatBoost",
+        "unrestricted_f1": 0.3579002962602657,
+        "balanced_f1": 0.3788558015917511,
+        "balanced_worst_f1": 0.3523608403725363,
+        "balanced_mcc": 0.10334744420341377
+      },
+      {
+        "family": "ExtraTrees",
+        "unrestricted_f1": 0.31467015509014284,
+        "balanced_f1": 0.3420326508606918,
+        "balanced_worst_f1": 0.2788203877000159,
+        "balanced_mcc": 0.05767750504104554
+      }
+    ],
+    "role": "post-hoc development; none beats original controls",
+    "tests_passed": 159,
+    "causal_audit": "ml/reports/regime_family_balance/20261018T154841_212343Z/causal_audit.json"
+  },
+  "three_class_return_distribution_live": {
+    "script": "ml/experiment_regime_return_distribution.py",
+    "log": "/tmp/regime-return-dist-training.log",
+    "audit": "ml/reports/regime_return_distribution/20261018T155332_078401Z/plan.json",
+    "new_tests_passed": 7,
+    "forecasters": 4,
+    "decisions": 2,
+    "new_hyperparameter_trials": 0,
+    "objective": "Same fixed three-class target and frozen dates; dense continuous return supervision",
+    "status": "completed"
+  },
+  "three_class_return_distribution_result": {
+    "report": "ml/reports/regime_return_distribution/20261018T155423_383833Z",
+    "forecasters": 4,
+    "decision_variants": 8,
+    "best_mean_fold_f1": 0.4151389043402987,
+    "best_worst_fold_f1": 0.2736329367993342,
+    "accepted": false,
+    "reason": "Higher mean but unstable; quadrature Brier worse than past class-frequency baseline."
+  },
+  "three_class_expert_selection_result": {
+    "report": "ml/reports/regime_expert_selection/20261018T160007_360834Z",
+    "candidate": "delayed_selector",
+    "mean_fold_f1": 0.42045100021628456,
+    "worst_fold_f1": 0.383783152160406,
+    "mean_mcc": 0.14118317174733352,
+    "passes_provisional_point_gates": true,
+    "accepted": false,
+    "source_interface_parity": 1560,
+    "prefix_future_label_checks": 5,
+    "sensitivity_variants": 8,
+    "bootstrap_intervals_include_zero": true,
+    "tests_passed": 171,
+    "contract": "ml/artifacts/regime_multiclass_candidate_20261018/contract.json"
+  },
+  "three_class_native_live": {
+    "script": "ml/regime_multiclass_native.py",
+    "log": "/tmp/regime-multiclass-native-replay.log",
+    "contract": "ml/artifacts/regime_multiclass_candidate_20261018/contract.json",
+    "new_tests_passed": 5,
+    "scope": "Independent native training/serialization/reloaded inference and separately implemented selector. No deployment or prospective emission.",
+    "status": "completed_full_parity"
+  },
+  "three_class_native_result": {
+    "report": "ml/reports/regime_multiclass_native/20261018T162002_744919Z",
+    "selector_matches": 1560,
+    "expert_matches_each": 1560,
+    "selector_event_matches": 80,
+    "max_score_error": 2.220446049250313e-16,
+    "historical_bundles": 28,
+    "native_boosters": 1064,
+    "lock": "ml/artifacts/regime_multiclass_candidate_20261018/native_runtime_lock.json",
+    "deployed": false,
+    "tests_passed": 180
+  },
+  "three_class_native_scores": {
+    "archive": "ml/reports/regime_native_scores/20261018T162849_386798Z",
+    "rows": 1560,
+    "point_decision_matches": 1560,
+    "role": "Historical native OOF scores, not prospective or calibrated probability",
+    "tests_passed": 180
+  },
+  "three_class_probability_live": {
+    "script": "ml/evaluate_regime_probabilities.py",
+    "log": "/tmp/regime-probability-run.log",
+    "plan": "ml/artifacts/regime_multiclass_candidate_20261018/probability_evaluation_plan.json",
+    "new_tests_passed": 8,
+    "point_policy_unchanged": true,
+    "scope": "Two causal logistic calibrators vs raw scores/component masses and full-index mature class-frequency baseline.",
+    "status": "completed_no_calibration_acceptance"
+  },
+  "three_class_probability_result": {
+    "report": "ml/reports/regime_probability_audit/20261018T163919_646038Z",
+    "active_rows": 1280,
+    "warmup_rows": 280,
+    "active_prior_brier": 0.538639,
+    "active_calibration_decision_brier": 0.625883,
+    "accepted": false,
+    "point_policy_unchanged": true,
+    "tests_passed": 188
+  },
+  "latest_dynamic_target_study": {
+    "report": "ml/reports/regime_dynamic_experts/20261019T033757_910222Z",
+    "mean_f1": 0.48930885619483216,
+    "worst_f1": 0.4000134347464767,
+    "equal_classifier_mean_f1": 0.44877633568238817,
+    "independent_acceptance": false,
+    "note": "New target task; 60-session paired interval includes zero. Frozen prior candidate and backend unchanged."
+  },
+  "latest_dynamic_tuning_study": {
+    "report": "ml/reports/regime_dynamic_tuning/20261019T042757_126390Z",
+    "trials": 192,
+    "conclusion": "Both tuned blend variants fail improvement screen; retain prior adaptive research baseline, not independent acceptance",
+    "best_tuned_mean_f1": 0.4829638313760332,
+    "prior_mean_f1": 0.48930885619483216,
+    "deployment_changed": false
+  },
+  "latest_directional_followups": {
+    "summary": "ml/reports/regime_research/directional_followup_20261019.md",
+    "studies": [
+      {
+        "study": "Directional specialists",
+        "report": "ml/reports/regime_directional/20261019T045527_492206Z",
+        "candidate": "inner_selected_blend",
+        "mean_f1": 0.45099718534391986,
+        "worst_f1": 0.37163928899613446,
+        "mean_mcc": 0.22729292623059819
+      },
+      {
+        "study": "Added inputs for quantiles",
+        "report": "ml/reports/regime_directional_density/20261019T045726_143832Z",
+        "candidate": "expanded_density_blend",
+        "mean_f1": 0.48859578049624575,
+        "worst_f1": 0.40244107932272444,
+        "mean_mcc": 0.2591193917104001
+      },
+      {
+        "study": "Delayed decision adapters",
+        "report": "ml/reports/regime_adaptive_decisions/20261019T045944_079584Z",
+        "candidate": "pooled_adapter",
+        "mean_f1": 0.47192202198732186,
+        "worst_f1": 0.3780342529453799,
+        "mean_mcc": 0.24763042752270922
+      },
+      {
+        "study": "CatBoost joint quantiles",
+        "report": "ml/reports/regime_joint_quantiles/20261019T050157_106140Z",
+        "candidate": "expanded_density_blend",
+        "mean_f1": 0.47853698587788285,
+        "worst_f1": 0.3956409525072562,
+        "mean_mcc": 0.24939792781913747
+      }
+    ],
+    "promoted": false,
+    "goal_achieved": false,
+    "retained_mean_f1": 0.48930885619483216,
+    "retained_worst_f1": 0.4000134347464767
+  },
+  "latest_broad_search": {
+    "summary": "ml/reports/regime_research/broad_search_20261019/README.md",
+    "studies": 7,
+    "highest_observed_f1": 0.49250821828003344,
+    "baseline_f1": 0.48930885619483216,
+    "accepted": false,
+    "goal_achieved": false,
+    "application_updated": false
+  },
+  "current_f1_goal": {
+    "objective": "tiếp tục đi, mọi giá có F1 tốt hơn",
+    "status": "usageLimited",
+    "summary": "ml/reports/regime_research/f1_goal_20261019_stage7/README.md",
+    "highest_observed_f1": 0.5144884151429698,
+    "previous_observed_f1": 0.5144884151429698,
+    "independent_metric_recalculation": true,
+    "independent_test": false,
+    "accepted": false,
+    "goal_achieved": false,
+    "tests_passed": 234,
+    "note": "Native shock_shrink complete:1560dates/28refits, all decisions match. Snapshot100models+empirical stores exported. Matched/extended close analog and path supervision do not improve highest F1. Logistic calibration worse overall; no probability or deployment acceptance.",
+    "focused_tests_passed": 8,
+    "balanced_candidate": {
+      "name": "shock_shrink",
+      "mean_f1": 0.5137451636929175,
+      "worst_f1": 0.403056383096105,
+      "mean_mcc": 0.300524907816212
+    },
+    "new_high_found": false,
+    "goal_status_from_tool": "usageLimited"
+  },
+  "latest_runtime_preparation": {
+    "report": "ml/reports/regime_runtime_parity/20261019T090001_796250Z",
+    "scope": "Composition-only streaming runtime, historical component-score replay",
+    "rows": 1560,
+    "restarts": 1560,
+    "max_score_error": 2.220446049250313e-16,
+    "mean_f1": 0.5137451636929175,
+    "new_unit_tests_passed": 2,
+    "native_model_weights_exported": false,
+    "prospective_parameter_selection_frozen": false,
+    "independent_test": false,
+    "deployed": false,
+    "next": "Native component models, feature contract, mature-only prospective configuration, end-to-end parity, separate probability evaluation."
+  },
+  "latest_native_shock": {
+    "report": "ml/reports/regime_shock_native/20261019T090304_754869Z",
+    "artifact": "ml/artifacts/regime_shock_candidate_20261019T090555_259289Z",
+    "native_models_exported": 100,
+    "native_rows_checked_at_update": 1560,
+    "full_native_replay_complete": true,
+    "feature_builder_max_error": 0.0,
+    "latest_snapshot_date": "2026-10-01",
+    "independent_test": false,
+    "deployed": false,
+    "independent_audit": "ml/reports/regime_research/f1_goal_20261019_stage7/independent_audit.json",
+    "new_unit_tests_passed": 5
+  },
+  "latest_server_integration": {
+    "at": "2026-10-19T10:36:53.376151+00:00",
+    "server_code_integrated": true,
+    "production_deployed": false,
+    "model": "shock_shrink_native_snapshot_v1",
+    "model_refit_changed": false,
+    "mean_development_f1": 0.5137451636929175,
+    "postgres_ledger_tests_passed": 6,
+    "real_native_worker_postgres_tests_passed": 1,
+    "net_policy_tests_passed": 2,
+    "frozen_native_regression_tests_passed": 4,
+    "backend_tests": {
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "frontend_build_passed": true,
+    "ui_checks": [
+      {
+        "device": "desktop",
+        "state": "ready",
+        "errors": [],
+        "scrollWidth": 1440,
+        "viewportWidth": 1440
+      },
+      {
+        "device": "desktop",
+        "state": "unavailable",
+        "errors": [],
+        "scrollWidth": 1440,
+        "viewportWidth": 1440
+      },
+      {
+        "device": "mobile",
+        "state": "ready",
+        "errors": [],
+        "scrollWidth": 390,
+        "viewportWidth": 390
+      },
+      {
+        "device": "mobile",
+        "state": "unavailable",
+        "errors": [],
+        "scrollWidth": 390,
+        "viewportWidth": 390
+      }
+    ],
+    "worker_health": "MODEL_LOADED",
+    "current_live_inference": "STALE_OR_INCOMPLETE_SESSION",
+    "taa_enabled_by_default": false,
+    "policy_comparison": "ml/reports/regime_net_taa/20261019T103518_043509Z",
+    "independent_test": false,
+    "taa_policy_accepted": false
+  }
+}

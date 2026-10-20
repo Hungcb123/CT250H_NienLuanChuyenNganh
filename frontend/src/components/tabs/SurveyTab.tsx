@@ -1,3 +1,4 @@
+import { EquityPreferenceQuestion } from '../profile/EquityPreferenceQuestion';
 import { useState } from 'react';
 import { Award, CheckCircle2, ShieldCheck, ArrowRight, RefreshCw } from 'lucide-react';
 import { submitRiskSurvey } from '../../services/api';
@@ -7,9 +8,10 @@ interface SurveyTabProps {
   surveyScores: number[];
   setSurveyScores: (scores: number[]) => void;
   onApplyProfile?: () => void;
+  onInvestmentSaved?: () => Promise<void> | void;
 }
 
-export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile }: SurveyTabProps) {
+export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile, onInvestmentSaved }: SurveyTabProps) {
   const toast = useToast();
   const [submitting, setSubmitting] = useState(false);
 
@@ -132,20 +134,21 @@ export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile }: Sur
   };
 
   return (
-    <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 lg:p-8 shadow-xs space-y-6">
+    <div className="vnx-panel p-6 space-y-6">
+      <EquityPreferenceQuestion onSaved={onInvestmentSaved} />
       {/* Header */}
-      <div className="border-b border-border-subtle pb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="border-b border-border-subtle pb-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="w-8 h-8 rounded-lg bg-accent-emerald-light border border-accent-emerald/30 flex items-center justify-center text-accent-emerald">
               <Award className="w-4 h-4" />
             </span>
-            <h2 className="text-lg font-extrabold text-text-primary tracking-tight">
-              Bộ Khảo Sát Khẩu Vị Rủi Ro Chuẩn Hóa (MiFID II)
+            <h2 className="text-base font-bold text-text-primary tracking-tight">
+              Khảo sát khẩu vị rủi ro
             </h2>
           </div>
           <p className="text-xs text-text-secondary font-medium max-w-2xl">
-            5 câu hỏi đo lường Năng lực tài chính khách quan và Tâm lý chấp nhận biến động chủ quan, tính toán chính xác Hệ số Ngại Rủi Ro λ của bạn.
+            5 câu hỏi để xác định mức rủi ro phù hợp với bạn.
           </p>
         </div>
 
@@ -166,13 +169,13 @@ export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile }: Sur
       {/* 5 Questions */}
       <div className="space-y-4">
         {questions.map((item, qIdx) => (
-          <div key={qIdx} className="p-5 rounded-xl border border-border-subtle bg-surface-container-low/50 hover:bg-surface-container-low transition-colors space-y-3.5">
+          <div key={qIdx} className="py-6 border-b border-border-subtle space-y-3.5">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <span className="font-extrabold text-text-primary text-sm">{item.q}</span>
                 <p className="text-xs text-text-secondary mt-0.5 font-medium">{item.desc}</p>
               </div>
-              <span className="px-3 py-1 rounded-lg bg-surface-container text-xs font-bold font-mono-num text-accent-emerald border border-border-subtle shadow-2xs shrink-0">
+              <span className="px-3 py-1 rounded-lg bg-surface-container text-xs font-bold font-mono-num text-accent-emerald border border-border-subtle  shrink-0">
                 {item.score} / 20đ
               </span>
             </div>
@@ -188,9 +191,9 @@ export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile }: Sur
                       updated[qIdx] = opt.val;
                       setSurveyScores(updated);
                     }}
-                    className={`p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
+                    className={`p-3 rounded-md border text-left text-xs transition-all cursor-pointer ${
                       isSelected
-                        ? 'border-accent-emerald bg-surface-container-high text-text-primary font-bold shadow-xs ring-1 ring-accent-emerald/30'
+                        ? 'border-text-primary bg-surface-container-low text-text-primary font-semibold'
                         : 'border-border-subtle bg-surface-container-lowest text-text-secondary hover:border-border-highlight hover:bg-surface-container-low'
                     }`}
                   >
@@ -211,11 +214,11 @@ export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile }: Sur
       </div>
 
       {/* Aggregate Result & Apply Action Card */}
-      <div className="p-6 rounded-2xl border-2 border-accent-emerald/30 bg-gradient-to-r from-accent-emerald-light via-surface-container-lowest to-surface-container-lowest flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-xs">
+      <div className="p-5 border-t border-border-subtle bg-surface-container-lowest flex flex-col lg:flex-row lg:items-center justify-between gap-6 ">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>
-            <h4 className="text-sm font-extrabold text-text-primary uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-accent-emerald"></span>
+            <h4 className="text-base font-semibold text-text-primary">
               Kết Quả Khảo Sát Phân Tầng Khẩu Vị
             </h4>
           </div>
@@ -235,7 +238,7 @@ export function SurveyTab({ surveyScores, setSurveyScores, onApplyProfile }: Sur
             type="button"
             onClick={handleSaveAndApply}
             disabled={submitting}
-            className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent-emerald hover:opacity-90 text-white font-bold text-xs shadow-sm hover:shadow transition-all cursor-pointer"
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent-emerald hover:opacity-90 text-white font-bold text-xs  hover:shadow transition-all cursor-pointer"
           >
             {submitting ? (
               <>

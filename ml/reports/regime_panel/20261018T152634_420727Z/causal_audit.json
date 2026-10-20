@@ -1,0 +1,42 @@
+{
+  "role": "Index-transfer historical three-class DEVELOPMENT only",
+  "candidates": 8,
+  "frozen_dates": 1560,
+  "refits_audited": 224,
+  "all_labels_mature_before_refit": true,
+  "date_and_weight_audit_passed": true,
+  "source_files": [
+    {
+      "path": "3y_medium_pooled_predictions.csv",
+      "sha256": "19a5754f48c5125ba14b2a88fb2f2e48a5ea306905880119f79cfde5b99583e1"
+    },
+    {
+      "path": "3y_medium_target_only_predictions.csv",
+      "sha256": "93048471c803316f57ba24a3cb692982023ddc8bc2f9688b1085e368f48ac064"
+    },
+    {
+      "path": "3y_shallow_pooled_predictions.csv",
+      "sha256": "aa5886bb6a15b80874d4c07ebec8b274b5cb61600c0492eeea6a2886b5d04f68"
+    },
+    {
+      "path": "3y_shallow_target_only_predictions.csv",
+      "sha256": "71bddb9ed4f80dafec74246c4fe52319377021a456232fdc224641effdc17a27"
+    },
+    {
+      "path": "expanding_medium_pooled_predictions.csv",
+      "sha256": "c758fe48773f2023bb5f58e5bf737328dc5a38279e4571de2eecb0f89b701b78"
+    },
+    {
+      "path": "expanding_medium_target_only_predictions.csv",
+      "sha256": "67badf0c356a9cccb15d48a60191d09dfd1aca85427f52b1dc6bcc02791070dd"
+    },
+    {
+      "path": "expanding_shallow_pooled_predictions.csv",
+      "sha256": "b322819b7ebd3e54aafbc92a46d5e97e5354a311a7b889bbb0741fe5496600ac"
+    },
+    {
+      "path": "expanding_shallow_target_only_predictions.csv",
+      "sha256": "607bd088404000d463106b20d2bfd03a027561879ad5ee8c976ce5455216d1dc"
+    }
+  ]
+}

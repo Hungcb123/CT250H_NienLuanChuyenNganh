@@ -1,0 +1,20 @@
+{
+  "mode": "fixed_recency_blend_development",
+  "source": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_ensemble/20261017T162100_738897Z",
+  "source_hashes": {
+    "3y_standardized": "044abf7b99432ffe88730d677a6cbfc573bade2e352f3082c7ad1b627e452f84",
+    "expanding_standardized": "cb47526e6055bb40caa1bc35f072121c874acdd0b6dcfb58702f7f6145163768"
+  },
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "weights": [
+    0.6666666666666666,
+    0.3333333333333333
+  ],
+  "online_window": 120,
+  "quantile": 0.9,
+  "warmup": "First 120 predictions use weighted expert calibration thresholds; not exact mixture p90. No rows dropped.",
+  "selection_caveat": "Predeclared rule motivated by already-inspected prior experiments; scores remain DEVELOPMENT evidence, not independent test."
+}

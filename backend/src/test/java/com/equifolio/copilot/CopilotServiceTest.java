@@ -88,6 +88,8 @@ class CopilotServiceTest {
         mockPlan.setDriftDetected(true);
         mockPlan.setMaxDriftPercent(new BigDecimal("22.14"));
         mockPlan.setExecutiveSummary("Phát hiện tỷ trọng Cổ phiếu vượt mục tiêu.");
+        mockPlan.setMlPredictions(java.util.List.of(new RebalancePlanDTO.MlPredictionInfo(
+                "STOCK", "test-model", 1, 0.69, "BULL_MOMENTUM", BigDecimal.ZERO)));
 
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(mockUser));
         when(ledgerService.calculatePortfolioValuation(anyLong())).thenReturn(mockValuation);

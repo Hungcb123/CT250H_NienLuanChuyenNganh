@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "n_decisions": 390,
+  "start": "2025-02-10",
+  "end": "2026-09-03",
+  "reference_predictions_sha256": "3e3328ff31dd38e0ce612281886b6fc113e959a4d4898989b7857a5cbf489e97",
+  "runtime_sha256": "cc59d9e5fb7c0509a35f945b9cb9a1d17869842ea9a806f133822a1dfee9f476",
+  "max_score_absolute_error": 8.881784197001252e-16,
+  "max_threshold_absolute_error": 8.881784197001252e-16
+}

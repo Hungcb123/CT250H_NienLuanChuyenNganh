@@ -1,0 +1,416 @@
+{
+  "contract_sha256": "c69b2ea82110cfe65e37fa81f1b476e34b0acd51238455a54c14bacf530c7852",
+  "runtime_sha256": "35349f0fa425d972c6b02b7e4aa7eecd2ded5aca1cd1d46a3eae688b86a30df6",
+  "refit_date": "2022-01-13",
+  "training_prefix_sha256": "4f27563a70c975d458019fbc06b410845a4334991022a3526bd3ad5033b5fa37",
+  "legacy_parameters_sha256": "bc108adc665e606822eabd0ab745ded4b44088efce66de87a2bf46ba0cebbc25",
+  "components": [
+    {
+      "name": "legacy_trend",
+      "kind": "classifier",
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "n_train": 700,
+      "train_label_end": "2022-01-12",
+      "roundtrip_max_error": 0.0,
+      "models": [
+        {
+          "file": "legacy_trend.txt",
+          "sha256": "986f790d4b09db5923896b2b24cd1b5cb90a460bebaddfb9eddc28091ed6ede6"
+        }
+      ]
+    },
+    {
+      "name": "legacy_risk",
+      "kind": "classifier",
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "Drawdown120",
+        "Drawdown252",
+        "HV20_60_Ratio",
+        "DownsideHV60"
+      ],
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "n_train": 700,
+      "train_label_end": "2022-01-12",
+      "roundtrip_max_error": 0.0,
+      "models": [
+        {
+          "file": "legacy_risk.txt",
+          "sha256": "364b36e607fef4520d11a65437f6972e95ff67a515e50feeba2c81be0f432bae"
+        }
+      ]
+    },
+    {
+      "name": "3y_raw",
+      "kind": "quantiles",
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "window": "3y",
+      "normalized": false,
+      "class_prior": [
+        0.08857142857142856,
+        0.6385714285714286,
+        0.27285714285714285
+      ],
+      "n_train": 700,
+      "train_label_end": "2022-01-12",
+      "roundtrip_max_error": 0.0,
+      "models": [
+        {
+          "alpha": 0.05,
+          "file": "3y_raw_q05.txt",
+          "sha256": "d3ae34f6fb7fe349d40c0e9763454ffef32f7494e49ff6a5c596727c6c17fe10"
+        },
+        {
+          "alpha": 0.15,
+          "file": "3y_raw_q15.txt",
+          "sha256": "bea9fc4fe149c0825593493004a97cea24597e43e2a21c3da4fbb739b5d15383"
+        },
+        {
+          "alpha": 0.25,
+          "file": "3y_raw_q25.txt",
+          "sha256": "afcf0f9dd7f8a840ce301db8d0e565ab9ea9afd504f43930176c12e004931c3f"
+        },
+        {
+          "alpha": 0.35,
+          "file": "3y_raw_q35.txt",
+          "sha256": "dd327bb18dedce3dc7759f15bd5f1cf861d5bac6a75cae932fc9f93e0d92aef3"
+        },
+        {
+          "alpha": 0.5,
+          "file": "3y_raw_q50.txt",
+          "sha256": "7d0e5c20e3d28ea5ba797c64c2450a475a4eddd139988c8b171944d96e1f56af"
+        },
+        {
+          "alpha": 0.65,
+          "file": "3y_raw_q65.txt",
+          "sha256": "b470aa9ffe482ed2f9673f9fa83d12e2cf8785931d9a0c4b12101a9f3bb9d379"
+        },
+        {
+          "alpha": 0.75,
+          "file": "3y_raw_q75.txt",
+          "sha256": "b5ba88c042f43c05bdfcb0c7febac3c6221b9273f9a083e3d4667439b75024dc"
+        },
+        {
+          "alpha": 0.85,
+          "file": "3y_raw_q85.txt",
+          "sha256": "72e24623941947bc3a62584a5d15b1eea01d9d396d01fb7f5ea90b2b47854e83"
+        },
+        {
+          "alpha": 0.95,
+          "file": "3y_raw_q95.txt",
+          "sha256": "5acaf5e74a9e08864a5bc4c66f2c47d4590fc2fd1494027cefe4a811a2f46588"
+        }
+      ]
+    },
+    {
+      "name": "3y_normalized",
+      "kind": "quantiles",
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "window": "3y",
+      "normalized": true,
+      "class_prior": [
+        0.08857142857142856,
+        0.6385714285714286,
+        0.27285714285714285
+      ],
+      "n_train": 700,
+      "train_label_end": "2022-01-12",
+      "roundtrip_max_error": 0.0,
+      "models": [
+        {
+          "alpha": 0.05,
+          "file": "3y_normalized_q05.txt",
+          "sha256": "2c11900f32f31249fb04079ad98b18b2e0b661fd1eaa1698a906ac771e8372ab"
+        },
+        {
+          "alpha": 0.15,
+          "file": "3y_normalized_q15.txt",
+          "sha256": "55457a01cc5df0a63b700753839f67465b1baf56804dcb367a444d3d9200966b"
+        },
+        {
+          "alpha": 0.25,
+          "file": "3y_normalized_q25.txt",
+          "sha256": "e4db0d653564633f65d003373536fbc6fb2b4c98bb80965e6203cb3d81fc5634"
+        },
+        {
+          "alpha": 0.35,
+          "file": "3y_normalized_q35.txt",
+          "sha256": "ca49a17e59234c5107fe481c18f26ce8459799a6753ed9ca496a6cd1d4e9f849"
+        },
+        {
+          "alpha": 0.5,
+          "file": "3y_normalized_q50.txt",
+          "sha256": "af3e715a7e8943e9d77e2a070c4f33db38c2878421df4b324801437cc3e4d140"
+        },
+        {
+          "alpha": 0.65,
+          "file": "3y_normalized_q65.txt",
+          "sha256": "c5a1f1e6f19fb2d950a7b9710354b7b675ff7f87f37133796c371f79c6fe9764"
+        },
+        {
+          "alpha": 0.75,
+          "file": "3y_normalized_q75.txt",
+          "sha256": "4ef356457f91de0e0af2cff2a58d98caf6991036ad45da5bc6ee0fa17e096bf1"
+        },
+        {
+          "alpha": 0.85,
+          "file": "3y_normalized_q85.txt",
+          "sha256": "545bfb07ed1bb6230c9e57e48b112c464ca9438d52c33393a2a518d544e651ae"
+        },
+        {
+          "alpha": 0.95,
+          "file": "3y_normalized_q95.txt",
+          "sha256": "904120c7a3b9062e2111989cb0ee527a5eb303fea933fe27426097e90faac83e"
+        }
+      ]
+    },
+    {
+      "name": "expanding_raw",
+      "kind": "quantiles",
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "window": "expanding",
+      "normalized": false,
+      "class_prior": [
+        0.10626029654036244,
+        0.6482701812191104,
+        0.24546952224052718
+      ],
+      "n_train": 1214,
+      "train_label_end": "2022-01-12",
+      "roundtrip_max_error": 0.0,
+      "models": [
+        {
+          "alpha": 0.05,
+          "file": "expanding_raw_q05.txt",
+          "sha256": "d1cb9a6bd2125d7bd3b266cfd06aae0447bab599c72308d6db9f0f91c3c3bd46"
+        },
+        {
+          "alpha": 0.15,
+          "file": "expanding_raw_q15.txt",
+          "sha256": "ae5cc29f7a6f8acb4dc7149d421c4ffd0345c5e98e3941bee9bad3ae29d3b435"
+        },
+        {
+          "alpha": 0.25,
+          "file": "expanding_raw_q25.txt",
+          "sha256": "fb895a34c4b2f9bc6caeae373f8d797617d99a92615e3fac22bb64b11d1b7583"
+        },
+        {
+          "alpha": 0.35,
+          "file": "expanding_raw_q35.txt",
+          "sha256": "aac69231cf995b994306f397688e097a4a40ea0fd4814d859d82343b1dc5ba31"
+        },
+        {
+          "alpha": 0.5,
+          "file": "expanding_raw_q50.txt",
+          "sha256": "9e9e48e6428ceb63e72be86dfe7b465f7259a27848bb3f29f494259eb2aeb93d"
+        },
+        {
+          "alpha": 0.65,
+          "file": "expanding_raw_q65.txt",
+          "sha256": "8954078bba2d1e3202029494c56cf6833d3be6e14eb2731c683def4e4212c680"
+        },
+        {
+          "alpha": 0.75,
+          "file": "expanding_raw_q75.txt",
+          "sha256": "67f50e2b19fb9712917b47def735cfad498a75d266a9a664737bfe1a1562caaf"
+        },
+        {
+          "alpha": 0.85,
+          "file": "expanding_raw_q85.txt",
+          "sha256": "187063a8476b7c07b4c6d73e3b3d2332883b4167097e4752d6ec0b7c28221585"
+        },
+        {
+          "alpha": 0.95,
+          "file": "expanding_raw_q95.txt",
+          "sha256": "90c5065ccf77161e24032eb72641b75024a37db108091dab9e222a6cd1243876"
+        }
+      ]
+    },
+    {
+      "name": "expanding_normalized",
+      "kind": "quantiles",
+      "features": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20",
+        "ROC60",
+        "ROC120",
+        "DistSMA200"
+      ],
+      "window": "expanding",
+      "normalized": true,
+      "class_prior": [
+        0.10626029654036244,
+        0.6482701812191104,
+        0.24546952224052718
+      ],
+      "n_train": 1214,
+      "train_label_end": "2022-01-12",
+      "roundtrip_max_error": 0.0,
+      "models": [
+        {
+          "alpha": 0.05,
+          "file": "expanding_normalized_q05.txt",
+          "sha256": "a9097ef7992fe7b4ab9b9f016d85d8064127179afcd0134416d8d6e7e28b0e44"
+        },
+        {
+          "alpha": 0.15,
+          "file": "expanding_normalized_q15.txt",
+          "sha256": "d9c63d48b2372863754e5530afdf7e9cd5331f23742b4880784f96b663da1546"
+        },
+        {
+          "alpha": 0.25,
+          "file": "expanding_normalized_q25.txt",
+          "sha256": "a08e889325ccde0ffc48072ef24a9d3e4c08aa5c85799f047d96b8167bbad7a4"
+        },
+        {
+          "alpha": 0.35,
+          "file": "expanding_normalized_q35.txt",
+          "sha256": "4b6cc07d2c8f10ef9404d984d873671e5bb05f4c83300e0ec085a4b3636be21f"
+        },
+        {
+          "alpha": 0.5,
+          "file": "expanding_normalized_q50.txt",
+          "sha256": "3d1522372a2a15aa97bcc37a1a1b0658bbd49b137017bcce3e45995199f76740"
+        },
+        {
+          "alpha": 0.65,
+          "file": "expanding_normalized_q65.txt",
+          "sha256": "2e13b42a9d00b3a74cb9ec3690bb91136b662848b08d4fa3112605ec604de4b1"
+        },
+        {
+          "alpha": 0.75,
+          "file": "expanding_normalized_q75.txt",
+          "sha256": "14c9bb6fd8fa8c81664d986e40c9ae996d8f21f28bcb81bbe135f2b70439a117"
+        },
+        {
+          "alpha": 0.85,
+          "file": "expanding_normalized_q85.txt",
+          "sha256": "6efb43a69ff7ff989700d12569e1a4bb4eee9ef9427db42ea3fab6af8efd432b"
+        },
+        {
+          "alpha": 0.95,
+          "file": "expanding_normalized_q95.txt",
+          "sha256": "6aea1bfe216180555206bebb34d1462e0aedd8b3a5657613bf60616afdef3481"
+        }
+      ]
+    }
+  ]
+}

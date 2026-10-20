@@ -1,0 +1,67 @@
+{
+  "role": "Read-only source semantics diagnostic on previously inspected history; no data repair, features or model update",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/sources/vci_VNINDEX.json": "8b9d655e55a5418cf2533d2c238cf68f65ff4eaa380394846054c0a6d65d2f3a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/sources/kbs_VNINDEX.json": "0c9c49951c42f3f4fe6e9a816c1bf34c0156f52e3120a24298def3e428270246",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/sources/vnd_VNINDEX.json": "2d97885a9549e3cd173fdd01cb04878778b2eecec2aba04ee77fecded2e3fc29"
+  },
+  "ratios": [
+    {
+      "source_a": "vci",
+      "source_b": "kbs",
+      "n": 3550,
+      "ratio_p05": 0.9232753977251924,
+      "ratio_median": 1.0,
+      "ratio_p95": 1.1122917467624234,
+      "fraction_within_1pct": 0.5794366197183098,
+      "fraction_within_0_01pct": 0.5523943661971831,
+      "fraction_ratio_10_or_100_or_1000": 0.0
+    },
+    {
+      "source_a": "vci",
+      "source_b": "vnd",
+      "n": 2258,
+      "ratio_p05": 0.9122043084293955,
+      "ratio_median": 0.9778404231619884,
+      "ratio_p95": 1.173138673852183,
+      "fraction_within_1pct": 0.3100088573959256,
+      "fraction_within_0_01pct": 0.2652790079716563,
+      "fraction_ratio_10_or_100_or_1000": 0.0
+    },
+    {
+      "source_a": "kbs",
+      "source_b": "vnd",
+      "n": 2265,
+      "ratio_p05": 0.999594610036877,
+      "ratio_median": 1.0,
+      "ratio_p95": 1.0000046548822132,
+      "fraction_within_1pct": 0.9567328918322295,
+      "fraction_within_0_01pct": 0.788962472406181,
+      "fraction_ratio_10_or_100_or_1000": 0.0
+    }
+  ],
+  "best_lags": [
+    {
+      "source_a": "vci",
+      "source_b": "kbs",
+      "shift_b_market_sessions": 0,
+      "n": 3527,
+      "correlation": 0.9912689867111621
+    },
+    {
+      "source_a": "vci",
+      "source_b": "vnd",
+      "shift_b_market_sessions": 0,
+      "n": 2247,
+      "correlation": 0.9676020738419597
+    },
+    {
+      "source_a": "kbs",
+      "source_b": "vnd",
+      "shift_b_market_sessions": 0,
+      "n": 2259,
+      "correlation": 0.978445363018805
+    }
+  ],
+  "caveat": "High correlation or similar units do not establish identical definitions of exchange volume. No provider is treated as exchange ground truth; no rescaling, filling or shifted-volume feature is authorized by this audit."
+}

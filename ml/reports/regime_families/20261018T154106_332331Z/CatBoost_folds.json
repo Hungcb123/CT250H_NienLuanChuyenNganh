@@ -1,0 +1,446 @@
+[
+  {
+    "f1_macro": 0.3750757108083014,
+    "mcc": 0.1315509124492977,
+    "accuracy": 0.41794871794871796,
+    "baseline_f1": 0.23405435385468665,
+    "confusion_matrix": [
+      [
+        14,
+        4,
+        7
+      ],
+      [
+        42,
+        60,
+        109
+      ],
+      [
+        44,
+        21,
+        89
+      ]
+    ],
+    "n_samples": 390,
+    "bear_support": 25,
+    "bear_signals": 100,
+    "bear_hits": 14,
+    "bear_false_alarms": 86,
+    "bear_missed": 11,
+    "bear_precision": 0.14,
+    "bear_recall": 0.56,
+    "bear_false_alarm_rate": 0.2356164383561644,
+    "bear_false_discovery_rate": 0.86,
+    "fold": 1,
+    "refits": [
+      {
+        "n_train": 687,
+        "train_label_end": "2020-03-26",
+        "prediction_start": "2020-03-27",
+        "prediction_end": "2020-06-26"
+      },
+      {
+        "n_train": 697,
+        "train_label_end": "2020-06-26",
+        "prediction_start": "2020-06-29",
+        "prediction_end": "2020-09-24"
+      },
+      {
+        "n_train": 699,
+        "train_label_end": "2020-09-24",
+        "prediction_start": "2020-09-25",
+        "prediction_end": "2020-12-22"
+      },
+      {
+        "n_train": 697,
+        "train_label_end": "2020-12-22",
+        "prediction_start": "2020-12-23",
+        "prediction_end": "2021-03-29"
+      },
+      {
+        "n_train": 699,
+        "train_label_end": "2021-03-29",
+        "prediction_start": "2021-03-30",
+        "prediction_end": "2021-06-29"
+      },
+      {
+        "n_train": 699,
+        "train_label_end": "2021-06-29",
+        "prediction_start": "2021-06-30",
+        "prediction_end": "2021-09-28"
+      },
+      {
+        "n_train": 698,
+        "train_label_end": "2021-09-28",
+        "prediction_start": "2021-09-29",
+        "prediction_end": "2021-10-14"
+      }
+    ],
+    "per_class": {
+      "bear": {
+        "precision": 0.14,
+        "recall": 0.56,
+        "f1-score": 0.224,
+        "support": 25.0
+      },
+      "side": {
+        "precision": 0.7058823529411765,
+        "recall": 0.2843601895734597,
+        "f1-score": 0.40540540540540543,
+        "support": 211.0
+      },
+      "bull": {
+        "precision": 0.43414634146341463,
+        "recall": 0.577922077922078,
+        "f1-score": 0.4958217270194986,
+        "support": 154.0
+      },
+      "accuracy": 0.41794871794871796,
+      "macro avg": {
+        "precision": 0.42667623146819705,
+        "recall": 0.47409408916517926,
+        "f1-score": 0.3750757108083014,
+        "support": 390.0
+      },
+      "weighted avg": {
+        "precision": 0.5623069565537284,
+        "recall": 0.41794871794871796,
+        "f1-score": 0.4294797089783162,
+        "support": 390.0
+      }
+    }
+  },
+  {
+    "f1_macro": 0.42125466885807406,
+    "mcc": 0.1415055070421539,
+    "accuracy": 0.5538461538461539,
+    "baseline_f1": 0.25396825396825395,
+    "confusion_matrix": [
+      [
+        11,
+        46,
+        13
+      ],
+      [
+        22,
+        174,
+        44
+      ],
+      [
+        4,
+        45,
+        31
+      ]
+    ],
+    "n_samples": 390,
+    "bear_support": 70,
+    "bear_signals": 37,
+    "bear_hits": 11,
+    "bear_false_alarms": 26,
+    "bear_missed": 59,
+    "bear_precision": 0.2972972972972973,
+    "bear_recall": 0.15714285714285714,
+    "bear_false_alarm_rate": 0.08125,
+    "bear_false_discovery_rate": 0.7027027027027027,
+    "fold": 2,
+    "refits": [
+      {
+        "n_train": 700,
+        "train_label_end": "2021-10-14",
+        "prediction_start": "2021-10-15",
+        "prediction_end": "2022-01-12"
+      },
+      {
+        "n_train": 700,
+        "train_label_end": "2022-01-12",
+        "prediction_start": "2022-01-13",
+        "prediction_end": "2022-04-19"
+      },
+      {
+        "n_train": 725,
+        "train_label_end": "2022-04-19",
+        "prediction_start": "2022-04-20",
+        "prediction_end": "2022-07-19"
+      },
+      {
+        "n_train": 693,
+        "train_label_end": "2022-05-26",
+        "prediction_start": "2022-07-20",
+        "prediction_end": "2022-10-18"
+      },
+      {
+        "n_train": 684,
+        "train_label_end": "2022-10-18",
+        "prediction_start": "2022-10-19",
+        "prediction_end": "2023-01-16"
+      },
+      {
+        "n_train": 684,
+        "train_label_end": "2023-01-16",
+        "prediction_start": "2023-01-17",
+        "prediction_end": "2023-04-20"
+      },
+      {
+        "n_train": 686,
+        "train_label_end": "2023-04-20",
+        "prediction_start": "2023-04-21",
+        "prediction_end": "2023-07-14"
+      }
+    ],
+    "per_class": {
+      "bear": {
+        "precision": 0.2972972972972973,
+        "recall": 0.15714285714285714,
+        "f1-score": 0.205607476635514,
+        "support": 70.0
+      },
+      "side": {
+        "precision": 0.6566037735849056,
+        "recall": 0.725,
+        "f1-score": 0.689108910891089,
+        "support": 240.0
+      },
+      "bull": {
+        "precision": 0.3522727272727273,
+        "recall": 0.3875,
+        "f1-score": 0.36904761904761907,
+        "support": 80.0
+      },
+      "accuracy": 0.5538461538461539,
+      "macro avg": {
+        "precision": 0.4353912660516434,
+        "recall": 0.4232142857142857,
+        "f1-score": 0.42125466885807406,
+        "support": 390.0
+      },
+      "weighted avg": {
+        "precision": 0.5296859862897598,
+        "recall": 0.5538461538461539,
+        "f1-score": 0.5366730038516843,
+        "support": 390.0
+      }
+    }
+  },
+  {
+    "f1_macro": 0.2994350282485876,
+    "mcc": 0.0,
+    "accuracy": 0.8153846153846154,
+    "baseline_f1": 0.2994350282485876,
+    "confusion_matrix": [
+      [
+        0,
+        36,
+        0
+      ],
+      [
+        0,
+        318,
+        0
+      ],
+      [
+        0,
+        36,
+        0
+      ]
+    ],
+    "n_samples": 390,
+    "bear_support": 36,
+    "bear_signals": 0,
+    "bear_hits": 0,
+    "bear_false_alarms": 0,
+    "bear_missed": 36,
+    "bear_precision": null,
+    "bear_recall": 0.0,
+    "bear_false_alarm_rate": 0.0,
+    "bear_false_discovery_rate": null,
+    "fold": 3,
+    "refits": [
+      {
+        "n_train": 683,
+        "train_label_end": "2023-07-14",
+        "prediction_start": "2023-07-17",
+        "prediction_end": "2023-10-13"
+      },
+      {
+        "n_train": 682,
+        "train_label_end": "2023-10-13",
+        "prediction_start": "2023-10-16",
+        "prediction_end": "2024-01-11"
+      },
+      {
+        "n_train": 684,
+        "train_label_end": "2024-01-11",
+        "prediction_start": "2024-01-12",
+        "prediction_end": "2024-04-16"
+      },
+      {
+        "n_train": 683,
+        "train_label_end": "2024-04-16",
+        "prediction_start": "2024-04-17",
+        "prediction_end": "2024-07-18"
+      },
+      {
+        "n_train": 684,
+        "train_label_end": "2024-07-18",
+        "prediction_start": "2024-07-19",
+        "prediction_end": "2024-10-17"
+      },
+      {
+        "n_train": 684,
+        "train_label_end": "2024-10-17",
+        "prediction_start": "2024-10-18",
+        "prediction_end": "2025-01-15"
+      },
+      {
+        "n_train": 683,
+        "train_label_end": "2025-01-15",
+        "prediction_start": "2025-01-16",
+        "prediction_end": "2025-02-07"
+      }
+    ],
+    "per_class": {
+      "bear": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 36.0
+      },
+      "side": {
+        "precision": 0.8153846153846154,
+        "recall": 1.0,
+        "f1-score": 0.8983050847457628,
+        "support": 318.0
+      },
+      "bull": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 36.0
+      },
+      "accuracy": 0.8153846153846154,
+      "macro avg": {
+        "precision": 0.2717948717948718,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.2994350282485876,
+        "support": 390.0
+      },
+      "weighted avg": {
+        "precision": 0.6648520710059171,
+        "recall": 0.8153846153846154,
+        "f1-score": 0.7324641460234681,
+        "support": 390.0
+      }
+    }
+  },
+  {
+    "f1_macro": 0.33583577712609974,
+    "mcc": 0.15783807720759901,
+    "accuracy": 0.5666666666666667,
+    "baseline_f1": 0.23548922056384744,
+    "confusion_matrix": [
+      [
+        0,
+        50,
+        10
+      ],
+      [
+        8,
+        199,
+        6
+      ],
+      [
+        7,
+        88,
+        22
+      ]
+    ],
+    "n_samples": 390,
+    "bear_support": 60,
+    "bear_signals": 15,
+    "bear_hits": 0,
+    "bear_false_alarms": 15,
+    "bear_missed": 60,
+    "bear_precision": 0.0,
+    "bear_recall": 0.0,
+    "bear_false_alarm_rate": 0.045454545454545456,
+    "bear_false_discovery_rate": 1.0,
+    "fold": 4,
+    "refits": [
+      {
+        "n_train": 682,
+        "train_label_end": "2025-02-07",
+        "prediction_start": "2025-02-10",
+        "prediction_end": "2025-05-13"
+      },
+      {
+        "n_train": 692,
+        "train_label_end": "2025-05-13",
+        "prediction_start": "2025-05-14",
+        "prediction_end": "2025-08-08"
+      },
+      {
+        "n_train": 727,
+        "train_label_end": "2025-08-08",
+        "prediction_start": "2025-08-11",
+        "prediction_end": "2025-11-07"
+      },
+      {
+        "n_train": 727,
+        "train_label_end": "2025-11-07",
+        "prediction_start": "2025-11-10",
+        "prediction_end": "2026-02-06"
+      },
+      {
+        "n_train": 731,
+        "train_label_end": "2026-02-06",
+        "prediction_start": "2026-02-09",
+        "prediction_end": "2026-05-18"
+      },
+      {
+        "n_train": 726,
+        "train_label_end": "2026-05-18",
+        "prediction_start": "2026-05-19",
+        "prediction_end": "2026-08-13"
+      },
+      {
+        "n_train": 728,
+        "train_label_end": "2026-08-13",
+        "prediction_start": "2026-08-14",
+        "prediction_end": "2026-09-03"
+      }
+    ],
+    "per_class": {
+      "bear": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 60.0
+      },
+      "side": {
+        "precision": 0.5905044510385756,
+        "recall": 0.9342723004694836,
+        "f1-score": 0.7236363636363636,
+        "support": 213.0
+      },
+      "bull": {
+        "precision": 0.5789473684210527,
+        "recall": 0.18803418803418803,
+        "f1-score": 0.2838709677419355,
+        "support": 117.0
+      },
+      "accuracy": 0.5666666666666667,
+      "macro avg": {
+        "precision": 0.3898172731532094,
+        "recall": 0.3741021628345573,
+        "f1-score": 0.33583577712609974,
+        "support": 390.0
+      },
+      "weighted avg": {
+        "precision": 0.49619048763199947,
+        "recall": 0.5666666666666667,
+        "f1-score": 0.48037807353936385,
+        "support": 390.0
+      }
+    }
+  }
+]

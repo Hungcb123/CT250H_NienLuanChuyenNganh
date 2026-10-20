@@ -1,0 +1,20 @@
+{
+  "mode": "causal_forecast_smoothing_DEVELOPMENT",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_forecast_smoothing.py": "12eb6797e7a3d4eabd7b08d9c8d4fec507f16769ae478118b0a96dd8e694e133",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_research_evaluation.py": "b4e0c29294d404fd6cdb00967c5d989a6c0e7550979f7bdba81e8492efa45142",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/info_seed5_predictions.csv": "7baf9dbb6df1a3b21164126e36a77b98b297eaa2296fb1697c341c1e6523513c",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/plan.json": "3fed146bbadffe7ce0c585f5e7005b870b4b58516ec3ea5f0f4dd89a0411502a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6"
+  },
+  "primary": "ema5: causal exponential smoothing span5 of fixed5-seed information-blend score; primary set before scoring",
+  "secondary": "ema5_shrink: .5 current score + .5 ema5",
+  "diagnostics": [
+    3,
+    10
+  ],
+  "timing": "Only current/past forecast scores, NO outcomes. Reset at first forecast or any missing raw-market session. True labels/dates/endpoints unchanged.",
+  "hypothesis": "T+20 endpoint states and noisy quantile scores may benefit from score persistence; smoothing can also lag turning points.",
+  "acceptance": "Mean F1 incumbent+.01, no worst/directional decline, MCC gain, >=3 fold wins and both paired20/60 intervals>0 for provisional evidence.",
+  "caveat": "No label smoothing in evaluation or future averaging. Repeatedly inspected historical development only; no independent acceptance or deployment."
+}

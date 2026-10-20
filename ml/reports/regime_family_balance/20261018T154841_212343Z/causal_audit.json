@@ -1,0 +1,19 @@
+{
+  "role": "Three-class DEVELOPMENT only; balanced restriction is post-hoc, not independent evidence",
+  "families": 3,
+  "selection_policies": 2,
+  "validation_days": 1560,
+  "hyperparameter_trials": 180,
+  "inner_fit_boundaries_audited": 360,
+  "refit_boundaries_audited": 168,
+  "new_trials_for_balance": 0,
+  "accepted": false,
+  "prediction_hashes": {
+    "ml/reports/regime_families/20261018T154106_332331Z/SVC_predictions.csv": "5b6c0beb3e3ce83d20838eb81b24f2f77f5b5cdbad25d21048b0e933b1737dec",
+    "ml/reports/regime_family_balance/20261018T154841_212343Z/SVC_predictions.csv": "fe904cdfe2a749baa258fb9d070624b49abff3994223027cf7123adcf333b36e",
+    "ml/reports/regime_families/20261018T154106_332331Z/CatBoost_predictions.csv": "ba650ca5bf5b2b6b1d5f2b137b30f4ed103b28ad4c3b045c853587a7e31e8acf",
+    "ml/reports/regime_family_balance/20261018T154841_212343Z/CatBoost_predictions.csv": "3e24d9cf02e72aa00678dda6453b4c588369f178b91eace88adb5e72b7d78cd5",
+    "ml/reports/regime_families/20261018T154106_332331Z/ExtraTrees_predictions.csv": "e15a4b555d5bbf8adb26e907c5a3f633bb8bcbd171e59b4c741784c5422481a6",
+    "ml/reports/regime_family_balance/20261018T154841_212343Z/ExtraTrees_predictions.csv": "90411bcb3cf0fa52b8115c16cf5aca04ba043ef7d3d1eb59be782f4ab564198c"
+  }
+}

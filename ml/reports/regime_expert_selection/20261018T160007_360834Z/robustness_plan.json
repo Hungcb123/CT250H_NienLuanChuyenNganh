@@ -1,0 +1,102 @@
+{
+  "role": "Post-hoc robustness audit only; no choosing a replacement parameter from the sensitivity results",
+  "created_at": "2026-10-18T16:03:05.634994+00:00",
+  "baseline_rule": {
+    "history_rows": 126,
+    "min_class_count": 5,
+    "improvement_margin": 0.03,
+    "refit_market_sessions": 20
+  },
+  "variants": [
+    {
+      "name": "history_rows_84",
+      "rule": {
+        "history_rows": 84,
+        "min_class_count": 5,
+        "improvement_margin": 0.03,
+        "refit_market_sessions": 20
+      }
+    },
+    {
+      "name": "history_rows_168",
+      "rule": {
+        "history_rows": 168,
+        "min_class_count": 5,
+        "improvement_margin": 0.03,
+        "refit_market_sessions": 20
+      }
+    },
+    {
+      "name": "min_class_count_3",
+      "rule": {
+        "history_rows": 126,
+        "min_class_count": 3,
+        "improvement_margin": 0.03,
+        "refit_market_sessions": 20
+      }
+    },
+    {
+      "name": "min_class_count_10",
+      "rule": {
+        "history_rows": 126,
+        "min_class_count": 10,
+        "improvement_margin": 0.03,
+        "refit_market_sessions": 20
+      }
+    },
+    {
+      "name": "improvement_margin_0.015",
+      "rule": {
+        "history_rows": 126,
+        "min_class_count": 5,
+        "improvement_margin": 0.015,
+        "refit_market_sessions": 20
+      }
+    },
+    {
+      "name": "improvement_margin_0.06",
+      "rule": {
+        "history_rows": 126,
+        "min_class_count": 5,
+        "improvement_margin": 0.06,
+        "refit_market_sessions": 20
+      }
+    },
+    {
+      "name": "refit_market_sessions_10",
+      "rule": {
+        "history_rows": 126,
+        "min_class_count": 5,
+        "improvement_margin": 0.03,
+        "refit_market_sessions": 10
+      }
+    },
+    {
+      "name": "refit_market_sessions_40",
+      "rule": {
+        "history_rows": 126,
+        "min_class_count": 5,
+        "improvement_margin": 0.03,
+        "refit_market_sessions": 40
+      }
+    }
+  ],
+  "bootstrap": {
+    "block_sessions": [
+      20,
+      60
+    ],
+    "repeats": 1000,
+    "seed": 42,
+    "metric": "mean of four fixed-class fold macro F1",
+    "references": [
+      "original_trend",
+      "original_risk",
+      "original_equal"
+    ]
+  },
+  "prefix_checks": "End each fold and last100 prediction dates; remove immature labels and compare prefix predictions with complete causal run",
+  "caveat": "Repeated inspected history and post-hoc rule design; intervals are descriptive sensitivity, not corrected independent acceptance.",
+  "initial_source_sha256": "cfd6aff94edd204eeb1b66e9bf0cb8fbe878a9c14e0bc9b46817ef154d93f91a",
+  "current_source_sha256": "9f40a26ea1ffaf957d26299d6ef0b10fbc76f5132eec43fe8a2b5c135c8bb59e"
+}

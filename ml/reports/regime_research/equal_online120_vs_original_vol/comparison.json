@@ -1,0 +1,40 @@
+{
+  "role": "Paired historical DEVELOPMENT sensitivity, not independent test or multiple-testing-adjusted inference",
+  "baseline_path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_risk/20261017T152147_353782Z/vol_1sigma_predictions.csv",
+  "baseline_sha256": "c984403e91d8d9f4c488f4439a0f4433d5a2a1f4fdb9177e2f1d2d6600af5990",
+  "challenger_path": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_online/20261017T162627_969154Z/equal_ensemble_online120_predictions.csv",
+  "challenger_sha256": "3e3328ff31dd38e0ce612281886b6fc113e959a4d4898989b7857a5cbf489e97",
+  "internal_reference_alias": "fixed_5pct is only an implementation alias inside resampling, never a target/source substitution",
+  "results": [
+    {
+      "policy": "vol_1sigma",
+      "n": 1560,
+      "support": 191,
+      "alarms": 325,
+      "tp": 55,
+      "fp": 270,
+      "fn": 136,
+      "tn": 1099,
+      "alarm_rate": 0.20833333333333334,
+      "prevalence": 0.12243589743589743,
+      "precision": 0.16923076923076924,
+      "recall": 0.2879581151832461,
+      "false_positive_rate": 0.19722425127830534
+    },
+    {
+      "policy": "equal_ensemble_online120",
+      "n": 1560,
+      "support": 191,
+      "alarms": 225,
+      "tp": 56,
+      "fp": 169,
+      "fn": 135,
+      "tn": 1200,
+      "alarm_rate": 0.14423076923076922,
+      "prevalence": 0.12243589743589743,
+      "precision": 0.24888888888888888,
+      "recall": 0.2931937172774869,
+      "false_positive_rate": 0.12344777209642074
+    }
+  ]
+}

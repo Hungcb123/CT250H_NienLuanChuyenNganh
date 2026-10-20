@@ -1,0 +1,6 @@
+{
+  "status": "failed_before_outer_scoring",
+  "reason": "Subtraction 1-bear-bull gives tiny negative middle mass at extreme returns due to floating point cancellation. Assertion stopped the run after some training blocks, before completed forecast export or any aggregate outer scoring.",
+  "executed_source_sha256": "b92e67afe79d8537dce5c033c03a40fdb88677a591ca801af3c0445243ccb235",
+  "resolution": "Use algebraically identical nonnegative logistic product for middle mass; run fresh predeclared study. No model/grid/target changes."
+}

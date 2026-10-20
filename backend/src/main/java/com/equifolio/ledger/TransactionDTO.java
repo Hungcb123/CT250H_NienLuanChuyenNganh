@@ -15,6 +15,10 @@ public class TransactionDTO {
     private List<EntryDTO> entries = new ArrayList<>();
     private BigDecimal totalAmount = BigDecimal.ZERO;
     private boolean acidBalanced = true;
+    private boolean auditVerifiable;
+
+    public boolean isAuditVerifiable() { return auditVerifiable; }
+    public void setAuditVerifiable(boolean value) { this.auditVerifiable = value; }
 
     public TransactionDTO() {}
 

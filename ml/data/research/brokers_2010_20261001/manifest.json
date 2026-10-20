@@ -1,0 +1,1656 @@
+{
+  "requested_start": "2010-01-01",
+  "requested_end": "2026-10-01",
+  "sources": {
+    "vci_VNINDEX": {
+      "provider": "vci",
+      "symbol": "VNINDEX",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "VNINDEX"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "downloaded_at": "2026-10-17T13:39:18.497405+00:00",
+      "response": "sources/vci_VNINDEX.json",
+      "response_sha256": "8b9d655e55a5418cf2533d2c238cf68f65ff4eaa380394846054c0a6d65d2f3a",
+      "rows": 4176,
+      "start": "2010-01-04",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 21,
+      "zero_volume_rows": 2,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified"
+    },
+    "kbs_VNINDEX": {
+      "provider": "kbs",
+      "symbol": "VNINDEX",
+      "url": "https://kbbuddywts.kbsec.com.vn/iis-server/investment/index/VNINDEX/data_day",
+      "params": {
+        "sdate": "01-01-2010",
+        "edate": "01-10-2026"
+      },
+      "body": null,
+      "downloaded_at": "2026-10-17T13:39:19.777953+00:00",
+      "response": "sources/kbs_VNINDEX.json",
+      "response_sha256": "0c9c49951c42f3f4fe6e9a816c1bf34c0156f52e3120a24298def3e428270246",
+      "rows": 3577,
+      "start": "2012-06-01",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 4,
+      "zero_volume_rows": 0,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified"
+    },
+    "vnd_VNINDEX": {
+      "provider": "vnd",
+      "symbol": "VNINDEX",
+      "url": "https://dchart-api.vndirect.com.vn/dchart/history",
+      "params": {
+        "resolution": "D",
+        "symbol": "VNINDEX",
+        "from": 1262278800,
+        "to": 1790874000
+      },
+      "body": null,
+      "downloaded_at": "2026-10-17T13:39:21.061758+00:00",
+      "response": "sources/vnd_VNINDEX.json",
+      "response_sha256": "2d97885a9549e3cd173fdd01cb04878778b2eecec2aba04ee77fecded2e3fc29",
+      "rows": 2271,
+      "start": "2017-08-24",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 1,
+      "zero_volume_rows": 0,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified"
+    },
+    "vci_E1VFVN30": {
+      "provider": "vci",
+      "symbol": "E1VFVN30",
+      "url": "https://trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart",
+      "params": null,
+      "body": {
+        "timeFrame": "ONE_DAY",
+        "symbols": [
+          "E1VFVN30"
+        ],
+        "to": 1790874000,
+        "countBack": 4735
+      },
+      "downloaded_at": "2026-10-17T13:39:21.970170+00:00",
+      "response": "sources/vci_E1VFVN30.json",
+      "response_sha256": "6a86374d7ce7cba3dde75d185ab8d4a165fe6bd5d7f3e18e4ff1186a6e90a471",
+      "rows": 2676,
+      "start": "2016-01-07",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 0,
+      "zero_volume_rows": 24,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified"
+    },
+    "kbs_E1VFVN30": {
+      "provider": "kbs",
+      "symbol": "E1VFVN30",
+      "url": "https://kbbuddywts.kbsec.com.vn/iis-server/investment/stocks/E1VFVN30/data_day",
+      "params": {
+        "sdate": "01-01-2010",
+        "edate": "01-10-2026"
+      },
+      "body": null,
+      "downloaded_at": "2026-10-17T13:39:23.209952+00:00",
+      "response": "sources/kbs_E1VFVN30.json",
+      "response_sha256": "25f16ca6b668f29e1726bf3ffaafec6a2f0027cfb0871f92791d0812ac0c4e3e",
+      "rows": 2967,
+      "start": "2014-10-06",
+      "end": "2026-10-01",
+      "ohlc_bounds_conflicts": 3,
+      "zero_volume_rows": 0,
+      "price_basis": "provider_reported_close; adjustment methodology not independently verified"
+    }
+  },
+  "source_errors": {},
+  "comparisons": {
+    "VNINDEX": {
+      "kbs": {
+        "overlap_rows": 3577,
+        "matching_close_rows": 3568,
+        "close_tolerance": 0.011,
+        "close_conflicts": [
+          {
+            "date": "2015-06-19",
+            "primary": 584.7,
+            "secondary": 585.15
+          },
+          {
+            "date": "2015-10-02",
+            "primary": 564.15,
+            "secondary": 562.31
+          },
+          {
+            "date": "2018-01-22",
+            "primary": 1086.51,
+            "secondary": 1087.42
+          },
+          {
+            "date": "2018-01-24",
+            "primary": 1086.51,
+            "secondary": 1087.42
+          },
+          {
+            "date": "2018-02-28",
+            "primary": 1124.87,
+            "secondary": 1121.54
+          },
+          {
+            "date": "2018-11-13",
+            "primary": 907.99,
+            "secondary": 905.38
+          },
+          {
+            "date": "2019-01-23",
+            "primary": 908.02,
+            "secondary": 908.18
+          },
+          {
+            "date": "2019-03-14",
+            "primary": 1009.56,
+            "secondary": 1008.44
+          },
+          {
+            "date": "2019-09-23",
+            "primary": 987.54,
+            "secondary": 985.75
+          }
+        ],
+        "max_close_difference": 3.3299999999999272,
+        "primary_dates_missing_in_secondary": 599,
+        "secondary_dates_missing_in_primary": 0,
+        "other_field_mismatch_counts": {
+          "Open": 1061,
+          "High": 253,
+          "Low": 454,
+          "Volume": 1609
+        }
+      },
+      "vnd": {
+        "overlap_rows": 2271,
+        "matching_close_rows": 2263,
+        "close_tolerance": 0.011,
+        "close_conflicts": [
+          {
+            "date": "2018-01-22",
+            "primary": 1086.51,
+            "secondary": 1087.42
+          },
+          {
+            "date": "2018-02-28",
+            "primary": 1124.87,
+            "secondary": 1121.54
+          },
+          {
+            "date": "2018-11-13",
+            "primary": 907.99,
+            "secondary": 905.38
+          },
+          {
+            "date": "2019-01-23",
+            "primary": 908.02,
+            "secondary": 908.18
+          },
+          {
+            "date": "2019-03-14",
+            "primary": 1009.56,
+            "secondary": 1008.44
+          },
+          {
+            "date": "2019-09-23",
+            "primary": 987.54,
+            "secondary": 985.75
+          },
+          {
+            "date": "2020-06-09",
+            "primary": 899.43,
+            "secondary": 903.1
+          },
+          {
+            "date": "2020-06-10",
+            "primary": 900.0,
+            "secondary": 900.68
+          }
+        ],
+        "max_close_difference": 3.6700000000000728,
+        "primary_dates_missing_in_secondary": 1905,
+        "secondary_dates_missing_in_primary": 0,
+        "other_field_mismatch_counts": {
+          "Open": 362,
+          "High": 153,
+          "Low": 299,
+          "Volume": 1667
+        }
+      },
+      "existing_local_csv": {
+        "overlap_rows": 1430,
+        "matching_close_rows": 1430,
+        "close_tolerance": 0.011,
+        "close_conflicts": [],
+        "max_close_difference": 0.0,
+        "primary_dates_missing_in_secondary": 2746,
+        "secondary_dates_missing_in_primary": 0,
+        "other_field_mismatch_counts": {
+          "Open": 255,
+          "High": 63,
+          "Low": 155,
+          "Volume": 1430
+        },
+        "sha256": "e791d62d30881170110a6e7b45a125739eab4b118eb63b06697e7439808de653"
+      }
+    },
+    "E1VFVN30": {
+      "kbs": {
+        "overlap_rows": 2649,
+        "matching_close_rows": 2648,
+        "close_tolerance": 0.011,
+        "close_conflicts": [
+          {
+            "date": "2019-03-14",
+            "primary": 15470.0,
+            "secondary": 15480.0
+          }
+        ],
+        "max_close_difference": 10.0,
+        "primary_dates_missing_in_secondary": 27,
+        "secondary_dates_missing_in_primary": 318,
+        "other_field_mismatch_counts": {
+          "Open": 73,
+          "High": 25,
+          "Low": 30,
+          "Volume": 2
+        }
+      },
+      "existing_local_csv": {
+        "overlap_rows": 685,
+        "matching_close_rows": 414,
+        "close_tolerance": 0.011,
+        "close_conflicts": [
+          {
+            "date": "2021-10-04",
+            "primary": 24550.0,
+            "secondary": 24570.0
+          },
+          {
+            "date": "2021-10-06",
+            "primary": 24530.0,
+            "secondary": 24500.0
+          },
+          {
+            "date": "2021-10-11",
+            "primary": 25400.0,
+            "secondary": 24900.0
+          },
+          {
+            "date": "2021-10-14",
+            "primary": 25200.0,
+            "secondary": 25400.0
+          },
+          {
+            "date": "2021-10-18",
+            "primary": 25850.0,
+            "secondary": 25340.0
+          },
+          {
+            "date": "2021-10-25",
+            "primary": 25000.0,
+            "secondary": 25500.0
+          },
+          {
+            "date": "2021-11-03",
+            "primary": 25700.0,
+            "secondary": 25690.0
+          },
+          {
+            "date": "2022-01-10",
+            "primary": 25580.0,
+            "secondary": 25850.0
+          },
+          {
+            "date": "2022-02-15",
+            "primary": 25690.0,
+            "secondary": 26000.0
+          },
+          {
+            "date": "2022-03-09",
+            "primary": 25000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-10",
+            "primary": 25150.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-11",
+            "primary": 24990.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-14",
+            "primary": 24500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-15",
+            "primary": 24700.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-16",
+            "primary": 24840.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-17",
+            "primary": 24860.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-18",
+            "primary": 25000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-21",
+            "primary": 25280.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-22",
+            "primary": 25410.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-23",
+            "primary": 25270.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-24",
+            "primary": 25150.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-25",
+            "primary": 25180.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-28",
+            "primary": 25130.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-29",
+            "primary": 25140.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-03-30",
+            "primary": 25150.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-01",
+            "primary": 25880.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-04",
+            "primary": 26100.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-05",
+            "primary": 25900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-06",
+            "primary": 25800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-07",
+            "primary": 25760.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-08",
+            "primary": 25880.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-12",
+            "primary": 25900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-13",
+            "primary": 25900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-14",
+            "primary": 25520.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-15",
+            "primary": 25500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-19",
+            "primary": 24950.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-20",
+            "primary": 24800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-21",
+            "primary": 24990.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-22",
+            "primary": 24800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-25",
+            "primary": 23080.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-04-26",
+            "primary": 23550.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-04",
+            "primary": 23500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-05",
+            "primary": 23550.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-06",
+            "primary": 22990.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-09",
+            "primary": 22000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-10",
+            "primary": 23000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-11",
+            "primary": 22800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-12",
+            "primary": 21470.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-13",
+            "primary": 21500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-16",
+            "primary": 20700.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-17",
+            "primary": 21790.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-18",
+            "primary": 21800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-19",
+            "primary": 21680.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-23",
+            "primary": 21400.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-24",
+            "primary": 21320.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-25",
+            "primary": 22000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-26",
+            "primary": 21930.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-27",
+            "primary": 22390.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-30",
+            "primary": 22600.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-05-31",
+            "primary": 22300.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-01",
+            "primary": 22650.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-02",
+            "primary": 22300.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-03",
+            "primary": 22100.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-06",
+            "primary": 22350.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-07",
+            "primary": 22350.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-08",
+            "primary": 22400.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-09",
+            "primary": 22450.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-10",
+            "primary": 22400.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-13",
+            "primary": 21740.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-14",
+            "primary": 21900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-15",
+            "primary": 21010.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-16",
+            "primary": 21900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-17",
+            "primary": 21400.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-20",
+            "primary": 20710.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-21",
+            "primary": 20600.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-22",
+            "primary": 20900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-23",
+            "primary": 20750.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-24",
+            "primary": 20790.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-27",
+            "primary": 21110.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-28",
+            "primary": 21450.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-29",
+            "primary": 21450.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-06-30",
+            "primary": 21350.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-01",
+            "primary": 21300.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-04",
+            "primary": 21260.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-05",
+            "primary": 20900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-06",
+            "primary": 20660.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-07",
+            "primary": 20700.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-08",
+            "primary": 20890.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-11",
+            "primary": 20370.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-12",
+            "primary": 20600.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-13",
+            "primary": 20630.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-14",
+            "primary": 20690.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-15",
+            "primary": 20630.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-18",
+            "primary": 20520.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-19",
+            "primary": 20500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-20",
+            "primary": 20700.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-21",
+            "primary": 20790.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-22",
+            "primary": 20890.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-25",
+            "primary": 20720.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-26",
+            "primary": 20690.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-27",
+            "primary": 20600.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-28",
+            "primary": 20920.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-07-29",
+            "primary": 20950.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-01",
+            "primary": 21100.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-02",
+            "primary": 21300.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-03",
+            "primary": 21200.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-04",
+            "primary": 21500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-05",
+            "primary": 21370.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-08",
+            "primary": 21430.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-09",
+            "primary": 21680.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-10",
+            "primary": 21570.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-11",
+            "primary": 21670.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-12",
+            "primary": 21600.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-15",
+            "primary": 21860.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-16",
+            "primary": 21900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-17",
+            "primary": 22040.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-18",
+            "primary": 21920.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-19",
+            "primary": 21800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-22",
+            "primary": 21800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-23",
+            "primary": 21790.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-24",
+            "primary": 21910.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-25",
+            "primary": 22200.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-26",
+            "primary": 22120.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-29",
+            "primary": 21810.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-30",
+            "primary": 22000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-08-31",
+            "primary": 22060.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-05",
+            "primary": 22060.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-06",
+            "primary": 21950.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-07",
+            "primary": 21800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-08",
+            "primary": 21490.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-09",
+            "primary": 21540.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-12",
+            "primary": 21700.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-13",
+            "primary": 21630.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-14",
+            "primary": 21390.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-15",
+            "primary": 21410.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-16",
+            "primary": 21050.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-19",
+            "primary": 20950.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-20",
+            "primary": 20930.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-21",
+            "primary": 20720.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-22",
+            "primary": 20820.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-23",
+            "primary": 20820.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-26",
+            "primary": 20270.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-27",
+            "primary": 20230.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-28",
+            "primary": 20170.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-29",
+            "primary": 19900.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-09-30",
+            "primary": 19920.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-03",
+            "primary": 18800.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-04",
+            "primary": 18500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-05",
+            "primary": 18980.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-06",
+            "primary": 18720.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-07",
+            "primary": 17660.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-10",
+            "primary": 17600.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-11",
+            "primary": 16860.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-12",
+            "primary": 17540.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-13",
+            "primary": 17700.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-14",
+            "primary": 18000.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-17",
+            "primary": 17750.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-18",
+            "primary": 17950.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-19",
+            "primary": 18010.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-20",
+            "primary": 17920.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-21",
+            "primary": 17090.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2022-10-24",
+            "primary": 16500.0,
+            "secondary": 25300.0
+          },
+          {
+            "date": "2025-01-15",
+            "primary": 22740.0,
+            "secondary": 22600.0
+          },
+          {
+            "date": "2025-01-16",
+            "primary": 22770.0,
+            "secondary": 22740.0
+          },
+          {
+            "date": "2025-05-05",
+            "primary": 22820.0,
+            "secondary": 22890.0
+          },
+          {
+            "date": "2025-05-06",
+            "primary": 23000.0,
+            "secondary": 22820.0
+          },
+          {
+            "date": "2025-05-07",
+            "primary": 23120.0,
+            "secondary": 23000.0
+          },
+          {
+            "date": "2025-05-08",
+            "primary": 23300.0,
+            "secondary": 23120.0
+          },
+          {
+            "date": "2025-05-09",
+            "primary": 23500.0,
+            "secondary": 23300.0
+          },
+          {
+            "date": "2025-05-12",
+            "primary": 23850.0,
+            "secondary": 23300.0
+          },
+          {
+            "date": "2025-05-13",
+            "primary": 24000.0,
+            "secondary": 23850.0
+          },
+          {
+            "date": "2025-05-14",
+            "primary": 24240.0,
+            "secondary": 24000.0
+          },
+          {
+            "date": "2025-05-15",
+            "primary": 24420.0,
+            "secondary": 24240.0
+          },
+          {
+            "date": "2025-05-16",
+            "primary": 24230.0,
+            "secondary": 24420.0
+          },
+          {
+            "date": "2025-05-20",
+            "primary": 24520.0,
+            "secondary": 24230.0
+          },
+          {
+            "date": "2025-05-21",
+            "primary": 24750.0,
+            "secondary": 24520.0
+          },
+          {
+            "date": "2025-05-22",
+            "primary": 24680.0,
+            "secondary": 24750.0
+          },
+          {
+            "date": "2025-05-23",
+            "primary": 24750.0,
+            "secondary": 24680.0
+          },
+          {
+            "date": "2025-05-27",
+            "primary": 24760.0,
+            "secondary": 24700.0
+          },
+          {
+            "date": "2025-05-28",
+            "primary": 24700.0,
+            "secondary": 24760.0
+          },
+          {
+            "date": "2025-05-29",
+            "primary": 25290.0,
+            "secondary": 24700.0
+          },
+          {
+            "date": "2025-05-30",
+            "primary": 24800.0,
+            "secondary": 25290.0
+          },
+          {
+            "date": "2025-06-03",
+            "primary": 25000.0,
+            "secondary": 24770.0
+          },
+          {
+            "date": "2025-06-04",
+            "primary": 25120.0,
+            "secondary": 25000.0
+          },
+          {
+            "date": "2025-06-05",
+            "primary": 25000.0,
+            "secondary": 25120.0
+          },
+          {
+            "date": "2025-06-06",
+            "primary": 24900.0,
+            "secondary": 25000.0
+          },
+          {
+            "date": "2025-06-10",
+            "primary": 24760.0,
+            "secondary": 24750.0
+          },
+          {
+            "date": "2025-06-11",
+            "primary": 24670.0,
+            "secondary": 24760.0
+          },
+          {
+            "date": "2025-06-12",
+            "primary": 24900.0,
+            "secondary": 24670.0
+          },
+          {
+            "date": "2025-06-13",
+            "primary": 24680.0,
+            "secondary": 24900.0
+          },
+          {
+            "date": "2025-06-17",
+            "primary": 25050.0,
+            "secondary": 24780.0
+          },
+          {
+            "date": "2025-06-18",
+            "primary": 25030.0,
+            "secondary": 25050.0
+          },
+          {
+            "date": "2025-06-20",
+            "primary": 25150.0,
+            "secondary": 25030.0
+          },
+          {
+            "date": "2025-06-24",
+            "primary": 25500.0,
+            "secondary": 25120.0
+          },
+          {
+            "date": "2025-06-25",
+            "primary": 25400.0,
+            "secondary": 25500.0
+          },
+          {
+            "date": "2025-06-26",
+            "primary": 25450.0,
+            "secondary": 25400.0
+          },
+          {
+            "date": "2025-06-27",
+            "primary": 25720.0,
+            "secondary": 25450.0
+          },
+          {
+            "date": "2025-07-01",
+            "primary": 25580.0,
+            "secondary": 25860.0
+          },
+          {
+            "date": "2025-07-02",
+            "primary": 25810.0,
+            "secondary": 25580.0
+          },
+          {
+            "date": "2025-07-03",
+            "primary": 25850.0,
+            "secondary": 25810.0
+          },
+          {
+            "date": "2025-07-08",
+            "primary": 26470.0,
+            "secondary": 26300.0
+          },
+          {
+            "date": "2025-07-09",
+            "primary": 26760.0,
+            "secondary": 26470.0
+          },
+          {
+            "date": "2025-07-10",
+            "primary": 27160.0,
+            "secondary": 26760.0
+          },
+          {
+            "date": "2025-07-11",
+            "primary": 27810.0,
+            "secondary": 27160.0
+          },
+          {
+            "date": "2025-07-15",
+            "primary": 27740.0,
+            "secondary": 27800.0
+          },
+          {
+            "date": "2025-07-16",
+            "primary": 27970.0,
+            "secondary": 27740.0
+          },
+          {
+            "date": "2025-07-17",
+            "primary": 28410.0,
+            "secondary": 27970.0
+          },
+          {
+            "date": "2025-07-18",
+            "primary": 28610.0,
+            "secondary": 28410.0
+          },
+          {
+            "date": "2025-07-22",
+            "primary": 28850.0,
+            "secondary": 28650.0
+          },
+          {
+            "date": "2025-07-23",
+            "primary": 28900.0,
+            "secondary": 28850.0
+          },
+          {
+            "date": "2025-07-25",
+            "primary": 29130.0,
+            "secondary": 28900.0
+          },
+          {
+            "date": "2025-07-29",
+            "primary": 28800.0,
+            "secondary": 29700.0
+          },
+          {
+            "date": "2025-07-30",
+            "primary": 28790.0,
+            "secondary": 28800.0
+          },
+          {
+            "date": "2025-07-31",
+            "primary": 28490.0,
+            "secondary": 28790.0
+          },
+          {
+            "date": "2025-08-01",
+            "primary": 28300.0,
+            "secondary": 28490.0
+          },
+          {
+            "date": "2025-08-05",
+            "primary": 29800.0,
+            "secondary": 29300.0
+          },
+          {
+            "date": "2025-08-06",
+            "primary": 30120.0,
+            "secondary": 29800.0
+          },
+          {
+            "date": "2025-08-07",
+            "primary": 30450.0,
+            "secondary": 30120.0
+          },
+          {
+            "date": "2025-08-08",
+            "primary": 30400.0,
+            "secondary": 30450.0
+          },
+          {
+            "date": "2025-08-12",
+            "primary": 30650.0,
+            "secondary": 30420.0
+          },
+          {
+            "date": "2025-08-13",
+            "primary": 30800.0,
+            "secondary": 30650.0
+          },
+          {
+            "date": "2025-08-14",
+            "primary": 31140.0,
+            "secondary": 30800.0
+          },
+          {
+            "date": "2025-08-15",
+            "primary": 31500.0,
+            "secondary": 31140.0
+          },
+          {
+            "date": "2025-08-19",
+            "primary": 31610.0,
+            "secondary": 31400.0
+          },
+          {
+            "date": "2025-08-20",
+            "primary": 31950.0,
+            "secondary": 31610.0
+          },
+          {
+            "date": "2025-08-21",
+            "primary": 32680.0,
+            "secondary": 31950.0
+          },
+          {
+            "date": "2025-08-22",
+            "primary": 32150.0,
+            "secondary": 32680.0
+          },
+          {
+            "date": "2025-08-26",
+            "primary": 32440.0,
+            "secondary": 31750.0
+          },
+          {
+            "date": "2025-08-27",
+            "primary": 32760.0,
+            "secondary": 32440.0
+          },
+          {
+            "date": "2025-08-28",
+            "primary": 32800.0,
+            "secondary": 32760.0
+          },
+          {
+            "date": "2025-08-29",
+            "primary": 32900.0,
+            "secondary": 32800.0
+          },
+          {
+            "date": "2025-09-04",
+            "primary": 33270.0,
+            "secondary": 32880.0
+          },
+          {
+            "date": "2025-09-05",
+            "primary": 32900.0,
+            "secondary": 33270.0
+          },
+          {
+            "date": "2025-09-10",
+            "primary": 32380.0,
+            "secondary": 32280.0
+          },
+          {
+            "date": "2025-09-11",
+            "primary": 32800.0,
+            "secondary": 32380.0
+          },
+          {
+            "date": "2025-09-12",
+            "primary": 32870.0,
+            "secondary": 32800.0
+          },
+          {
+            "date": "2025-09-15",
+            "primary": 33090.0,
+            "secondary": 32800.0
+          },
+          {
+            "date": "2025-09-16",
+            "primary": 33150.0,
+            "secondary": 33090.0
+          },
+          {
+            "date": "2025-09-17",
+            "primary": 33230.0,
+            "secondary": 33150.0
+          },
+          {
+            "date": "2025-09-18",
+            "primary": 32900.0,
+            "secondary": 33230.0
+          },
+          {
+            "date": "2025-09-19",
+            "primary": 32990.0,
+            "secondary": 32900.0
+          },
+          {
+            "date": "2025-09-23",
+            "primary": 32170.0,
+            "secondary": 32200.0
+          },
+          {
+            "date": "2025-09-24",
+            "primary": 32500.0,
+            "secondary": 32170.0
+          },
+          {
+            "date": "2025-09-25",
+            "primary": 32680.0,
+            "secondary": 32500.0
+          },
+          {
+            "date": "2025-09-26",
+            "primary": 32400.0,
+            "secondary": 32680.0
+          },
+          {
+            "date": "2025-09-30",
+            "primary": 33090.0,
+            "secondary": 32800.0
+          },
+          {
+            "date": "2025-10-01",
+            "primary": 33000.0,
+            "secondary": 33090.0
+          },
+          {
+            "date": "2025-10-02",
+            "primary": 32800.0,
+            "secondary": 33000.0
+          },
+          {
+            "date": "2025-10-03",
+            "primary": 32880.0,
+            "secondary": 32800.0
+          },
+          {
+            "date": "2025-10-07",
+            "primary": 33880.0,
+            "secondary": 33950.0
+          },
+          {
+            "date": "2025-10-08",
+            "primary": 34040.0,
+            "secondary": 33880.0
+          },
+          {
+            "date": "2025-10-09",
+            "primary": 34200.0,
+            "secondary": 34040.0
+          },
+          {
+            "date": "2025-10-10",
+            "primary": 34810.0,
+            "secondary": 34200.0
+          },
+          {
+            "date": "2025-10-14",
+            "primary": 35490.0,
+            "secondary": 35350.0
+          },
+          {
+            "date": "2025-10-15",
+            "primary": 35300.0,
+            "secondary": 35490.0
+          },
+          {
+            "date": "2025-10-16",
+            "primary": 35600.0,
+            "secondary": 35300.0
+          },
+          {
+            "date": "2025-10-17",
+            "primary": 34900.0,
+            "secondary": 35600.0
+          },
+          {
+            "date": "2025-10-21",
+            "primary": 33800.0,
+            "secondary": 34000.0
+          },
+          {
+            "date": "2025-10-22",
+            "primary": 34000.0,
+            "secondary": 33800.0
+          },
+          {
+            "date": "2025-10-23",
+            "primary": 34520.0,
+            "secondary": 34000.0
+          },
+          {
+            "date": "2025-10-28",
+            "primary": 34400.0,
+            "secondary": 33900.0
+          },
+          {
+            "date": "2025-10-29",
+            "primary": 34550.0,
+            "secondary": 34400.0
+          },
+          {
+            "date": "2025-10-30",
+            "primary": 34420.0,
+            "secondary": 34550.0
+          },
+          {
+            "date": "2025-10-31",
+            "primary": 34130.0,
+            "secondary": 34420.0
+          },
+          {
+            "date": "2025-11-05",
+            "primary": 33300.0,
+            "secondary": 33970.0
+          },
+          {
+            "date": "2025-12-18",
+            "primary": 33700.0,
+            "secondary": 33600.0
+          },
+          {
+            "date": "2025-12-25",
+            "primary": 35200.0,
+            "secondary": 35680.0
+          },
+          {
+            "date": "2026-03-03",
+            "primary": 34870.0,
+            "secondary": 35700.0
+          },
+          {
+            "date": "2026-04-06",
+            "primary": 32400.0,
+            "secondary": 32700.0
+          },
+          {
+            "date": "2026-07-01",
+            "primary": 36080.0,
+            "secondary": 35870.0
+          },
+          {
+            "date": "2026-09-09",
+            "primary": 35390.0,
+            "secondary": 35250.0
+          }
+        ],
+        "max_close_difference": 8800.0,
+        "primary_dates_missing_in_secondary": 1991,
+        "secondary_dates_missing_in_primary": 39,
+        "other_field_mismatch_counts": {
+          "Open": 267,
+          "High": 270,
+          "Low": 272,
+          "Volume": 281
+        },
+        "sha256": "00a3c692a829c7ab6d9c1f9a2cd4573a1b551d89da400789d3197fd18aaaf532"
+      }
+    }
+  },
+  "canonical": {
+    "E1VFVN30": {
+      "rows": 2675,
+      "sha256": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97",
+      "excluded_conflict_dates": [
+        "2019-03-14"
+      ]
+    }
+  },
+  "errors": [
+    "VNINDEX primary has conflicting closes or insufficient requested historical coverage"
+  ]
+}

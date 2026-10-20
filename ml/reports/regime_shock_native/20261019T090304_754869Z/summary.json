@@ -1,0 +1,34 @@
+{
+  "rows": 1560,
+  "blocks": 28,
+  "complete": true,
+  "native_model_weights_exported": true,
+  "all_component_parity": true,
+  "all_decisions_match": true,
+  "folds": [
+    {
+      "fold": 1,
+      "rows": 390,
+      "f1": 0.5642611356897071
+    },
+    {
+      "fold": 2,
+      "rows": 390,
+      "f1": 0.6543737157843653
+    },
+    {
+      "fold": 3,
+      "rows": 390,
+      "f1": 0.403056383096105
+    },
+    {
+      "fold": 4,
+      "rows": 390,
+      "f1": 0.43328942020149236
+    }
+  ],
+  "mean_f1": 0.5137451636929175,
+  "prospective_configuration_frozen": false,
+  "independent_test": false,
+  "deployed": false
+}

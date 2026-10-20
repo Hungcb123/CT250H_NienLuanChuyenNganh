@@ -1,0 +1,6 @@
+{
+  "role": "shadow_raw_price_exposure_not_independent_test",
+  "source_snapshot_sha256": "df6a29c26776c1d81060bf381e1563473d1c7affcf7a88a21790826da7afa227",
+  "observed_through": "2026-10-20",
+  "first_new_mature_decision": "2026-09-22"
+}

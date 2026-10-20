@@ -1,0 +1,51 @@
+{
+  "role": "Paired sensitivity on repeatedly inspected DEVELOPMENT; not multiple-testing-adjusted independent inference",
+  "rows": 1560,
+  "results": [
+    {
+      "candidate": "legacy_equal_63/argmax",
+      "control": "legacy_trend_63/argmax",
+      "metric": "mean_of_four_fold_macro_f1",
+      "point_delta": 0.009638128365760779,
+      "block_sessions": 20,
+      "repeats": 1000,
+      "delta_low": -0.020957576847764614,
+      "delta_high": 0.04275126610293848
+    },
+    {
+      "candidate": "legacy_equal_63/argmax",
+      "control": "legacy_trend_63/argmax",
+      "metric": "mean_of_four_fold_macro_f1",
+      "point_delta": 0.009638128365760779,
+      "block_sessions": 60,
+      "repeats": 1000,
+      "delta_low": -0.019690020505247045,
+      "delta_high": 0.0475977283630431
+    },
+    {
+      "candidate": "legacy_equal_63/argmax",
+      "control": "legacy_risk_63/argmax",
+      "metric": "mean_of_four_fold_macro_f1",
+      "point_delta": 0.005873725936046653,
+      "block_sessions": 20,
+      "repeats": 1000,
+      "delta_low": -0.022903702417000727,
+      "delta_high": 0.03179383543532606
+    },
+    {
+      "candidate": "legacy_equal_63/argmax",
+      "control": "legacy_risk_63/argmax",
+      "metric": "mean_of_four_fold_macro_f1",
+      "point_delta": 0.005873725936046653,
+      "block_sessions": 60,
+      "repeats": 1000,
+      "delta_low": -0.02076893769592563,
+      "delta_high": 0.03209041580017373
+    }
+  ],
+  "source_hashes": {
+    "legacy_equal_63_predictions.csv": "5a079a343e4ca685b50349e8944a99a880a5218c6971b2f46d9608ce9d188720",
+    "legacy_risk_63_predictions.csv": "66535f965d9dc3cc8581ccb0e1d128278f0be59cc315853d8140515c8bedbb96",
+    "legacy_trend_63_predictions.csv": "7fdd4be6a61304001f9840594cf224988f8448aa9daae2a1744db6b360a626d7"
+  }
+}

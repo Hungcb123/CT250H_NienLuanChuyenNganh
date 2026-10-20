@@ -1,0 +1,116 @@
+{
+  "role": "Independent saved-prediction calculation against raw full-calendar target; historical development only",
+  "raw_data_sha256": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+  "records": [
+    {
+      "name": "previous49.25",
+      "source": "ml/reports/regime_dynamic_information/20261019T052057_760569Z/inner_selected_blend_predictions.csv",
+      "sha256": "5d3794c70e74e27e1ac9a973457390d65ca668b32bb223954252b275acde32fb",
+      "rows": 1560,
+      "mean_f1": 0.49250821828003344,
+      "worst_f1": 0.4000134347464767,
+      "mean_class_f1": [
+        0.2904853989105694,
+        0.7454289076293866,
+        0.44161034830014434
+      ],
+      "folds": [
+        {
+          "fold": 1,
+          "f1": 0.5046525283539176,
+          "mcc": 0.27751836782826766
+        },
+        {
+          "fold": 2,
+          "f1": 0.6532362241954977,
+          "mcc": 0.4990686169334356
+        },
+        {
+          "fold": 3,
+          "f1": 0.4000134347464767,
+          "mcc": 0.12744095152398857
+        },
+        {
+          "fold": 4,
+          "f1": 0.4121306858242417,
+          "mcc": 0.16937488279163168
+        }
+      ],
+      "truth_and_endpoints_exact": true
+    },
+    {
+      "name": "seed5",
+      "source": "ml/reports/regime_density_seeds/20261019T061537_193740Z/info_seed5_predictions.csv",
+      "sha256": "7baf9dbb6df1a3b21164126e36a77b98b297eaa2296fb1697c341c1e6523513c",
+      "rows": 1560,
+      "mean_f1": 0.49323098932162784,
+      "worst_f1": 0.40244107932272444,
+      "mean_class_f1": [
+        0.2965202775970506,
+        0.7429277091180824,
+        0.4402449812497508
+      ],
+      "folds": [
+        {
+          "fold": 1,
+          "f1": 0.5122917373221713,
+          "mcc": 0.30013850165252215
+        },
+        {
+          "fold": 2,
+          "f1": 0.6402116402116401,
+          "mcc": 0.4663703539613538
+        },
+        {
+          "fold": 3,
+          "f1": 0.40244107932272444,
+          "mcc": 0.1295148706733792
+        },
+        {
+          "fold": 4,
+          "f1": 0.4179795004299756,
+          "mcc": 0.17379161592649775
+        }
+      ],
+      "truth_and_endpoints_exact": true
+    },
+    {
+      "name": "ema5_shrink",
+      "source": "ml/reports/regime_forecast_smoothing/20261019T062316_546117Z/ema5_shrink_predictions.csv",
+      "sha256": "2e1505abe7628682b5f157b254fefeaeb02f3a7cc94d27ab5dd0f89ae800b7fd",
+      "rows": 1560,
+      "mean_f1": 0.49492737914367657,
+      "worst_f1": 0.4006275923109485,
+      "mean_class_f1": [
+        0.3023201773201773,
+        0.7457937990272907,
+        0.4366681610835616
+      ],
+      "folds": [
+        {
+          "fold": 1,
+          "f1": 0.536310712781301,
+          "mcc": 0.3221025377982954
+        },
+        {
+          "fold": 2,
+          "f1": 0.633276884571838,
+          "mcc": 0.4688744897847459
+        },
+        {
+          "fold": 3,
+          "f1": 0.40949432691061877,
+          "mcc": 0.1265046522194865
+        },
+        {
+          "fold": 4,
+          "f1": 0.4006275923109485,
+          "mcc": 0.16337564071348382
+        }
+      ],
+      "truth_and_endpoints_exact": true
+    }
+  ],
+  "goal_achieved": false,
+  "remaining": "Gains are small and provisional screens have not passed; continue active objective."
+}

@@ -1,0 +1,75 @@
+{
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "bf445fd7933ad9d8c106ba7bef6b5cadf9cfd8a8eed4f699339a26c114898b94",
+  "training_prefix_sha256": "603ac5c3c6af0dc4b2d8b1364f195f9c5b78a7eafc2e82e7164d3b69493dc184",
+  "refit_date": "2026-05-26",
+  "feature_schema": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200",
+    "Drawdown120",
+    "Drawdown252",
+    "HV20_60_Ratio",
+    "DownsideHV60",
+    "Stretch20",
+    "Shock5",
+    "VolRatio5_20",
+    "NegativeDays10",
+    "Drawdown20"
+  ],
+  "experts": [
+    {
+      "window": "3y",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_0.txt",
+      "model_sha256": "3e9220fed606e2848e3f21f6156be94c0e2efc0ccabe5ad28cf89ff8204faf92",
+      "logit_center": -3.156585716321948,
+      "logit_scale": 1.8548366382422607,
+      "n_core": 666,
+      "n_calibration": 40,
+      "core_start": "2023-05-26",
+      "core_end": "2026-01-21",
+      "core_label_end": "2026-02-25",
+      "calibration_start": "2026-02-26",
+      "calibration_end": "2026-04-22",
+      "calibration_label_end": "2026-05-25"
+    },
+    {
+      "window": "expanding",
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "model_file": "expert_1.txt",
+      "model_sha256": "1f3935a246b65e8f17ec0045cce19da5537a1b65f821857aef100d6932111389",
+      "logit_center": -1.7266230187884894,
+      "logit_scale": 0.8743380341909445,
+      "n_core": 3753,
+      "n_calibration": 40,
+      "core_start": "2011-01-05",
+      "core_end": "2026-01-21",
+      "core_label_end": "2026-02-25",
+      "calibration_start": "2026-02-26",
+      "calibration_end": "2026-04-22",
+      "calibration_label_end": "2026-05-25"
+    }
+  ],
+  "calibration_threshold": 1.756669556603733
+}

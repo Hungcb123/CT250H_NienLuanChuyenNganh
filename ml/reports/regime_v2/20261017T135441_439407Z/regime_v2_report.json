@@ -1,0 +1,1006 @@
+{
+  "generated_at": "2026-10-17T13:54:41.457974+00:00",
+  "mode": "quick_development_only",
+  "holdout_start": null,
+  "selection": "highest development CV macro F1 across requested models and feature sets; deterministic first candidate on ties",
+  "evaluation": "development selection scores only; no independent test claim",
+  "evaluation_protocol": {
+    "latest_observed_label_date": "2026-10-01",
+    "exposures": [
+      {
+        "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 20,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 60,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 120,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 20,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 60,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      },
+      {
+        "report": "/mnt/d/Project_CT250H_NienLuanChuyenNganh/ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+        "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+        "horizon": 120,
+        "start": "2025-03-20",
+        "labels_observed_through": "2026-10-01"
+      }
+    ],
+    "rule": "A new final holdout must begin strictly after every previously observed label-end date."
+  },
+  "cv": {
+    "n_splits": 4,
+    "purge": "label_end_date < validation_start"
+  },
+  "optuna": {
+    "n_trials": 5,
+    "timeout_seconds": 30
+  },
+  "features": {
+    "close": {
+      "version": "close-v3-research",
+      "names": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20"
+      ]
+    },
+    "close-etf": {
+      "version": "close-etf-v3-research",
+      "names": [
+        "RSI_14",
+        "MACD",
+        "MACD_Signal",
+        "MACD_Hist",
+        "BB_Width",
+        "BB_PctB",
+        "SMA_20_50_Ratio",
+        "Dist_SMA20",
+        "Dist_SMA50",
+        "Abs_Change_14_Pct",
+        "ROC_20",
+        "HV_20",
+        "ETF_ROC20",
+        "ETF_HV20",
+        "ETF_Corr30_VNINDEX",
+        "ETF_ReturnSpread20"
+      ]
+    }
+  },
+  "results": [
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 225,
+        "learning_rate": 0.049743185797885274,
+        "max_depth": 3,
+        "num_leaves": 42,
+        "min_child_samples": 33,
+        "subsample": 0.6260206371941118,
+        "colsample_bytree": 0.9795542149013333,
+        "reg_alpha": 4.905556676028774,
+        "reg_lambda": 0.18861495878553936,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 5,
+      "validation_f1_macro": 0.3506909357790726,
+      "validation_mcc": 0.061075499468595196,
+      "validation_folds": [
+        {
+          "f1_macro": 0.265563460479219,
+          "mcc": -0.03856563930602041,
+          "accuracy": 0.31025641025641026,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              10,
+              9,
+              6
+            ],
+            [
+              69,
+              84,
+              58
+            ],
+            [
+              63,
+              64,
+              27
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.07042253521126761,
+              "recall": 0.4,
+              "f1": 0.11976047904191617,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.535031847133758,
+              "recall": 0.3981042654028436,
+              "f1": 0.45652173913043476,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.2967032967032967,
+              "recall": 0.17532467532467533,
+              "f1": 0.22040816326530613,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.41015129527378913,
+          "mcc": 0.13815411460819538,
+          "accuracy": 0.47435897435897434,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              22,
+              29,
+              19
+            ],
+            [
+              45,
+              129,
+              66
+            ],
+            [
+              20,
+              26,
+              34
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.25287356321839083,
+              "recall": 0.3142857142857143,
+              "f1": 0.2802547770700637,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.7010869565217391,
+              "recall": 0.5375,
+              "f1": 0.6084905660377359,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.2857142857142857,
+              "recall": 0.425,
+              "f1": 0.3417085427135678,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.33936633041110653,
+          "mcc": 0.04687640824645017,
+          "accuracy": 0.5512820512820513,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              15,
+              20,
+              1
+            ],
+            [
+              72,
+              196,
+              50
+            ],
+            [
+              11,
+              21,
+              4
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.15306122448979592,
+              "recall": 0.4166666666666667,
+              "f1": 0.22388059701492538,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8270042194092827,
+              "recall": 0.6163522012578616,
+              "f1": 0.7063063063063063,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.07272727272727272,
+              "recall": 0.1111111111111111,
+              "f1": 0.08791208791208792,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.3876826569521758,
+          "mcc": 0.09783711432575566,
+          "accuracy": 0.4307692307692308,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              19,
+              23,
+              18
+            ],
+            [
+              50,
+              103,
+              60
+            ],
+            [
+              28,
+              43,
+              46
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.1958762886597938,
+              "recall": 0.31666666666666665,
+              "f1": 0.24203821656050956,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.6094674556213018,
+              "recall": 0.4835680751173709,
+              "f1": 0.5392670157068062,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.3709677419354839,
+              "recall": 0.39316239316239315,
+              "f1": 0.3817427385892116,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 20
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 175,
+        "learning_rate": 0.13125830316209655,
+        "max_depth": 7,
+        "min_child_weight": 12,
+        "subsample": 0.6624074561769746,
+        "colsample_bytree": 0.662397808134481,
+        "reg_alpha": 3.3323645788192616e-08,
+        "reg_lambda": 0.6245760287469893,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 5,
+      "validation_f1_macro": 0.3241991699593656,
+      "validation_mcc": 0.0023781295028403315,
+      "validation_folds": [
+        {
+          "f1_macro": 0.30878493594010836,
+          "mcc": 0.0152551971243145,
+          "accuracy": 0.44358974358974357,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              9,
+              12,
+              4
+            ],
+            [
+              22,
+              154,
+              35
+            ],
+            [
+              40,
+              104,
+              10
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.1267605633802817,
+              "recall": 0.36,
+              "f1": 0.1875,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5703703703703704,
+              "recall": 0.7298578199052133,
+              "f1": 0.6403326403326404,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.20408163265306123,
+              "recall": 0.06493506493506493,
+              "f1": 0.09852216748768473,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.3969533676596277,
+          "mcc": 0.11209713566506826,
+          "accuracy": 0.5692307692307692,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              10,
+              47,
+              13
+            ],
+            [
+              7,
+              193,
+              40
+            ],
+            [
+              2,
+              59,
+              19
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.5263157894736842,
+              "recall": 0.14285714285714285,
+              "f1": 0.2247191011235955,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.6454849498327759,
+              "recall": 0.8041666666666667,
+              "f1": 0.7161410018552876,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.2638888888888889,
+              "recall": 0.2375,
+              "f1": 0.25,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.31756200084068936,
+          "mcc": -0.04478046486691335,
+          "accuracy": 0.6948717948717948,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              4,
+              30,
+              2
+            ],
+            [
+              20,
+              267,
+              31
+            ],
+            [
+              1,
+              35,
+              0
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.16,
+              "recall": 0.1111111111111111,
+              "f1": 0.13114754098360656,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8042168674698795,
+              "recall": 0.839622641509434,
+              "f1": 0.8215384615384616,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.2734963753970369,
+          "mcc": -0.07305934991110809,
+          "accuracy": 0.46153846153846156,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              4,
+              50,
+              6
+            ],
+            [
+              20,
+              168,
+              25
+            ],
+            [
+              5,
+              104,
+              8
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.13793103448275862,
+              "recall": 0.06666666666666667,
+              "f1": 0.0898876404494382,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.5217391304347826,
+              "recall": 0.7887323943661971,
+              "f1": 0.6280373831775701,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.20512820512820512,
+              "recall": 0.06837606837606838,
+              "f1": 0.10256410256410256,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close",
+      "horizon": 20
+    },
+    {
+      "model_name": "LightGBM",
+      "best_params": {
+        "n_estimators": 225,
+        "learning_rate": 0.049743185797885274,
+        "max_depth": 3,
+        "num_leaves": 42,
+        "min_child_samples": 33,
+        "subsample": 0.6260206371941118,
+        "colsample_bytree": 0.9795542149013333,
+        "reg_alpha": 4.905556676028774,
+        "reg_lambda": 0.18861495878553936,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": -1
+      },
+      "optuna_n_trials": 5,
+      "validation_f1_macro": 0.3732018919875252,
+      "validation_mcc": 0.08531191865863907,
+      "validation_folds": [
+        {
+          "f1_macro": 0.3012725367576004,
+          "mcc": -0.006980356555353213,
+          "accuracy": 0.3564102564102564,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              10,
+              8,
+              7
+            ],
+            [
+              54,
+              95,
+              62
+            ],
+            [
+              52,
+              68,
+              34
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.08620689655172414,
+              "recall": 0.4,
+              "f1": 0.14184397163120568,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5555555555555556,
+              "recall": 0.45023696682464454,
+              "f1": 0.4973821989528796,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.3300970873786408,
+              "recall": 0.22077922077922077,
+              "f1": 0.26459143968871596,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.3988461481711006,
+          "mcc": 0.12961816558276099,
+          "accuracy": 0.5358974358974359,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              7,
+              43,
+              20
+            ],
+            [
+              32,
+              168,
+              40
+            ],
+            [
+              5,
+              41,
+              34
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.1590909090909091,
+              "recall": 0.1,
+              "f1": 0.12280701754385964,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.6666666666666666,
+              "recall": 0.7,
+              "f1": 0.6829268292682927,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.3617021276595745,
+              "recall": 0.425,
+              "f1": 0.39080459770114945,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.3741237324396791,
+          "mcc": 0.06258905022158441,
+          "accuracy": 0.6153846153846154,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              6,
+              30,
+              0
+            ],
+            [
+              53,
+              223,
+              42
+            ],
+            [
+              9,
+              16,
+              11
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.08823529411764706,
+              "recall": 0.16666666666666666,
+              "f1": 0.11538461538461539,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.828996282527881,
+              "recall": 0.7012578616352201,
+              "f1": 0.7597955706984668,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.20754716981132076,
+              "recall": 0.3055555555555556,
+              "f1": 0.24719101123595505,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.41856515058172056,
+          "mcc": 0.15602081538556412,
+          "accuracy": 0.5102564102564102,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              14,
+              30,
+              16
+            ],
+            [
+              28,
+              145,
+              40
+            ],
+            [
+              23,
+              54,
+              40
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.2153846153846154,
+              "recall": 0.23333333333333334,
+              "f1": 0.224,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.6331877729257642,
+              "recall": 0.6807511737089202,
+              "f1": 0.6561085972850679,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.4166666666666667,
+              "recall": 0.3418803418803419,
+              "f1": 0.3755868544600939,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 20
+    },
+    {
+      "model_name": "XGBoost",
+      "best_params": {
+        "n_estimators": 275,
+        "learning_rate": 0.06803900745073706,
+        "max_depth": 3,
+        "min_child_weight": 20,
+        "subsample": 0.9329770563201687,
+        "colsample_bytree": 0.6849356442713105,
+        "reg_alpha": 4.329370014459266e-07,
+        "reg_lambda": 4.4734294104626844e-07,
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "eval_metric": "mlogloss",
+        "random_state": 42,
+        "n_jobs": 2,
+        "verbosity": 0,
+        "use_label_encoder": false
+      },
+      "optuna_n_trials": 5,
+      "validation_f1_macro": 0.3568882296010853,
+      "validation_mcc": 0.07289614570680186,
+      "validation_folds": [
+        {
+          "f1_macro": 0.37056846954072425,
+          "mcc": 0.0356772585430063,
+          "accuracy": 0.5051282051282051,
+          "baseline_f1": 0.23405435385468665,
+          "confusion_matrix": [
+            [
+              8,
+              12,
+              5
+            ],
+            [
+              7,
+              175,
+              29
+            ],
+            [
+              12,
+              128,
+              14
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.2962962962962963,
+              "recall": 0.32,
+              "f1": 0.3076923076923077,
+              "support": 25
+            },
+            "Sideway (0)": {
+              "precision": 0.5555555555555556,
+              "recall": 0.8293838862559242,
+              "f1": 0.6653992395437263,
+              "support": 211
+            },
+            "Bullish (+1)": {
+              "precision": 0.2916666666666667,
+              "recall": 0.09090909090909091,
+              "f1": 0.13861386138613863,
+              "support": 154
+            }
+          },
+          "n_train": 761,
+          "n_validation": 390,
+          "train_end": "2020-02-27",
+          "train_label_end": "2020-03-26",
+          "validation_start": "2020-03-27",
+          "validation_end": "2021-10-14"
+        },
+        {
+          "f1_macro": 0.4250116021801306,
+          "mcc": 0.216351467560737,
+          "accuracy": 0.6333333333333333,
+          "baseline_f1": 0.25396825396825395,
+          "confusion_matrix": [
+            [
+              8,
+              52,
+              10
+            ],
+            [
+              6,
+              219,
+              15
+            ],
+            [
+              3,
+              57,
+              20
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.47058823529411764,
+              "recall": 0.11428571428571428,
+              "f1": 0.1839080459770115,
+              "support": 70
+            },
+            "Sideway (0)": {
+              "precision": 0.6676829268292683,
+              "recall": 0.9125,
+              "f1": 0.7711267605633803,
+              "support": 240
+            },
+            "Bullish (+1)": {
+              "precision": 0.4444444444444444,
+              "recall": 0.25,
+              "f1": 0.32,
+              "support": 80
+            }
+          },
+          "n_train": 1151,
+          "n_validation": 390,
+          "train_end": "2021-09-16",
+          "train_label_end": "2021-10-14",
+          "validation_start": "2021-10-15",
+          "validation_end": "2023-07-14"
+        },
+        {
+          "f1_macro": 0.29976801717250473,
+          "mcc": -0.0489014082353921,
+          "accuracy": 0.7512820512820513,
+          "baseline_f1": 0.2994350282485876,
+          "confusion_matrix": [
+            [
+              0,
+              36,
+              0
+            ],
+            [
+              12,
+              292,
+              14
+            ],
+            [
+              2,
+              33,
+              1
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 36
+            },
+            "Sideway (0)": {
+              "precision": 0.8088642659279779,
+              "recall": 0.9182389937106918,
+              "f1": 0.8600883652430045,
+              "support": 318
+            },
+            "Bullish (+1)": {
+              "precision": 0.06666666666666667,
+              "recall": 0.027777777777777776,
+              "f1": 0.0392156862745098,
+              "support": 36
+            }
+          },
+          "n_train": 1541,
+          "n_validation": 390,
+          "train_end": "2023-06-16",
+          "train_label_end": "2023-07-14",
+          "validation_start": "2023-07-17",
+          "validation_end": "2025-02-07"
+        },
+        {
+          "f1_macro": 0.3322048295109817,
+          "mcc": 0.08845726495885621,
+          "accuracy": 0.5333333333333333,
+          "baseline_f1": 0.23548922056384744,
+          "confusion_matrix": [
+            [
+              4,
+              41,
+              15
+            ],
+            [
+              9,
+              188,
+              16
+            ],
+            [
+              7,
+              94,
+              16
+            ]
+          ],
+          "per_class": {
+            "Bearish (-1)": {
+              "precision": 0.2,
+              "recall": 0.06666666666666667,
+              "f1": 0.1,
+              "support": 60
+            },
+            "Sideway (0)": {
+              "precision": 0.5820433436532507,
+              "recall": 0.8826291079812206,
+              "f1": 0.7014925373134329,
+              "support": 213
+            },
+            "Bullish (+1)": {
+              "precision": 0.3404255319148936,
+              "recall": 0.13675213675213677,
+              "f1": 0.1951219512195122,
+              "support": 117
+            }
+          },
+          "n_train": 1931,
+          "n_validation": 390,
+          "train_end": "2025-01-03",
+          "train_label_end": "2025-02-07",
+          "validation_start": "2025-02-10",
+          "validation_end": "2026-09-03"
+        }
+      ],
+      "score_role": "selection_validation_not_unbiased_test",
+      "feature_set": "close-etf",
+      "horizon": 20
+    }
+  ],
+  "best_per_horizon": {
+    "20": {
+      "model": "LightGBM",
+      "feature_set": "close-etf",
+      "validation_f1_macro": 0.3732018919875252,
+      "holdout": "not_scored_in_quick_mode"
+    }
+  },
+  "data_audit": "data_audit.json"
+}

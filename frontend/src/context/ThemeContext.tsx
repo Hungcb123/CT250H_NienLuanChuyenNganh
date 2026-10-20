@@ -14,13 +14,13 @@ const THEME_STORAGE_KEY = 'equifolio_theme';
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Requirement: Darkmode is default (TCInvest theme)
+  // Requirement: Default to White mode (Light mode)
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     const saved = localStorage.getItem(THEME_STORAGE_KEY);
     if (saved === 'light' || saved === 'dark') {
       return saved;
     }
-    return 'dark'; // Default to dark mode
+    return 'light'; // Default to white mode
   });
 
   useEffect(() => {

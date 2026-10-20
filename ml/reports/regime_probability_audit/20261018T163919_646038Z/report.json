@@ -1,0 +1,340 @@
+{
+  "role": "Historical causal probability DEVELOPMENT, not independent acceptance",
+  "n": 1560,
+  "active_calibration_rows": 1280,
+  "fallback_rows": 280,
+  "frozen_point_mean_fold_f1": 0.42045100021628456,
+  "summary": {
+    "causal_prior": {
+      "all": {
+        "n": 1560,
+        "brier": 0.559241144385222,
+        "log_loss": 0.9611691691988147,
+        "mean_fold_argmax_f1": 0.2557367141588439,
+        "frozen_decision_disagreement": 0.3903846153846154
+      },
+      "active": {
+        "n": 1280,
+        "brier": 0.5386392708685893,
+        "log_loss": 0.936370408610362,
+        "mean_fold_argmax_f1": 0.25912788759993416,
+        "frozen_decision_disagreement": 0.3375
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "n": 110,
+          "brier": 0.5780094987195579,
+          "log_loss": 0.9678173181322525,
+          "mean_fold_argmax_f1": 0.24761904761904763,
+          "frozen_decision_disagreement": 0.5454545454545454
+        },
+        {
+          "fold": 2,
+          "n": 390,
+          "brier": 0.5889146148030642,
+          "log_loss": 1.0304575600470407,
+          "mean_fold_argmax_f1": 0.25396825396825395,
+          "frozen_decision_disagreement": 0.4717948717948718
+        },
+        {
+          "fold": 3,
+          "n": 390,
+          "brier": 0.3603510495005891,
+          "log_loss": 0.6774807565336934,
+          "mean_fold_argmax_f1": 0.2994350282485876,
+          "frozen_decision_disagreement": 0.16923076923076924
+        },
+        {
+          "fold": 4,
+          "n": 390,
+          "brier": 0.6555477250620977,
+          "log_loss": 1.0923032681031521,
+          "mean_fold_argmax_f1": 0.23548922056384744,
+          "frozen_decision_disagreement": 0.3128205128205128
+        }
+      ]
+    },
+    "raw_decision": {
+      "all": {
+        "n": 1560,
+        "brier": 0.6309516039109311,
+        "log_loss": 1.8258881775483398,
+        "mean_fold_argmax_f1": 0.42045100021628456,
+        "frozen_decision_disagreement": 0.0
+      },
+      "active": {
+        "n": 1280,
+        "brier": 0.6160696159677647,
+        "log_loss": 1.9724961378491528,
+        "mean_fold_argmax_f1": 0.4494240460897694,
+        "frozen_decision_disagreement": 0.0
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "n": 110,
+          "brier": 0.6040477426075256,
+          "log_loss": 1.2268381993343638,
+          "mean_fold_argmax_f1": 0.5243093803321885,
+          "frozen_decision_disagreement": 0.0
+        },
+        {
+          "fold": 2,
+          "n": 390,
+          "brier": 0.654153258527161,
+          "log_loss": 2.837027002984786,
+          "mean_fold_argmax_f1": 0.5028686532117662,
+          "frozen_decision_disagreement": 0.0
+        },
+        {
+          "fold": 3,
+          "n": 390,
+          "brier": 0.4695369906978308,
+          "log_loss": 1.3039711563533591,
+          "mean_fold_argmax_f1": 0.38673499865471667,
+          "frozen_decision_disagreement": 0.0
+        },
+        {
+          "fold": 4,
+          "n": 390,
+          "brier": 0.7279093834722158,
+          "log_loss": 1.986804031739126,
+          "mean_fold_argmax_f1": 0.383783152160406,
+          "frozen_decision_disagreement": 0.0
+        }
+      ]
+    },
+    "cal_raw_decision": {
+      "all": {
+        "n": 1560,
+        "brier": 0.6308258446246962,
+        "log_loss": 1.2357191840853967,
+        "mean_fold_argmax_f1": 0.28655616175379556,
+        "frozen_decision_disagreement": 0.37115384615384617
+      },
+      "active": {
+        "n": 1280,
+        "brier": 0.6258831242854483,
+        "log_loss": 1.270978239253384,
+        "mean_fold_argmax_f1": 0.28965744499972373,
+        "frozen_decision_disagreement": 0.3140625
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "n": 110,
+          "brier": 0.9777823975764769,
+          "log_loss": 2.893056792708861,
+          "mean_fold_argmax_f1": 0.2698930041152263,
+          "frozen_decision_disagreement": 0.44545454545454544
+        },
+        {
+          "fold": 2,
+          "n": 390,
+          "brier": 0.6467843592167268,
+          "log_loss": 1.210453228912655,
+          "mean_fold_argmax_f1": 0.26302308802308805,
+          "frozen_decision_disagreement": 0.47435897435897434
+        },
+        {
+          "fold": 3,
+          "n": 390,
+          "brier": 0.3599440119430253,
+          "log_loss": 0.7361458108113159,
+          "mean_fold_argmax_f1": 0.2994350282485876,
+          "frozen_decision_disagreement": 0.16923076923076924
+        },
+        {
+          "fold": 4,
+          "n": 390,
+          "brier": 0.7716673605119443,
+          "log_loss": 1.408826342446174,
+          "mean_fold_argmax_f1": 0.3262786596119929,
+          "frozen_decision_disagreement": 0.26153846153846155
+        }
+      ]
+    },
+    "raw_mass": {
+      "all": {
+        "n": 1560,
+        "brier": 0.5942941300005473,
+        "log_loss": 1.8631203958308,
+        "mean_fold_argmax_f1": 0.3756342958850332,
+        "frozen_decision_disagreement": 0.25256410256410255
+      },
+      "active": {
+        "n": 1280,
+        "brier": 0.5873140600990732,
+        "log_loss": 2.0454085209677477,
+        "mean_fold_argmax_f1": 0.38325890367499443,
+        "frozen_decision_disagreement": 0.21953125
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "n": 110,
+          "brier": 0.5739474431818181,
+          "log_loss": 1.2190600467486754,
+          "mean_fold_argmax_f1": 0.4409465020576131,
+          "frozen_decision_disagreement": 0.42727272727272725
+        },
+        {
+          "fold": 2,
+          "n": 390,
+          "brier": 0.594244289356451,
+          "log_loss": 2.8016360763236534,
+          "mean_fold_argmax_f1": 0.3932996706208274,
+          "frozen_decision_disagreement": 0.31025641025641026
+        },
+        {
+          "fold": 3,
+          "n": 390,
+          "brier": 0.4185015560251193,
+          "log_loss": 1.319401848068688,
+          "mean_fold_argmax_f1": 0.40859841912473494,
+          "frozen_decision_disagreement": 0.05897435897435897
+        },
+        {
+          "fold": 4,
+          "n": 390,
+          "brier": 0.7529664063538496,
+          "log_loss": 2.248260285085511,
+          "mean_fold_argmax_f1": 0.29019102289680226,
+          "frozen_decision_disagreement": 0.23076923076923078
+        }
+      ]
+    },
+    "cal_raw_mass": {
+      "all": {
+        "n": 1560,
+        "brier": 0.6338390971128202,
+        "log_loss": 1.2335940557860179,
+        "mean_fold_argmax_f1": 0.28221313783341917,
+        "frozen_decision_disagreement": 0.375
+      },
+      "active": {
+        "n": 1280,
+        "brier": 0.6295555257553496,
+        "log_loss": 1.268388239138516,
+        "mean_fold_argmax_f1": 0.28531442107934735,
+        "frozen_decision_disagreement": 0.31875
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "n": 110,
+          "brier": 0.9921801361676194,
+          "log_loss": 2.8765047553651937,
+          "mean_fold_argmax_f1": 0.2698930041152263,
+          "frozen_decision_disagreement": 0.44545454545454544
+        },
+        {
+          "fold": 2,
+          "n": 390,
+          "brier": 0.650062513358872,
+          "log_loss": 1.2151873445400843,
+          "mean_fold_argmax_f1": 0.2544693344932579,
+          "frozen_decision_disagreement": 0.4948717948717949
+        },
+        {
+          "fold": 3,
+          "n": 390,
+          "brier": 0.3620643924685429,
+          "log_loss": 0.7426035501748984,
+          "mean_fold_argmax_f1": 0.2994350282485876,
+          "frozen_decision_disagreement": 0.16923076923076924
+        },
+        {
+          "fold": 4,
+          "n": 390,
+          "brier": 0.7742609351685059,
+          "log_loss": 1.3938024976109895,
+          "mean_fold_argmax_f1": 0.31746031746031744,
+          "frozen_decision_disagreement": 0.2564102564102564
+        }
+      ]
+    }
+  },
+  "intervals": [
+    {
+      "method": "cal_raw_decision",
+      "metric": "brier",
+      "block_sessions": 20,
+      "point_improvement": -0.08724385341685921,
+      "low": -0.17872895655040766,
+      "high": -0.014080911854830484
+    },
+    {
+      "method": "cal_raw_decision",
+      "metric": "brier",
+      "block_sessions": 60,
+      "point_improvement": -0.08724385341685921,
+      "low": -0.19115954848941424,
+      "high": 0.0038268940212799964
+    },
+    {
+      "method": "cal_raw_decision",
+      "metric": "log_loss",
+      "block_sessions": 20,
+      "point_improvement": -0.3346078306430218,
+      "low": -0.5871560168772811,
+      "high": -0.12387791777915381
+    },
+    {
+      "method": "cal_raw_decision",
+      "metric": "log_loss",
+      "block_sessions": 60,
+      "point_improvement": -0.3346078306430218,
+      "low": -0.6294287311525125,
+      "high": -0.06876965769812826
+    },
+    {
+      "method": "cal_raw_mass",
+      "metric": "brier",
+      "block_sessions": 20,
+      "point_improvement": -0.09091625488676018,
+      "low": -0.18228079919602874,
+      "high": -0.01727715063826689
+    },
+    {
+      "method": "cal_raw_mass",
+      "metric": "brier",
+      "block_sessions": 60,
+      "point_improvement": -0.09091625488676018,
+      "low": -0.19384380270260035,
+      "high": 0.0005854704336394927
+    },
+    {
+      "method": "cal_raw_mass",
+      "metric": "log_loss",
+      "block_sessions": 20,
+      "point_improvement": -0.33201783052815387,
+      "low": -0.581997134206128,
+      "high": -0.12424270838335895
+    },
+    {
+      "method": "cal_raw_mass",
+      "metric": "log_loss",
+      "block_sessions": 60,
+      "point_improvement": -0.33201783052815387,
+      "low": -0.6225185024860282,
+      "high": -0.06834741403567128
+    }
+  ],
+  "screens": {
+    "cal_raw_decision": {
+      "point_screen": false,
+      "brier_fold_wins": 1,
+      "paired_screen": false,
+      "passed": false
+    },
+    "cal_raw_mass": {
+      "point_screen": false,
+      "brier_fold_wins": 0,
+      "paired_screen": false,
+      "passed": false
+    }
+  },
+  "disclosure": "Calibrated argmax differs from class-balanced frozen point decision. No policy replacement or confidence certification."
+}

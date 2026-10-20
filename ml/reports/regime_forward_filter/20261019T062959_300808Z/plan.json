@@ -1,0 +1,21 @@
+{
+  "mode": "causal_forward_transition_filter_DEVELOPMENT",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_forward_filter.py": "ed79e2c3b12235eca936fd24b0145da8da07999385cb6b822063968321e37e06",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_research_evaluation.py": "b4e0c29294d404fd6cdb00967c5d989a6c0e7550979f7bdba81e8492efa45142",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_forecast_smoothing/20261019T062316_546117Z/ema5_shrink_predictions.csv": "2e1505abe7628682b5f157b254fefeaeb02f3a7cc94d27ab5dd0f89ae800b7fd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_forecast_smoothing/20261019T062316_546117Z/plan.json": "b3668ae76b27343d1e1ee2f43c606e1e772c441970ecf7d680e1bce7f762d2cd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6"
+  },
+  "transition": "Last3 calendar years of raw-market adjacent target labels with BOTH endpoints strictly mature before refresh; Laplace1 counts, half transition/half uniform; update20 market sessions",
+  "primary": "filter2: forward posterior using incumbent decision scores squared as pseudo-likelihood",
+  "secondary": "filter2_shrink: .5 incumbent scores + .5 filter2",
+  "diagnostic_powers": [
+    1.0,
+    4.0
+  ],
+  "timing": "No backward smoothing or Viterbi decoding. Uniform state after missing forecast sessions. Current/future true label never enters filter.",
+  "score_semantics": "Pseudo-likelihood state scores; not certified event probabilities",
+  "acceptance": "Mean F1 +.01, no worst/directional decline, MCC gain, >=3 wins, paired20/60 lower>0 for provisional evidence.",
+  "caveat": "Repeatedly inspected history, no independent acceptance or deployment."
+}

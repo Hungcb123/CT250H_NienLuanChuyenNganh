@@ -1,0 +1,16 @@
+{
+  "created_at": "2026-10-17T17:07:01.495352+00:00",
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "file_sha256": {
+    "run_regime_shadow_daily.py": "750679ac1cef076a7f1bfc6ba1df632c360fd23b0a02dfcb24c1addd6ead88de",
+    "evaluate_regime_shadow.py": "0b596db533b9f1b9b75894b2cd52e0cbee37231810ba7dabcfe7e214f62d2cbe",
+    "research_protocol.py": "4f86aaaf1e15f9f1baf9289612085a982de513f0c691ba01706225035daa8614"
+  },
+  "artifact_sha256": {
+    "runtime_lock.json": "0e2946dc6dbbb775974e567bbc50bff765b83bc6ad5ed3388a45dabae41214e0",
+    "prospective_protocol.json": "c452f79adfa2617ecce14f5de515a66a45b6dd47c73a8f56fd84c3b5f10d1a37",
+    "environment_lock.json": "b1fc089740eb931bd91774dbaa5cc46576dfcbc32100ffa0f468941342e27285"
+  },
+  "interpreter": "/usr/bin/python3",
+  "status": "research_only_not_deployed"
+}

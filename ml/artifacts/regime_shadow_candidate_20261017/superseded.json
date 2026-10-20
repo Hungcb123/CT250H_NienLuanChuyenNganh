@@ -1,0 +1,5 @@
+{
+  "reason": "Research replay initialization fix before any prospective prediction",
+  "replacement": "ml/artifacts/regime_shadow_candidate_20261017_v2",
+  "prospective_predictions_at_supersession": 0
+}

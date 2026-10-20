@@ -1,0 +1,22 @@
+[
+  {
+    "rows": 390,
+    "forecast_prefix_invariance": true
+  },
+  {
+    "rows": 780,
+    "forecast_prefix_invariance": true
+  },
+  {
+    "rows": 1170,
+    "forecast_prefix_invariance": true
+  },
+  {
+    "rows": 1460,
+    "forecast_prefix_invariance": true
+  },
+  {
+    "rows": 1560,
+    "forecast_prefix_invariance": true
+  }
+]

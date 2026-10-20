@@ -1,0 +1,22 @@
+{
+  "role": "Post-hoc DEVELOPMENT density-pool check, no pool metrics computed yet",
+  "created_at": "2026-10-18T16:49:45.260149+00:00",
+  "source": "ml/reports/regime_conditional_returns/20261018T164710_240627Z",
+  "source_probability_sha256": "8d6bd4a2946436669eb6e667f6e02a7afaf2c102a140ea72e8d41d3efed6a9ef",
+  "reference": "ml/reports/regime_probability_audit/20261018T163919_646038Z",
+  "reference_probability_sha256": "c5e095c7456025a4e69b61514faba741839129229606f8c7016922f2c66b23b3",
+  "target": "Same original three-classT+20 +/-5%, same1560 dates and1280 active comparison dates",
+  "weights": {
+    "causal_prior": 0.5,
+    "conditional_normal": 0.5
+  },
+  "candidates": "All FOUR conditional models individually pooled plus equal mean of all FOUR pooled;5 total, no weight grid",
+  "default_research_candidate": "pooled_all; do not silently substitute an outer-best individual variant",
+  "hypothesis": "Partial pooling with a competent causal class prior may reduce normal-tail misspecification/extreme confidence; no guarantee.",
+  "screening": "Same previous proper-score screen: both Brier/logloss improve, >=3/4 Brier fold wins, both20/60 paired lower bounds>0.",
+  "disclosure": "Motivated by inspected normal-tail logloss. All results remain repeated DEVELOPMENT, not independent evidence.",
+  "point_policy": "Frozen .420 point-decision policy unchanged. This forecasts class probabilities separately; cannot call maximum score confidence of that policy.",
+  "source_sha256": "98813d5b5a5596b3f5d69729bbd7be09158b9f638cae00af79792e4886acc36f",
+  "plan_sha256": "8d04ae2cc958d607476c1ae3e9801fb3624ef4ed5e5976059aea3c4e1c9321af",
+  "executed_at": "2026-10-18T16:52:30.518311+00:00"
+}

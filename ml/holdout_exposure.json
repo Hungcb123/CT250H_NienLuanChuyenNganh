@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "reason": "These final holdout results were inspected during research on 2026-10-17. Do not reuse them as an independent test.",
+  "exposures": [
+    {
+      "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+      "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+      "horizon": 20,
+      "start": "2025-03-20",
+      "labels_observed_through": "2026-10-01"
+    },
+    {
+      "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+      "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+      "horizon": 60,
+      "start": "2025-03-20",
+      "labels_observed_through": "2026-10-01"
+    },
+    {
+      "report": "ml/reports/regime_v2/20261017T125935_040656Z/regime_v2_report.json",
+      "report_sha256": "db50f8613d58c64b82f279e130cb48161376a51ec4bafe473dd8d37512842e3f",
+      "horizon": 120,
+      "start": "2025-03-20",
+      "labels_observed_through": "2026-10-01"
+    },
+    {
+      "report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_shadow/latest_seed_runtime_v2_20261017/initialization_audit.json",
+      "horizon": 20,
+      "start": "2026-09-04",
+      "labels_observed_through": "2026-10-16"
+    },
+    {
+      "report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/exposures/2026-10-19_c33166ac.json",
+      "horizon": 20,
+      "start": "2026-09-21",
+      "labels_observed_through": "2026-10-19"
+    },
+    {
+      "report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/artifacts/regime_shadow_candidate_20261017_v2/exposures/2026-10-20_df6a29c2.json",
+      "horizon": 20,
+      "start": "2026-09-22",
+      "labels_observed_through": "2026-10-20"
+    }
+  ]
+}

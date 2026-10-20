@@ -1,0 +1,39 @@
+{
+  "role": "Research score snapshot/reproduction recipe only; no native inference bundle or deployment acceptance",
+  "created_at": "2026-10-19T07:15:04.921244+00:00",
+  "model": "magnitude_shrink",
+  "metric": {
+    "at": "2026-10-19T07:15:04.921244+00:00",
+    "highest_observed_f1": 0.5133980959531047,
+    "worst_f1": 0.3924641426943876,
+    "mean_mcc": 0.2958704757542401,
+    "bear_mean_f1": 0.3229297466112881,
+    "bull_mean_f1": 0.4736080819975651,
+    "fold_f1": [
+      0.555436973444794,
+      0.6704931369800513,
+      0.3924641426943876,
+      0.43519813069318597
+    ],
+    "forecast_files_audited": 10,
+    "source_hashes_verified": 49,
+    "focused_tests_passed": 7,
+    "prior_full_tests_passed": 234,
+    "independent_test": false,
+    "accepted": false,
+    "goal_achieved": false,
+    "goal_status": "active",
+    "deployment_changed": false
+  },
+  "files": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/plan.json": "92a56a05bd42a2738f6074f93a645ea9dff40b7a891e541333315c5dd6e505c6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/report.json": "d4827b27ec81003d647f14738ee59eb710fff4a02856229929d63f823bfb1939",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/comparison.csv": "0d50fef64cb30ff95c0baf7eea4c5083b13b5db913720f825a8a4a66ff453fb0",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/magnitude_shrink_predictions.csv": "bbfe9402a9303027ce114c0751c723935401e5b61cdb8d6e0f2fef49a7284d8f",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_magnitude_forest/20261019T070928_701705Z/timing_audit.json": "52e4fb6ff239da07e94e40616f426b97ba3e96b3a7e60f27571b3d9045d789f8",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage4/independent_metric_audit.json": "3af2e2719a99d00fdf59f64cb1e27ec0dd7b4277d3794a219226eaf7f35a6c42",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_research/f1_goal_20261019_stage4/recalculate.py": "b20f4fc8fdc5881f6f095f680ef1bc3010313c4b6582c2383f0e74acb95e3bcb",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_magnitude_forest.py": "1b67cb4feaeab3a8f4b59ffb9bfa0a1c96e16c25a1f74efecf8f45e2a0c3cb08"
+  },
+  "rerun": "python3 ml/experiment_regime_magnitude_forest.py"
+}

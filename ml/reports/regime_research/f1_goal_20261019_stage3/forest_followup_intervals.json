@@ -1,0 +1,47 @@
+{
+  "role": "Post-inspection descriptive diagnostic; selection across repeated experiments unadjusted",
+  "intervals": [
+    {
+      "control": "original_dynamic",
+      "block": 20,
+      "delta": 0.022840438463603008,
+      "low": 0.000737192266677282,
+      "high": 0.0449041148308443
+    },
+    {
+      "control": "original_dynamic",
+      "block": 60,
+      "delta": 0.022840438463603008,
+      "low": 0.00114072622326749,
+      "high": 0.0468283520968762
+    },
+    {
+      "control": "stage2",
+      "block": 20,
+      "delta": 0.014857313816791118,
+      "low": -0.0020426159997715522,
+      "high": 0.03197592456795103
+    },
+    {
+      "control": "stage2",
+      "block": 60,
+      "delta": 0.014857313816791118,
+      "low": 0.002039990786328724,
+      "high": 0.033541286190657126
+    },
+    {
+      "control": "matched_robust",
+      "block": 20,
+      "delta": 0.003674744767996563,
+      "low": -0.010596233894805596,
+      "high": 0.020421625913609093
+    },
+    {
+      "control": "matched_robust",
+      "block": 60,
+      "delta": 0.003674744767996563,
+      "low": -0.010441356112333247,
+      "high": 0.021861827588816194
+    }
+  ]
+}

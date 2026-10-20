@@ -2,8 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* DEFAULT: TCInvest Dark Mode (As requested by user) */
+/* DEFAULT: White Mode / Light Mode */
 :root {
+  color-scheme: light;
+  --color-surface: 248 250 252;
+  --color-surface-dim: 241 245 249;
+  --color-surface-bright: 255 255 255;
+  --color-surface-container-lowest: 255 255 255;
+  --color-surface-container-low: 248 250 252;
+  --color-surface-container: 241 245 249;
+  --color-surface-container-high: 226 232 240;
+  --color-surface-container-highest: 203 213 225;
+  --color-primary: 15 23 42;
+  --color-primary-container: 30 41 59;
+  --color-secondary: 2 132 199;
+  --color-secondary-container: 224 242 254;
+  --color-accent-gold: 180 83 9;
+  --color-accent-gold-light: #fef3c7;
+  --color-accent-emerald: 5 150 105;
+  --color-accent-emerald-light: #ecfdf5;
+  --color-accent-rose: 225 29 72;
+  --color-accent-rose-light: #ffe4e6;
+  --color-accent-blue: 2 132 199;
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 71 85 105;
+  --color-text-muted: 148 163 184;
+  --color-border-subtle: 226 232 240;
+  --color-border-highlight: 203 213 225;
+}
+
+/* TCInvest Dark Mode */
+html.dark, [data-theme="dark"] {
   color-scheme: dark;
   --color-surface: 15 16 21;
   --color-surface-dim: 10 11 15;
@@ -120,3 +149,53 @@ body {
     width: 0%;
   }
 }
+
+/* VNxCapital: investment workspace, shared by the operating tabs. */
+.vnx-workspace .vnx-panel {
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid rgb(var(--color-border-subtle));
+  border-radius: 0;
+  background: rgb(var(--color-surface-container-lowest));
+  box-shadow: none;
+}
+.vnx-workspace .vnx-panel:first-child {
+  background: transparent;
+  border-top: 0;
+  border-bottom: 1px solid rgb(var(--color-border-subtle));
+  padding: 0 0 1.25rem;
+}
+.vnx-stat-strip {
+  border-bottom: 1px solid rgb(var(--color-border-subtle));
+  padding-bottom: 1rem;
+}
+.vnx-workspace .vnx-stat {
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  border-inline-start: 1px solid rgb(var(--color-border-subtle));
+  background: transparent;
+  box-shadow: none;
+}
+.vnx-workspace .vnx-stat:first-child { border-inline-start: 0; }
+.vnx-workspace .vnx-stat > div:first-child > svg { display: none; }
+.vnx-workspace :is(h2,h3,h4) { text-transform: none; letter-spacing: normal; }
+.vnx-workspace :is(h2,h3) { font-weight: 600; }
+.vnx-workspace :is(table,dl) { font-variant-numeric: tabular-nums; }
+.vnx-workspace .vnx-savings-row { border-bottom: 1px solid rgb(var(--color-border-subtle)); }
+.vnx-workspace :is(button,input,select,textarea):focus-visible {
+  outline: 2px solid rgb(var(--color-text-primary));
+  outline-offset: 3px;
+}
+@media (max-width: 639px) {
+  .vnx-workspace .vnx-stat { border-inline-start: 0; border-top: 1px solid rgb(var(--color-border-subtle)); padding-inline: 0; }
+  .vnx-workspace .vnx-stat:first-child { border-top: 0; }
+}
+.vnx-workspace .vnx-detail {
+  min-width: 0;
+  border-top: 1px solid rgb(var(--color-border-subtle));
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.vnx-workspace .text-text-muted { color: rgb(var(--color-text-secondary)); }

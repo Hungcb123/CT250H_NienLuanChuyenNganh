@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "candidate_id": "equal_standardized_3y_expanding_online120_v1",
+  "objective": "VNINDEX T+20 risk event: simple return strictly below -5%",
+  "status": "research_challenger_not_accepted_or_live_approved",
+  "frozen_at": "2026-10-17T16:33:35.000953+00:00",
+  "development_source": "reports/regime_online/20261017T162627_969154Z/equal_ensemble_online120_predictions.csv",
+  "development_predictions_sha256": "3e3328ff31dd38e0ce612281886b6fc113e959a4d4898989b7857a5cbf489e97",
+  "development_comparison": "reports/regime_research/equal_online120_vs_original_vol",
+  "feature_schema": [
+    "RSI_14",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Hist",
+    "BB_Width",
+    "BB_PctB",
+    "SMA_20_50_Ratio",
+    "Dist_SMA20",
+    "Dist_SMA50",
+    "Abs_Change_14_Pct",
+    "ROC_20",
+    "HV_20",
+    "ROC60",
+    "ROC120",
+    "DistSMA200",
+    "Drawdown120",
+    "Drawdown252",
+    "HV20_60_Ratio",
+    "DownsideHV60",
+    "Stretch20",
+    "Shock5",
+    "VolRatio5_20",
+    "NegativeDays10",
+    "Drawdown20"
+  ],
+  "label": "Volatility regimes z=log(P[t+20]/P[t])/(std(last20 completed daily log returns, ddof1)*sqrt20); class0 z<-1, class1 -1<=z<=1, class2 z>1",
+  "learner": {
+    "type": "LightGBM",
+    "parameters": {
+      "n_estimators": 150,
+      "learning_rate": 0.03,
+      "max_depth": 3,
+      "num_leaves": 7,
+      "min_child_samples": 50,
+      "colsample_bytree": 0.7,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1
+    }
+  },
+  "experts": [
+    "3y",
+    "expanding"
+  ],
+  "expert_weights": [
+    0.5,
+    0.5
+  ],
+  "calibration_rows": 40,
+  "refit_market_sessions": 20,
+  "latest_refit_anchor": "2025-02-10",
+  "normalization": {
+    "input": "class0 probability",
+    "clip_epsilon": 1e-06,
+    "transform": "logit",
+    "center": "current expert calibration mean",
+    "scale": "max(calibration population std, .25)"
+  },
+  "threshold": {
+    "type": "strictly past archived standardized ensemble-score rolling quantile",
+    "window": 120,
+    "quantile": 0.9,
+    "method": "higher",
+    "signal": "score > threshold",
+    "warmup": "current blended calibration p90 until 120 past score observations exist"
+  },
+  "timing": [
+    "Predict after VNINDEX close only",
+    "Train only when label_end_date < refit start",
+    "Purge core labels with end >= calibration first date",
+    "Calibration outcomes mature before refit start",
+    "Every score stored with observation date, model version and emitted timestamp",
+    "Research backcast used only to seed history and never tagged prospective",
+    "Prospective forecast requires emission after frozen_at and same completed-session close; never backfill prospective records"
+  ],
+  "source_component_sha256": {
+    "train_regime_v2.py": "c9a94abcc3f97e9d100f5b108c38eb87d4fe70448f8519efb2e1af575218363f",
+    "experiment_regime.py": "527e6b89dfe4b5c63d177385525ed5f510ecf4eaed932cec5a92d32d4559a59b",
+    "experiment_regime_labels.py": "3eea3bf79158d54668a23a3fcfd16b7a2a744f33ef87ef058b110442eccbd201",
+    "experiment_regime_risk.py": "8ef233c08b7b7df66a86703f63b396e90e54d6f46771cb81a70150fd10345870",
+    "experiment_regime_candidates.py": "74934813dbf929077718be5369be8ff15e334c14f098f14090353f9c0612d6b0",
+    "experiment_regime_history.py": "49bebbaea33b46a411c338f8beff9d8fb163fb4d9926f2323d3621c927b157c2",
+    "experiment_regime_fresh.py": "434f70f937d5333313e8d85996cfcddfd737ddd13a318a65cc17a9f8d6d350df",
+    "experiment_regime_ensemble.py": "7ab4d4e6393c63ad5ad002e51deb3610f4467a31ab35a0bc3a548bdeb8092d26",
+    "experiment_regime_online.py": "43bf14de76331b5014e07f2e8576c4bfb45c642dffee4455e0a1ae23789e22d0",
+    "regime_risk_diagnostics.py": "6e3b5530bd1c530e0155dc22ce263284f78e8c35eb3fb8c64b0ce74e5c01426d"
+  },
+  "environment": {
+    "lightgbm": "4.7.0",
+    "sklearn": "1.7.2"
+  },
+  "data_caveat": "Oldest index history single-broker; current historical source revisions not independently point-in-time certified",
+  "limitations": [
+    "Failed some predeclared development gates",
+    "Paired bootstrap intervals include zero",
+    "Repeated historical experiment selection is not independent test evidence",
+    "No claimed trading profitability, calibrated event probability, live deployment or completed user goal"
+  ],
+  "remaining": [
+    "Implement/test/replay frozen inference runtime",
+    "Prepare append-only source-reviewed fresh-data collector",
+    "Create prospective prediction ledger",
+    "Wait for genuinely future T+20 outcomes and enough risk events"
+  ]
+}

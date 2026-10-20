@@ -1,0 +1,11 @@
+{
+  "mode": "research_backcast_initialization_not_independent_test",
+  "data_snapshot": "ml/data/research/regime_shadow/20261017T164231_009575Z/VNINDEX.csv",
+  "data_sha256": "2d55af597b6a78e7a55df8a4b6153a270d7ac250665480895a6c447679c6c775",
+  "raw_prices_observed_through": "2026-10-16",
+  "candidate_id": "equal_standardized_3y_expanding_online120_v1",
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "a90c5fa58d577aab07f5083e148028453bccdcab8d77f99cebe9708905f2fa3c",
+  "prospective_predictions": 0,
+  "created_at": "2026-10-17T16:53:39.910140+00:00"
+}

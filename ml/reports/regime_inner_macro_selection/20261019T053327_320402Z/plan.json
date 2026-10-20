@@ -1,0 +1,64 @@
+{
+  "mode": "pure_inner_macro_selection_DEVELOPMENT",
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_inner_macro_selection.py": "855613fc1e91d702598b7d77af0c00d90c0241fff0b3d6794966f667bdd12182",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_research_evaluation.py": "b4e0c29294d404fd6cdb00967c5d989a6c0e7550979f7bdba81e8492efa45142",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/plan.json": "70cab9f02820d44764f297521f18f1f810f29f8b62d2072504ea9cf6d3cfe660",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/trend_predictions.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/risk_predictions.csv": "9673be6656785f2d1e9aaf4bfb85ad1167cd1ed575ef3317c602612ba1ae0a80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_raw_mapped_predictions.csv": "02a35e6b7ccc26877666aab9ccd0562781c11509277f16075bdb883457bc06df",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_normalized_mapped_predictions.csv": "f048d7e4a9107820c58b306315133b0b847c4a2e5509d7f6544e49205732e466",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/plan.json": "481f3f12019f8267381ef6af96f57ee16b4f96a8ffeefdfd843be9a8ec4d5d69",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/inner_selection.json": "5c26c715848841ea45703286b12389c8ba1a18239b11d48b9330dfb6f5079000",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/combined_scores.csv": "e1396d6a5b46837932991f05e30dcc82f8b058415b51fa5a652732478ac77cbc",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/control_scores.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/indices_scores.csv": "8eece2bacd2aa77ed285ad4f8cb1034310f206c54509638f4f68aea087fa0d5a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/ohlcv_scores.csv": "6faa1040cce24ccd9a532d5d6da29843c4c0a2fab5bea55ddd262f92e60e8ee1",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/vix_scores.csv": "9e998afa36bd6dfd2876f6e7bd7d0355cddba3faf855331c3b3ae07f8f0b5f93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/plan.json": "c2b17187df5f22ce93a92fa101e4bab6762e525952e6a8dcba44d2c599863eb0",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/inner_selection.json": "47a5c243b6cd88e9148330ad179c159a31a2fa2f58677ee5dddd0bc72a759b85",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/CatBoost_scores.csv": "ebc288424f039609b2317ad045bd4eb3c9c3aa50c7eeaadcca19e6c84a90ddcb",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/ExtraTrees_scores.csv": "fe29b2312905138f65ed81f127a70b40cb6ed6ed65f91a665e6ae0395a77253e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/HistGBM_scores.csv": "a97ab9a21c6bb63fdfae02098634a36966af1c3e2dbf387974023081af09594b",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/KNN_scores.csv": "ce80a4b89a0fa0898190358fcb9cc446735492681685e0f71065e0e549044291",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/legacy_equal_scores.csv": "dcdb5442d74af1f8aaefe536387571e625472c7b8c699d2298cca1f9082a923a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/MLP_scores.csv": "b8339fdb74d6889ada10edf830afc3d4146099c51ab214b13ba8fae27782d0b4",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/RandomForest_scores.csv": "290ee41de1ec0176b9c501d6aa3b26805917085c13bf12d2cdfe82d4b72d7f20",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/ShrinkageLDA_scores.csv": "db83fcb5bd646d54e72a24df349d389cdfbdab23d09d7a1470f9b565923b1d2c",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_families/20261019T052530_594387Z/SVC_RBF_scores.csv": "51f116c42a833ce8d743071e30e1707fefbddcfe41541c748ad454a509923687",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/plan.json": "531e6db9f983feeceb98a3b7422244aa1d0a1829910011bb6d7ff88d69524d68",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/inner_selection.json": "08f4b91b2c5183bdc3786024ad4a0cb6d10c466363539ebb3dabc319fe91674e",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/ce_scores.csv": "888c3c55aaeb41316e7addcc8f97a1c778f0a46e3c596a2a257ab2cf22d27b33",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/focal1_scores.csv": "8e98f8493c625201a957269da0a9ea54896740371337366322812eea752ef667",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/focal2_scores.csv": "3ed1140c702b1ba938d5d4df8584dacac395d6c498d45f8b88bd67b5064eb9a9",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/legacy_equal_scores.csv": "dcdb5442d74af1f8aaefe536387571e625472c7b8c699d2298cca1f9082a923a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/smooth05_scores.csv": "f384c009c4143e68b69777e91a831e3b37c5f8b01caebf09446baf0257634f59",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_losses/20261019T052808_023744Z/smooth10_scores.csv": "d9c89dc6bb19c51d928c24a3eca986efbdb0a17e1bf32f64bf1bbc41d98b34a0"
+  },
+  "selection": "Per source study/outer fold maximize mean of three stored purged inner macro F1 scores; switch only if >=.01 above legacy/control; ties source order. NO outer metrics used to choose.",
+  "source_studies": {
+    "information": [
+      "regime_dynamic_information/20261019T052057_760569Z",
+      "name",
+      "control"
+    ],
+    "families": [
+      "regime_dynamic_families/20261019T052530_594387Z",
+      "family",
+      "legacy_equal"
+    ],
+    "losses": [
+      "regime_dynamic_losses/20261019T052808_023744Z",
+      "loss",
+      "legacy_equal"
+    ]
+  },
+  "primary": [
+    "macro_information_blend",
+    "macro_families_supplement",
+    "macro_families_replacement"
+  ],
+  "mixture": "Information: .25 selected trend + .25 old risk + .5 old density. Family supplement: .25 selected classifier + .25 old equal + .5 density. Replacement: .5 selected classifier + .5 density.",
+  "acceptance": "Same mean+1pt/worst/directional/MCC/3fold screen and paired20/60 intervals; no independent acceptance.",
+  "caveat": "Protocol motivated by already inspected outcomes. Reusing true inner scores preserves timing, but cannot undo research selection bias."
+}

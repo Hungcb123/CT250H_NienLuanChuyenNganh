@@ -1,0 +1,274 @@
+{
+  "role": "Independent implementation audit of historical DEVELOPMENT, not independent data validation",
+  "forecast_files": [
+    {
+      "path": "reports/regime_inner_forest/20261019T070804_899122Z/incumbent_predictions.csv",
+      "sha256": "732bab1d01fa8ababad6a7ed1f39fc905e5bf28bcdedfe9c439499f077af8569",
+      "fold_f1": [
+        0.5600762926756442,
+        0.6631035701661364,
+        0.3911202129927543,
+        0.43429710279920575
+      ],
+      "mean_f1": 0.5121492946584352,
+      "worst_f1": 0.3911202129927543,
+      "mean_mcc": 0.2958542895196485,
+      "bear_mean_f1": 0.3164668470428258,
+      "side_mean_f1": 0.7415593246374856,
+      "bull_mean_f1": 0.47842171229499403
+    },
+    {
+      "path": "reports/regime_inner_forest/20261019T070804_899122Z/joint_macro_predictions.csv",
+      "sha256": "353bba87a539edd44010440ad83432f97789915d6de7146a6c25371ba53cc1d5",
+      "fold_f1": [
+        0.5600762926756442,
+        0.6574938086850574,
+        0.3554363437757757,
+        0.4080959427796276
+      ],
+      "mean_f1": 0.4952755969790262,
+      "worst_f1": 0.3554363437757757,
+      "mean_mcc": 0.2669500579116666,
+      "bear_mean_f1": 0.3152697047198326,
+      "side_mean_f1": 0.7354478281016659,
+      "bull_mean_f1": 0.4351092581155801
+    },
+    {
+      "path": "reports/regime_inner_forest/20261019T070804_899122Z/joint_robust_predictions.csv",
+      "sha256": "6f9f642c2fefe6e0e2a46eb66e6b20db271cd00e1b272936da9ee6ec27868661",
+      "fold_f1": [
+        0.5505608390809522,
+        0.5941328484339237,
+        0.3554363437757757,
+        0.4080959427796276
+      ],
+      "mean_f1": 0.4770564935175698,
+      "worst_f1": 0.3554363437757757,
+      "mean_mcc": 0.2527127157103219,
+      "bear_mean_f1": 0.2669400452488688,
+      "side_mean_f1": 0.7308704459375477,
+      "bull_mean_f1": 0.4333589893662929
+    },
+    {
+      "path": "reports/regime_inner_forest/20261019T070804_899122Z/joint_shrink_predictions.csv",
+      "sha256": "2fc40eb066cb5ab4e10fd9ed388de02c99934b525b312e7147111b8a9f931b11",
+      "fold_f1": [
+        0.5483079340595524,
+        0.6248990224211196,
+        0.36370691037357705,
+        0.4107102048278519
+      ],
+      "mean_f1": 0.48690601792052524,
+      "worst_f1": 0.36370691037357705,
+      "mean_mcc": 0.26598101994168605,
+      "bear_mean_f1": 0.2804158714959101,
+      "side_mean_f1": 0.7343829816157056,
+      "bull_mean_f1": 0.44591920064996016
+    },
+    {
+      "path": "reports/regime_magnitude_forest/20261019T070928_701705Z/incumbent_predictions.csv",
+      "sha256": "732bab1d01fa8ababad6a7ed1f39fc905e5bf28bcdedfe9c439499f077af8569",
+      "fold_f1": [
+        0.5600762926756442,
+        0.6631035701661364,
+        0.3911202129927543,
+        0.43429710279920575
+      ],
+      "mean_f1": 0.5121492946584352,
+      "worst_f1": 0.3911202129927543,
+      "mean_mcc": 0.2958542895196485,
+      "bear_mean_f1": 0.3164668470428258,
+      "side_mean_f1": 0.7415593246374856,
+      "bull_mean_f1": 0.47842171229499403
+    },
+    {
+      "path": "reports/regime_magnitude_forest/20261019T070928_701705Z/magnitude_shrink_predictions.csv",
+      "sha256": "bbfe9402a9303027ce114c0751c723935401e5b61cdb8d6e0f2fef49a7284d8f",
+      "fold_f1": [
+        0.555436973444794,
+        0.6704931369800513,
+        0.3924641426943876,
+        0.43519813069318597
+      ],
+      "mean_f1": 0.5133980959531047,
+      "worst_f1": 0.3924641426943876,
+      "mean_mcc": 0.2958704757542401,
+      "bear_mean_f1": 0.32292974661128815,
+      "side_mean_f1": 0.7436564592504609,
+      "bull_mean_f1": 0.4736080819975651
+    },
+    {
+      "path": "reports/regime_magnitude_forest/20261019T070928_701705Z/magnitude_replace_predictions.csv",
+      "sha256": "38b0f7f86cbcc81faa55cc6b1acb11bb4ee715297f0d644381ceda9e77291172",
+      "fold_f1": [
+        0.5483838104882016,
+        0.655631707963595,
+        0.38701454935801055,
+        0.44021985783125084
+      ],
+      "mean_f1": 0.5078124814102645,
+      "worst_f1": 0.38701454935801055,
+      "mean_mcc": 0.28596618118052153,
+      "bear_mean_f1": 0.3201910183922741,
+      "side_mean_f1": 0.7418412931402729,
+      "bull_mean_f1": 0.46140513269824657
+    },
+    {
+      "path": "reports/regime_soft_margin/20261019T071331_554457Z/incumbent_predictions.csv",
+      "sha256": "495d21c26ce9b65f0beda6ac20b0ac7b8ab33d712cdb3dca4b025c5b1ea51d44",
+      "fold_f1": [
+        0.555436973444794,
+        0.6704931369800513,
+        0.3924641426943876,
+        0.43519813069318597
+      ],
+      "mean_f1": 0.5133980959531047,
+      "worst_f1": 0.3924641426943876,
+      "mean_mcc": 0.2958704757542401,
+      "bear_mean_f1": 0.32292974661128815,
+      "side_mean_f1": 0.7436564592504609,
+      "bull_mean_f1": 0.4736080819975651
+    },
+    {
+      "path": "reports/regime_soft_margin/20261019T071331_554457Z/soft_margin_shrink_predictions.csv",
+      "sha256": "b51b8f56a0318fb764f476b9013cd0da93d236b684e826a5c6135cf25a3e721a",
+      "fold_f1": [
+        0.5499332263357285,
+        0.6560588050083291,
+        0.3772675896883298,
+        0.44000306080379703
+      ],
+      "mean_f1": 0.5058156704590462,
+      "worst_f1": 0.3772675896883298,
+      "mean_mcc": 0.28661051431891466,
+      "bear_mean_f1": 0.31368933971505264,
+      "side_mean_f1": 0.7359983531306717,
+      "bull_mean_f1": 0.46775931853141406
+    },
+    {
+      "path": "reports/regime_soft_margin/20261019T071331_554457Z/soft_margin_replace_predictions.csv",
+      "sha256": "0c3e9f1b973e92edde1dce153322181268fb11e508c9e4ab7fedddbac1402f2a",
+      "fold_f1": [
+        0.46959701041956947,
+        0.5515728473782359,
+        0.357545134445267,
+        0.47395913409067186
+      ],
+      "mean_f1": 0.463168531583436,
+      "worst_f1": 0.357545134445267,
+      "mean_mcc": 0.2388045614456522,
+      "bear_mean_f1": 0.2854935569631397,
+      "side_mean_f1": 0.6815441797281985,
+      "bull_mean_f1": 0.42246785805896997
+    }
+  ],
+  "source_hashes_verified": 49,
+  "timing_audits": [
+    {
+      "study": "20261019T070804_899122Z",
+      "parent": "regime_inner_forest",
+      "strictly_mature_fit_boundaries": 36
+    },
+    {
+      "study": "20261019T070928_701705Z",
+      "parent": "regime_magnitude_forest",
+      "strictly_mature_fit_boundaries": 56
+    },
+    {
+      "study": "20261019T071331_554457Z",
+      "parent": "regime_soft_margin",
+      "strictly_mature_fit_boundaries": 28
+    }
+  ],
+  "selection_replay": [
+    {
+      "fold": 1,
+      "candidates": 225,
+      "chosen": {
+        "macro": 127,
+        "robust": 81
+      },
+      "strict_inner_maturity": true
+    },
+    {
+      "fold": 2,
+      "candidates": 225,
+      "chosen": {
+        "macro": 82,
+        "robust": 164
+      },
+      "strict_inner_maturity": true
+    },
+    {
+      "fold": 3,
+      "candidates": 225,
+      "chosen": {
+        "macro": 132,
+        "robust": 132
+      },
+      "strict_inner_maturity": true
+    },
+    {
+      "fold": 4,
+      "candidates": 225,
+      "chosen": {
+        "macro": 77,
+        "robust": 77
+      },
+      "strict_inner_maturity": true
+    }
+  ],
+  "independent_outer_score_parity": [
+    {
+      "study": "regime_inner_forest",
+      "candidate": "incumbent",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_inner_forest",
+      "candidate": "joint_macro",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_inner_forest",
+      "candidate": "joint_robust",
+      "max_score_error": 3.3306690738754696e-16
+    },
+    {
+      "study": "regime_magnitude_forest",
+      "candidate": "incumbent",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_magnitude_forest",
+      "candidate": "magnitude_shrink",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_magnitude_forest",
+      "candidate": "magnitude_replace",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_soft_margin",
+      "candidate": "incumbent",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_soft_margin",
+      "candidate": "soft_margin_shrink",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_soft_margin",
+      "candidate": "soft_margin_replace",
+      "max_score_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_inner_forest",
+      "candidate": "joint_shrink",
+      "max_score_error": 2.220446049250313e-16
+    }
+  ],
+  "caveat": "Same frozen dynamic target, 1560 outer dates. Repeated research exposure remains; no test or production acceptance."
+}

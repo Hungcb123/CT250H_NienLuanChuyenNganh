@@ -87,9 +87,9 @@ public class LedgerController {
     }
 
     @PostMapping("/rebalance/confirm")
-    public ResponseEntity<ApiResponse<RebalanceExecutionResultDTO>> confirmRebalance() {
+    public ResponseEntity<ApiResponse<RebalanceExecutionResultDTO>> confirmRebalance(@RequestParam(value = "planToken", required = false) String planToken) {
         Long userId = SecurityUtils.getCurrentUserIdOrDefault(1L);
-        RebalanceExecutionResultDTO result = optimizerService.executeRebalancePlan(userId);
+        RebalanceExecutionResultDTO result = optimizerService.executeRebalancePlan(userId, planToken);
         return ResponseEntity.ok(ApiResponse.success("Xác nhận thực hiện tái cơ cấu theo kế hoạch thành công", result));
     }
 

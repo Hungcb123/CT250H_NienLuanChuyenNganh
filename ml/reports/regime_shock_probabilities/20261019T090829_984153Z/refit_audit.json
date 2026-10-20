@@ -1,0 +1,871 @@
+[
+  {
+    "session": "2020-03-27",
+    "n_train": 0,
+    "class_counts": [
+      0,
+      0,
+      0
+    ],
+    "latest_label_end": null,
+    "model_available": false
+  },
+  {
+    "session": "2020-04-27",
+    "n_train": 0,
+    "class_counts": [
+      0,
+      0,
+      0
+    ],
+    "latest_label_end": null,
+    "model_available": false
+  },
+  {
+    "session": "2020-05-27",
+    "n_train": 20,
+    "class_counts": [
+      0,
+      14,
+      6
+    ],
+    "latest_label_end": "2020-05-26",
+    "model_available": false
+  },
+  {
+    "session": "2020-06-24",
+    "n_train": 40,
+    "class_counts": [
+      0,
+      23,
+      17
+    ],
+    "latest_label_end": "2020-06-23",
+    "model_available": false
+  },
+  {
+    "session": "2020-07-22",
+    "n_train": 60,
+    "class_counts": [
+      7,
+      36,
+      17
+    ],
+    "latest_label_end": "2020-07-21",
+    "model_available": false
+  },
+  {
+    "session": "2020-08-19",
+    "n_train": 80,
+    "class_counts": [
+      7,
+      56,
+      17
+    ],
+    "latest_label_end": "2020-08-18",
+    "model_available": false
+  },
+  {
+    "session": "2020-09-17",
+    "n_train": 100,
+    "class_counts": [
+      7,
+      72,
+      21
+    ],
+    "latest_label_end": "2020-09-16",
+    "model_available": false
+  },
+  {
+    "session": "2020-10-15",
+    "n_train": 120,
+    "class_counts": [
+      7,
+      83,
+      30
+    ],
+    "latest_label_end": "2020-10-14",
+    "model_available": false
+  },
+  {
+    "session": "2020-11-12",
+    "n_train": 140,
+    "class_counts": [
+      7,
+      92,
+      41
+    ],
+    "latest_label_end": "2020-11-11",
+    "model_available": false
+  },
+  {
+    "session": "2020-12-10",
+    "n_train": 160,
+    "class_counts": [
+      7,
+      94,
+      59
+    ],
+    "latest_label_end": "2020-12-09",
+    "model_available": false
+  },
+  {
+    "session": "2021-01-08",
+    "n_train": 180,
+    "class_counts": [
+      7,
+      94,
+      79
+    ],
+    "latest_label_end": "2021-01-07",
+    "model_available": false
+  },
+  {
+    "session": "2021-02-05",
+    "n_train": 200,
+    "class_counts": [
+      11,
+      98,
+      91
+    ],
+    "latest_label_end": "2021-02-04",
+    "model_available": true
+  },
+  {
+    "session": "2021-03-12",
+    "n_train": 220,
+    "class_counts": [
+      13,
+      114,
+      93
+    ],
+    "latest_label_end": "2021-03-11",
+    "model_available": true
+  },
+  {
+    "session": "2021-04-09",
+    "n_train": 240,
+    "class_counts": [
+      13,
+      134,
+      93
+    ],
+    "latest_label_end": "2021-04-08",
+    "model_available": true
+  },
+  {
+    "session": "2021-05-12",
+    "n_train": 260,
+    "class_counts": [
+      13,
+      142,
+      105
+    ],
+    "latest_label_end": "2021-05-11",
+    "model_available": true
+  },
+  {
+    "session": "2021-06-09",
+    "n_train": 280,
+    "class_counts": [
+      13,
+      152,
+      115
+    ],
+    "latest_label_end": "2021-06-08",
+    "model_available": true
+  },
+  {
+    "session": "2021-07-07",
+    "n_train": 300,
+    "class_counts": [
+      13,
+      156,
+      131
+    ],
+    "latest_label_end": "2021-07-06",
+    "model_available": true
+  },
+  {
+    "session": "2021-08-04",
+    "n_train": 320,
+    "class_counts": [
+      27,
+      162,
+      131
+    ],
+    "latest_label_end": "2021-08-03",
+    "model_available": true
+  },
+  {
+    "session": "2021-09-01",
+    "n_train": 340,
+    "class_counts": [
+      27,
+      181,
+      132
+    ],
+    "latest_label_end": "2021-08-31",
+    "model_available": true
+  },
+  {
+    "session": "2021-10-01",
+    "n_train": 360,
+    "class_counts": [
+      27,
+      201,
+      132
+    ],
+    "latest_label_end": "2021-09-30",
+    "model_available": true
+  },
+  {
+    "session": "2021-10-29",
+    "n_train": 380,
+    "class_counts": [
+      27,
+      214,
+      139
+    ],
+    "latest_label_end": "2021-10-28",
+    "model_available": true
+  },
+  {
+    "session": "2021-11-26",
+    "n_train": 400,
+    "class_counts": [
+      27,
+      214,
+      159
+    ],
+    "latest_label_end": "2021-11-25",
+    "model_available": true
+  },
+  {
+    "session": "2021-12-24",
+    "n_train": 420,
+    "class_counts": [
+      28,
+      231,
+      161
+    ],
+    "latest_label_end": "2021-12-23",
+    "model_available": true
+  },
+  {
+    "session": "2022-01-24",
+    "n_train": 440,
+    "class_counts": [
+      28,
+      250,
+      162
+    ],
+    "latest_label_end": "2022-01-21",
+    "model_available": true
+  },
+  {
+    "session": "2022-02-28",
+    "n_train": 460,
+    "class_counts": [
+      28,
+      270,
+      162
+    ],
+    "latest_label_end": "2022-02-25",
+    "model_available": true
+  },
+  {
+    "session": "2022-03-28",
+    "n_train": 480,
+    "class_counts": [
+      28,
+      290,
+      162
+    ],
+    "latest_label_end": "2022-03-25",
+    "model_available": true
+  },
+  {
+    "session": "2022-04-26",
+    "n_train": 500,
+    "class_counts": [
+      33,
+      305,
+      162
+    ],
+    "latest_label_end": "2022-04-25",
+    "model_available": true
+  },
+  {
+    "session": "2022-07-04",
+    "n_train": 504,
+    "class_counts": [
+      52,
+      293,
+      159
+    ],
+    "latest_label_end": "2022-05-26",
+    "model_available": true
+  },
+  {
+    "session": "2022-08-01",
+    "n_train": 504,
+    "class_counts": [
+      52,
+      293,
+      159
+    ],
+    "latest_label_end": "2022-05-26",
+    "model_available": true
+  },
+  {
+    "session": "2022-08-29",
+    "n_train": 504,
+    "class_counts": [
+      52,
+      292,
+      160
+    ],
+    "latest_label_end": "2022-08-26",
+    "model_available": true
+  },
+  {
+    "session": "2022-09-28",
+    "n_train": 504,
+    "class_counts": [
+      53,
+      291,
+      160
+    ],
+    "latest_label_end": "2022-09-27",
+    "model_available": true
+  },
+  {
+    "session": "2022-10-26",
+    "n_train": 504,
+    "class_counts": [
+      73,
+      271,
+      160
+    ],
+    "latest_label_end": "2022-10-25",
+    "model_available": true
+  },
+  {
+    "session": "2022-11-23",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      266,
+      156
+    ],
+    "latest_label_end": "2022-11-22",
+    "model_available": true
+  },
+  {
+    "session": "2022-12-21",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      266,
+      156
+    ],
+    "latest_label_end": "2022-12-20",
+    "model_available": true
+  },
+  {
+    "session": "2023-01-19",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      278,
+      144
+    ],
+    "latest_label_end": "2023-01-18",
+    "model_available": true
+  },
+  {
+    "session": "2023-02-23",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      292,
+      130
+    ],
+    "latest_label_end": "2023-02-22",
+    "model_available": true
+  },
+  {
+    "session": "2023-03-23",
+    "n_train": 504,
+    "class_counts": [
+      86,
+      308,
+      110
+    ],
+    "latest_label_end": "2023-03-22",
+    "model_available": true
+  },
+  {
+    "session": "2023-04-20",
+    "n_train": 504,
+    "class_counts": [
+      83,
+      326,
+      95
+    ],
+    "latest_label_end": "2023-04-19",
+    "model_available": true
+  },
+  {
+    "session": "2023-05-23",
+    "n_train": 504,
+    "class_counts": [
+      80,
+      331,
+      93
+    ],
+    "latest_label_end": "2023-05-22",
+    "model_available": true
+  },
+  {
+    "session": "2023-06-20",
+    "n_train": 504,
+    "class_counts": [
+      80,
+      315,
+      109
+    ],
+    "latest_label_end": "2023-06-19",
+    "model_available": true
+  },
+  {
+    "session": "2023-07-18",
+    "n_train": 504,
+    "class_counts": [
+      80,
+      310,
+      114
+    ],
+    "latest_label_end": "2023-07-17",
+    "model_available": true
+  },
+  {
+    "session": "2023-08-15",
+    "n_train": 504,
+    "class_counts": [
+      80,
+      298,
+      126
+    ],
+    "latest_label_end": "2023-08-14",
+    "model_available": true
+  },
+  {
+    "session": "2023-09-14",
+    "n_train": 504,
+    "class_counts": [
+      80,
+      312,
+      112
+    ],
+    "latest_label_end": "2023-09-13",
+    "model_available": true
+  },
+  {
+    "session": "2023-10-12",
+    "n_train": 504,
+    "class_counts": [
+      75,
+      318,
+      111
+    ],
+    "latest_label_end": "2023-10-11",
+    "model_available": true
+  },
+  {
+    "session": "2023-11-09",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      312,
+      110
+    ],
+    "latest_label_end": "2023-11-08",
+    "model_available": true
+  },
+  {
+    "session": "2023-12-07",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      312,
+      110
+    ],
+    "latest_label_end": "2023-12-06",
+    "model_available": true
+  },
+  {
+    "session": "2024-01-05",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      316,
+      106
+    ],
+    "latest_label_end": "2024-01-04",
+    "model_available": true
+  },
+  {
+    "session": "2024-02-02",
+    "n_train": 504,
+    "class_counts": [
+      82,
+      324,
+      98
+    ],
+    "latest_label_end": "2024-02-01",
+    "model_available": true
+  },
+  {
+    "session": "2024-03-08",
+    "n_train": 504,
+    "class_counts": [
+      81,
+      313,
+      110
+    ],
+    "latest_label_end": "2024-03-07",
+    "model_available": true
+  },
+  {
+    "session": "2024-04-05",
+    "n_train": 504,
+    "class_counts": [
+      81,
+      304,
+      119
+    ],
+    "latest_label_end": "2024-04-04",
+    "model_available": true
+  },
+  {
+    "session": "2024-05-09",
+    "n_train": 504,
+    "class_counts": [
+      90,
+      295,
+      119
+    ],
+    "latest_label_end": "2024-05-08",
+    "model_available": true
+  },
+  {
+    "session": "2024-06-06",
+    "n_train": 504,
+    "class_counts": [
+      90,
+      291,
+      123
+    ],
+    "latest_label_end": "2024-06-05",
+    "model_available": true
+  },
+  {
+    "session": "2024-07-04",
+    "n_train": 504,
+    "class_counts": [
+      88,
+      293,
+      123
+    ],
+    "latest_label_end": "2024-07-03",
+    "model_available": true
+  },
+  {
+    "session": "2024-08-01",
+    "n_train": 504,
+    "class_counts": [
+      68,
+      313,
+      123
+    ],
+    "latest_label_end": "2024-07-31",
+    "model_available": true
+  },
+  {
+    "session": "2024-08-29",
+    "n_train": 504,
+    "class_counts": [
+      75,
+      314,
+      115
+    ],
+    "latest_label_end": "2024-08-28",
+    "model_available": true
+  },
+  {
+    "session": "2024-09-30",
+    "n_train": 504,
+    "class_counts": [
+      71,
+      319,
+      114
+    ],
+    "latest_label_end": "2024-09-27",
+    "model_available": true
+  },
+  {
+    "session": "2024-10-28",
+    "n_train": 504,
+    "class_counts": [
+      52,
+      337,
+      115
+    ],
+    "latest_label_end": "2024-10-25",
+    "model_available": true
+  },
+  {
+    "session": "2024-11-25",
+    "n_train": 504,
+    "class_counts": [
+      49,
+      340,
+      115
+    ],
+    "latest_label_end": "2024-11-22",
+    "model_available": true
+  },
+  {
+    "session": "2024-12-23",
+    "n_train": 504,
+    "class_counts": [
+      49,
+      341,
+      114
+    ],
+    "latest_label_end": "2024-12-20",
+    "model_available": true
+  },
+  {
+    "session": "2025-01-21",
+    "n_train": 504,
+    "class_counts": [
+      49,
+      341,
+      114
+    ],
+    "latest_label_end": "2025-01-20",
+    "model_available": true
+  },
+  {
+    "session": "2025-02-25",
+    "n_train": 504,
+    "class_counts": [
+      49,
+      337,
+      118
+    ],
+    "latest_label_end": "2025-02-24",
+    "model_available": true
+  },
+  {
+    "session": "2025-03-25",
+    "n_train": 504,
+    "class_counts": [
+      45,
+      325,
+      134
+    ],
+    "latest_label_end": "2025-03-24",
+    "model_available": true
+  },
+  {
+    "session": "2025-04-23",
+    "n_train": 504,
+    "class_counts": [
+      58,
+      312,
+      134
+    ],
+    "latest_label_end": "2025-04-22",
+    "model_available": true
+  },
+  {
+    "session": "2025-05-26",
+    "n_train": 504,
+    "class_counts": [
+      65,
+      303,
+      136
+    ],
+    "latest_label_end": "2025-05-23",
+    "model_available": true
+  },
+  {
+    "session": "2025-06-23",
+    "n_train": 504,
+    "class_counts": [
+      65,
+      315,
+      124
+    ],
+    "latest_label_end": "2025-06-20",
+    "model_available": true
+  },
+  {
+    "session": "2025-07-21",
+    "n_train": 504,
+    "class_counts": [
+      65,
+      321,
+      118
+    ],
+    "latest_label_end": "2025-07-18",
+    "model_available": true
+  },
+  {
+    "session": "2025-08-18",
+    "n_train": 504,
+    "class_counts": [
+      65,
+      321,
+      118
+    ],
+    "latest_label_end": "2025-08-15",
+    "model_available": true
+  },
+  {
+    "session": "2025-09-17",
+    "n_train": 504,
+    "class_counts": [
+      65,
+      316,
+      123
+    ],
+    "latest_label_end": "2025-09-16",
+    "model_available": true
+  },
+  {
+    "session": "2025-10-15",
+    "n_train": 504,
+    "class_counts": [
+      62,
+      319,
+      123
+    ],
+    "latest_label_end": "2025-10-14",
+    "model_available": true
+  },
+  {
+    "session": "2025-11-12",
+    "n_train": 504,
+    "class_counts": [
+      54,
+      327,
+      123
+    ],
+    "latest_label_end": "2025-11-11",
+    "model_available": true
+  },
+  {
+    "session": "2025-12-10",
+    "n_train": 504,
+    "class_counts": [
+      57,
+      321,
+      126
+    ],
+    "latest_label_end": "2025-12-09",
+    "model_available": true
+  },
+  {
+    "session": "2026-01-09",
+    "n_train": 504,
+    "class_counts": [
+      57,
+      316,
+      131
+    ],
+    "latest_label_end": "2026-01-08",
+    "model_available": true
+  },
+  {
+    "session": "2026-02-06",
+    "n_train": 504,
+    "class_counts": [
+      57,
+      316,
+      131
+    ],
+    "latest_label_end": "2026-02-05",
+    "model_available": true
+  },
+  {
+    "session": "2026-03-13",
+    "n_train": 504,
+    "class_counts": [
+      63,
+      325,
+      116
+    ],
+    "latest_label_end": "2026-03-12",
+    "model_available": true
+  },
+  {
+    "session": "2026-04-10",
+    "n_train": 504,
+    "class_counts": [
+      75,
+      327,
+      102
+    ],
+    "latest_label_end": "2026-04-09",
+    "model_available": true
+  },
+  {
+    "session": "2026-05-13",
+    "n_train": 504,
+    "class_counts": [
+      67,
+      324,
+      113
+    ],
+    "latest_label_end": "2026-05-12",
+    "model_available": true
+  },
+  {
+    "session": "2026-06-10",
+    "n_train": 504,
+    "class_counts": [
+      68,
+      326,
+      110
+    ],
+    "latest_label_end": "2026-06-09",
+    "model_available": true
+  },
+  {
+    "session": "2026-07-08",
+    "n_train": 504,
+    "class_counts": [
+      74,
+      320,
+      110
+    ],
+    "latest_label_end": "2026-07-07",
+    "model_available": true
+  },
+  {
+    "session": "2026-08-05",
+    "n_train": 504,
+    "class_counts": [
+      86,
+      308,
+      110
+    ],
+    "latest_label_end": "2026-08-04",
+    "model_available": true
+  }
+]

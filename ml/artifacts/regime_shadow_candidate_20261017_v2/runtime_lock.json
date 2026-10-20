@@ -1,0 +1,15 @@
+{
+  "contract_sha256": "973146c80e986a08ccb0914a49c4f82e023ff92f36cc6b7631be959692a8c128",
+  "runtime_sha256": "a90c5fa58d577aab07f5083e148028453bccdcab8d77f99cebe9708905f2fa3c",
+  "ledger_sha256": "11242db16b7205ec097f52e3d8bafe3155cf7440c04a891e9776ac378c8cbd74",
+  "runtime_frozen_at": "2026-10-17T16:51:31.462333+00:00",
+  "parity_report_sha256": "d4083b892a820cbfc374afd9e11d4d7eccd0f9137fddbf53ba796236d1ad3f44",
+  "frozen_dependency_sha256": {
+    "regime_shadow_ledger.py": "11242db16b7205ec097f52e3d8bafe3155cf7440c04a891e9776ac378c8cbd74",
+    "collect_regime_shadow_data.py": "a12a9ab6df4556e9819a5f59046c6a81e67f5bd179aca93038bf9596539e4351",
+    "prepare_regime_indices.py": "af2564aa1b940e46e7807604cd351d97a64dc50dfe9663e74d34b1d8d90ea03c",
+    "prepare_regime_data.py": "2497c16fd4ac9022af082965a855c67b0c8fe1b78344150c3337f9893feaddd4"
+  },
+  "status": "research_only_not_approved_for_live",
+  "prospective_ledger": "prospective_predictions.jsonl"
+}

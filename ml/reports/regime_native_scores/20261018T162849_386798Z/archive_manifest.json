@@ -1,0 +1,19 @@
+{
+  "role": "Native historical OOF research replay, NOT prospective forecasts or calibrated probabilities",
+  "rows": 1560,
+  "created_at": "2026-10-18T16:29:24.444849+00:00",
+  "candidate_id": "multiclass_delayed_experts_v1",
+  "contract_sha256": "c69b2ea82110cfe65e37fa81f1b476e34b0acd51238455a54c14bacf530c7852",
+  "native_lock_sha256": "3a4c8038a53bbb019f60f4cf1405d47be9616890105215f9471b905e0e252419",
+  "source_sha256": "c52e21813fe9e5d60ac1302cb0536ca8fb8f33de455d24d09d4c9082e1498bd9",
+  "data_sha256": "b1ceec9d7b91a6b4c4685d650a78c1edbcc63fc18dc08a830de8e6575a04e370",
+  "source_parity_report_sha256": "f4cc6d017cb3373cd1aa241855bff8be0460f5a16b8e891968e4a13b2121cd3d",
+  "semantics": {
+    "decision_score": "Class-balanced expert score used by frozen point-decision policy, NOT event probability",
+    "component_mass": "Approximate prior unbalance for classifier or raw quantile mass for density; requires evaluation/calibration, NOT established probability",
+    "label": "T+20 realized class, available only once label_end_date strictly precedes a calibration/refit date"
+  },
+  "label_timing_rule": "Every later calibrator must use label_end_date < current decision/refit date; never random CV.",
+  "selector_event_identity_matches": 80,
+  "point_decision_matches": 1560
+}

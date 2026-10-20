@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "csv_sha256": "2d55af597b6a78e7a55df8a4b6153a270d7ac250665480895a6c447679c6c775",
+  "manifest_sha256": "0a07764c0c9d0a2e268cb38a5058f63ad540188dcdfae4c71e40dfd29970e3d0",
+  "base_snapshot_sha256": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+  "collector_sha256": "f982687cfb39b3945867f4b46d3e9cbadf7d6218bb3eb8cc00db08de8c4333ff",
+  "source_provenance": "reviewed_frozen_prefix_plus_two_broker_close_agreement_extension",
+  "calendar_status": "cross-broker session agreement; not independently exchange-certified",
+  "adjustment_status": "price index points; latest broker history snapshot, not original vintages"
+}

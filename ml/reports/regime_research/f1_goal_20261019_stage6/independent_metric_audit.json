@@ -1,0 +1,398 @@
+{
+  "role": "Independent implementation audit of historical DEVELOPMENT; not independent data test",
+  "all_studies_complete": true,
+  "forecast_files": [
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/incumbent_predictions.csv",
+      "sha256": "6b06bb14723401b7395927b7c278f5e7642695cadd953e422f1b3127c0fb2b0f",
+      "fold_f1": [
+        0.5636926364563347,
+        0.667310111828534,
+        0.3936614920855182,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5144884151429698,
+      "worst_f1": 0.3936614920855182,
+      "mean_mcc": 0.2978418524061578,
+      "bear_mean_f1": 0.32024078657753924,
+      "side_mean_f1": 0.743310289618171,
+      "bull_mean_f1": 0.4799141692331991
+    },
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/mahal_half_predictions.csv",
+      "sha256": "e707c51e78fc1c740c2464a524b26590b1245f2a4134b7da6dd1714111193cd7",
+      "fold_f1": [
+        0.5610817472668012,
+        0.646200927953552,
+        0.39225559189876763,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5082069218301533,
+      "worst_f1": 0.39225559189876763,
+      "mean_mcc": 0.29174196684977993,
+      "bear_mean_f1": 0.3064079431894591,
+      "side_mean_f1": 0.7415828545857411,
+      "bull_mean_f1": 0.4766299677152597
+    },
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/mahal_replace_predictions.csv",
+      "sha256": "d347c3aea9ae68dd1e49e46e86d4b7c2c9a1825ac5ede3cea55dcf226928063c",
+      "fold_f1": [
+        0.5624674030503627,
+        0.6393612911991063,
+        0.38440656565656567,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5048811700268817,
+      "worst_f1": 0.38440656565656567,
+      "mean_mcc": 0.28428333524921784,
+      "bear_mean_f1": 0.30997867530637085,
+      "side_mean_f1": 0.7365857974498103,
+      "bull_mean_f1": 0.4680790373244642
+    },
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/separated_half_predictions.csv",
+      "sha256": "d98cf5bd6a2a41d48344d72ebbb3b65473be3bed9e01d54365df211ec19d8c57",
+      "fold_f1": [
+        0.5548254985754987,
+        0.6464120245792043,
+        0.39225559189876763,
+        0.4251226938606936
+      ],
+      "mean_f1": 0.504653952228541,
+      "worst_f1": 0.39225559189876763,
+      "mean_mcc": 0.2877087148300511,
+      "bear_mean_f1": 0.30195070944599867,
+      "side_mean_f1": 0.7404337970140591,
+      "bull_mean_f1": 0.47157735022556535
+    },
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/separated_replace_predictions.csv",
+      "sha256": "e251ede8f24fc3e4b51b9b3aa438f726f7c8f43b79dcdc814ba79aacab3e3ed6",
+      "fold_f1": [
+        0.5497039724980901,
+        0.6317134333036669,
+        0.38888102239276784,
+        0.4195960498970919
+      ],
+      "mean_f1": 0.4974736195229042,
+      "worst_f1": 0.38888102239276784,
+      "mean_mcc": 0.2798957904188163,
+      "bear_mean_f1": 0.2911383456143587,
+      "side_mean_f1": 0.7402023785945303,
+      "bull_mean_f1": 0.46108013435982353
+    },
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/joint_half_predictions.csv",
+      "sha256": "1235a57914708a76d197fe218f1134bf3d1ed4167a1d4baaff664fce7667c5da",
+      "fold_f1": [
+        0.5646116683351767,
+        0.6492370027496253,
+        0.38888102239276784,
+        0.4251226938606936
+      ],
+      "mean_f1": 0.5069630968345659,
+      "worst_f1": 0.38888102239276784,
+      "mean_mcc": 0.28888089656876387,
+      "bear_mean_f1": 0.3077571713464064,
+      "side_mean_f1": 0.7410535975587185,
+      "bull_mean_f1": 0.4720785215985728
+    },
+    {
+      "path": "reports/regime_metric_analog/20261019T073046_885436Z/joint_replace_predictions.csv",
+      "sha256": "c44ee22652aff0d3ee6dd7f07c28a68887c47e9fc6940af198a5d030750ac097",
+      "fold_f1": [
+        0.5514025767136848,
+        0.6357831986211194,
+        0.38888102239276784,
+        0.4209032845779932
+      ],
+      "mean_f1": 0.49924252057639135,
+      "worst_f1": 0.38888102239276784,
+      "mean_mcc": 0.2811907380768243,
+      "bear_mean_f1": 0.29608870805738974,
+      "side_mean_f1": 0.7399498447993366,
+      "bull_mean_f1": 0.46168900887244757
+    },
+    {
+      "path": "reports/regime_extended_forest/20261019T073305_918472Z/incumbent_predictions.csv",
+      "sha256": "9295fdeff4e45510ebc3d4a5f748b6fb04f081fd335b331accb52737c0e5acb6",
+      "fold_f1": [
+        0.5636926364563347,
+        0.667310111828534,
+        0.3936614920855182,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5144884151429698,
+      "worst_f1": 0.3936614920855182,
+      "mean_mcc": 0.2978418524061578,
+      "bear_mean_f1": 0.32024078657753924,
+      "side_mean_f1": 0.743310289618171,
+      "bull_mean_f1": 0.4799141692331991
+    },
+    {
+      "path": "reports/regime_extended_forest/20261019T073305_918472Z/extended_shrink_predictions.csv",
+      "sha256": "fe7e49d5b1ce64857fcca41e526b6f0ccc20b2fccdcafc6862d48e19a6782a91",
+      "fold_f1": [
+        0.5756863425460299,
+        0.6326619228927951,
+        0.39211071057629576,
+        0.43554976897516157
+      ],
+      "mean_f1": 0.5090021862475707,
+      "worst_f1": 0.39211071057629576,
+      "mean_mcc": 0.2983454068320192,
+      "bear_mean_f1": 0.29757989712454674,
+      "side_mean_f1": 0.7445837577525897,
+      "bull_mean_f1": 0.4848429038655754
+    },
+    {
+      "path": "reports/regime_extended_forest/20261019T073305_918472Z/extended_replace_predictions.csv",
+      "sha256": "9aa67483971057787f28047c8eabdc5b6973de0fc9dc7710f43f312b05f44cac",
+      "fold_f1": [
+        0.574504060580696,
+        0.6368982436669786,
+        0.40188106586192124,
+        0.43194919115971747
+      ],
+      "mean_f1": 0.5113081403173283,
+      "worst_f1": 0.40188106586192124,
+      "mean_mcc": 0.29783121982834976,
+      "bear_mean_f1": 0.3126116417176074,
+      "side_mean_f1": 0.7425211419036593,
+      "bull_mean_f1": 0.4787916373307184
+    },
+    {
+      "path": "reports/regime_relative_volume/20261019T083345_837476Z/incumbent_predictions.csv",
+      "sha256": "9295fdeff4e45510ebc3d4a5f748b6fb04f081fd335b331accb52737c0e5acb6",
+      "fold_f1": [
+        0.5636926364563347,
+        0.667310111828534,
+        0.3936614920855182,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5144884151429698,
+      "worst_f1": 0.3936614920855182,
+      "mean_mcc": 0.2978418524061578,
+      "bear_mean_f1": 0.32024078657753924,
+      "side_mean_f1": 0.743310289618171,
+      "bull_mean_f1": 0.4799141692331991
+    },
+    {
+      "path": "reports/regime_relative_volume/20261019T083345_837476Z/volume_shrink_predictions.csv",
+      "sha256": "3b3412eb37623aef55d819473b5301eecee9adeca03457b6c67a9368f4b60036",
+      "fold_f1": [
+        0.5625888415067519,
+        0.6621179158468047,
+        0.3936614920855182,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5129144174101418,
+      "worst_f1": 0.3936614920855182,
+      "mean_mcc": 0.29519597965587463,
+      "bear_mean_f1": 0.31865097378470764,
+      "side_mean_f1": 0.7429058073554673,
+      "bull_mean_f1": 0.4771864710902505
+    },
+    {
+      "path": "reports/regime_relative_volume/20261019T083345_837476Z/volume_replace_predictions.csv",
+      "sha256": "75eea25c64d62e7ce6919869f42105ad83207ca10613dc9d6c29841e2f85b662",
+      "fold_f1": [
+        0.5625888415067519,
+        0.6621179158468047,
+        0.3936614920855182,
+        0.43328942020149236
+      ],
+      "mean_f1": 0.5129144174101418,
+      "worst_f1": 0.3936614920855182,
+      "mean_mcc": 0.29519597965587463,
+      "bear_mean_f1": 0.31865097378470764,
+      "side_mean_f1": 0.7429058073554673,
+      "bull_mean_f1": 0.4771864710902505
+    }
+  ],
+  "source_hashes_verified": 47,
+  "timing_audits": [
+    {
+      "study": "regime_metric_analog",
+      "strict_mature_records": 336
+    },
+    {
+      "study": "regime_extended_forest",
+      "strict_mature_records": 112
+    },
+    {
+      "study": "regime_relative_volume",
+      "strict_mature_records": 112
+    }
+  ],
+  "independent_outer_score_parity": [
+    {
+      "study": "regime_metric_analog",
+      "candidate": "incumbent",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_metric_analog",
+      "candidate": "mahal_half",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_metric_analog",
+      "candidate": "mahal_replace",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_metric_analog",
+      "candidate": "separated_half",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_metric_analog",
+      "candidate": "separated_replace",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_metric_analog",
+      "candidate": "joint_half",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_metric_analog",
+      "candidate": "joint_replace",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_extended_forest",
+      "candidate": "incumbent",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_extended_forest",
+      "candidate": "extended_shrink",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_extended_forest",
+      "candidate": "extended_replace",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_relative_volume",
+      "candidate": "incumbent",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_relative_volume",
+      "candidate": "volume_shrink",
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "study": "regime_relative_volume",
+      "candidate": "volume_replace",
+      "max_error": 2.220446049250313e-16
+    }
+  ],
+  "neighborhood_parity": [
+    {
+      "mode": "mahal",
+      "view": "compact",
+      "normalized": false,
+      "rows": 63,
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "mode": "mahal",
+      "view": "compact",
+      "normalized": true,
+      "rows": 63,
+      "max_error": 1.6653345369377348e-16
+    },
+    {
+      "mode": "mahal",
+      "view": "full",
+      "normalized": false,
+      "rows": 63,
+      "max_error": 3.3306690738754696e-16
+    },
+    {
+      "mode": "mahal",
+      "view": "full",
+      "normalized": true,
+      "rows": 63,
+      "max_error": 3.3306690738754696e-16
+    },
+    {
+      "mode": "separated",
+      "view": "compact",
+      "normalized": false,
+      "rows": 63,
+      "max_error": 1.1102230246251565e-16
+    },
+    {
+      "mode": "separated",
+      "view": "compact",
+      "normalized": true,
+      "rows": 63,
+      "max_error": 1.6653345369377348e-16
+    },
+    {
+      "mode": "separated",
+      "view": "full",
+      "normalized": false,
+      "rows": 63,
+      "max_error": 1.1102230246251565e-16
+    },
+    {
+      "mode": "separated",
+      "view": "full",
+      "normalized": true,
+      "rows": 63,
+      "max_error": 1.6653345369377348e-16
+    },
+    {
+      "mode": "joint",
+      "view": "compact",
+      "normalized": false,
+      "rows": 63,
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "mode": "joint",
+      "view": "compact",
+      "normalized": true,
+      "rows": 63,
+      "max_error": 2.220446049250313e-16
+    },
+    {
+      "mode": "joint",
+      "view": "full",
+      "normalized": false,
+      "rows": 63,
+      "max_error": 3.3306690738754696e-16
+    },
+    {
+      "mode": "joint",
+      "view": "full",
+      "normalized": true,
+      "rows": 63,
+      "max_error": 6.106226635438361e-16
+    }
+  ],
+  "history_audit": {
+    "extended_eligible_rows": 3955,
+    "start": "2010-10-22",
+    "fit_records_recounted": 112,
+    "ETF_missing_preserved": true
+  },
+  "volume_precision_audit": {
+    "rows": 4174,
+    "relative_field_frozen": 0.7391025641025641,
+    "absolute_field_frozen": 0.5679487179487179,
+    "two_or_more_source_fields": 3149,
+    "relative_budget": 0.0001,
+    "feature_reconstruction": true,
+    "caveat": "Bounded disagreement is not verified identity of source-volume definitions or exchange certification."
+  },
+  "caveat": "All dates repeatedly inspected. No independent acceptance or deployment."
+}

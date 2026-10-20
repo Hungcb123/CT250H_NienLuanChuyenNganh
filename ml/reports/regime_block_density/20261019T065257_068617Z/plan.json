@@ -1,0 +1,254 @@
+{
+  "mode": "mature_moving_block_quantile_ensemble_DEVELOPMENT",
+  "reference_report": "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_v2/20261017T135531_744801Z/regime_v2_report.json",
+  "reference_sha256": "89484b41f72c46700776316f1393504bbd7f0c9393a68069824b04fa9b2c20fa",
+  "input_hashes": {
+    "VNINDEX": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "E1VFVN30": "0e44e82b9752377f18208f210214f437f816e5b9e64c107ddc77cdf1e6f99a97"
+  },
+  "labels": {
+    "20": {
+      "policy": "vol_1sigma",
+      "k": 1.0,
+      "lookback": 20,
+      "horizon": 20,
+      "ddof": 1,
+      "equality": "sideway"
+    }
+  },
+  "base_feature_set": "close-etf",
+  "feature_groups": {
+    "trend": [
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Hist",
+      "BB_Width",
+      "BB_PctB",
+      "SMA_20_50_Ratio",
+      "Dist_SMA20",
+      "Dist_SMA50",
+      "Abs_Change_14_Pct",
+      "ROC_20",
+      "HV_20",
+      "ETF_ROC20",
+      "ETF_HV20",
+      "ETF_Corr30_VNINDEX",
+      "ETF_ReturnSpread20",
+      "ROC60",
+      "ROC120",
+      "DistSMA200"
+    ]
+  },
+  "feature_version": "long-trend-risk-v1-research",
+  "train_windows": [
+    "3y",
+    "expanding"
+  ],
+  "refit_market_sessions": 63,
+  "inner_splits": 2,
+  "models": [
+    "LightGBM"
+  ],
+  "optuna": null,
+  "score_role": "Nested forward development comparison on already-inspected history; no fresh holdout claim.",
+  "assumptions": [
+    "All variants use identical dates and labels; adding a feature cannot remove a frozen validation date.",
+    "Parameters are selected once at each outer fold start using purged inner folds only.",
+    "The model is refitted periodically using labels known strictly before each prediction block.",
+    "Rolling windows are calendar years measured from the prediction block start.",
+    "Each refit uses the same fixed parameters until the next outer fold.",
+    "A drawdown feature measures current distance below the trailing peak.",
+    "No confidence threshold, new label definition, financial backtest, or ONNX deployment."
+  ],
+  "datasets": [
+    {
+      "horizon": 20,
+      "eligible_history_rows": 2341,
+      "folds": [
+        {
+          "fold": 1,
+          "start": "2020-03-27",
+          "end": "2021-10-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e3ec359a354411f10bebd5c0ec4007585f3dfcdd34e8e33b135c0e6fae4f7733",
+          "n_refits": 7
+        },
+        {
+          "fold": 2,
+          "start": "2021-10-15",
+          "end": "2023-07-14",
+          "n_validation": 390,
+          "validation_dates_sha256": "e8710e4707c0d304870af81cfbe213b6558d656de2df6587b7acaa3950e8860d",
+          "n_refits": 7
+        },
+        {
+          "fold": 3,
+          "start": "2023-07-17",
+          "end": "2025-02-07",
+          "n_validation": 390,
+          "validation_dates_sha256": "4d252ee3ee6e6341584ec1aa866f78fed9a74e70d91a5bb95d225e89229a049d",
+          "n_refits": 7
+        },
+        {
+          "fold": 4,
+          "start": "2025-02-10",
+          "end": "2026-09-03",
+          "n_validation": 390,
+          "validation_dates_sha256": "23510ab395a42b45bacb54fa9270a1e9cfe725a3600f353da063da6a26450a09",
+          "n_refits": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "specification": {
+    "role": "Predeclared next study: dense conditional-return supervision for SAME three-class target; no fit yet",
+    "created_at": "2026-10-18T15:49:33.524205+00:00",
+    "motivation": "Three-family categorical comparison shows weak outer generalization; hard class labels discard magnitude within each class. Test continuous future-return supervision without redefining evaluation labels.",
+    "target": "Evaluation remains VNINDEX T+20 return strictly below -5%, above +5%, else sideway, same1560 dates.",
+    "features": "Same original19 close/ETF/trend; no additional source or universe",
+    "train_windows": [
+      "3y",
+      "expanding"
+    ],
+    "refit_market_sessions": 63,
+    "regression_targets": [
+      "future log return",
+      "future log return / (trailing20 daily log-return sample std * sqrt20)"
+    ],
+    "normalization_formula": "Z=log(P[t+20]/P[t]) / (std(last20 completed daily log returns,ddof=1)*sqrt20); only past sigma enters normalizer.",
+    "quantile_levels": [
+      0.05,
+      0.15,
+      0.25,
+      0.35,
+      0.5,
+      0.65,
+      0.75,
+      0.85,
+      0.95
+    ],
+    "quantile_atom_weights": [
+      0.1,
+      0.1,
+      0.09999999999999998,
+      0.125,
+      0.14999999999999997,
+      0.125,
+      0.10000000000000009,
+      0.09999999999999987,
+      0.10000000000000009
+    ],
+    "forecast_map": "Fit one conditional quantile per level, sort predicted quantiles, convert normalized predictions back to log returns. Quadrature class mass = sum fixed atom weights with return < log(.95), > log(1.05), otherwise sideway. Threshold equality stays sideway.",
+    "decision_rules": [
+      "argmax raw approximate masses",
+      "argmax mass / mature-training class frequency; decision balancing only, not calibrated posterior"
+    ],
+    "parameters": {
+      "n_estimators": 300,
+      "learning_rate": 0.03,
+      "max_depth": 4,
+      "num_leaves": 15,
+      "min_child_samples": 50,
+      "colsample_bytree": 0.7,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0,
+      "random_state": 42,
+      "n_jobs": 2,
+      "verbosity": -1,
+      "objective": "quantile"
+    },
+    "hyperparameter_search": false,
+    "total_forecasters": 4,
+    "decisions_per_forecaster": 2,
+    "timing": "All training labels must mature strictly before global prediction/refit boundary. Raw-calendar labels and sigma before any feature filter.",
+    "acceptance": "Compare same dates/labels vs original trend and risk controls: +.02 mean fold F1, no worse worst F1, MCC gain, >=3 improved folds. No independent acceptance from repeatedly inspected history.",
+    "limitations": [
+      "Quantile quadrature probabilities are approximate scores, not asserted calibrated event probabilities.",
+      "Previous quantile risk study used onlyq10 for binary risk; this study requires the full three-class distribution and fixed target.",
+      "No confidence subset, label policy change or automatic deployment."
+    ]
+  },
+  "specification_sha256": "dd968e42aa0801dac8b03e82c7588b4665d97e7b234b723b7b39f5cdd3761660",
+  "source_sha256": "229244354fe84dc317fd0cd64e0fa3b1c7e1e84c30cac6df520dfd049c4bbdfd",
+  "configs": [
+    {
+      "window": "3y",
+      "normalized": false
+    },
+    {
+      "window": "3y",
+      "normalized": true
+    },
+    {
+      "window": "expanding",
+      "normalized": false
+    },
+    {
+      "window": "expanding",
+      "normalized": true
+    }
+  ],
+  "decisions": [
+    "prediction_raw",
+    "prediction_prior_balanced"
+  ],
+  "environment": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "lightgbm": "4.7.0"
+  },
+  "supplementary_metrics": "Raw quadrature mass log loss/Brier vs causal training-class frequency; descriptive only, not substituted for original macro-F1 acceptance.",
+  "control_report_sha256": "cb92562ac3a11bb192f888f5e9056787a14fb606feb924ed8586e4909b66eb4e",
+  "reference_labels": {
+    "20": {
+      "name": "T+20",
+      "bull_threshold": 0.05,
+      "bear_threshold": -0.05
+    }
+  },
+  "source_hashes": {
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_temporal_fusion/20261019T063220_032375Z/adaptive_pool_smoothed_predictions.csv": "1b6a4f182a48f9a6a7b9b96fd0aac28a673391b869579ff4b1ae95717dcc6539",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_temporal_fusion/20261019T063220_032375Z/plan.json": "caa1638220632d42bc2654adab4d524aed6ea5b3f1940a006b5c221c5d310a7c",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/inner_selection.json": "5c26c715848841ea45703286b12389c8ba1a18239b11d48b9330dfb6f5079000",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/risk_predictions.csv": "9673be6656785f2d1e9aaf4bfb85ad1167cd1ed575ef3317c602612ba1ae0a80",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/data/research/brokers_2010_20261001_reviewed/VNINDEX.csv": "19bf8eb2c8dda7d73498d8d21e9303a7627484a8a4e6178458529e4ad5c1c3b6",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/plan.json": "481f3f12019f8267381ef6af96f57ee16b4f96a8ffeefdfd843be9a8ec4d5d69",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/plan.json": "3fed146bbadffe7ce0c585f5e7005b870b4b58516ec3ea5f0f4dd89a0411502a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/vix_scores.csv": "9e998afa36bd6dfd2876f6e7bd7d0355cddba3faf855331c3b3ae07f8f0b5f93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/indices_scores.csv": "8eece2bacd2aa77ed285ad4f8cb1034310f206c54509638f4f68aea087fa0d5a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/control_scores.csv": "d25fc659a8990c1b12d7b7853eace5fdcb0ede52d68fb3e94b60e3dad772e7af",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_information/20261019T052057_760569Z/ohlcv_scores.csv": "6faa1040cce24ccd9a532d5d6da29843c4c0a2fab5bea55ddd262f92e60e8ee1",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed7_raw_scores.csv": "8c9c6657e23d062b6c21629277deb1068a9cc20254aea1a1ca3c5d1ece667a4a",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed7_normalized_scores.csv": "92012aaa9af7322cc8037ed8c90186df5438dc7e66a7b3541139b6d1a9757bbd",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed21_raw_scores.csv": "1ce9015949731376c56e1c45c3ab537de3dffc41b522ce7d4e17b37acdab5fde",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed21_normalized_scores.csv": "a081e31c455a9eb92ba04c0ceed81ae4ecdcc73d16cac8ede9bf9b7330ba28fc",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_raw_mapped_predictions.csv": "02a35e6b7ccc26877666aab9ccd0562781c11509277f16075bdb883457bc06df",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_dynamic_experts/20261019T033757_910222Z/vol_1sigma/expanding_normalized_mapped_predictions.csv": "f048d7e4a9107820c58b306315133b0b847c4a2e5509d7f6544e49205732e466",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed84_raw_scores.csv": "660c64030b929abf1a8c92455ca8716f9403999cec0f0c07a74b42a439507b94",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed84_normalized_scores.csv": "6c255d712cdb2013558ad6a93baf33c2f8aec02f1ef2f7fc787ce54ca7311941",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed126_raw_scores.csv": "f16c4990a5b57b3d8c4fa2ae9fb0c2a21d6d8943f32a405138eac800d48e9f94",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/reports/regime_density_seeds/20261019T061537_193740Z/seed126_normalized_scores.csv": "ae7af3c40014406f65fe4cfdf5fe2a0bc13fbfe92eb159b3058a16cc9a4fbb93",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_block_density.py": "b302850e3e3d0cf0a99a956fc16b8cc57ea77d339327ac3fe3ad87b992793f9d",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_component_archive.py": "33eb9b11bcf2cf16327a2f40aee448f10f97fe04e2deb189e3221b8f0491ccc3",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/regime_research_evaluation.py": "b4e0c29294d404fd6cdb00967c5d989a6c0e7550979f7bdba81e8492efa45142",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_temporal_fusion.py": "dc1fc5d5b6c2dfa99e8b702f89333642227c48d59e21784c7bc67b63b7018d89",
+    "/mnt/d/project_ct250h_nienluanchuyennganh/ml/experiment_regime_forecast_smoothing.py": "12eb6797e7a3d4eabd7b08d9c8d4fec507f16769ae478118b0a96dd8e694e133"
+  },
+  "seeds": [
+    7,
+    21,
+    42,
+    84,
+    126
+  ],
+  "block_length": 20,
+  "resampling": "Circular consecutive20-session blocks inside permitted training rows. Multiplicity weights sum to original row count. Reject up to100 draws lacking min(10,original_count) mass in any target class; fallback uniform. Same draw for raw/normalized targets.",
+  "learner": "Original quantile hyperparameters including random_state42 held constant; change only training row multiplicities. Decision prior remains original full mature target class frequency.",
+  "primary": "bagged_adaptive: equal five bagged densities; same mature-past fusion/temperature learner and current/EMA5 mixture as incumbent",
+  "secondary": "bagged_shrink: equal incumbent/bagged_adaptive. No best-bag outer choice.",
+  "acceptance": "Mean F1 incumbent+.01, no worst/directional decline, higher MCC and >=3 wins; both paired20/60 lower>0 for provisional evidence.",
+  "caveat": "Blocks do not create independent economic events or new historical data. No target change, outer bag selection, independent acceptance or deployment."
+}

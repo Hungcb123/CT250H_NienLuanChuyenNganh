@@ -1,0 +1,17 @@
+{
+  "session": "2026-10-01",
+  "signal": 0,
+  "class_scores": [
+    0.29299705357149713,
+    0.5088517668346862,
+    0.19815117959381662
+  ],
+  "calibrated_probability": null,
+  "horizon_sessions": 20,
+  "ema_reset": true,
+  "stream_id": "VNINDEX:a01cb65ae2c96091eb876ba4d0613dee03583eb5f02444d584dc458c59e103b5:[0.75,0.75,1.5]",
+  "recipe_id": "a01cb65ae2c96091eb876ba4d0613dee03583eb5f02444d584dc458c59e103b5",
+  "role": "historical_snapshot_cold_start_preview",
+  "independent_prospective_prediction": false,
+  "deployed": false
+}

@@ -1,0 +1,198 @@
+[
+  {
+    "fold": 1,
+    "bucket": 0,
+    "bundle": "2020-03-27_72e3f7be76c2ff05ff50",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 1,
+    "bucket": 1,
+    "bundle": "2020-06-29_abfb8d7e2b770c3d3a2e",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 1,
+    "bucket": 2,
+    "bundle": "2020-09-25_2fd4ac0a540f6247922f",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 1,
+    "bucket": 3,
+    "bundle": "2020-12-23_1d6d36f5091af31d4a61",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 1,
+    "bucket": 4,
+    "bundle": "2021-03-30_2b372d3b4ef803f416ed",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 1,
+    "bucket": 5,
+    "bundle": "2021-06-30_1a426eee3ce47df67d30",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 1,
+    "bucket": 6,
+    "bundle": "2021-09-29_f0b6d6f4552d706b4dc7",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 0,
+    "bundle": "2021-10-15_4624115e60aa81678396",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 1,
+    "bundle": "2022-01-13_895676391c8372f37e12",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 2,
+    "bundle": "2022-04-20_616de7a418ba0ec651c1",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 3,
+    "bundle": "2022-07-20_ea2f92b49f472ae42771",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 4,
+    "bundle": "2022-10-19_82597af50a91a2da8b81",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 5,
+    "bundle": "2023-01-17_b3ccd35bdc7c29005efe",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 2,
+    "bucket": 6,
+    "bundle": "2023-04-21_d6c659ed5b7c88c59966",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 0,
+    "bundle": "2023-07-17_b9d85a5a8909b7f37f21",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 1,
+    "bundle": "2023-10-16_79b1ce44b973c6357fb7",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 2,
+    "bundle": "2024-01-12_91189bfd4d9930bff7fe",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 3,
+    "bundle": "2024-04-17_fe469bc16d6ce9ac3454",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 4,
+    "bundle": "2024-07-19_ed68decd48bec36791b3",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 5,
+    "bundle": "2024-10-18_423fa9733f326eee99cc",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 3,
+    "bucket": 6,
+    "bundle": "2025-01-16_ab16d8969a4936301f37",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 0,
+    "bundle": "2025-02-10_6bbcf4c689e0dbac33c6",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 1,
+    "bundle": "2025-05-14_758d318214c8255ca336",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 2,
+    "bundle": "2025-08-11_630684cb07f1037b3b08",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 3,
+    "bundle": "2025-11-10_9596cdac9f9904e0827c",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 4,
+    "bundle": "2026-02-09_0e2379210a0ffee08000",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 5,
+    "bundle": "2026-05-19_24dcf1f555debcf8dc44",
+    "components": 6,
+    "models": 38
+  },
+  {
+    "fold": 4,
+    "bucket": 6,
+    "bundle": "2026-08-14_faffbc98e7c36d79d0d0",
+    "components": 6,
+    "models": 38
+  }
+]

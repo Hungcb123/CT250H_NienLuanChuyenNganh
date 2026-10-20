@@ -1,0 +1,91 @@
+{
+  "goal": "ti\u1ebfp t\u1ee5c \u0111i, m\u1ecdi gi\u00e1 c\u00f3 F1 t\u1ed1t h\u01a1n",
+  "goal_status": "active",
+  "goal_achieved": false,
+  "rows": [
+    {
+      "title": "Previous best",
+      "path": "regime_forecast_smoothing/20261019T062316_546117Z",
+      "candidate": "ema5_shrink",
+      "mean_f1": 0.49492737914367657,
+      "worst_f1": 0.4006275923109485,
+      "bear_f1": 0.3023201773201773,
+      "bull_f1": 0.4366681610835616
+    },
+    {
+      "title": "Causal adaptive fusion",
+      "path": "regime_temporal_fusion/20261019T063220_032375Z",
+      "candidate": "adaptive_pool_smoothed",
+      "mean_f1": 0.49729198084164405,
+      "worst_f1": 0.39740411618886046,
+      "bear_f1": 0.3233243611303196,
+      "bull_f1": 0.4244189791049767
+    },
+    {
+      "title": "Fixed hysteresis",
+      "path": "regime_state_decisions/20261019T062906_887444Z",
+      "candidate": "hysteresis05",
+      "mean_f1": 0.48330353016393895,
+      "worst_f1": 0.39904774645906443,
+      "bear_f1": 0.29724926735023915,
+      "bull_f1": 0.41161885245805263
+    },
+    {
+      "title": "Forward state filter",
+      "path": "regime_forward_filter/20261019T062959_300808Z",
+      "candidate": "filter2",
+      "mean_f1": 0.4813485708073847,
+      "worst_f1": 0.3603254198500985,
+      "bear_f1": 0.2711953739883133,
+      "bull_f1": 0.4242443974912418
+    },
+    {
+      "title": "Ten-session GRU supplement",
+      "path": "regime_gru/20261019T063557_085560Z",
+      "candidate": "gru10_supplement",
+      "mean_f1": 0.4546164296802874,
+      "worst_f1": 0.3665042235217673,
+      "bear_f1": 0.2504416381817399,
+      "bull_f1": 0.3885038049754007
+    },
+    {
+      "title": "Component winner gate",
+      "path": "regime_component_gate/20261019T064133_306712Z",
+      "candidate": "gate_supplement",
+      "mean_f1": 0.48234776100485144,
+      "worst_f1": 0.3799536137953625,
+      "bear_f1": 0.28775259040185663,
+      "bull_f1": 0.41876203775038523
+    }
+  ],
+  "paired_intervals": [
+    {
+      "candidate": "adaptive_pool_smoothed",
+      "block_sessions": 20,
+      "delta": 0.0023646016979674833,
+      "low": -0.014899237635798606,
+      "high": 0.01714127791864218
+    },
+    {
+      "candidate": "adaptive_pool_smoothed",
+      "block_sessions": 60,
+      "delta": 0.0023646016979674833,
+      "low": -0.018174973390148473,
+      "high": 0.01631843902638542
+    },
+    {
+      "candidate": "adaptive504_smoothed",
+      "block_sessions": 20,
+      "delta": -0.0009003082954085473,
+      "low": -0.02461065533491719,
+      "high": 0.020131374133303022
+    },
+    {
+      "candidate": "adaptive504_smoothed",
+      "block_sessions": 60,
+      "delta": -0.0009003082954085473,
+      "low": -0.028024430823426413,
+      "high": 0.018702878783543056
+    }
+  ]
+}

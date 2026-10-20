@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { Bot, Send, Sparkles, User, BookOpen, Lightbulb, Key, Eye, EyeOff, CheckCircle2, ExternalLink, X, ShieldCheck } from 'lucide-react';
-import { sendCopilotMessage, getCopilotStatus, saveCopilotApiKey } from '../../services/api';
+import { Bot, Send, User, BookOpen, Lightbulb } from 'lucide-react';
+import { sendCopilotMessage } from '../../services/api';
+import { MessageMarkdown } from '../copilot/MessageMarkdown';
 
 const QUICK_PROMPTS = [
   'Tại sao hệ thống lại khuyên tôi nên tái cơ cấu?',
@@ -18,45 +19,13 @@ export function CopilotTab() {
   }>>([
     {
       role: 'assistant',
-      content: `Xin chào! Tôi là **EquiFolio Copilot**, trợ lý tư vấn tài chính định lượng thông minh của bạn.
-
-Tôi có quyền truy cập trực tiếp vào **Sổ cái kép thời gian thực** (NAV, độ lệch tỷ trọng Drift, các sổ tiết kiệm) cùng **Mô hình học máy ONNX nhận diện chu kỳ thị trường**.
-
-Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ câu hỏi nào về danh mục của mình nhé!`,
+      content: `Xin chào! Tôi là cố vấn VNxCapital. Bạn có thể hỏi về danh mục, phân bổ tài sản, tín hiệu thị trường và tiết kiệm của mình.`,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // API Key State & Modal
-  const [hasApiKey, setHasApiKey] = useState(true);
-  const [isServiceAccount, setIsServiceAccount] = useState(false);
-  const [modelName, setModelName] = useState('gemini-2.5-flash-lite');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [apiKeyInput, setApiKeyInput] = useState('');
-  const [showKey, setShowKey] = useState(false);
-  const [saveSuccessMsg, setSaveSuccessMsg] = useState('');
-
-  const checkStatus = async () => {
-    try {
-      const status = await getCopilotStatus();
-      setHasApiKey(status.hasApiKey);
-      setIsServiceAccount(!!status.serviceAccountLoaded || status.authMode === 'SERVICE_ACCOUNT');
-      if (status.model) setModelName(status.model);
-    } catch {
-      // fallback
-    }
-  };
-
-  useEffect(() => {
-    checkStatus();
-    const stored = localStorage.getItem('gemini_api_key');
-    if (stored) {
-      setApiKeyInput(stored);
-    }
-  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -65,17 +34,6 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
   useEffect(() => {
     scrollToBottom();
   }, [messages, sending]);
-
-  const handleSaveApiKey = async () => {
-    const trimmed = apiKeyInput.trim();
-    await saveCopilotApiKey(trimmed);
-    setHasApiKey(!!trimmed);
-    setSaveSuccessMsg(trimmed ? 'Đã lưu và kích hoạt Google Gemini API Key!' : 'Đã xóa API Key, trở về chế độ Local RAG.');
-    setTimeout(() => {
-      setSaveSuccessMsg('');
-      setIsModalOpen(false);
-    }, 1200);
-  };
 
   const handleSend = async (customText?: string) => {
     const textToSend = (customText || input).trim();
@@ -106,7 +64,7 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
         ...prev,
         {
           role: 'assistant',
-          content: 'Xin lỗi, đã xảy ra sự cố khi kết nối tới động cơ Copilot. Bạn vui lòng thử lại sau giây lát nhé.',
+          content: 'Xin lỗi, đã xảy ra sự cố khi kết nối với cố vấn. Bạn vui lòng thử lại sau giây lát nhé.',
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
       ]);
@@ -116,40 +74,9 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
   };
 
   return (
-    <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm space-y-6 flex flex-col h-[750px] relative">
-      {/* Header */}
-      <div className="border-b border-border-subtle pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
-        <div>
-          <h2 className="text-lg font-bold text-text-primary tracking-tight">
-            Trợ Lý Tài Chính Thông Minh (Financial Copilot)
-          </h2>
-          <p className="text-xs text-text-secondary">
-            Phân tích thời gian thực với dữ liệu Sổ cái kép & Mô hình máy học chu kỳ thị trường
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {hasApiKey ? (
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-emerald-light text-accent-emerald text-xs font-bold border border-accent-emerald/30 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Google Gemini ({modelName}) {isServiceAccount ? '• Cloud Active' : ''}</span>
-            </span>
-          ) : (
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-text-secondary text-xs font-semibold border border-border-subtle">
-              <Sparkles className="w-3.5 h-3.5 text-accent-gold" />
-              <span>Local RAG Mode</span>
-            </span>
-          )}
-
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-text-muted hover:text-text-primary text-xs font-medium transition-all"
-            title="Cài đặt kết nối AI"
-          >
-            <Key className="w-3.5 h-3.5 text-accent-emerald" />
-            <span>{isServiceAccount ? 'Cloud SA' : (hasApiKey ? 'Đổi Key' : 'Nhập Key')}</span>
-          </button>
-        </div>
+    <div className="vnx-panel p-4 space-y-4 flex flex-col h-[750px] relative">
+      <div className="border-b border-border-subtle pb-3 shrink-0">
+        <h2 className="text-base font-bold text-text-primary">Cố vấn</h2>
       </div>
 
       {/* Quick Prompts Chips */}
@@ -174,14 +101,14 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`flex gap-3 max-w-3xl ${msg.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}
+            className={`flex min-w-0 gap-3 max-w-3xl ${msg.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}
           >
             {/* Avatar */}
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
                 msg.role === 'user'
                   ? 'bg-surface-container-high text-text-primary border border-border-subtle'
-                  : 'bg-accent-emerald text-white shadow-sm'
+                  : 'bg-accent-emerald text-white '
               }`}
             >
               {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
@@ -189,15 +116,17 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
 
             {/* Content Bubble */}
             <div
-              className={`p-4 rounded-2xl text-xs space-y-2 leading-relaxed ${
+              className={`min-w-0 p-4 rounded-2xl text-xs space-y-2 leading-relaxed ${
                 msg.role === 'user'
                   ? 'rounded-tr-none bg-surface-container-high border border-border-subtle text-text-primary'
                   : 'rounded-tl-none bg-surface-container-low border border-border-subtle text-text-primary'
               }`}
             >
-              {msg.content.split('\n\n').map((para, pIdx) => (
-                <p key={pIdx} className="leading-relaxed whitespace-pre-wrap">{para}</p>
-              ))}
+              {msg.role === 'assistant' ? (
+                <MessageMarkdown content={msg.content} />
+              ) : (
+                <p className="leading-relaxed whitespace-pre-wrap [overflow-wrap:anywhere]">{msg.content}</p>
+              )}
 
               {/* Reference citations if any */}
               {msg.references && msg.references.length > 0 && (
@@ -229,7 +158,7 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
               <div className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse [animation-delay:200ms]"></div>
               <div className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse [animation-delay:400ms]"></div>
               <span className="ml-1 text-[11px]">
-                {hasApiKey ? 'Google Gemini đang phân tích danh mục & soạn câu trả lời...' : 'Copilot đang phân tích danh mục & tra cứu tri thức...'}
+                Cố vấn đang soạn câu trả lời…
               </span>
             </div>
           </div>
@@ -245,14 +174,14 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-          placeholder="Hỏi Copilot về tỷ trọng danh mục, độ lệch Drift, mô hình ML hoặc lý do tái cơ cấu..."
+          placeholder="Hỏi về danh mục của bạn…"
           disabled={sending}
           className="flex-1 px-4 py-2.5 rounded-lg border border-border-subtle bg-surface-container-lowest text-xs text-text-primary placeholder:text-text-muted focus:outline-hidden focus:border-accent-emerald transition-colors"
         />
         <button
           onClick={() => handleSend()}
           disabled={sending || !input.trim()}
-          className={`px-4 py-2.5 rounded-lg text-white font-bold flex items-center gap-1.5 shadow-xs transition-all text-xs ${
+          className={`px-4 py-2.5 rounded-lg text-white font-bold flex items-center gap-1.5  transition-all text-xs ${
             sending || !input.trim()
               ? 'bg-accent-emerald/50 cursor-not-allowed'
               : 'bg-accent-emerald hover:bg-accent-emerald/90'
@@ -263,122 +192,6 @@ Bạn có thể bấm vào các gợi ý bên dưới hoặc đặt bất kỳ c
         </button>
       </div>
 
-      {/* API Key Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-surface-container-lowest border border-border-subtle rounded-2xl shadow-xl w-full max-w-md p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-border-subtle">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-accent-emerald-light text-accent-emerald flex items-center justify-center">
-                  <Key className="w-4 h-4" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-text-primary">Cấu hình Google Gemini API Key</h3>
-                  <p className="text-[11px] text-text-secondary">Trực tiếp kết nối mô hình {modelName}</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="text-text-muted hover:text-text-primary p-1 rounded-lg"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {isServiceAccount && (
-              <div className="p-3 rounded-lg bg-accent-emerald-light/60 border border-accent-emerald/30 text-xs text-text-primary flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-accent-emerald shrink-0 mt-0.5" />
-                <div>
-                  <div className="font-bold text-accent-emerald">Đang kích hoạt Google Cloud Service Account</div>
-                  <div className="text-[11px] text-text-secondary mt-0.5">
-                    Backend đã kết nối trực tiếp Vertex AI ({modelName}) qua file Service Account Key. Bạn có thể sử dụng ngay mà không cần nhập key thủ công.
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <p className="text-xs text-text-secondary leading-relaxed">
-              EquiFolio kết nối trực tiếp với <strong>Google Cloud Gemini ({modelName})</strong> để tự động tổng hợp số liệu tài chính thời gian thực (NAV, số dư tiền mặt, tỷ lệ tài sản, lệnh lô 100 HOSE, tín hiệu chu kỳ ONNX) vào câu trả lời.
-            </p>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-text-primary">Google API Key</label>
-              <div className="relative">
-                <input
-                  type={showKey ? 'text' : 'password'}
-                  value={apiKeyInput}
-                  onChange={(e) => setApiKeyInput(e.target.value)}
-                  placeholder="AIzaSy..."
-                  className="w-full px-3 py-2 pr-10 rounded-lg border border-border-subtle bg-surface-container-low text-xs text-text-primary font-mono focus:outline-hidden focus:border-accent-emerald"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowKey(!showKey)}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary"
-                >
-                  {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between text-[11px] text-text-muted bg-surface-container p-2.5 rounded-lg border border-border-subtle">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-accent-emerald" /> Key được mã hóa và lưu tại trình duyệt
-              </span>
-              <a
-                href="https://aistudio.google.com/app/apikey"
-                target="_blank"
-                rel="noreferrer"
-                className="text-accent-emerald hover:underline font-semibold flex items-center gap-0.5"
-              >
-                Lấy Key <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-
-            {saveSuccessMsg && (
-              <div className="p-2.5 rounded-lg bg-accent-emerald-light text-accent-emerald text-xs font-semibold flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>{saveSuccessMsg}</span>
-              </div>
-            )}
-
-            <div className="flex items-center justify-end gap-2 pt-2">
-              {hasApiKey && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setApiKeyInput('');
-                    saveCopilotApiKey('');
-                    setHasApiKey(false);
-                    setSaveSuccessMsg('Đã xóa API Key!');
-                    setTimeout(() => {
-                      setSaveSuccessMsg('');
-                      setIsModalOpen(false);
-                    }, 1000);
-                  }}
-                  className="px-3 py-2 rounded-lg text-accent-rose hover:bg-accent-rose-light text-xs font-semibold mr-auto transition-colors"
-                >
-                  Xóa Key
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-lg border border-border-subtle text-text-secondary hover:text-text-primary text-xs font-medium"
-              >
-                Đóng
-              </button>
-              <button
-                type="button"
-                onClick={handleSaveApiKey}
-                className="px-4 py-2 rounded-lg bg-accent-emerald hover:bg-accent-emerald/90 text-white text-xs font-bold shadow-xs transition-all"
-              >
-                Lưu & Kích hoạt
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

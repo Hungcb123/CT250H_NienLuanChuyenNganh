@@ -9,6 +9,10 @@ public class LedgerAuditReportDTO {
 
     private int totalTransactionsChecked;
     private int balancedTransactions;
+    private int unverifiedTransactions;
+
+    public int getUnverifiedTransactions() { return unverifiedTransactions; }
+    public void setUnverifiedTransactions(int value) { this.unverifiedTransactions = value; }
     private int unbalancedTransactions;
     private boolean allTransactionsBalanced;
     private boolean allAccountsConsistent;
